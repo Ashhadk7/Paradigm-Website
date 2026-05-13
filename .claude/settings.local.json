@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "WebFetch(domain:www.paradigmasset.com)",
+      "WebFetch(domain:paasinvest.com)",
+      "WebFetch(domain:webcache.googleusercontent.com)",
+      "WebFetch(domain:web.archive.org)",
+      "Bash(python -c \"from docx import Document; doc = Document\\('c:/Users/AKL/OneDrive/Desktop/Ashhad/paradigm-website/paradigm-website-copy-p2-v2.docx'\\); [print\\(p.text\\) for p in doc.paragraphs]\")"
+    ]
+  }
+}
