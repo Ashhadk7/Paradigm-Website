@@ -185,6 +185,14 @@ h1, h2, h3, h4 {
   color: #F5F3EF;
 }
 
+.display-headline-compact {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #F5F3EF;
+}
+
 .section-headline {
   font-family: 'Source Serif 4', Georgia, serif;
   font-size: clamp(1.85rem, 3.2vw, 2.75rem);
@@ -748,6 +756,11 @@ h1, h2, h3, h4 {
   .display-headline {
     font-size: 2rem;
     line-height: 1.08;
+  }
+
+  .display-headline-compact {
+    font-size: 1.5rem;
+    line-height: 1.15;
   }
 
   .hero-subcopy {

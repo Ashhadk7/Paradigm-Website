@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { GLSLHills } from './ui/glsl-hills';
 
-export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal = false }) {
+export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal = false, compact = false }) {
   return (
     <section
       className="hero-section"
@@ -12,11 +12,8 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
         paddingBottom: minimal ? '3.25rem' : '3rem',
       }}
     >
-      <div className="hero-texture" />
-
-      {/* GLSL Hills — animated WebGL terrain behind content */}
       {!minimal && (
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.35, zIndex: 0 }}>
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>
           <GLSLHills speed={0.3} cameraZ={130} />
         </div>
       )}
@@ -26,18 +23,21 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: 'easeOut' }}
-          style={{ maxWidth: 760, position: 'relative', zIndex: 2 }}
+          style={{ maxWidth: compact ? 720 : 760, position: 'relative', zIndex: 2 }}
         >
           {eyebrow && (
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{eyebrow}</p>
+            <p className="eyebrow" style={{ marginBottom: compact ? '0.75rem' : '1rem' }}>{eyebrow}</p>
           )}
 
-          <h1 className="display-headline" style={{ marginBottom: '1.35rem', whiteSpace: 'pre-line' }}>
+          <h1
+            className={compact ? 'display-headline-compact' : 'display-headline'}
+            style={{ marginBottom: compact ? '1rem' : '1.35rem', whiteSpace: 'pre-line' }}
+          >
             {headline}
           </h1>
 
           {sub && (
-            <p className="hero-subcopy">
+            <p className="hero-subcopy" style={compact ? { fontSize: '0.95rem', marginBottom: '1.25rem' } : undefined}>
               {sub}
             </p>
           )}
@@ -53,17 +53,6 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
           )}
         </motion.div>
       </div>
-
-      {!minimal && (
-        <motion.div
-          animate={{ opacity: [0.35, 0.9, 0.35] }}
-          transition={{ repeat: Infinity, duration: 2.5 }}
-          className="scroll-indicator"
-        >
-          <span>Scroll</span>
-          <div />
-        </motion.div>
-      )}
     </section>
   );
 }

@@ -37,7 +37,7 @@ export default function Advisors() {
         eyebrow="For Wealth Advisors & Independent RIAs"
         headline={"Your clients are paying active management fees. Most of that capital is locked inside a single strategy's approach. There is a different way to invest it."}
         sub="Paradigm builds portfolios from active market data — not anchored to any single approach. Portfolios that can move as market leadership moves. Under your name."
-
+        compact
         ctas={[{ label: 'Book a 20-Minute Call', to: '/contact', variant: 'gold' }]}
       />
 

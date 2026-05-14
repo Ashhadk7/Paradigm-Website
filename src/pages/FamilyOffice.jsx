@@ -36,7 +36,7 @@ export default function FamilyOffice() {
         eyebrow="For Multi-Family Offices & OCIOs"
         headline={"Your clients expect portfolios built for them specifically. Most platforms offer portfolios built for everyone. There is a different approach."}
         sub="Paradigm builds portfolios to your specification for any client mandate — using collective intelligence to identify regime leadership within each mandate and qualify it through active market data. Your investment team operates the platform. Your clients see your process."
-
+        compact
         ctas={[{ label: 'Start a Conversation', to: '/contact', variant: 'outline' }]}
       />
 

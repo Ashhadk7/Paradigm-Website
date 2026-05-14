@@ -34,13 +34,13 @@ export default function Institutions() {
 
       <HeroSection
         eyebrow="For Institutional Investors & Strategic Partners"
-        headline={"35 years of institutional\ninvestment process.\nThe same intelligence that served\nGeneral Motors, AMEX, and\nthe US Treasury — now structured\nfor the partnerships, mandates,\nand platforms that define\nwhat comes next."}
+        headline={"35 years of institutional investment process. The same intelligence that served General Motors, AMEX, and the US Treasury — now structured for the partnerships, mandates, and platforms that define what comes next."}
         sub="Paradigm reads active market data to identify where leadership is forming within each mandate — and builds portfolios from that signal. Transparent. Explainable. No black box."
-
+        compact
         ctas={[{ label: 'Start a Conversation', to: '/contact', variant: 'outline' }]}
       />
 
-      {/* Core Story */}
+      {/* Core Story — Institutional Register */}
       <section className="section-offwhite">
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
@@ -65,12 +65,12 @@ export default function Institutions() {
         </div>
       </section>
 
-      {/* What Paradigm Offers */}
+      {/* What Paradigm Offers Institutions */}
       <section className="section-white">
         <div className="section-inner">
           <p className="eyebrow" style={{ marginBottom: '0.875rem', textAlign: 'center' }}>What Paradigm Offers Institutions</p>
           <h2 className="section-headline" style={{ color: '#34416D', textAlign: 'center', marginBottom: '0.625rem' }}>
-            Three distinct ways to work with Paradigm.
+            Three distinct ways institutions work with Paradigm.
           </h2>
           <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', textAlign: 'center', maxWidth: 480, margin: '0 auto 3.5rem' }}>
             Each is a different application of the same investment process.
@@ -100,13 +100,10 @@ export default function Institutions() {
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
-            <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>
-              Active management and direct indexing.<br />One platform, fully integrated.
-            </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                Customization, personalization, and tax-loss harvesting run across both sleeves simultaneously — at the individual account level. Institutions operate the platform. Paradigm provides the investment intelligence and the infrastructure.
+                Active management and direct indexing. One platform, fully integrated. Customization, personalization, and tax-loss harvesting run across both sleeves simultaneously — at the individual account level. Institutions operate the platform. Paradigm provides the investment intelligence and the infrastructure.
               </motion.p>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
