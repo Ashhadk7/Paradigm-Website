@@ -36,6 +36,7 @@ export default function Institutions() {
         eyebrow="For Institutional Investors & Strategic Partners"
         headline={"35 years of institutional\ninvestment process.\nThe same intelligence that served\nGeneral Motors, AMEX, and\nthe US Treasury — now structured\nfor the partnerships, mandates,\nand platforms that define\nwhat comes next."}
         sub="Paradigm reads active market data to identify where leadership is forming within each mandate — and builds portfolios from that signal. Transparent. Explainable. No black box."
+
         ctas={[{ label: 'Start a Conversation', to: '/contact', variant: 'outline' }]}
       />
 

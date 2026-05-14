@@ -1,23 +1,32 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { GLSLHills } from './ui/glsl-hills';
 
-export default function HeroSection({ eyebrow, headline, sub, ctas = [], visual = null, minimal = false }) {
+export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal = false }) {
   return (
     <section
       className="hero-section"
       style={{
-        minHeight: minimal ? '46vh' : '68vh',
-        paddingBottom: minimal ? '3.25rem' : '3.75rem',
+        minHeight: minimal ? '46vh' : '100vh',
+        paddingTop: minimal ? '7rem' : '5rem',
+        paddingBottom: minimal ? '3.25rem' : '3rem',
       }}
     >
       <div className="hero-texture" />
 
-      <div className={`hero-inner ${visual ? 'hero-inner-with-visual' : ''}`}>
+      {/* GLSL Hills — animated WebGL terrain behind content */}
+      {!minimal && (
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.35, zIndex: 0 }}>
+          <GLSLHills speed={0.3} cameraZ={130} />
+        </div>
+      )}
+
+      <div className="hero-inner">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: 'easeOut' }}
-          style={{ maxWidth: 760, position: 'relative', zIndex: 1 }}
+          style={{ maxWidth: 760, position: 'relative', zIndex: 2 }}
         >
           {eyebrow && (
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>{eyebrow}</p>
@@ -43,17 +52,6 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], visual 
             </div>
           )}
         </motion.div>
-
-        {visual && (
-          <motion.div
-            className="hero-visual"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.12, ease: 'easeOut' }}
-          >
-            {visual}
-          </motion.div>
-        )}
       </div>
 
       {!minimal && (

@@ -1,41 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Radar } from 'lucide-react';
 import HeroSection from '../components/HeroSection';
 import ProofBlock from '../components/ProofBlock';
 import CTAStrip from '../components/CTAStrip';
-
-function HomeHeroVisual() {
-  return (
-    <div className="home-hero-card">
-      <div className="home-hero-card-top">
-        <span>Leadership Signal</span>
-        <strong>Live mandate view</strong>
-      </div>
-      <div className="signal-stack">
-        {[
-          { label: 'Active strategies', value: '20,000+', width: '92%' },
-          { label: 'Securities covered', value: '45,000+', width: '78%' },
-          { label: 'Global markets', value: '75', width: '64%' },
-        ].map((item) => (
-          <div key={item.label} className="signal-row">
-            <div>
-              <span>{item.label}</span>
-              <strong>{item.value}</strong>
-            </div>
-            <div className="signal-track">
-              <div style={{ width: item.width }} />
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="hero-card-footer">
-        <Radar size={18} />
-        <span>Portfolio Blueprint updates as leadership confirms.</span>
-      </div>
-    </div>
-  );
-}
+/* Radar import removed — Leadership Signal card was not in the brief */
 
 function Stat({ value, label }) {
   return (
@@ -155,7 +123,7 @@ export default function Home() {
         eyebrow="Paradigm Asset Management"
         headline={"The collective intelligence of the market.\nBuilt into every portfolio."}
         sub="Paradigm identifies where market leadership is forming — right now, within each mandate — and builds portfolios that reflect it. Portfolios that can move as leadership moves."
-        visual={<HomeHeroVisual />}
+
         ctas={[
           { label: 'For Advisors', to: '/advisors', variant: 'gold' },
           { label: 'For Family Offices', to: '/familyoffice', variant: 'navy' },
@@ -183,7 +151,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '4rem', alignItems: 'start' }}>
+          <div className="what-we-see-grid">
             {/* Left: numbered observations */}
             <div style={{ maxWidth: 540 }}>
               {OBSERVATIONS.map(({ num, body }, i) => (

@@ -6,7 +6,15 @@
       "WebFetch(domain:paasinvest.com)",
       "WebFetch(domain:webcache.googleusercontent.com)",
       "WebFetch(domain:web.archive.org)",
-      "Bash(python -c \"from docx import Document; doc = Document\\('c:/Users/AKL/OneDrive/Desktop/Ashhad/paradigm-website/paradigm-website-copy-p2-v2.docx'\\); [print\\(p.text\\) for p in doc.paragraphs]\")"
+      "Bash(python -c \"from docx import Document; doc = Document\\('c:/Users/AKL/OneDrive/Desktop/Ashhad/paradigm-website/paradigm-website-copy-p2-v2.docx'\\); [print\\(p.text\\) for p in doc.paragraphs]\")",
+      "Bash(python -c ':*)",
+      "Bash(npx netlify-cli:*)",
+      "Bash(npm install:*)",
+      "Bash(netlify login:*)",
+      "Bash(netlify deploy:*)",
+      "Bash(netlify sites:update --name paradigm-asset-management)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }
