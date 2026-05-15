@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { GLSLHills } from '../components/ui/glsl-hills';
-import CTAStrip from '../components/CTAStrip';
 
 function TeamCard({ name, title, prev, bio }) {
   return (
@@ -220,7 +219,6 @@ export default function About() {
         </div>
       </section>
 
-      <CTAStrip variant="both" />
     </>
   );
 }
