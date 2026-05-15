@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import HeroSection from '../components/HeroSection';
+import { GLSLHills } from '../components/ui/glsl-hills';
 import CTAStrip from '../components/CTAStrip';
 
 function TeamCard({ name, title, prev, bio }) {
@@ -31,6 +31,12 @@ function TeamCard({ name, title, prev, bio }) {
 }
 
 export default function About() {
+  const clauses = [
+    'Built on a single conviction.',
+    'Run for 35 years.',
+    'Now accessible to the partners and platforms that need it most.',
+  ];
+
   return (
     <>
       <Helmet>
@@ -38,12 +44,61 @@ export default function About() {
         <meta name="description" content="Built on a single conviction. Run for 35 years. Now accessible to the partners and platforms that need it most." />
       </Helmet>
 
-      <HeroSection
-        headline={"Built on a single conviction.\nRun for 35 years.\nNow accessible to the partners\nand platforms that need it most."}
-        minimal
-      />
+      {/* ── HERO — Serif H1, navy background, no subheading ── */}
+      <section
+        className="hero-section"
+        style={{
+          minHeight: '100vh',
+          paddingTop: '5rem',
+          paddingBottom: '3rem',
+        }}
+      >
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>
+          <GLSLHills speed={0.3} cameraZ={130} />
+        </div>
 
-      {/* The Firm */}
+        <div className="hero-inner">
+          <div style={{ position: 'relative', zIndex: 2, maxWidth: 820 }}>
+            {clauses.map((clause, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.3 + i * 0.25,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+              >
+                <h1
+                  className="display-headline"
+                  style={{
+                    marginBottom: i < clauses.length - 1 ? '0.15em' : 0,
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {clause}
+                </h1>
+              </motion.div>
+            ))}
+
+            <motion.div
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.2, ease: 'easeOut' }}
+              style={{
+                height: 2,
+                background: 'linear-gradient(90deg, #C4A25B 0%, transparent 70%)',
+                marginTop: '2rem',
+                maxWidth: 180,
+                transformOrigin: 'left',
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── THE FIRM ── */}
       <section className="section-white">
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
@@ -67,7 +122,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* James Francis Bio */}
+      {/* ── JAMES FRANCIS — FOUNDER & CEO ── */}
       <section className="section-offwhite">
         <div className="section-inner">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'start' }}>
@@ -77,15 +132,18 @@ export default function About() {
                 James Francis
               </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
+                <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                  style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
                   James Francis founded Paradigm in 1990 with a question that has driven the firm ever since: what does the market know collectively that no single strategy can know on its own?
-                </p>
-                <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
+                </motion.p>
+                <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.07 }}
+                  style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
                   The answer became DMinor — a pattern recognition process that reads active market data across thousands of strategies to identify where leadership is forming within each mandate. It has run continuously for 35 years through the full cycle of market regimes, serving institutional clients across pension funds, endowments, and government entities.
-                </p>
-                <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
+                </motion.p>
+                <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.14 }}
+                  style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
                   James is the author of <em>Artificial Integrity: Leadership in an Age of Intelligent Systems.</em>
-                </p>
+                </motion.p>
               </div>
             </div>
             {/* Portrait placeholder */}
@@ -106,38 +164,16 @@ export default function About() {
         </div>
       </section>
 
-      {/* Advisory Board */}
+      {/* ── THE TEAM ── */}
       <section className="section-white">
         <div className="section-inner">
-          <p className="eyebrow" style={{ marginBottom: '0.875rem' }}>Advisory Board</p>
-          <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '3rem' }}>
-            Senior Advisors
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
-            <TeamCard
-              name="Robert Capaldi"
-              title="Advisor"
-              prev="Senior Strategist to BlackRock's CEO"
-              bio="Former Senior Strategist to BlackRock's Chief Executive Officer. Deep expertise in institutional investment strategy and global markets."
-            />
-            <TeamCard
-              name="Natalie Turnow"
-              title="Advisor"
-              prev="CIO, Calvert Funds"
-              bio="Former Chief Investment Officer at Calvert Funds. Extensive experience in responsible investment and institutional portfolio management."
-            />
-          </div>
-
           <p className="eyebrow" style={{ marginBottom: '0.875rem' }}>The Team</p>
-          <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '3rem' }}>
-            Paradigm Asset Management
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
             <TeamCard
               name="James Francis"
               title="Founder & CEO"
               prev="IBM, Shearson, Oppenheimer & Co."
-              bio="Founded Paradigm in 1990. Business development, portfolio management, and firm strategy."
+              bio="Business development, portfolio management, and firm strategy. Founded Paradigm in 1990."
             />
             <TeamCard
               name="Gregory Pai"
@@ -160,12 +196,25 @@ export default function About() {
             <TeamCard
               name="Odalisse Sosa"
               title="Operations"
-              bio="Placeholder — updated with current title and bio before launch."
             />
             <TeamCard
               name="Jarius DeWalt"
               title="Team Member"
-              bio="Placeholder — updated with current title and bio before launch."
+            />
+          </div>
+
+          {/* ── ADVISORY BOARD ── */}
+          <p className="eyebrow" style={{ marginBottom: '0.875rem' }}>Advisory Board</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
+            <TeamCard
+              name="Robert Capaldi"
+              title="Advisor"
+              bio="Former Senior Strategist to BlackRock's CEO."
+            />
+            <TeamCard
+              name="Natalie Turnow"
+              title="Advisor"
+              bio="Former CIO, Calvert Funds."
             />
           </div>
         </div>

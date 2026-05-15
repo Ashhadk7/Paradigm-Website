@@ -1,37 +1,53 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import HeroSection from '../components/HeroSection';
+import { GLSLHills } from '../components/ui/glsl-hills';
 
 function ProcessStep({ num, title, paragraphs, isLast }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.55 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6 }}
       style={{
         display: 'grid',
-        gridTemplateColumns: '5rem 1fr',
-        gap: '2rem',
-        paddingBottom: isLast ? 0 : '3rem',
+        gridTemplateColumns: '6rem 1fr',
+        gap: '2.5rem',
+        paddingBottom: isLast ? 0 : '3.5rem',
+        marginBottom: isLast ? 0 : '3.5rem',
         borderBottom: isLast ? 'none' : '1px solid rgba(52,65,109,0.08)',
-        marginBottom: isLast ? 0 : '3rem',
         alignItems: 'start',
       }}
     >
-      <div>
+      {/* Navy number block */}
+      <div style={{
+        background: '#34416D',
+        borderRadius: 4,
+        width: '5rem',
+        height: '5rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0,
+      }}>
         <span style={{
           fontFamily: 'Source Serif 4, Georgia, serif',
-          fontSize: '3rem',
+          fontSize: '2rem',
           fontWeight: 700,
           color: '#C4A25B',
           lineHeight: 1,
-          display: 'block',
         }}>{num}</span>
       </div>
-      <div>
-        <h3 style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.375rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.3 }}>{title}</h3>
+      {/* Copy block */}
+      <div style={{ paddingTop: '0.5rem' }}>
+        <h3 style={{
+          fontFamily: 'Source Serif 4, Georgia, serif',
+          fontSize: '1.375rem',
+          color: '#34416D',
+          marginBottom: '1rem',
+          lineHeight: 1.3,
+        }}>{title}</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {paragraphs.map((p, i) => (
             <p key={i} style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>{p}</p>
@@ -43,6 +59,8 @@ function ProcessStep({ num, title, paragraphs, isLast }) {
 }
 
 export default function Process() {
+  const words = ['Systematic.', 'Transparent.', 'Explainable at every step.'];
+
   return (
     <>
       <Helmet>
@@ -50,12 +68,64 @@ export default function Process() {
         <meta name="description" content="Systematic. Transparent. Explainable at every step. How Paradigm reads active market data to build portfolios from collective market intelligence." />
       </Helmet>
 
-      <HeroSection
-        headline={"Systematic.\nTransparent.\nExplainable at every step."}
-        minimal
-      />
+      {/* ── HERO — Minimal: H1 only, no sub, no CTA ── */}
+      <section
+        className="hero-section"
+        style={{
+          minHeight: '100vh',
+          paddingTop: '5rem',
+          paddingBottom: '3rem',
+        }}
+      >
+        {/* GLSL hills background */}
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>
+          <GLSLHills speed={0.3} cameraZ={130} />
+        </div>
 
-      {/* The Data Foundation */}
+        <div className="hero-inner">
+          <div style={{ position: 'relative', zIndex: 2, maxWidth: 820 }}>
+            {/* Staggered three-line H1 */}
+            {words.map((word, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.3 + i * 0.25,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+              >
+                <h1
+                  className="display-headline"
+                  style={{
+                    marginBottom: i < words.length - 1 ? '0.15em' : 0,
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {word}
+                </h1>
+              </motion.div>
+            ))}
+
+            {/* Subtle gold accent line below the H1 */}
+            <motion.div
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.2, ease: 'easeOut' }}
+              style={{
+                height: 2,
+                background: 'linear-gradient(90deg, #C4A25B 0%, transparent 70%)',
+                marginTop: '2rem',
+                maxWidth: 180,
+                transformOrigin: 'left',
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── THE DATA FOUNDATION ── */}
       <section className="section-white">
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
@@ -80,7 +150,7 @@ export default function Process() {
         </div>
       </section>
 
-      {/* The Process — Four Steps */}
+      {/* ── THE PROCESS — FOUR STEPS ── */}
       <section className="section-offwhite">
         <div className="section-inner">
           <div style={{ maxWidth: 760, margin: '0 auto' }}>
@@ -125,7 +195,7 @@ export default function Process() {
         </div>
       </section>
 
-      {/* Why No Black Box */}
+      {/* ── WHY NO BLACK BOX ── */}
       <section className="section-white">
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
@@ -155,7 +225,7 @@ export default function Process() {
         </div>
       </section>
 
-      {/* Closing CTA — Process Page */}
+      {/* ── CLOSING CTA — PROCESS PAGE ── */}
       <section style={{ borderTop: '1px solid rgba(52,65,109,0.12)' }}>
         <div className="section-inner" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
           <motion.p

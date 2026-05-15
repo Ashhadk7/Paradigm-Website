@@ -15,7 +15,17 @@ export default function Navbar() {
   const location = useLocation();
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40);
+    let ticking = false;
+    const fn = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          const isScrolled = window.scrollY > 40;
+          setScrolled(prev => prev === isScrolled ? prev : isScrolled);
+          ticking = false;
+        });
+      }
+    };
     window.addEventListener('scroll', fn, { passive: true });
     return () => window.removeEventListener('scroll', fn);
   }, []);
@@ -81,7 +91,8 @@ export default function Navbar() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          transition: 'all 0.35s cubic-bezier(0.4,0,0.2,1)',
+          transition: 'top 0.4s cubic-bezier(0.4,0,0.2,1), width 0.4s cubic-bezier(0.4,0,0.2,1), max-width 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.4s cubic-bezier(0.4,0,0.2,1), border-radius 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s ease, background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
+          willChange: 'transform',
         }}
       >
           {/* Logo */}
@@ -180,7 +191,8 @@ export default function Navbar() {
         background: 'rgba(26,34,64,0.97)',
         backdropFilter: 'blur(20px)',
         transform: mobileOpen ? 'translateX(0)' : 'translateX(100%)',
-        transition: 'transform 0.32s cubic-bezier(0.4,0,0.2,1)',
+        transition: 'transform 0.38s cubic-bezier(0.32,0.72,0,1)',
+        willChange: 'transform',
         display: 'flex', flexDirection: 'column',
         paddingTop: '5.5rem', paddingLeft: '2rem', paddingRight: '2rem',
         overflowY: 'auto',
