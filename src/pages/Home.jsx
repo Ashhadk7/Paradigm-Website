@@ -133,8 +133,8 @@ export default function Home() {
 
       <section className="home-proof-band">
         <div className="home-proof-inner">
-          <Stat value="35" label="Years · Founded 1990" />
-          <Stat value="65" label="Top 100 US pension funds served" />
+          <Stat value="35 Years" label="Founded 1990" />
+          <Stat value="65 of the top 100" label="US pension funds served" />
           <Stat value="45,000+" label="Securities covered" />
           <Stat value="75" label="Global markets" />
           <Stat value="20,000+" label="Active strategies tracked" />
@@ -236,7 +236,7 @@ export default function Home() {
       {/* ── PROOF ── */}
       <section className="section-offwhite compact-proof-section">
         <div className="section-inner">
-          <ProofBlock variant="institutional" />
+          <ProofBlock variant="home" />
         </div>
       </section>
 

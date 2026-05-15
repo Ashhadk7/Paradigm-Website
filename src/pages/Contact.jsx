@@ -66,43 +66,25 @@ export default function Contact() {
       {/* ── HERO — Minimal, light background, open and warm ── */}
       <section style={{
         background: '#F5F3EF',
-        minHeight: '52vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        paddingTop: '7rem',
-        paddingBottom: '3rem',
+        paddingTop: 'clamp(7rem, 14vh, 10rem)',
+        paddingBottom: 'clamp(3rem, 8vh, 5rem)',
         position: 'relative',
         overflow: 'hidden',
       }}>
-        {/* Subtle decorative elements */}
+        {/* Subtle decorative circle — hidden on small screens */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.5 }}
           style={{
             position: 'absolute',
-            top: '15%',
-            right: '8%',
-            width: 280,
-            height: 280,
+            top: '50%',
+            right: 'clamp(-4rem, 5vw, 8%)',
+            width: 'clamp(180px, 25vw, 320px)',
+            height: 'clamp(180px, 25vw, 320px)',
             borderRadius: '50%',
-            border: '1px solid rgba(196,162,91,0.12)',
-            pointerEvents: 'none',
-          }}
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.7 }}
-          style={{
-            position: 'absolute',
-            bottom: '10%',
-            right: '12%',
-            width: 160,
-            height: 160,
-            borderRadius: '50%',
-            border: '1px solid rgba(52,65,109,0.06)',
+            border: '1px solid rgba(196,162,91,0.1)',
+            transform: 'translateY(-50%)',
             pointerEvents: 'none',
           }}
         />
@@ -114,7 +96,7 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
             style={{
               fontFamily: 'Source Serif 4, Georgia, serif',
-              fontSize: 'clamp(3.5rem, 8vw, 6.5rem)',
+              fontSize: 'clamp(2.75rem, 8vw, 6.5rem)',
               fontWeight: 700,
               color: '#34416D',
               lineHeight: 1.05,
@@ -132,8 +114,8 @@ export default function Contact() {
             style={{
               height: 2,
               background: 'linear-gradient(90deg, #C4A25B 0%, transparent 60%)',
-              marginTop: '1.75rem',
-              maxWidth: 140,
+              marginTop: '1.5rem',
+              maxWidth: 120,
               transformOrigin: 'left',
             }}
           />
@@ -143,7 +125,7 @@ export default function Contact() {
       {/* ── TWO PATHS — Equal visual weight ── */}
       <section className="section-offwhite">
         <div className="section-inner" style={{ paddingTop: '4.5rem', paddingBottom: '4.5rem' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '2rem', marginBottom: '4rem' }}>
             <ContactPath
               tag="For Advisors & Multi-Family Offices"
               headline="Book a 20-Minute Call"
@@ -177,9 +159,9 @@ export default function Contact() {
             style={{
               background: '#34416D',
               borderRadius: 6,
-              padding: '3rem',
+              padding: 'clamp(1.75rem, 4vw, 3rem)',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
               gap: '2.5rem',
               alignItems: 'start',
             }}

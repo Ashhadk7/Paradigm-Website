@@ -6,6 +6,10 @@ import { motion } from 'framer-motion';
  * variant: 'advisor' | 'institutional' | 'mfo'
  */
 const COPY = {
+  home: {
+    body: 'Over 35 years Paradigm has worked with institutional clients including General Motors, AMEX, and the US Treasury. 65 of the nation\'s top 100 US pension funds have worked with Paradigm.',
+    bridge: 'The same intelligence is now accessible to advisors and institutional partners.',
+  },
   advisor: {
     body: 'Paradigm has worked with institutional clients including General Motors, AMEX, and the US Treasury over its 35-year history.',
     bridge: 'The same investment intelligence is now available to independent advisors and multi-family offices.',
