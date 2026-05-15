@@ -7,7 +7,7 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
     <section
       className="hero-section"
       style={{
-        minHeight: minimal ? '56vh' : '100vh',
+        minHeight: '100vh',
         paddingTop: minimal ? '8rem' : '5rem',
         paddingBottom: minimal ? '4rem' : '3rem',
       }}
