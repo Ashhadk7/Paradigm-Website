@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import CTAStrip from '../components/CTAStrip';
 
-function ProcessStep({ num, title, body }) {
+function ProcessStep({ num, title, body, isLast }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -14,9 +14,9 @@ function ProcessStep({ num, title, body }) {
         display: 'grid',
         gridTemplateColumns: '5rem 1fr',
         gap: '2rem',
-        paddingBottom: '3rem',
-        borderBottom: '1px solid rgba(52,65,109,0.08)',
-        marginBottom: '3rem',
+        paddingBottom: isLast ? 0 : '3rem',
+        borderBottom: isLast ? 'none' : '1px solid rgba(52,65,109,0.08)',
+        marginBottom: isLast ? 0 : '3rem',
         alignItems: 'start',
       }}
     >
@@ -60,12 +60,20 @@ export default function Process() {
               Every Paradigm portfolio begins with data.
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: 0 }}
+                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
+              >
                 Not analyst opinions. Not committee views. Market data — specifically the disclosed holdings of active investment strategies across the global equity universe. This data is public. What Paradigm does with it is not.
-              </p>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: 0.07 }}
+                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
+              >
                 Paradigm's Active Market Data database covers more than 20,000 strategies across 45,000 securities in 75 global markets. It is the most comprehensive view of where active capital is positioned within any mandate at any given time. Updated continuously. Evaluated monthly for changes in regime leadership.
-              </p>
+              </motion.p>
             </div>
             {/* Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginTop: '3rem' }}>
@@ -115,15 +123,12 @@ export default function Process() {
               title="Generate the Portfolio Blueprint."
               body="The strategies in regime leadership reveal a consensus view of the market — which sectors, factors, regions, and securities are concentrated in the leading positions. That consensus becomes the Portfolio Blueprint: a map of where the market's collective attention is focused within the mandate right now. The Blueprint is not a replication of any single strategy. It is a new intelligence that emerges from the aggregate of many strategies each doing their job well within their own domain."
             />
-            <div style={{ display: 'grid', gridTemplateColumns: '5rem 1fr', gap: '2rem', alignItems: 'start' }}>
-              <span style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '3rem', fontWeight: 700, color: '#C4A25B', lineHeight: 1 }}>04</span>
-              <div>
-                <h3 style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.375rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.3 }}>Build, optimize, and monitor.</h3>
-                <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                  Paradigm optimizes the portfolio toward the Blueprint — maximum return relative to risk within the mandate parameters. The model runs monthly from the beginning. A rebalance is triggered when the signal confirms a shift in regime leadership, not when a calendar date arrives. Tax-loss harvesting runs on the active positions through the platform. The advisor or institution operates this capability. Paradigm enables it.
-                </p>
-              </div>
-            </div>
+            <ProcessStep
+              num="04"
+              title="Build, optimize, and monitor."
+              body="Paradigm optimizes the portfolio toward the Blueprint — maximum return relative to risk within the mandate parameters. The model runs monthly from the beginning. A rebalance is triggered when the signal confirms a shift in regime leadership, not when a calendar date arrives. Tax-loss harvesting runs on the active positions through the platform. The advisor or institution operates this capability. Paradigm enables it."
+              isLast
+            />
           </div>
         </div>
       </section>
@@ -138,16 +143,17 @@ export default function Process() {
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
                 Systematic investment processes are often dismissed as black boxes — algorithms that produce outputs no one can explain or defend. Paradigm's process is the opposite.
               </motion.p>
-              <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+              <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.07 }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
                 Every input to the Portfolio Blueprint is observable market data. Every output is a specific security position with a specific rationale: this position reflects where the collective market signal says leadership is forming within this mandate today. Every rebalance decision is traceable to a specific change in that signal. Every position can be explained to a client, a committee, or a regulator in plain language.
               </motion.p>
-              <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+              <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.14 }}
                 style={{
                   fontFamily: 'Source Serif 4, Georgia, serif',
                   fontSize: '1.375rem',
                   lineHeight: 1.5,
                   color: '#34416D',
+                  fontWeight: 600,
                   borderLeft: '4px solid #C4A25B',
                   paddingLeft: '1.5rem',
                 }}
@@ -156,6 +162,24 @@ export default function Process() {
               </motion.p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Process-specific intro before CTA */}
+      <section className="section-offwhite">
+        <div className="section-inner" style={{ paddingTop: '3.5rem', paddingBottom: '0' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ maxWidth: 600, margin: '0 auto', textAlign: 'center' }}
+          >
+            <p style={{
+              fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890',
+            }}>
+              The process is built to answer questions. If you have specific ones, a conversation is the right next step.
+            </p>
+          </motion.div>
         </div>
       </section>
 

@@ -7,16 +7,14 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
     <section
       className="hero-section"
       style={{
-        minHeight: minimal ? '46vh' : '100vh',
-        paddingTop: minimal ? '7rem' : '5rem',
-        paddingBottom: minimal ? '3.25rem' : '3rem',
+        minHeight: minimal ? '56vh' : '100vh',
+        paddingTop: minimal ? '8rem' : '5rem',
+        paddingBottom: minimal ? '4rem' : '3rem',
       }}
     >
-      {!minimal && (
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>
-          <GLSLHills speed={0.3} cameraZ={130} />
-        </div>
-      )}
+      <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>
+        <GLSLHills speed={0.3} cameraZ={130} />
+      </div>
 
       <div className="hero-inner">
         <motion.div
