@@ -51,7 +51,7 @@ export default function Process() {
       </Helmet>
 
       <HeroSection
-        headline="Systematic. Transparent.\nExplainable at every step."
+        headline={"Systematic. Transparent.\nExplainable at every step."}
         minimal
       />
 
