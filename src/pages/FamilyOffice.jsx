@@ -84,7 +84,7 @@ export default function FamilyOffice() {
             {
               label: 'Platform Operations',
               title: 'You operate it. Paradigm enables it.',
-              body: "Customization, personalization, and tax-loss harvesting run across both the active and indexed sleeves simultaneously — at the individual client account level. Your investment team runs these tools. Paradigm provides the infrastructure and the investment intelligence.",
+              body: "Customization, personalization, and tax-loss harvesting run across custom active, SMA conversion, and direct indexing — at the individual client account level. Your investment team runs these tools. Paradigm provides the infrastructure and the investment intelligence.",
             },
             {
               label: 'White Glove Build',

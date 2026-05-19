@@ -101,13 +101,13 @@ export default function Advisors() {
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform Capability</p>
-            <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>Active management and direct indexing.<br />One platform, fully integrated.</h2>
+            <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>One platform. Three capabilities.</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                Customization, personalization, and tax-loss harvesting run across both sleeves simultaneously — at the individual client level. <strong style={{ color: '#34416D', fontWeight: 600 }}>You operate it. Paradigm enables it.</strong>
+                Custom active strategies built to your specification, SMA conversion of existing fund exposures into customizable tax-aware portfolios, and direct and custom indexing at scale. Customization, personalization, and tax-loss harvesting run across all three — at the individual client level. <strong style={{ color: '#34416D', fontWeight: 600 }}>You operate it. Paradigm enables it.</strong>
               </p>
               <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                Most advisors manage these capabilities across two vendors, two processes, and two different stories for clients. Paradigm consolidates both. One relationship. One interface. One coherent investment narrative for every client conversation.
+                Most advisors manage these capabilities across multiple vendors, multiple processes, and multiple stories for clients. Paradigm consolidates them. One relationship. One interface. One coherent investment narrative for every client conversation.
               </p>
             </div>
           </div>

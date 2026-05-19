@@ -103,7 +103,7 @@ export default function Institutions() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                Active management and direct indexing. One platform, fully integrated. Customization, personalization, and tax-loss harvesting run across both sleeves simultaneously — at the individual account level. Institutions operate the platform. Paradigm provides the investment intelligence and the infrastructure.
+                One platform. Three capabilities. Custom active strategies, SMA conversion, and direct and custom indexing — fully integrated. Customization, personalization, and tax-loss harvesting run across all three — at the individual account level. Institutions operate the platform. Paradigm provides the investment intelligence and the infrastructure.
               </motion.p>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>

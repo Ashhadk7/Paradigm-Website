@@ -143,7 +143,7 @@ export default function Process() {
                 viewport={{ once: true }} transition={{ delay: 0.07 }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
               >
-                Paradigm's Active Market Data database covers more than 20,000 strategies across 45,000 securities in 75 global markets. It is the most comprehensive view of where active capital is positioned within any mandate at any given time. Updated continuously. Evaluated monthly for changes in regime leadership.
+                Paradigm's Active Market Data (AMD) covers more than 12,000 strategies across 45,000 securities in 75 global markets. It is the most comprehensive view of where active capital is positioned within any mandate at any given time. Updated continuously. Evaluated monthly for changes in regime leadership.
               </motion.p>
             </div>
           </div>
@@ -163,15 +163,15 @@ export default function Process() {
               num="01"
               title="Isolate the mandate universe."
               paragraphs={[
-                "Every portfolio begins with a defined mandate. Large Cap Value. International Developed. A custom thematic strategy. Whatever the mandate, Paradigm isolates the relevant dataset from Active Market Data — the universe of strategies operating within that specific space.",
+                "Every portfolio begins with a defined mandate. Large Cap Value. International Developed. A custom thematic strategy. Whatever the mandate, Paradigm isolates the relevant dataset from AMD — the universe of strategies operating within that specific space.",
               ]}
             />
             <ProcessStep
               num="02"
               title="Identify regime leadership."
               paragraphs={[
-                "DMinor — Paradigm's proprietary pattern recognition engine — identifies which strategies within the mandate are in genuine market leadership right now. Not which strategies performed best over the last three years. Which are leading within the mandate today.",
-                "The distinction matters. Most manager searches are backward-looking by design — they evaluate trailing performance and hire the sub-style that just led the cycle. DMinor reads current market positioning.",
+                "CIPE — Paradigm's Collective Intelligence Portfolio Engine — identifies which strategies within the mandate are in genuine market leadership right now. Not which strategies performed best over the last three years. Which are leading within the mandate today.",
+                "The distinction matters. Most manager searches are backward-looking by design — they evaluate trailing performance and hire the sub-style that just led the cycle. CIPE reads current market positioning.",
               ]}
             />
             <ProcessStep

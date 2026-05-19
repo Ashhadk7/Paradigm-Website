@@ -58,13 +58,38 @@ src/
 | `/contact` | All | Two-path inquiry (advisor vs institutional) + structured form |
 | `/legal` | All | Disclaimers, SEC registration, performance disclosures |
 
-### Phase 2 — In Progress
+### Phase 2 — Complete
 
-| Route | Status |
-| :--- | :--- |
-| `/institutions` | Structure complete — copy pending final approval |
-| `/process` | Structure complete — copy pending final approval |
-| `/about` | Structure complete — team bios and photos pending |
+| Route | Audience | Purpose |
+| :--- | :--- | :--- |
+| `/institutions` | Institutional allocators | Platform capability, operational consequence |
+| `/process` | All | Four-step investment process, CIPE engine, Active Market Data |
+| `/about` | All | Firm history, James Francis bio, team, advisory board |
+
+---
+
+## Copy Revisions — May 2026
+
+Nine revisions applied to align the website with the updated PaaS deck and one-pager. All edits are copy-only; no structural or component changes.
+
+| Edit | Scope | Summary |
+| :--- | :--- | :--- |
+| 01 | Home hero | Added infrastructure eyebrow above H1 |
+| 02 | Process, About | DMinor renamed to CIPE (Collective Intelligence Portfolio Engine) |
+| 03 | Process | Active Market Data (AMD) shorthand introduced; strategy count corrected to 12,000 |
+| 04 | Global | James Francis title confirmed as Founder & CEO (was already correct) |
+| 05 | Home | The Platform section — three-capability framing |
+| 06 | For Advisors | Platform Capability section — three-capability framing |
+| 07 | For Family Offices | Platform Operations column — three-capability naming |
+| 08 | For Institutions | The Platform section — three-capability framing |
+| 09 | Home | Trust Strip — infrastructure scale numbers replaced with firm credentials |
+
+### Consistency checks passed
+- Zero instances of `DMinor` across codebase
+- Zero instances of `20,000 strategies` across codebase
+- Zero instances of `President` in connection with James Francis
+- Three-capability framing present on Home, For Advisors, For Family Offices, For Institutions
+- Trust Strip shows firm credentials only (scale numbers remain on Process page)
 
 ---
 

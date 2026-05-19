@@ -120,7 +120,7 @@ export default function Home() {
       </Helmet>
 
       <HeroSection
-        eyebrow="Paradigm Asset Management"
+        eyebrow="Institutional Portfolio Infrastructure for the Next Generation of Wealth Platforms"
         headline={"The collective intelligence of the market.\nBuilt into every portfolio."}
         sub="Paradigm identifies where market leadership is forming — right now, within each mandate — and builds portfolios that reflect it. Portfolios that can move as leadership moves."
 
@@ -134,10 +134,10 @@ export default function Home() {
       <section className="home-proof-band">
         <div className="home-proof-inner">
           <Stat value="35 Years" label="Founded 1990" />
-          <Stat value="65 of the top 100" label="US pension funds served" />
-          <Stat value="45,000+" label="Securities covered" />
-          <Stat value="75" label="Global markets" />
-          <Stat value="20,000+" label="Active strategies tracked" />
+          <Stat value="65 of the top 100" label="U.S. pension funds served" />
+          <Stat value="6" label={<>Equity strategies<br /><span className="stat-sub">Funded — domestic, international, global</span></>} />
+          <Stat value="$7B+" label="Cumulative AUM" />
+          <Stat value="100%" label="Employee owned" />
         </div>
       </section>
 
@@ -226,7 +226,7 @@ export default function Home() {
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
               <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                Active management and direct indexing. One platform, fully integrated. Customization, personalization, and tax-loss harvesting run across both sleeves simultaneously — at the individual client level. Built for advisors and institutions who want the full capability without splitting it across two vendors.
+                One platform. Three capabilities. Custom active strategies built to specification, SMA conversion of existing fund exposures into customizable tax-aware portfolios, and direct and custom indexing at scale. Customization, personalization, and tax-loss harvesting run across all three — at the individual client level. Built for advisors and institutions who want the full capability without splitting it across multiple vendors.
               </p>
             </div>
           </div>
