@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import ProofBlock from '../components/ProofBlock';
 import CTAStrip from '../components/CTAStrip';
+import { useContent } from '../lib/useContent';
 /* Radar import removed — Leadership Signal card was not in the brief */
 
 function Stat({ value, label }) {
@@ -112,17 +113,37 @@ function AnimatedOrbit() {
 }
 
 export default function Home() {
+  const { content: cms } = useContent('home');
+
+  const c = {
+    hero_eyebrow: cms?.hero_eyebrow || "Institutional Portfolio Infrastructure for the Next Generation of Wealth Platforms",
+    hero_headline: cms?.hero_headline || "The collective intelligence of the market.\nBuilt into every portfolio.",
+    hero_sub: cms?.hero_sub || "Paradigm identifies where market leadership is forming — right now, within each mandate — and builds portfolios that reflect it. Portfolios that can move as leadership moves.",
+    trust_stat_1_value: cms?.trust_stat_1_value || "35 Years",
+    trust_stat_1_label: cms?.trust_stat_1_label || "Founded 1990",
+    trust_stat_2_value: cms?.trust_stat_2_value || "65 of the top 100",
+    trust_stat_2_label: cms?.trust_stat_2_label || "U.S. pension funds served",
+    trust_stat_3_value: cms?.trust_stat_3_value || "6",
+    trust_stat_3_label: cms?.trust_stat_3_label || "Equity strategies",
+    trust_stat_3_sub: cms?.trust_stat_3_sub || "Funded — domestic, international, global",
+    trust_stat_4_value: cms?.trust_stat_4_value || "$7B+",
+    trust_stat_4_label: cms?.trust_stat_4_label || "Cumulative AUM",
+    trust_stat_5_value: cms?.trust_stat_5_value || "100%",
+    trust_stat_5_label: cms?.trust_stat_5_label || "Employee owned",
+    platform_text: cms?.platform_text || "One platform. Three capabilities. Custom active strategies built to specification, SMA conversion of existing fund exposures into customizable tax-aware portfolios, and direct and custom indexing at scale. Customization, personalization, and tax-loss harvesting run across all three — at the individual client level. Built for advisors and institutions who want the full capability without splitting it across multiple vendors.",
+  };
+
   return (
     <>
       <Helmet>
         <title>Paradigm Asset Management — The Collective Intelligence of the Market</title>
-        <meta name="description" content="Paradigm identifies where market leadership is forming — right now, within each mandate — and builds portfolios that reflect it. Portfolios that can move as leadership moves." />
+        <meta name="description" content={c.hero_sub} />
       </Helmet>
 
       <HeroSection
-        eyebrow="Institutional Portfolio Infrastructure for the Next Generation of Wealth Platforms"
-        headline={"The collective intelligence of the market.\nBuilt into every portfolio."}
-        sub="Paradigm identifies where market leadership is forming — right now, within each mandate — and builds portfolios that reflect it. Portfolios that can move as leadership moves."
+        eyebrow={c.hero_eyebrow}
+        headline={c.hero_headline}
+        sub={c.hero_sub}
 
         ctas={[
           { label: 'For Advisors', to: '/advisors', variant: 'gold' },
@@ -133,11 +154,11 @@ export default function Home() {
 
       <section className="home-proof-band">
         <div className="home-proof-inner">
-          <Stat value="35 Years" label="Founded 1990" />
-          <Stat value="65 of the top 100" label="U.S. pension funds served" />
-          <Stat value="6" label={<>Equity strategies<br /><span className="stat-sub">Funded — domestic, international, global</span></>} />
-          <Stat value="$7B+" label="Cumulative AUM" />
-          <Stat value="100%" label="Employee owned" />
+          <Stat value={c.trust_stat_1_value} label={c.trust_stat_1_label} />
+          <Stat value={c.trust_stat_2_value} label={c.trust_stat_2_label} />
+          <Stat value={c.trust_stat_3_value} label={<>{c.trust_stat_3_label}<br /><span className="stat-sub">{c.trust_stat_3_sub}</span></>} />
+          <Stat value={c.trust_stat_4_value} label={c.trust_stat_4_label} />
+          <Stat value={c.trust_stat_5_value} label={c.trust_stat_5_label} />
         </div>
       </section>
 
@@ -226,7 +247,7 @@ export default function Home() {
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
               <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                One platform. Three capabilities. Custom active strategies built to specification, SMA conversion of existing fund exposures into customizable tax-aware portfolios, and direct and custom indexing at scale. Customization, personalization, and tax-loss harvesting run across all three — at the individual client level. Built for advisors and institutions who want the full capability without splitting it across multiple vendors.
+                {c.platform_text}
               </p>
             </div>
           </div>
