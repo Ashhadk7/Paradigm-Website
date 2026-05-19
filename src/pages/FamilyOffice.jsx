@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import ProofBlock from '../components/ProofBlock';
 import CTAStrip from '../components/CTAStrip';
+import { useContent } from '../lib/useContent';
 
 function ThreeCol({ blocks }) {
   return (
@@ -25,6 +26,16 @@ function ThreeCol({ blocks }) {
 }
 
 export default function FamilyOffice() {
+  const { content: cms } = useContent('familyoffice');
+
+  const c = {
+    hero_eyebrow: cms?.hero_eyebrow || "For Multi-Family Offices & OCIOs",
+    hero_headline: cms?.hero_headline || "Your clients expect portfolios built for them specifically. Most platforms offer portfolios built for everyone. There is a different approach.",
+    hero_sub: cms?.hero_sub || "Paradigm builds portfolios to your specification for any client mandate — using collective intelligence to identify regime leadership within each mandate and qualify it through active market data. Your investment team operates the platform. Your clients see your process.",
+    platform_ops_title: cms?.platform_ops_title || "The Operational Consequence",
+    platform_ops_body: cms?.platform_ops_body || "Most multi-family offices manage active mandates through relationships with multiple style-specific managers. Each brings genuine expertise within their domain. Each also brings coordination overhead — performance monitoring across multiple mandates, attribution reporting across multiple accounts, and a different investment rationale for each manager in every client review.",
+  };
+
   return (
     <>
       <Helmet>
@@ -33,9 +44,9 @@ export default function FamilyOffice() {
       </Helmet>
 
       <HeroSection
-        eyebrow="For Multi-Family Offices & OCIOs"
-        headline={"Your clients expect portfolios built for them specifically. Most platforms offer portfolios built for everyone. There is a different approach."}
-        sub="Paradigm builds portfolios to your specification for any client mandate — using collective intelligence to identify regime leadership within each mandate and qualify it through active market data. Your investment team operates the platform. Your clients see your process."
+        eyebrow={c.hero_eyebrow}
+        headline={c.hero_headline}
+        sub={c.hero_sub}
         compact
         ctas={[{ label: 'Start a Conversation', to: '/contact', variant: 'outline' }]}
       />
@@ -99,11 +110,11 @@ export default function FamilyOffice() {
       <section className="section-offwhite">
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Operational Consequence</p>
+            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_ops_title}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                Most multi-family offices manage active mandates through relationships with multiple style-specific managers. Each brings genuine expertise within their domain. Each also brings coordination overhead — performance monitoring across multiple mandates, attribution reporting across multiple accounts, and a different investment rationale for each manager in every client review.
+                {c.platform_ops_body}
               </motion.p>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>

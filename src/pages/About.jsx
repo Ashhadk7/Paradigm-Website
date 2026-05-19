@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { GLSLHills } from '../components/ui/glsl-hills';
+import { useContent } from '../lib/useContent';
 
 function TeamCard({ name, title, prev, bio }) {
   return (
@@ -30,11 +31,22 @@ function TeamCard({ name, title, prev, bio }) {
 }
 
 export default function About() {
-  const clauses = [
+  const { content: cms } = useContent('about');
+
+  const c = {
+    james_title: cms?.james_title || "Founder & CEO",
+    james_bio_1: cms?.james_bio_1 || "James Francis founded Paradigm in 1990 with a question that has driven the firm ever since: what does the market know collectively that no single strategy can know on its own?",
+    james_bio_2: cms?.james_bio_2 || "The answer became CIPE — the Collective Intelligence Portfolio Engine, a process that reads active market data across thousands of strategies to identify where leadership is forming within each mandate. It has run continuously for 35 years through the full cycle of market regimes, serving institutional clients across pension funds, endowments, and government entities.",
+    james_bio_3: cms?.james_bio_3 || "James is the author of Artificial Integrity: Leadership in an Age of Intelligent Systems.",
+    james_image_url: cms?.james_image_url || "",
+  };
+
+  const defaultClauses = [
     'Built on a single conviction.',
     'Run for 35 years.',
     'Now accessible to the partners and platforms that need it most.',
   ];
+  const clauses = cms?.hero_headline ? cms.hero_headline.split('\n') : defaultClauses;
 
   return (
     <>
@@ -125,34 +137,42 @@ export default function About() {
         <div className="section-inner">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'start' }}>
             <div>
-              <p className="eyebrow" style={{ marginBottom: '1rem' }}>Founder & CEO</p>
+              <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.james_title}</p>
               <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>
                 James Francis
               </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                   style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                  James Francis founded Paradigm in 1990 with a question that has driven the firm ever since: what does the market know collectively that no single strategy can know on its own?
+                  {c.james_bio_1}
                 </motion.p>
                 <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.07 }}
                   style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                  The answer became CIPE — the Collective Intelligence Portfolio Engine, a process that reads active market data across thousands of strategies to identify where leadership is forming within each mandate. It has run continuously for 35 years through the full cycle of market regimes, serving institutional clients across pension funds, endowments, and government entities.
+                  {c.james_bio_2}
                 </motion.p>
                 <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.14 }}
                   style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                  James is the author of <em>Artificial Integrity: Leadership in an Age of Intelligent Systems.</em>
+                  {c.james_bio_3}
                 </motion.p>
               </div>
             </div>
             {/* Portrait placeholder */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
-              <div style={{
-                width: 220, height: 260, background: '#34416D', borderRadius: 4,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '0.5rem'
-              }}>
-                <span style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontWeight: 700, fontSize: '3rem', color: '#C4A25B' }}>JF</span>
-                <span style={{ fontFamily: 'Inter', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(245,243,239,0.5)' }}>Photo Coming</span>
-              </div>
+              {c.james_image_url ? (
+                <img
+                  src={c.james_image_url}
+                  alt="James Francis"
+                  style={{ width: 220, height: 260, objectFit: 'cover', borderRadius: 4 }}
+                />
+              ) : (
+                <div style={{
+                  width: 220, height: 260, background: '#34416D', borderRadius: 4,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '0.5rem'
+                }}>
+                  <span style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontWeight: 700, fontSize: '3rem', color: '#C4A25B' }}>JF</span>
+                  <span style={{ fontFamily: 'Inter', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(245,243,239,0.5)' }}>Photo Coming</span>
+                </div>
+              )}
               <div style={{ textAlign: 'center' }}>
                 <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.125rem', color: '#34416D' }}>James Francis</p>
                 <p style={{ fontFamily: 'Inter', fontSize: '0.8125rem', color: '#C4A25B', fontWeight: 600 }}>Founder & CEO</p>

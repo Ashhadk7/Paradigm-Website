@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import ProofBlock from '../components/ProofBlock';
 import CTAStrip from '../components/CTAStrip';
+import { useContent } from '../lib/useContent';
 
 function ThreeCol({ blocks }) {
   return (
@@ -25,6 +26,17 @@ function ThreeCol({ blocks }) {
 }
 
 export default function Advisors() {
+  const { content: cms } = useContent('advisors');
+
+  const c = {
+    hero_eyebrow: cms?.hero_eyebrow || "For Wealth Advisors & Independent RIAs",
+    hero_headline: cms?.hero_headline || "Your clients are paying active management fees. Most of that capital is locked inside a single strategy's approach. There is a different way to invest it.",
+    hero_sub: cms?.hero_sub || "Paradigm builds portfolios from active market data — not anchored to any single approach. Portfolios that can move as market leadership moves. Under your name.",
+    platform_headline: cms?.platform_headline || "One platform. Three capabilities.",
+    platform_para1: cms?.platform_para1 || "Custom active strategies built to your specification, SMA conversion of existing fund exposures into customizable tax-aware portfolios, and direct and custom indexing at scale. Customization, personalization, and tax-loss harvesting run across all three — at the individual client level. You operate it. Paradigm enables it.",
+    platform_para2: cms?.platform_para2 || "Most advisors manage these capabilities across multiple vendors, multiple processes, and multiple stories for clients. Paradigm consolidates them. One relationship. One interface. One coherent investment narrative for every client conversation.",
+  };
+
   return (
     <>
       <Helmet>
@@ -34,9 +46,9 @@ export default function Advisors() {
 
       {/* ── HERO ── */}
       <HeroSection
-        eyebrow="For Wealth Advisors & Independent RIAs"
-        headline={"Your clients are paying active management fees. Most of that capital is locked inside a single strategy's approach. There is a different way to invest it."}
-        sub="Paradigm builds portfolios from active market data — not anchored to any single approach. Portfolios that can move as market leadership moves. Under your name."
+        eyebrow={c.hero_eyebrow}
+        headline={c.hero_headline}
+        sub={c.hero_sub}
         compact
         ctas={[{ label: 'Book a 20-Minute Call', to: '/contact', variant: 'gold' }]}
       />
@@ -101,13 +113,13 @@ export default function Advisors() {
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform Capability</p>
-            <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>One platform. Three capabilities.</h2>
+            <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                Custom active strategies built to your specification, SMA conversion of existing fund exposures into customizable tax-aware portfolios, and direct and custom indexing at scale. Customization, personalization, and tax-loss harvesting run across all three — at the individual client level. <strong style={{ color: '#34416D', fontWeight: 600 }}>You operate it. Paradigm enables it.</strong>
+                {c.platform_para1}
               </p>
               <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                Most advisors manage these capabilities across multiple vendors, multiple processes, and multiple stories for clients. Paradigm consolidates them. One relationship. One interface. One coherent investment narrative for every client conversation.
+                {c.platform_para2}
               </p>
             </div>
           </div>

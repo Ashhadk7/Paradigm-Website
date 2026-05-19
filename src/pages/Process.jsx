@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { GLSLHills } from '../components/ui/glsl-hills';
+import { useContent } from '../lib/useContent';
 
 function ProcessStep({ num, title, paragraphs, isLast }) {
   return (
@@ -59,7 +60,24 @@ function ProcessStep({ num, title, paragraphs, isLast }) {
 }
 
 export default function Process() {
-  const words = ['Systematic.', 'Transparent.', 'Explainable at every step.'];
+  const { content: cms } = useContent('process');
+
+  const c = {
+    data_foundation_text: cms?.data_foundation_text || "Every Paradigm portfolio begins with data. Not analyst opinions. Not committee views. Market data — specifically the disclosed holdings of active investment strategies across the global equity universe. This data is public. What Paradigm does with it is not.",
+    data_foundation_amd: cms?.data_foundation_amd || "Paradigm's Active Market Data (AMD) covers more than 12,000 strategies across 45,000 securities in 75 global markets. It is the most comprehensive view of where active capital is positioned within any mandate at any given time. Updated continuously. Evaluated monthly for changes in regime leadership.",
+    step1_title: cms?.step1_title || "Isolate the mandate universe.",
+    step1_text: cms?.step1_text || "Every portfolio begins with a defined mandate. Large Cap Value. International Developed. A custom thematic strategy. Whatever the mandate, Paradigm isolates the relevant dataset from AMD — the universe of strategies operating within that specific space.",
+    step2_title: cms?.step2_title || "Identify regime leadership.",
+    step2_para1: cms?.step2_para1 || "CIPE — Paradigm's Collective Intelligence Portfolio Engine — identifies which strategies within the mandate are in genuine market leadership right now. Not which strategies performed best over the last three years. Which are leading within the mandate today.",
+    step2_para2: cms?.step2_para2 || "The distinction matters. Most manager searches are backward-looking by design — they evaluate trailing performance and hire the sub-style that just led the cycle. CIPE reads current market positioning.",
+    step3_title: cms?.step3_title || "Generate the Portfolio Blueprint.",
+    step3_text: cms?.step3_text || "The strategies in regime leadership reveal a consensus view of the market — which sectors, factors, regions, and securities are concentrated in the leading positions. That consensus becomes the Portfolio Blueprint: a map of where the market's collective attention is focused within the mandate right now.",
+    step4_title: cms?.step4_title || "Build, optimize, and monitor.",
+    step4_text: cms?.step4_text || "Paradigm optimizes the portfolio toward the Blueprint — maximum return relative to risk within the mandate parameters. The model runs monthly from the beginning. A rebalance is triggered when the signal confirms a shift in regime leadership, not when a calendar date arrives.",
+  };
+
+  const defaultWords = ['Systematic.', 'Transparent.', 'Explainable at every step.'];
+  const words = cms?.hero_headline ? cms.hero_headline.split('\n') : defaultWords;
 
   return (
     <>
@@ -135,14 +153,14 @@ export default function Process() {
                 viewport={{ once: true }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
               >
-                Every Paradigm portfolio begins with data. Not analyst opinions. Not committee views. Market data — specifically the disclosed holdings of active investment strategies across the global equity universe. This data is public. What Paradigm does with it is not.
+                {c.data_foundation_text}
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: 0.07 }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
               >
-                Paradigm's Active Market Data (AMD) covers more than 12,000 strategies across 45,000 securities in 75 global markets. It is the most comprehensive view of where active capital is positioned within any mandate at any given time. Updated continuously. Evaluated monthly for changes in regime leadership.
+                {c.data_foundation_amd}
               </motion.p>
             </div>
           </div>
@@ -160,32 +178,27 @@ export default function Process() {
 
             <ProcessStep
               num="01"
-              title="Isolate the mandate universe."
-              paragraphs={[
-                "Every portfolio begins with a defined mandate. Large Cap Value. International Developed. A custom thematic strategy. Whatever the mandate, Paradigm isolates the relevant dataset from AMD — the universe of strategies operating within that specific space.",
-              ]}
+              title={c.step1_title}
+              paragraphs={[c.step1_text]}
             />
             <ProcessStep
               num="02"
-              title="Identify regime leadership."
-              paragraphs={[
-                "CIPE — Paradigm's Collective Intelligence Portfolio Engine — identifies which strategies within the mandate are in genuine market leadership right now. Not which strategies performed best over the last three years. Which are leading within the mandate today.",
-                "The distinction matters. Most manager searches are backward-looking by design — they evaluate trailing performance and hire the sub-style that just led the cycle. CIPE reads current market positioning.",
-              ]}
+              title={c.step2_title}
+              paragraphs={[c.step2_para1, c.step2_para2]}
             />
             <ProcessStep
               num="03"
-              title="Generate the Portfolio Blueprint."
+              title={c.step3_title}
               paragraphs={[
-                "The strategies in regime leadership reveal a consensus view of the market — which sectors, factors, regions, and securities are concentrated in the leading positions. That consensus becomes the Portfolio Blueprint: a map of where the market's collective attention is focused within the mandate right now.",
+                c.step3_text,
                 "The Blueprint is not a replication of any single strategy. It is a new intelligence that emerges from the aggregate of many strategies each doing their job well within their own domain.",
               ]}
             />
             <ProcessStep
               num="04"
-              title="Build, optimize, and monitor."
+              title={c.step4_title}
               paragraphs={[
-                "Paradigm optimizes the portfolio toward the Blueprint — maximum return relative to risk within the mandate parameters. The model runs monthly from the beginning. A rebalance is triggered when the signal confirms a shift in regime leadership, not when a calendar date arrives.",
+                c.step4_text,
                 "Tax-loss harvesting runs on the active positions through the platform. The advisor or institution operates this capability. Paradigm enables it.",
               ]}
               isLast

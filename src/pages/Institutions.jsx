@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import ProofBlock from '../components/ProofBlock';
 import CTAStrip from '../components/CTAStrip';
+import { useContent } from '../lib/useContent';
 
 function ThreeCol({ blocks }) {
   return (
@@ -25,6 +26,16 @@ function ThreeCol({ blocks }) {
 }
 
 export default function Institutions() {
+  const { content: cms } = useContent('institutions');
+
+  const c = {
+    hero_eyebrow: cms?.hero_eyebrow || "For Institutional Investors & Strategic Partners",
+    hero_headline: cms?.hero_headline || "35 years of institutional investment process. The same intelligence that served General Motors, AMEX, and the US Treasury — now structured for the partnerships, mandates, and platforms that define what comes next.",
+    hero_sub: cms?.hero_sub || "Paradigm reads active market data to identify where leadership is forming within each mandate — and builds portfolios from that signal. Transparent. Explainable. No black box.",
+    platform_para1: cms?.platform_para1 || "One platform. Three capabilities. Custom active strategies, SMA conversion, and direct and custom indexing — fully integrated. Customization, personalization, and tax-loss harvesting run across all three — at the individual account level. Institutions operate the platform. Paradigm provides the investment intelligence and the infrastructure.",
+    platform_para2: cms?.platform_para2 || "For institutions managing assets across multiple mandates and account types, the operational consequence is significant. One process. One relationship. One coherent investment narrative across every client, every committee, and every regulatory filing that asks how the portfolio is positioned and why.",
+  };
+
   return (
     <>
       <Helmet>
@@ -33,9 +44,9 @@ export default function Institutions() {
       </Helmet>
 
       <HeroSection
-        eyebrow="For Institutional Investors & Strategic Partners"
-        headline={"35 years of institutional investment process. The same intelligence that served General Motors, AMEX, and the US Treasury — now structured for the partnerships, mandates, and platforms that define what comes next."}
-        sub="Paradigm reads active market data to identify where leadership is forming within each mandate — and builds portfolios from that signal. Transparent. Explainable. No black box."
+        eyebrow={c.hero_eyebrow}
+        headline={c.hero_headline}
+        sub={c.hero_sub}
         compact
         ctas={[{ label: 'Start a Conversation', to: '/contact', variant: 'outline' }]}
       />
@@ -103,11 +114,11 @@ export default function Institutions() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                One platform. Three capabilities. Custom active strategies, SMA conversion, and direct and custom indexing — fully integrated. Customization, personalization, and tax-loss harvesting run across all three — at the individual account level. Institutions operate the platform. Paradigm provides the investment intelligence and the infrastructure.
+                {c.platform_para1}
               </motion.p>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                For institutions managing assets across multiple mandates and account types, the operational consequence is significant. One process. One relationship. One coherent investment narrative across every client, every committee, and every regulatory filing that asks how the portfolio is positioned and why.
+                {c.platform_para2}
               </motion.p>
             </div>
           </div>

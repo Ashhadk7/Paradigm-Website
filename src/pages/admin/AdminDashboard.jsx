@@ -64,7 +64,8 @@ const PAGES = [
     fields: [
       { name: 'hero_eyebrow', label: 'Hero Eyebrow', type: 'text' },
       { name: 'hero_headline', label: 'Hero Headline', type: 'textarea' },
-      { name: 'data_foundation_text', label: 'Data Foundation — Body Text', type: 'textarea' },
+      { name: 'data_foundation_text', label: 'Data Foundation — Paragraph 1', type: 'textarea' },
+      { name: 'data_foundation_amd', label: 'Data Foundation — AMD Paragraph', type: 'textarea' },
       { name: 'step1_title', label: 'Step 01 — Title', type: 'text' },
       { name: 'step1_text', label: 'Step 01 — Body', type: 'textarea' },
       { name: 'step2_title', label: 'Step 02 — Title', type: 'text' },
@@ -86,6 +87,7 @@ const PAGES = [
       { name: 'james_bio_1', label: 'James Francis — Bio Paragraph 1', type: 'textarea' },
       { name: 'james_bio_2', label: 'James Francis — Bio Paragraph 2', type: 'textarea' },
       { name: 'james_bio_3', label: 'James Francis — Bio Paragraph 3', type: 'textarea' },
+      { name: 'james_image_url', label: 'James Francis — Photo URL', type: 'text' },
     ],
   },
 ];
