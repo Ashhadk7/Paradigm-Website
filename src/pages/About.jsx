@@ -47,7 +47,6 @@ export default function About() {
       <section
         className="hero-section"
         style={{
-          minHeight: '100vh',
           paddingTop: '5rem',
           paddingBottom: '3rem',
         }}
