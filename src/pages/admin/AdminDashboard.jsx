@@ -87,7 +87,7 @@ const PAGES = [
       { name: 'james_bio_1', label: 'James Francis — Bio Paragraph 1', type: 'textarea' },
       { name: 'james_bio_2', label: 'James Francis — Bio Paragraph 2', type: 'textarea' },
       { name: 'james_bio_3', label: 'James Francis — Bio Paragraph 3', type: 'textarea' },
-      { name: 'james_image_url', label: 'James Francis — Photo URL', type: 'text' },
+      { name: 'james_image_url', label: 'James Francis — Photo', type: 'image' },
     ],
   },
 ];
@@ -138,6 +138,35 @@ export default function AdminDashboard({ onLogout }) {
       setSaved(true);
     }
     setSaving(false);
+  }
+
+  async function handleImageUpload(fieldName, file) {
+    if (!file) return;
+    const ext = file.name.split('.').pop();
+    const fileName = `${fieldName}-${Date.now()}.${ext}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('images')
+      .upload(fileName, file, { upsert: true });
+
+    if (uploadError) {
+      alert('Upload failed: ' + uploadError.message);
+      return;
+    }
+
+    const { data } = supabase.storage.from('images').getPublicUrl(fileName);
+    updateField(fieldName, data.publicUrl);
+  }
+
+  async function handleImageRemove(fieldName) {
+    const url = content[fieldName];
+    if (url) {
+      const path = url.split('/images/')[1];
+      if (path) {
+        await supabase.storage.from('images').remove([path]);
+      }
+    }
+    updateField(fieldName, '');
   }
 
   async function handleLogout() {
@@ -204,6 +233,25 @@ export default function AdminDashboard({ onLogout }) {
                     style={styles.textarea}
                     rows={4}
                   />
+                ) : field.type === 'image' ? (
+                  <div style={styles.imageField}>
+                    {content[field.name] ? (
+                      <div style={styles.imagePreviewWrap}>
+                        <img src={content[field.name]} alt={field.label} style={styles.imagePreview} />
+                        <button onClick={() => handleImageRemove(field.name)} style={styles.imageRemoveBtn}>Remove</button>
+                      </div>
+                    ) : (
+                      <label style={styles.imageUploadLabel}>
+                        <span>Choose Image</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          style={{ display: 'none' }}
+                          onChange={e => handleImageUpload(field.name, e.target.files[0])}
+                        />
+                      </label>
+                    )}
+                  </div>
                 ) : (
                   <input
                     type="text"
@@ -402,5 +450,47 @@ const styles = {
     resize: 'vertical',
     lineHeight: 1.6,
     boxSizing: 'border-box',
+  },
+  imageField: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.5rem',
+  },
+  imagePreviewWrap: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: '1rem',
+  },
+  imagePreview: {
+    width: 160,
+    height: 200,
+    objectFit: 'cover',
+    borderRadius: '6px',
+    border: '1px solid rgba(52,65,109,0.15)',
+  },
+  imageRemoveBtn: {
+    padding: '0.4rem 0.85rem',
+    background: '#c0392b',
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '4px',
+    fontFamily: 'Inter, sans-serif',
+    fontSize: '0.75rem',
+    fontWeight: 600,
+    cursor: 'pointer',
+  },
+  imageUploadLabel: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '0.65rem 1.25rem',
+    background: '#34416D',
+    color: '#ffffff',
+    borderRadius: '6px',
+    fontFamily: 'Inter, sans-serif',
+    fontSize: '0.8125rem',
+    fontWeight: 600,
+    cursor: 'pointer',
+    width: 'fit-content',
   },
 };
