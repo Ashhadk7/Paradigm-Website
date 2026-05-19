@@ -35,7 +35,7 @@ export default function CTAStrip({ variant = 'both' }) {
             >
               <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>For Institutions</p>
               <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.375rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.4 }}>
-                Paradigm is actively building strategic relationships with family offices, OCIOs, and institutional partners.
+                Paradigm is actively building strategic relationships with family offices, OCIOs, and institutional partners. Start a conversation.
               </p>
               <Link to="/contact" className="btn-outline-navy" style={{ marginTop: '0.5rem' }}>
                 Start a Conversation
