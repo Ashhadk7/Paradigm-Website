@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
  * CTAStrip — bottom of every marketing page.
  * variant: 'advisor' | 'institutional' | 'both'
  */
-export default function CTAStrip({ variant = 'both' }) {
+export default function CTAStrip({ variant = 'both', advisorText, institutionText }) {
   return (
     <section className="cta-strip" style={{ borderTop: '1px solid rgba(52,65,109,0.12)' }}>
       <div className="section-inner" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
@@ -20,7 +20,7 @@ export default function CTAStrip({ variant = 'both' }) {
             >
               <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>For Advisors</p>
               <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.375rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.4 }}>
-                See what a portfolio built from collective intelligence looks like for your practice. Worth 20 minutes.
+                {advisorText || "See what a portfolio built from collective intelligence looks like for your practice. Worth 20 minutes."}
               </p>
               <Link to="/contact" className="btn-gold" style={{ marginTop: '0.5rem' }}>
                 Book a 20-Minute Call
@@ -35,7 +35,7 @@ export default function CTAStrip({ variant = 'both' }) {
             >
               <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>For Institutions</p>
               <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.375rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.4 }}>
-                Paradigm is actively building strategic relationships with family offices, OCIOs, and institutional partners. Start a conversation.
+                {institutionText || "Paradigm is actively building strategic relationships with family offices, OCIOs, and institutional partners. Start a conversation."}
               </p>
               <Link to="/contact" className="btn-outline-navy" style={{ marginTop: '0.5rem' }}>
                 Start a Conversation

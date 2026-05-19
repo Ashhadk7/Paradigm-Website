@@ -24,8 +24,9 @@ const COPY = {
   },
 };
 
-export default function ProofBlock({ variant = 'advisor' }) {
-  const copy = COPY[variant] || COPY.advisor;
+export default function ProofBlock({ variant = 'advisor', body, bridge }) {
+  const fallback = COPY[variant] || COPY.advisor;
+  const copy = { body: body || fallback.body, bridge: bridge || fallback.bridge };
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
