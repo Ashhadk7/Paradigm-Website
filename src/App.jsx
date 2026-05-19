@@ -11,6 +11,7 @@ import Process from './pages/Process';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Legal from './pages/Legal';
+import Admin from './pages/admin/Admin';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -44,7 +45,10 @@ export default function App() {
   return (
     <HelmetProvider>
       <Router>
-        <Layout />
+        <Routes>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/*" element={<Layout />} />
+        </Routes>
       </Router>
     </HelmetProvider>
   );
