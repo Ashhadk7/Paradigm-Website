@@ -1,136 +1,214 @@
-# Paradigm Asset Management — Website
+# Paradigm Asset Management Website
 
-Production marketing site for **Paradigm Asset Management Co. LLC**, built as a React SPA. The site communicates Paradigm's collective intelligence investment process to three distinct audiences: independent wealth advisors, multi-family offices / OCIOs, and institutional investors.
+Production marketing website and lightweight CMS for Paradigm Asset Management Co. LLC.
 
----
+The site presents Paradigm's collective intelligence investment process across advisor, family office, institutional, process, and firm-story pages. Content is managed through a protected `/admin` dashboard backed by Supabase.
+
+## Overview
+
+Paradigm is a React single-page application built with Vite. It combines a polished institutional marketing site with an internal CMS so page copy can be updated without code changes.
+
+Core capabilities:
+
+- Public marketing pages for all primary audiences
+- Supabase-backed page content CMS
+- Protected admin dashboard at `/admin`
+- Section-based CMS editing for every major page
+- Real-time local content refresh after CMS saves
+- Responsive navigation, animated heroes, and editorial page sections
+- Vercel-ready SPA routing via `public/_redirects` and `vercel.json`
 
 ## Tech Stack
 
-| Layer | Choice |
-| :--- | :--- |
-| **Framework** | React 18 + Vite |
-| **Routing** | React Router v6 |
-| **Animation** | Framer Motion |
-| **SEO** | React Helmet Async |
-| **Fonts** | Inter · Source Serif 4 (Google Fonts) |
-| **Styling** | Custom CSS (brand token system) |
-| **Icons** | Lucide React |
-
----
+| Area | Technology |
+| --- | --- |
+| Frontend | React 19, Vite |
+| Routing | React Router |
+| CMS/Data | Supabase |
+| Animation | Framer Motion |
+| SEO | React Helmet Async |
+| Icons | Lucide React |
+| Styling | Tailwind CSS import plus custom CSS and inline component styles |
+| Visuals | Three.js / custom GLSL hills background |
 
 ## Project Structure
 
 ```text
-src/
-├── components/
-│   ├── CTAStrip.jsx        # Bottom CTA bar — variants: advisor | mfo | institutional | both
-│   ├── Footer.jsx          # Site footer with nav links and legal
-│   ├── HeroSection.jsx     # Reusable hero — eyebrow, H1, sub, visual, CTAs
-│   ├── Navbar.jsx          # Top nav with advisor dropdown and mobile drawer
-│   └── ProofBlock.jsx      # Navy proof section — variants: advisor | mfo | institutional
-│
-├── pages/
-│   ├── Home.jsx            # /             — collective intelligence overview
-│   ├── Advisors.jsx        # /advisors     — RIAs and independent wealth advisors
-│   ├── FamilyOffice.jsx    # /familyoffice — MFOs and OCIOs
-│   ├── Institutions.jsx    # /institutions — institutional allocators (Phase 2)
-│   ├── Process.jsx         # /process      — four-step investment process (Phase 2)
-│   ├── About.jsx           # /about        — firm history, team, advisory board (Phase 2)
-│   ├── Contact.jsx         # /contact      — two-path inquiry + structured form
-│   └── Legal.jsx           # /legal        — disclaimers, SEC registration, privacy
-│
-├── App.jsx                 # Route definitions
-├── main.jsx                # React entry point
-└── index.css               # All styles — tokens, layout, component classes
+.
+├── public/
+│   ├── _redirects
+│   ├── favicon.svg
+│   └── icons.svg
+├── src/
+│   ├── components/
+│   │   ├── CTAStrip.jsx
+│   │   ├── Footer.jsx
+│   │   ├── HeroSection.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── ProofBlock.jsx
+│   │   └── ui/
+│   │       └── glsl-hills.jsx
+│   ├── lib/
+│   │   ├── supabase.js
+│   │   └── useContent.js
+│   ├── pages/
+│   │   ├── About.jsx
+│   │   ├── Advisors.jsx
+│   │   ├── Contact.jsx
+│   │   ├── FamilyOffice.jsx
+│   │   ├── Home.jsx
+│   │   ├── Institutions.jsx
+│   │   ├── Legal.jsx
+│   │   ├── Process.jsx
+│   │   └── admin/
+│   │       ├── Admin.jsx
+│   │       ├── AdminDashboard.jsx
+│   │       └── AdminLogin.jsx
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── supabase-setup.sql
+├── package.json
+├── vite.config.js
+└── vercel.json
 ```
 
----
+## Routes
 
-## Pages
+| Route | Purpose |
+| --- | --- |
+| `/` | Homepage, market intelligence narrative, proof, and CTAs |
+| `/advisors` | Wealth advisor and independent RIA pitch |
+| `/familyoffice` | Multi-family office and OCIO pitch |
+| `/familyoffices` | Alias for `/familyoffice` |
+| `/institutions` | Institutional investors and strategic partners |
+| `/process` | Investment process and Active Market Data methodology |
+| `/about` | Firm story, James Francis profile, team, advisory board |
+| `/contact` | Inquiry and contact page |
+| `/legal` | Disclosures and legal copy |
+| `/admin` | Protected CMS dashboard |
 
-### Phase 1 — Complete
+## CMS Architecture
 
-| Route | Audience | Purpose |
-| :--- | :--- | :--- |
-| `/` | All | Collective intelligence story, trust strip, proof |
-| `/advisors` | RIAs, wealth advisors | Full self-contained pitch — practice consequences, platform, proof |
-| `/familyoffice` | MFOs, OCIOs | Portfolio manufacturing capability, custom mandates |
-| `/contact` | All | Two-path inquiry (advisor vs institutional) + structured form |
-| `/legal` | All | Disclaimers, SEC registration, performance disclosures |
+The CMS uses a `page_content` table in Supabase. Each page stores a JSON `content` object keyed by `page_key`.
 
-### Phase 2 — Complete
+Implemented CMS pages:
 
-| Route | Audience | Purpose |
-| :--- | :--- | :--- |
-| `/institutions` | Institutional allocators | Platform capability, operational consequence |
-| `/process` | All | Four-step investment process, CIPE engine, Active Market Data |
-| `/about` | All | Firm history, James Francis bio, team, advisory board |
+- Home
+- For Advisors
+- For Family Offices
+- For Institutions
+- Our Process
+- About
 
----
+The admin dashboard groups fields by the same section order used on the public website. Section navigation highlights the section currently in view and scrolls within the dashboard without changing section-specific URL hashes.
 
-## Copy Revisions — May 2026
+Content flow:
 
-Nine revisions applied to align the website with the updated PaaS deck and one-pager. All edits are copy-only; no structural or component changes.
+1. Public pages call `useContent(pageKey)`.
+2. `useContent` reads from Supabase and caches page content in memory.
+3. Admin saves write the updated JSON content to Supabase.
+4. `publishContentUpdate` updates the local cache and broadcasts the change to mounted pages and other open tabs.
 
-| Edit | Scope | Summary |
-| :--- | :--- | :--- |
-| 01 | Home hero | Added infrastructure eyebrow above H1 |
-| 02 | Process, About | DMinor renamed to CIPE (Collective Intelligence Portfolio Engine) |
-| 03 | Process | Active Market Data (AMD) shorthand introduced; strategy count corrected to 12,000 |
-| 04 | Global | James Francis title confirmed as Founder & CEO (was already correct) |
-| 05 | Home | The Platform section — three-capability framing |
-| 06 | For Advisors | Platform Capability section — three-capability framing |
-| 07 | For Family Offices | Platform Operations column — three-capability naming |
-| 08 | For Institutions | The Platform section — three-capability framing |
-| 09 | Home | Trust Strip — infrastructure scale numbers replaced with firm credentials |
+## Supabase Setup
 
-### Consistency checks passed
-- Zero instances of `DMinor` across codebase
-- Zero instances of `20,000 strategies` across codebase
-- Zero instances of `President` in connection with James Francis
-- Three-capability framing present on Home, For Advisors, For Family Offices, For Institutions
-- Trust Strip shows firm credentials only (scale numbers remain on Process page)
+The Supabase schema is provided in:
 
----
+```text
+supabase-setup.sql
+```
 
-## Getting Started
+Required environment variables:
 
-Follow these steps to set up the project locally and start development.
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-### 1. Prerequisites
-Ensure you have the following installed on your machine:
-- [Node.js](https://nodejs.org/) (Version 18.0 or higher recommended)
-- [npm](https://www.npmjs.com/) (usually comes with Node.js)
+Image uploads use the Supabase storage bucket named:
 
-### 2. Installation
-Clone the repository (or navigate to the project directory) and install the necessary dependencies:
+```text
+images
+```
+
+## Local Development
+
+Install dependencies:
 
 ```bash
-# Install dependencies
 npm install
 ```
 
-### 3. Development
-To start the local development server with Hot Module Replacement (HMR):
+Start the development server:
 
 ```bash
-# Start dev server
 npm run dev
 ```
-Once started, the application will be available at: `http://localhost:5173`
 
-### 4. Production Build
-To create an optimized production bundle in the `dist/` directory:
+Default local URL:
+
+```text
+http://localhost:5173
+```
+
+Build for production:
 
 ```bash
-# Build for production
 npm run build
 ```
 
-### 5. Preview Production Build
-To test the production build locally before deployment:
+Preview the production build:
 
 ```bash
-# Preview production build
 npm run preview
+```
+
+Run ESLint:
+
+```bash
+npm run lint
+```
+
+## Deployment
+
+The app is ready for Vercel or any static host that supports SPA fallbacks.
+
+Build output:
+
+```text
+dist/
+```
+
+Vercel config:
+
+```text
+vercel.json
+```
+
+Static redirect fallback:
+
+```text
+public/_redirects
+```
+
+## Development Notes
+
+- Public page copy is preserved as fallback values in each page component and in admin defaults.
+- The admin dashboard should not change client-provided copy unless an authenticated admin edits and saves content.
+- CMS page hashes are page-level only, such as `/admin#home` or `/admin#about`; section scrolling does not mutate the URL.
+- The shared `HeroSection` handles animated public-page heroes for Home, Advisors, Family Office, and Institutions.
+- Process and About use custom staggered hero layouts.
+
+## Verification
+
+Before pushing changes, run:
+
+```bash
+npm run build
+```
+
+For focused checks during CMS work:
+
+```bash
+npx eslint src/pages/admin/AdminDashboard.jsx
 ```

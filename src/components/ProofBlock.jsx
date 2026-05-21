@@ -24,7 +24,7 @@ const COPY = {
   },
 };
 
-export default function ProofBlock({ variant = 'advisor', body, bridge }) {
+export default function ProofBlock({ variant = 'advisor', eyebrow, body, bridge }) {
   const fallback = COPY[variant] || COPY.advisor;
   const copy = { body: body || fallback.body, bridge: bridge || fallback.bridge };
   return (
@@ -41,7 +41,7 @@ export default function ProofBlock({ variant = 'advisor', body, bridge }) {
       }}
     >
       <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '1.25rem' }}>
-        Proven Over 35 Years
+        {eyebrow || "Proven Over 35 Years"}
       </p>
       <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: 'clamp(1.125rem, 2.5vw, 1.375rem)', lineHeight: 1.6, color: '#F5F3EF', marginBottom: '0.875rem' }}>
         {copy.body}

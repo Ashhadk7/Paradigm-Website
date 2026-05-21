@@ -32,8 +32,34 @@ export default function Institutions() {
     hero_eyebrow: cms?.hero_eyebrow || "For Institutional Investors & Strategic Partners",
     hero_headline: cms?.hero_headline || "35 years of institutional investment process. The same intelligence that served General Motors, AMEX, and the US Treasury — now structured for the partnerships, mandates, and platforms that define what comes next.",
     hero_sub: cms?.hero_sub || "Paradigm reads active market data to identify where leadership is forming within each mandate — and builds portfolios from that signal. Transparent. Explainable. No black box.",
+    hero_cta_label: cms?.hero_cta_label || "Start a Conversation",
+    core_story_eyebrow: cms?.core_story_eyebrow || "The Core Story",
+    core_story_1: cms?.core_story_1 || "Every active strategy operates within the boundaries of its expertise. A manager running large cap value runs large cap value — with precision and pattern recognition built over years. That specialization is a genuine edge. It is also a structural constraint: when market leadership rotates outside those boundaries, the strategy lags. Not because of error. Because staying current with the rotation would mean operating outside the domain of real competence.",
+    core_story_2: cms?.core_story_2 || "Most institutional portfolios manage this by diversifying across managers and styles. It is a reasonable solution. It is also an expensive one — multiple management fees, multiple mandates to monitor, and a portfolio that reflects yesterday's allocation decisions more than today's market reality.",
+    core_story_3: cms?.core_story_3 || "Paradigm reads active market data to identify where leadership is forming within each mandate right now. From that signal Paradigm constructs portfolios not anchored to any single approach. Informed by the full picture of where returns are being found within each asset class today. Evaluated monthly. Rebalanced when the signal confirms a shift — not on a calendar schedule.",
+    core_story_4: cms?.core_story_4 || "The result is a portfolio built from collective market intelligence that no single strategy can replicate — because replicating it would require leaving the domain of its own expertise.",
+    offers_eyebrow: cms?.offers_eyebrow || "What Paradigm Offers Institutions",
+    offers_headline: cms?.offers_headline || "Three distinct ways institutions work with Paradigm.",
+    offers_sub: cms?.offers_sub || "Each is a different application of the same investment process.",
+    offer_1_label: cms?.offer_1_label || "Investment Mandates",
+    offer_1_title: cms?.offer_1_title || "Existing strategies. Institutional quality.",
+    offer_1_body: cms?.offer_1_body || "Large Cap Value. Domestic All-Cap All-Style. International Developed. World Value. Small Cap Domestic. Each strategy built from active market data. Each portfolio systematically positioned toward current market leadership within the mandate.",
+    offer_2_label: cms?.offer_2_label || "Custom Mandates",
+    offer_2_title: cms?.offer_2_title || "Any specification. Built to order.",
+    offer_2_body: cms?.offer_2_body || "Paradigm builds custom strategies to institutional specification. Any style, any geography, any thematic or ESG overlay. The same collective intelligence process — applied to the mandate the institution defines. No off-the-shelf products.",
+    offer_3_label: cms?.offer_3_label || "Strategic Partnerships",
+    offer_3_title: cms?.offer_3_title || "Platform. Sub-advisory. Distribution.",
+    offer_3_body: cms?.offer_3_body || "Paradigm is actively building strategic relationships with aggregators, OCIOs, and institutional platforms. Portfolio as a Service — product manufacturing, sub-advisory, and white-label delivery — at institutional scale.",
+    platform_eyebrow: cms?.platform_eyebrow || "The Platform",
     platform_para1: cms?.platform_para1 || "One platform. Three capabilities. Custom active strategies, SMA conversion, and direct and custom indexing — fully integrated. Customization, personalization, and tax-loss harvesting run across all three — at the individual account level. Institutions operate the platform. Paradigm provides the investment intelligence and the infrastructure.",
     platform_para2: cms?.platform_para2 || "For institutions managing assets across multiple mandates and account types, the operational consequence is significant. One process. One relationship. One coherent investment narrative across every client, every committee, and every regulatory filing that asks how the portfolio is positioned and why.",
+    proof_eyebrow: cms?.proof_eyebrow || "Proven Over 35 Years",
+    proof_body: cms?.proof_body || "Paradigm has worked with institutional clients including General Motors, AMEX, and the US Treasury over its 35-year history. 65 of the nation's top 100 US pension funds have worked with Paradigm.",
+    proof_bridge: cms?.proof_bridge || "The same intelligence is now structured for the institutional partnerships that define what comes next.",
+    cta_title: cms?.cta_title || "Paradigm is actively building strategic relationships with institutional investors, pension funds, endowments, and platforms who want a different approach to portfolio construction.",
+    cta_email: cms?.cta_email || "jef@paradigmasset.com",
+    cta_phone: cms?.cta_phone || "917-991-3348",
+    cta_button_label: cms?.cta_button_label || "Start a Conversation",
   };
 
   return (
@@ -48,20 +74,20 @@ export default function Institutions() {
         headline={c.hero_headline}
         sub={c.hero_sub}
         compact
-        ctas={[{ label: 'Start a Conversation', to: '/contact', variant: 'outline' }]}
+        ctas={[{ label: c.hero_cta_label, to: '/contact', variant: 'outline' }]}
       />
 
       {/* Core Story — Institutional Register */}
       <section className="section-offwhite">
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Core Story</p>
+            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
               {[
-                "Every active strategy operates within the boundaries of its expertise. A manager running large cap value runs large cap value — with precision and pattern recognition built over years. That specialization is a genuine edge. It is also a structural constraint: when market leadership rotates outside those boundaries, the strategy lags. Not because of error. Because staying current with the rotation would mean operating outside the domain of real competence.",
-                "Most institutional portfolios manage this by diversifying across managers and styles. It is a reasonable solution. It is also an expensive one — multiple management fees, multiple mandates to monitor, and a portfolio that reflects yesterday's allocation decisions more than today's market reality.",
-                "Paradigm reads active market data to identify where leadership is forming within each mandate right now. From that signal Paradigm constructs portfolios not anchored to any single approach. Informed by the full picture of where returns are being found within each asset class today. Evaluated monthly. Rebalanced when the signal confirms a shift — not on a calendar schedule.",
-                "The result is a portfolio built from collective market intelligence that no single strategy can replicate — because replicating it would require leaving the domain of its own expertise.",
+                c.core_story_1,
+                c.core_story_2,
+                c.core_story_3,
+                c.core_story_4,
               ].map((p, i) => (
                 <motion.p key={i}
                   initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
@@ -79,28 +105,28 @@ export default function Institutions() {
       {/* What Paradigm Offers Institutions */}
       <section className="section-white">
         <div className="section-inner">
-          <p className="eyebrow" style={{ marginBottom: '0.875rem', textAlign: 'center' }}>What Paradigm Offers Institutions</p>
+          <p className="eyebrow" style={{ marginBottom: '0.875rem', textAlign: 'center' }}>{c.offers_eyebrow}</p>
           <h2 className="section-headline" style={{ color: '#34416D', textAlign: 'center', marginBottom: '0.625rem' }}>
-            Three distinct ways institutions work with Paradigm.
+            {c.offers_headline}
           </h2>
           <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', textAlign: 'center', maxWidth: 480, margin: '0 auto 3.5rem' }}>
-            Each is a different application of the same investment process.
+            {c.offers_sub}
           </p>
           <ThreeCol blocks={[
             {
-              label: 'Investment Mandates',
-              title: 'Existing strategies. Institutional quality.',
-              body: "Large Cap Value. Domestic All-Cap All-Style. International Developed. World Value. Small Cap Domestic. Each strategy built from active market data. Each portfolio systematically positioned toward current market leadership within the mandate.",
+              label: c.offer_1_label,
+              title: c.offer_1_title,
+              body: c.offer_1_body,
             },
             {
-              label: 'Custom Mandates',
-              title: 'Any specification. Built to order.',
-              body: "Paradigm builds custom strategies to institutional specification. Any style, any geography, any thematic or ESG overlay. The same collective intelligence process — applied to the mandate the institution defines. No off-the-shelf products.",
+              label: c.offer_2_label,
+              title: c.offer_2_title,
+              body: c.offer_2_body,
             },
             {
-              label: 'Strategic Partnerships',
-              title: 'Platform. Sub-advisory. Distribution.',
-              body: "Paradigm is actively building strategic relationships with aggregators, OCIOs, and institutional platforms. Portfolio as a Service — product manufacturing, sub-advisory, and white-label delivery — at institutional scale.",
+              label: c.offer_3_label,
+              title: c.offer_3_title,
+              body: c.offer_3_body,
             },
           ]} />
         </div>
@@ -110,7 +136,7 @@ export default function Institutions() {
       <section className="section-offwhite">
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
+            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
@@ -128,11 +154,17 @@ export default function Institutions() {
       {/* Proof */}
       <section className="section-white">
         <div className="section-inner" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
-          <ProofBlock variant="institutional" />
+          <ProofBlock variant="institutional" eyebrow={c.proof_eyebrow} body={c.proof_body} bridge={c.proof_bridge} />
         </div>
       </section>
 
-      <CTAStrip variant="institutional" />
+      <CTAStrip
+        variant="institutional"
+        institutionalTitle={c.cta_title}
+        institutionalEmail={c.cta_email}
+        institutionalPhone={c.cta_phone}
+        institutionalButtonLabel={c.cta_button_label}
+      />
     </>
   );
 }

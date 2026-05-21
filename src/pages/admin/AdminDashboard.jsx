@@ -127,8 +127,34 @@ const PAGES = [
       { name: 'hero_eyebrow', label: 'Hero Eyebrow', type: 'text' },
       { name: 'hero_headline', label: 'Hero Headline', type: 'textarea' },
       { name: 'hero_sub', label: 'Hero Subheading', type: 'textarea' },
+      { name: 'hero_cta_label', label: 'Hero CTA Button', type: 'text' },
+      { name: 'core_story_eyebrow', label: 'Core Story — Eyebrow', type: 'text' },
+      { name: 'core_story_1', label: 'Core Story — Paragraph 1', type: 'textarea' },
+      { name: 'core_story_2', label: 'Core Story — Paragraph 2', type: 'textarea' },
+      { name: 'core_story_3', label: 'Core Story — Paragraph 3', type: 'textarea' },
+      { name: 'core_story_4', label: 'Core Story — Paragraph 4', type: 'textarea' },
+      { name: 'offers_eyebrow', label: 'Institution Offers — Eyebrow', type: 'text' },
+      { name: 'offers_headline', label: 'Institution Offers — Headline', type: 'text' },
+      { name: 'offers_sub', label: 'Institution Offers — Subheading', type: 'textarea' },
+      { name: 'offer_1_label', label: 'Offer 01 — Label', type: 'text' },
+      { name: 'offer_1_title', label: 'Offer 01 — Title', type: 'text' },
+      { name: 'offer_1_body', label: 'Offer 01 — Body', type: 'textarea' },
+      { name: 'offer_2_label', label: 'Offer 02 — Label', type: 'text' },
+      { name: 'offer_2_title', label: 'Offer 02 — Title', type: 'text' },
+      { name: 'offer_2_body', label: 'Offer 02 — Body', type: 'textarea' },
+      { name: 'offer_3_label', label: 'Offer 03 — Label', type: 'text' },
+      { name: 'offer_3_title', label: 'Offer 03 — Title', type: 'text' },
+      { name: 'offer_3_body', label: 'Offer 03 — Body', type: 'textarea' },
+      { name: 'platform_eyebrow', label: 'The Platform — Eyebrow', type: 'text' },
       { name: 'platform_para1', label: 'The Platform — Paragraph 1', type: 'textarea' },
       { name: 'platform_para2', label: 'The Platform — Paragraph 2', type: 'textarea' },
+      { name: 'proof_eyebrow', label: 'Proof — Eyebrow', type: 'text' },
+      { name: 'proof_body', label: 'Proof — Body Text', type: 'textarea' },
+      { name: 'proof_bridge', label: 'Proof — Bridge Text', type: 'textarea' },
+      { name: 'cta_title', label: 'CTA — Headline', type: 'textarea' },
+      { name: 'cta_email', label: 'CTA — Email', type: 'text' },
+      { name: 'cta_phone', label: 'CTA — Phone', type: 'text' },
+      { name: 'cta_button_label', label: 'CTA — Button Label', type: 'text' },
     ],
   },
   {
@@ -137,8 +163,11 @@ const PAGES = [
     fields: [
       { name: 'hero_eyebrow', label: 'Hero Eyebrow', type: 'text' },
       { name: 'hero_headline', label: 'Hero Headline', type: 'textarea' },
+      { name: 'data_foundation_eyebrow', label: 'Data Foundation — Eyebrow', type: 'text' },
       { name: 'data_foundation_text', label: 'Data Foundation — Paragraph 1', type: 'textarea' },
       { name: 'data_foundation_amd', label: 'Data Foundation — AMD Paragraph', type: 'textarea' },
+      { name: 'process_eyebrow', label: 'Process — Eyebrow', type: 'text' },
+      { name: 'process_intro', label: 'Process — Intro Text', type: 'textarea' },
       { name: 'step1_title', label: 'Step 01 — Title', type: 'text' },
       { name: 'step1_text', label: 'Step 01 — Body', type: 'textarea' },
       { name: 'step2_title', label: 'Step 02 — Title', type: 'text' },
@@ -146,8 +175,21 @@ const PAGES = [
       { name: 'step2_para2', label: 'Step 02 — Paragraph 2', type: 'textarea' },
       { name: 'step3_title', label: 'Step 03 — Title', type: 'text' },
       { name: 'step3_text', label: 'Step 03 — Body', type: 'textarea' },
+      { name: 'step3_text_2', label: 'Step 03 — Body 2', type: 'textarea' },
       { name: 'step4_title', label: 'Step 04 — Title', type: 'text' },
       { name: 'step4_text', label: 'Step 04 — Body', type: 'textarea' },
+      { name: 'step4_text_2', label: 'Step 04 — Body 2', type: 'textarea' },
+      { name: 'black_box_eyebrow', label: 'No Black Box — Eyebrow', type: 'text' },
+      { name: 'black_box_1', label: 'No Black Box — Paragraph 1', type: 'textarea' },
+      { name: 'black_box_2', label: 'No Black Box — Paragraph 2', type: 'textarea' },
+      { name: 'black_box_pullquote', label: 'No Black Box — Pull Quote', type: 'textarea' },
+      { name: 'cta_intro', label: 'CTA — Intro Text', type: 'textarea' },
+      { name: 'cta_advisor_eyebrow', label: 'CTA Advisor — Eyebrow', type: 'text' },
+      { name: 'cta_advisor_text', label: 'CTA Advisor — Text', type: 'textarea' },
+      { name: 'cta_advisor_button', label: 'CTA Advisor — Button', type: 'text' },
+      { name: 'cta_institution_eyebrow', label: 'CTA Institution — Eyebrow', type: 'text' },
+      { name: 'cta_institution_text', label: 'CTA Institution — Text', type: 'textarea' },
+      { name: 'cta_institution_button', label: 'CTA Institution — Button', type: 'text' },
     ],
   },
   {
@@ -156,11 +198,48 @@ const PAGES = [
     fields: [
       { name: 'hero_eyebrow', label: 'Hero Eyebrow', type: 'text' },
       { name: 'hero_headline', label: 'Hero Headline', type: 'textarea' },
+      { name: 'firm_eyebrow', label: 'Firm — Eyebrow', type: 'text' },
+      { name: 'firm_1', label: 'Firm — Paragraph 1', type: 'textarea' },
+      { name: 'firm_2', label: 'Firm — Paragraph 2', type: 'textarea' },
+      { name: 'firm_3', label: 'Firm — Paragraph 3', type: 'textarea' },
       { name: 'james_title', label: 'James Francis — Title', type: 'text' },
+      { name: 'james_name', label: 'James Francis — Name', type: 'text' },
       { name: 'james_bio_1', label: 'James Francis — Bio Paragraph 1', type: 'textarea' },
       { name: 'james_bio_2', label: 'James Francis — Bio Paragraph 2', type: 'textarea' },
       { name: 'james_bio_3', label: 'James Francis — Bio Paragraph 3', type: 'textarea' },
       { name: 'james_image_url', label: 'James Francis — Photo', type: 'image' },
+      { name: 'james_image_alt', label: 'James Francis — Photo Alt Text', type: 'text' },
+      { name: 'james_placeholder_initials', label: 'James Francis — Placeholder Initials', type: 'text' },
+      { name: 'james_placeholder_text', label: 'James Francis — Placeholder Text', type: 'text' },
+      { name: 'team_eyebrow', label: 'Team — Eyebrow', type: 'text' },
+      { name: 'previous_prefix', label: 'Team — Previous Prefix', type: 'text' },
+      { name: 'team_1_name', label: 'Team 01 — Name', type: 'text' },
+      { name: 'team_1_title', label: 'Team 01 — Title', type: 'text' },
+      { name: 'team_1_prev', label: 'Team 01 — Previous', type: 'text' },
+      { name: 'team_1_bio', label: 'Team 01 — Bio', type: 'textarea' },
+      { name: 'team_2_name', label: 'Team 02 — Name', type: 'text' },
+      { name: 'team_2_title', label: 'Team 02 — Title', type: 'text' },
+      { name: 'team_2_prev', label: 'Team 02 — Previous', type: 'text' },
+      { name: 'team_2_bio', label: 'Team 02 — Bio', type: 'textarea' },
+      { name: 'team_3_name', label: 'Team 03 — Name', type: 'text' },
+      { name: 'team_3_title', label: 'Team 03 — Title', type: 'text' },
+      { name: 'team_3_prev', label: 'Team 03 — Previous', type: 'text' },
+      { name: 'team_3_bio', label: 'Team 03 — Bio', type: 'textarea' },
+      { name: 'team_4_name', label: 'Team 04 — Name', type: 'text' },
+      { name: 'team_4_title', label: 'Team 04 — Title', type: 'text' },
+      { name: 'team_4_prev', label: 'Team 04 — Previous', type: 'text' },
+      { name: 'team_4_bio', label: 'Team 04 — Bio', type: 'textarea' },
+      { name: 'team_5_name', label: 'Team 05 — Name', type: 'text' },
+      { name: 'team_5_title', label: 'Team 05 — Title', type: 'text' },
+      { name: 'team_6_name', label: 'Team 06 — Name', type: 'text' },
+      { name: 'team_6_title', label: 'Team 06 — Title', type: 'text' },
+      { name: 'advisory_eyebrow', label: 'Advisory Board — Eyebrow', type: 'text' },
+      { name: 'advisor_1_name', label: 'Advisor 01 — Name', type: 'text' },
+      { name: 'advisor_1_title', label: 'Advisor 01 — Title', type: 'text' },
+      { name: 'advisor_1_bio', label: 'Advisor 01 — Bio', type: 'textarea' },
+      { name: 'advisor_2_name', label: 'Advisor 02 — Name', type: 'text' },
+      { name: 'advisor_2_title', label: 'Advisor 02 — Title', type: 'text' },
+      { name: 'advisor_2_bio', label: 'Advisor 02 — Bio', type: 'textarea' },
     ],
   },
 ];
@@ -345,6 +424,188 @@ const PAGE_SECTIONS = {
       fields: ['cta_title', 'cta_email', 'cta_phone', 'cta_button_label'],
     },
   ],
+  institutions: [
+    {
+      number: '01',
+      title: 'Hero',
+      description: 'Opening institutions page hero copy and primary button label.',
+      fields: ['hero_eyebrow', 'hero_headline', 'hero_sub', 'hero_cta_label'],
+    },
+    {
+      number: '02',
+      title: 'Core Story',
+      description: 'The four narrative paragraphs below the institutions hero.',
+      fields: ['core_story_eyebrow', 'core_story_1', 'core_story_2', 'core_story_3', 'core_story_4'],
+    },
+    {
+      number: '03',
+      title: 'Institution Offers',
+      description: 'Section heading and three institution offer cards.',
+      fields: [
+        'offers_eyebrow',
+        'offers_headline',
+        'offers_sub',
+        'offer_1_label',
+        'offer_1_title',
+        'offer_1_body',
+        'offer_2_label',
+        'offer_2_title',
+        'offer_2_body',
+        'offer_3_label',
+        'offer_3_title',
+        'offer_3_body',
+      ],
+      compact: true,
+    },
+    {
+      number: '04',
+      title: 'The Platform',
+      description: 'Platform section eyebrow and two body paragraphs.',
+      fields: ['platform_eyebrow', 'platform_para1', 'platform_para2'],
+    },
+    {
+      number: '05',
+      title: 'Proof',
+      description: 'Institutional proof block copy.',
+      fields: ['proof_eyebrow', 'proof_body', 'proof_bridge'],
+    },
+    {
+      number: '06',
+      title: 'Closing CTA',
+      description: 'Final institutional call-to-action and contact details.',
+      fields: ['cta_title', 'cta_email', 'cta_phone', 'cta_button_label'],
+    },
+  ],
+  process: [
+    {
+      number: '01',
+      title: 'Hero',
+      description: 'Process page staggered hero headline.',
+      fields: ['hero_headline'],
+    },
+    {
+      number: '02',
+      title: 'Data Foundation',
+      description: 'Data foundation eyebrow and two body paragraphs.',
+      fields: ['data_foundation_eyebrow', 'data_foundation_text', 'data_foundation_amd'],
+    },
+    {
+      number: '03',
+      title: 'Four Steps',
+      description: 'Process section intro and all four process steps.',
+      fields: [
+        'process_eyebrow',
+        'process_intro',
+        'step1_title',
+        'step1_text',
+        'step2_title',
+        'step2_para1',
+        'step2_para2',
+        'step3_title',
+        'step3_text',
+        'step3_text_2',
+        'step4_title',
+        'step4_text',
+        'step4_text_2',
+      ],
+      compact: true,
+    },
+    {
+      number: '04',
+      title: 'Why No Black Box',
+      description: 'No black box section eyebrow, body copy, and pull quote.',
+      fields: ['black_box_eyebrow', 'black_box_1', 'black_box_2', 'black_box_pullquote'],
+    },
+    {
+      number: '05',
+      title: 'Closing CTA',
+      description: 'Advisor and institution call-to-action blocks.',
+      fields: [
+        'cta_intro',
+        'cta_advisor_eyebrow',
+        'cta_advisor_text',
+        'cta_advisor_button',
+        'cta_institution_eyebrow',
+        'cta_institution_text',
+        'cta_institution_button',
+      ],
+    },
+  ],
+  about: [
+    {
+      number: '01',
+      title: 'Hero',
+      description: 'About page staggered hero headline.',
+      fields: ['hero_headline'],
+    },
+    {
+      number: '02',
+      title: 'The Firm',
+      description: 'Firm section eyebrow and three body paragraphs.',
+      fields: ['firm_eyebrow', 'firm_1', 'firm_2', 'firm_3'],
+    },
+    {
+      number: '03',
+      title: 'Founder',
+      description: 'James Francis profile copy and image settings.',
+      fields: [
+        'james_title',
+        'james_name',
+        'james_bio_1',
+        'james_bio_2',
+        'james_bio_3',
+        'james_image_url',
+        'james_image_alt',
+        'james_placeholder_initials',
+        'james_placeholder_text',
+      ],
+    },
+    {
+      number: '04',
+      title: 'Team',
+      description: 'Team section heading and all team member cards.',
+      fields: [
+        'team_eyebrow',
+        'previous_prefix',
+        'team_1_name',
+        'team_1_title',
+        'team_1_prev',
+        'team_1_bio',
+        'team_2_name',
+        'team_2_title',
+        'team_2_prev',
+        'team_2_bio',
+        'team_3_name',
+        'team_3_title',
+        'team_3_prev',
+        'team_3_bio',
+        'team_4_name',
+        'team_4_title',
+        'team_4_prev',
+        'team_4_bio',
+        'team_5_name',
+        'team_5_title',
+        'team_6_name',
+        'team_6_title',
+      ],
+      compact: true,
+    },
+    {
+      number: '05',
+      title: 'Advisory Board',
+      description: 'Advisory board heading and advisor cards.',
+      fields: [
+        'advisory_eyebrow',
+        'advisor_1_name',
+        'advisor_1_title',
+        'advisor_1_bio',
+        'advisor_2_name',
+        'advisor_2_title',
+        'advisor_2_bio',
+      ],
+      compact: true,
+    },
+  ],
 };
 
 const PAGE_DEFAULTS = {
@@ -423,19 +684,171 @@ const PAGE_DEFAULTS = {
     cta_phone: "917-991-3348",
     cta_button_label: "Start a Conversation",
   },
+  institutions: {
+    hero_eyebrow: "For Institutional Investors & Strategic Partners",
+    hero_headline: "35 years of institutional investment process. The same intelligence that served General Motors, AMEX, and the US Treasury — now structured for the partnerships, mandates, and platforms that define what comes next.",
+    hero_sub: "Paradigm reads active market data to identify where leadership is forming within each mandate — and builds portfolios from that signal. Transparent. Explainable. No black box.",
+    hero_cta_label: "Start a Conversation",
+    core_story_eyebrow: "The Core Story",
+    core_story_1: "Every active strategy operates within the boundaries of its expertise. A manager running large cap value runs large cap value — with precision and pattern recognition built over years. That specialization is a genuine edge. It is also a structural constraint: when market leadership rotates outside those boundaries, the strategy lags. Not because of error. Because staying current with the rotation would mean operating outside the domain of real competence.",
+    core_story_2: "Most institutional portfolios manage this by diversifying across managers and styles. It is a reasonable solution. It is also an expensive one — multiple management fees, multiple mandates to monitor, and a portfolio that reflects yesterday's allocation decisions more than today's market reality.",
+    core_story_3: "Paradigm reads active market data to identify where leadership is forming within each mandate right now. From that signal Paradigm constructs portfolios not anchored to any single approach. Informed by the full picture of where returns are being found within each asset class today. Evaluated monthly. Rebalanced when the signal confirms a shift — not on a calendar schedule.",
+    core_story_4: "The result is a portfolio built from collective market intelligence that no single strategy can replicate — because replicating it would require leaving the domain of its own expertise.",
+    offers_eyebrow: "What Paradigm Offers Institutions",
+    offers_headline: "Three distinct ways institutions work with Paradigm.",
+    offers_sub: "Each is a different application of the same investment process.",
+    offer_1_label: "Investment Mandates",
+    offer_1_title: "Existing strategies. Institutional quality.",
+    offer_1_body: "Large Cap Value. Domestic All-Cap All-Style. International Developed. World Value. Small Cap Domestic. Each strategy built from active market data. Each portfolio systematically positioned toward current market leadership within the mandate.",
+    offer_2_label: "Custom Mandates",
+    offer_2_title: "Any specification. Built to order.",
+    offer_2_body: "Paradigm builds custom strategies to institutional specification. Any style, any geography, any thematic or ESG overlay. The same collective intelligence process — applied to the mandate the institution defines. No off-the-shelf products.",
+    offer_3_label: "Strategic Partnerships",
+    offer_3_title: "Platform. Sub-advisory. Distribution.",
+    offer_3_body: "Paradigm is actively building strategic relationships with aggregators, OCIOs, and institutional platforms. Portfolio as a Service — product manufacturing, sub-advisory, and white-label delivery — at institutional scale.",
+    platform_eyebrow: "The Platform",
+    platform_para1: "One platform. Three capabilities. Custom active strategies, SMA conversion, and direct and custom indexing — fully integrated. Customization, personalization, and tax-loss harvesting run across all three — at the individual account level. Institutions operate the platform. Paradigm provides the investment intelligence and the infrastructure.",
+    platform_para2: "For institutions managing assets across multiple mandates and account types, the operational consequence is significant. One process. One relationship. One coherent investment narrative across every client, every committee, and every regulatory filing that asks how the portfolio is positioned and why.",
+    proof_eyebrow: "Proven Over 35 Years",
+    proof_body: "Paradigm has worked with institutional clients including General Motors, AMEX, and the US Treasury over its 35-year history. 65 of the nation's top 100 US pension funds have worked with Paradigm.",
+    proof_bridge: "The same intelligence is now structured for the institutional partnerships that define what comes next.",
+    cta_title: "Paradigm is actively building strategic relationships with institutional investors, pension funds, endowments, and platforms who want a different approach to portfolio construction.",
+    cta_email: "jef@paradigmasset.com",
+    cta_phone: "917-991-3348",
+    cta_button_label: "Start a Conversation",
+  },
+  process: {
+    hero_headline: "Systematic.\nTransparent.\nExplainable at every step.",
+    data_foundation_eyebrow: "The Data Foundation",
+    data_foundation_text: "Every Paradigm portfolio begins with data. Not analyst opinions. Not committee views. Market data — specifically the disclosed holdings of active investment strategies across the global equity universe. This data is public. What Paradigm does with it is not.",
+    data_foundation_amd: "Paradigm's Active Market Data (AMD) covers more than 12,000 strategies across 45,000 securities in 75 global markets. It is the most comprehensive view of where active capital is positioned within any mandate at any given time. Updated continuously. Evaluated monthly for changes in regime leadership.",
+    process_eyebrow: "The Process — Four Steps",
+    process_intro: "The same four steps run for every mandate. Evaluated monthly. Signal-driven from start to finish.",
+    step1_title: "Isolate the mandate universe.",
+    step1_text: "Every portfolio begins with a defined mandate. Large Cap Value. International Developed. A custom thematic strategy. Whatever the mandate, Paradigm isolates the relevant dataset from AMD — the universe of strategies operating within that specific space.",
+    step2_title: "Identify regime leadership.",
+    step2_para1: "CIPE — Paradigm's Collective Intelligence Portfolio Engine — identifies which strategies within the mandate are in genuine market leadership right now. Not which strategies performed best over the last three years. Which are leading within the mandate today.",
+    step2_para2: "The distinction matters. Most manager searches are backward-looking by design — they evaluate trailing performance and hire the sub-style that just led the cycle. CIPE reads current market positioning.",
+    step3_title: "Generate the Portfolio Blueprint.",
+    step3_text: "The strategies in regime leadership reveal a consensus view of the market — which sectors, factors, regions, and securities are concentrated in the leading positions. That consensus becomes the Portfolio Blueprint: a map of where the market's collective attention is focused within the mandate right now.",
+    step3_text_2: "The Blueprint is not a replication of any single strategy. It is a new intelligence that emerges from the aggregate of many strategies each doing their job well within their own domain.",
+    step4_title: "Build, optimize, and monitor.",
+    step4_text: "Paradigm optimizes the portfolio toward the Blueprint — maximum return relative to risk within the mandate parameters. The model runs monthly from the beginning. A rebalance is triggered when the signal confirms a shift in regime leadership, not when a calendar date arrives.",
+    step4_text_2: "Tax-loss harvesting runs on the active positions through the platform. The advisor or institution operates this capability. Paradigm enables it.",
+    black_box_eyebrow: "Why No Black Box",
+    black_box_1: "Systematic investment processes are often dismissed as black boxes — algorithms that produce outputs no one can explain or defend. Paradigm's process is the opposite.",
+    black_box_2: "Every input to the Portfolio Blueprint is observable market data. Every output is a specific security position with a specific rationale: this position reflects where the collective market signal says leadership is forming within this mandate today. Every rebalance decision is traceable to a specific change in that signal. Every position can be explained to a client, a committee, or a regulator in plain language.",
+    black_box_pullquote: "Transparent and explainable is not a feature. It is the architecture.",
+    cta_intro: "The process is built to answer questions. If you have specific ones, a conversation is the right next step.",
+    cta_advisor_eyebrow: "For Advisors",
+    cta_advisor_text: "See what a portfolio built from collective intelligence looks like for your practice. Worth 20 minutes.",
+    cta_advisor_button: "Book a 20-Minute Call",
+    cta_institution_eyebrow: "For Institutions",
+    cta_institution_text: "Paradigm is actively building strategic relationships with family offices, OCIOs, and institutional partners.",
+    cta_institution_button: "Start a Conversation",
+  },
+  about: {
+    hero_headline: "Built on a single conviction.\nRun for 35 years.\nNow accessible to the partners and platforms that need it most.",
+    firm_eyebrow: "The Firm",
+    firm_1: "Paradigm Asset Management was founded in 1990 on a specific conviction: that the collective intelligence embedded in active market data could be read, distilled, and expressed as portfolios that no individual strategy could construct on its own.",
+    firm_2: "That conviction has not changed in 35 years. The data has grown. The process has been refined. The platform has been rebuilt for the scale and sophistication the market now requires. The conviction — that the collective signal of the market is more intelligent than any individual expression of it — is the same.",
+    firm_3: "Paradigm is an SEC-registered investment adviser. One of the nation's oldest firms of its kind. Managing assets for institutional clients for 35 years before opening its platform to advisors and institutional partners.",
+    james_title: "Founder & CEO",
+    james_name: "James Francis",
+    james_bio_1: "James Francis founded Paradigm in 1990 with a question that has driven the firm ever since: what does the market know collectively that no single strategy can know on its own?",
+    james_bio_2: "The answer became CIPE — the Collective Intelligence Portfolio Engine, a process that reads active market data across thousands of strategies to identify where leadership is forming within each mandate. It has run continuously for 35 years through the full cycle of market regimes, serving institutional clients across pension funds, endowments, and government entities.",
+    james_bio_3: "James is the author of Artificial Integrity: Leadership in an Age of Intelligent Systems.",
+    james_image_url: "",
+    james_image_alt: "James Francis",
+    james_placeholder_initials: "JF",
+    james_placeholder_text: "Photo Coming",
+    team_eyebrow: "The Team",
+    previous_prefix: "Previous:",
+    team_1_name: "James Francis",
+    team_1_title: "Founder & CEO",
+    team_1_prev: "IBM, Shearson, Oppenheimer & Co.",
+    team_1_bio: "Business development, portfolio management, and firm strategy. Founded Paradigm in 1990.",
+    team_2_name: "Gregory Pai",
+    team_2_title: "Investment Strategist",
+    team_2_prev: "Price Waterhouse",
+    team_2_bio: "Extensive portfolio management, data science, and computing experience.",
+    team_3_name: "Chaoxie Liu",
+    team_3_title: "Data Scientist",
+    team_3_prev: "Australia and New Zealand Bank",
+    team_3_bio: "Model and algorithm development, coding, and data infrastructure.",
+    team_4_name: "Jeffrey Marcus",
+    team_4_title: "Operations",
+    team_4_prev: "Pension Investment Analyst, Warner Lambert",
+    team_4_bio: "Portfolio construction, optimization, trading, and performance attribution and reporting.",
+    team_5_name: "Odalisse Sosa",
+    team_5_title: "Operations",
+    team_6_name: "Jarius DeWalt",
+    team_6_title: "Team Member",
+    advisory_eyebrow: "Advisory Board",
+    advisor_1_name: "Robert Capaldi",
+    advisor_1_title: "Advisor",
+    advisor_1_bio: "Former Senior Strategist to BlackRock's CEO.",
+    advisor_2_name: "Natalie Turnow",
+    advisor_2_title: "Advisor",
+    advisor_2_bio: "Former CIO, Calvert Funds.",
+  },
 };
 
 export default function AdminDashboard({ onLogout }) {
-  const [activePage, setActivePage] = useState('home');
+  const [activePage, setActivePage] = useState(() => {
+    if (typeof window === 'undefined') return 'home';
+
+    const hashPage = window.location.hash.replace('#', '');
+    return PAGES.some(p => p.key === hashPage) ? hashPage : 'home';
+  });
   const [content, setContent] = useState({});
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [activeSectionId, setActiveSectionId] = useState('');
 
   const page = PAGES.find(p => p.key === activePage);
   const fieldsByName = new Map(page?.fields.map(field => [field.name, field]) || []);
   const completedFields = page?.fields.filter(field => Boolean(content[field.name]?.trim?.() || content[field.name])).length || 0;
   const completionTotal = page?.fields.length || 0;
+
+  const sectionList = activePage === 'home' ? HOME_SECTIONS : PAGE_SECTIONS[activePage];
+
+  function getSectionId(prefix, title) {
+    return `${prefix}-${title.toLowerCase().replaceAll(' ', '-')}`;
+  }
+
+  function scrollToSection(sectionId) {
+    setActiveSectionId(sectionId);
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+
+  function selectPage(pageKey) {
+    setActivePage(pageKey);
+    setActiveSectionId('');
+    window.history.replaceState(null, '', `${window.location.pathname}#${pageKey}`);
+  }
+
+  useEffect(() => {
+    if (window.location.hash !== `#${activePage}`) {
+      window.history.replaceState(null, '', `${window.location.pathname}#${activePage}`);
+    }
+  }, [activePage]);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hashPage = window.location.hash.replace('#', '');
+      if (PAGES.some(p => p.key === hashPage)) {
+        setActivePage(hashPage);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -459,6 +872,40 @@ export default function AdminDashboard({ onLogout }) {
       cancelled = true;
     };
   }, [activePage]);
+
+  useEffect(() => {
+    if (loading || !sectionList?.length) return undefined;
+
+    const ids = sectionList.map(section => getSectionId(activePage, section.title));
+    Promise.resolve().then(() => {
+      setActiveSectionId(ids[0]);
+    });
+
+    const sections = ids
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const visible = entries
+          .filter(entry => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target?.id) {
+          setActiveSectionId(visible.target.id);
+        }
+      },
+      {
+        root: null,
+        rootMargin: '-22% 0px -58% 0px',
+        threshold: [0.08, 0.18, 0.32, 0.5],
+      }
+    );
+
+    sections.forEach(section => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [activePage, loading, sectionList]);
 
   function updateField(name, value) {
     setContent(prev => ({ ...prev, [name]: value }));
@@ -593,10 +1040,25 @@ export default function AdminDashboard({ onLogout }) {
           <div style={styles.sectionNavCard}>
             <p style={styles.sectionNavLabel}>Sections</p>
             {HOME_SECTIONS.map(section => (
-              <a key={section.title} href={`#home-${section.title.toLowerCase().replaceAll(' ', '-')}`} style={styles.sectionNavLink}>
-                <span style={styles.sectionNavNumber}>{section.number}</span>
+              <button
+                key={section.title}
+                type="button"
+                onClick={() => scrollToSection(getSectionId('home', section.title))}
+                style={{
+                  ...styles.sectionNavLink,
+                  ...(activeSectionId === getSectionId('home', section.title) ? styles.sectionNavLinkActive : {}),
+                }}
+              >
+                <span
+                  style={{
+                    ...styles.sectionNavNumber,
+                    ...(activeSectionId === getSectionId('home', section.title) ? styles.sectionNavNumberActive : {}),
+                  }}
+                >
+                  {section.number}
+                </span>
                 <span>{section.title}</span>
-              </a>
+              </button>
             ))}
           </div>
         </aside>
@@ -613,7 +1075,7 @@ export default function AdminDashboard({ onLogout }) {
           {HOME_SECTIONS.map(section => (
             <section
               key={section.title}
-              id={`home-${section.title.toLowerCase().replaceAll(' ', '-')}`}
+              id={getSectionId('home', section.title)}
               style={styles.editorSection}
             >
               <div style={styles.sectionHeader}>
@@ -664,10 +1126,25 @@ export default function AdminDashboard({ onLogout }) {
           <div style={styles.sectionNavCard}>
             <p style={styles.sectionNavLabel}>Sections</p>
             {sections.map(section => (
-              <a key={section.title} href={`#${activePage}-${section.title.toLowerCase().replaceAll(' ', '-')}`} style={styles.sectionNavLink}>
-                <span style={styles.sectionNavNumber}>{section.number}</span>
+              <button
+                key={section.title}
+                type="button"
+                onClick={() => scrollToSection(getSectionId(activePage, section.title))}
+                style={{
+                  ...styles.sectionNavLink,
+                  ...(activeSectionId === getSectionId(activePage, section.title) ? styles.sectionNavLinkActive : {}),
+                }}
+              >
+                <span
+                  style={{
+                    ...styles.sectionNavNumber,
+                    ...(activeSectionId === getSectionId(activePage, section.title) ? styles.sectionNavNumberActive : {}),
+                  }}
+                >
+                  {section.number}
+                </span>
                 <span>{section.title}</span>
-              </a>
+              </button>
             ))}
           </div>
         </aside>
@@ -684,7 +1161,7 @@ export default function AdminDashboard({ onLogout }) {
           {sections.map(section => (
             <section
               key={section.title}
-              id={`${activePage}-${section.title.toLowerCase().replaceAll(' ', '-')}`}
+              id={getSectionId(activePage, section.title)}
               style={styles.editorSection}
             >
               <div style={styles.sectionHeader}>
@@ -723,7 +1200,7 @@ export default function AdminDashboard({ onLogout }) {
           {PAGES.map(p => (
             <button
               key={p.key}
-              onClick={() => setActivePage(p.key)}
+              onClick={() => selectPage(p.key)}
               style={{
                 ...styles.navItem,
                 ...(activePage === p.key ? styles.navItemActive : {}),
@@ -778,17 +1255,20 @@ export default function AdminDashboard({ onLogout }) {
 const styles = {
   layout: {
     display: 'flex',
-    minHeight: '100vh',
+    height: '100vh',
+    overflow: 'hidden',
     background: '#F5F3EF',
   },
   sidebar: {
     width: 272,
+    height: '100vh',
     background: '#1a2240',
     color: '#ffffff',
     display: 'flex',
     flexDirection: 'column',
     padding: '1.25rem 0',
     flexShrink: 0,
+    overflowY: 'auto',
     borderRight: '1px solid rgba(196,162,91,0.22)',
     boxShadow: 'inset -1px 0 0 rgba(245,243,239,0.04)',
   },
@@ -880,7 +1360,7 @@ const styles = {
   },
   main: {
     flex: 1,
-    padding: '1.65rem clamp(1.25rem, 3vw, 3rem) 3rem',
+    padding: '0 clamp(1.25rem, 3vw, 3rem) 3rem',
     overflowY: 'auto',
     maxHeight: '100vh',
     background:
@@ -893,13 +1373,12 @@ const styles = {
     alignItems: 'flex-start',
     gap: '1rem',
     marginBottom: '1.4rem',
-    padding: '0.25rem 0 1rem',
+    padding: '1.9rem 0 1rem',
     borderBottom: '1px solid rgba(52,65,109,0.1)',
     position: 'sticky',
     top: 0,
     zIndex: 5,
-    background: 'rgba(245,243,239,0.94)',
-    backdropFilter: 'blur(14px)',
+    background: '#F5F3EF',
   },
   pageKicker: {
     fontFamily: 'Inter, sans-serif',
@@ -1051,13 +1530,23 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '0.55rem',
+    width: '100%',
     padding: '0.55rem 0.5rem',
     borderRadius: 3,
     fontFamily: 'Inter, sans-serif',
     fontSize: '0.78rem',
     fontWeight: 700,
     color: '#34416D',
-    textDecoration: 'none',
+    textAlign: 'left',
+    background: 'transparent',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease',
+  },
+  sectionNavLinkActive: {
+    background: '#34416D',
+    color: '#F5F3EF',
+    boxShadow: 'inset 3px 0 0 #C4A25B, 0 8px 18px rgba(52,65,109,0.12)',
   },
   sectionNavNumber: {
     fontFamily: 'Source Serif 4, Georgia, serif',
@@ -1065,6 +1554,9 @@ const styles = {
     fontWeight: 700,
     color: '#C4A25B',
     minWidth: 24,
+  },
+  sectionNavNumberActive: {
+    color: '#C4A25B',
   },
   sectionStack: {
     display: 'grid',

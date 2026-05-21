@@ -18,6 +18,10 @@ export default function CTAStrip({
   mfoEmail,
   mfoPhone,
   mfoButtonLabel,
+  institutionalTitle,
+  institutionalEmail,
+  institutionalPhone,
+  institutionalButtonLabel,
 }) {
   return (
     <section className="cta-strip" style={{ borderTop: '1px solid rgba(52,65,109,0.12)' }}>
@@ -98,14 +102,14 @@ export default function CTAStrip({
             style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto' }}
           >
             <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.625rem', color: '#34416D', marginBottom: '0.625rem', lineHeight: 1.35 }}>
-              Paradigm is actively building strategic relationships with institutional investors, pension funds, endowments, and platforms who want a different approach to portfolio construction.
+              {institutionalTitle || "Paradigm is actively building strategic relationships with institutional investors, pension funds, endowments, and platforms who want a different approach to portfolio construction."}
             </p>
             <p style={{ fontFamily: 'Inter', fontSize: '0.875rem', color: '#637890', marginBottom: '1.75rem' }}>
-              <a href="mailto:jef@paradigmasset.com" style={{ color: '#34416D', textDecoration: 'none' }}>jef@paradigmasset.com</a>
+              <a href={`mailto:${institutionalEmail || "jef@paradigmasset.com"}`} style={{ color: '#34416D', textDecoration: 'none' }}>{institutionalEmail || "jef@paradigmasset.com"}</a>
               &nbsp;·&nbsp;
-              <a href="tel:9179913348" style={{ color: '#34416D', textDecoration: 'none' }}>917-991-3348</a>
+              <a href={`tel:${(institutionalPhone || "917-991-3348").replace(/[^+\d]/g, '')}`} style={{ color: '#34416D', textDecoration: 'none' }}>{institutionalPhone || "917-991-3348"}</a>
             </p>
-            <Link to="/contact" className="btn-outline-navy">Start a Conversation</Link>
+            <Link to="/contact" className="btn-outline-navy">{institutionalButtonLabel || "Start a Conversation"}</Link>
           </motion.div>
         )}
       </div>

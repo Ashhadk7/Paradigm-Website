@@ -63,8 +63,12 @@ export default function Process() {
   const { content: cms } = useContent('process');
 
   const c = {
+    hero_headline: cms?.hero_headline || "Systematic.\nTransparent.\nExplainable at every step.",
+    data_foundation_eyebrow: cms?.data_foundation_eyebrow || "The Data Foundation",
     data_foundation_text: cms?.data_foundation_text || "Every Paradigm portfolio begins with data. Not analyst opinions. Not committee views. Market data — specifically the disclosed holdings of active investment strategies across the global equity universe. This data is public. What Paradigm does with it is not.",
     data_foundation_amd: cms?.data_foundation_amd || "Paradigm's Active Market Data (AMD) covers more than 12,000 strategies across 45,000 securities in 75 global markets. It is the most comprehensive view of where active capital is positioned within any mandate at any given time. Updated continuously. Evaluated monthly for changes in regime leadership.",
+    process_eyebrow: cms?.process_eyebrow || "The Process — Four Steps",
+    process_intro: cms?.process_intro || "The same four steps run for every mandate. Evaluated monthly. Signal-driven from start to finish.",
     step1_title: cms?.step1_title || "Isolate the mandate universe.",
     step1_text: cms?.step1_text || "Every portfolio begins with a defined mandate. Large Cap Value. International Developed. A custom thematic strategy. Whatever the mandate, Paradigm isolates the relevant dataset from AMD — the universe of strategies operating within that specific space.",
     step2_title: cms?.step2_title || "Identify regime leadership.",
@@ -72,12 +76,24 @@ export default function Process() {
     step2_para2: cms?.step2_para2 || "The distinction matters. Most manager searches are backward-looking by design — they evaluate trailing performance and hire the sub-style that just led the cycle. CIPE reads current market positioning.",
     step3_title: cms?.step3_title || "Generate the Portfolio Blueprint.",
     step3_text: cms?.step3_text || "The strategies in regime leadership reveal a consensus view of the market — which sectors, factors, regions, and securities are concentrated in the leading positions. That consensus becomes the Portfolio Blueprint: a map of where the market's collective attention is focused within the mandate right now.",
+    step3_text_2: cms?.step3_text_2 || "The Blueprint is not a replication of any single strategy. It is a new intelligence that emerges from the aggregate of many strategies each doing their job well within their own domain.",
     step4_title: cms?.step4_title || "Build, optimize, and monitor.",
     step4_text: cms?.step4_text || "Paradigm optimizes the portfolio toward the Blueprint — maximum return relative to risk within the mandate parameters. The model runs monthly from the beginning. A rebalance is triggered when the signal confirms a shift in regime leadership, not when a calendar date arrives.",
+    step4_text_2: cms?.step4_text_2 || "Tax-loss harvesting runs on the active positions through the platform. The advisor or institution operates this capability. Paradigm enables it.",
+    black_box_eyebrow: cms?.black_box_eyebrow || "Why No Black Box",
+    black_box_1: cms?.black_box_1 || "Systematic investment processes are often dismissed as black boxes — algorithms that produce outputs no one can explain or defend. Paradigm's process is the opposite.",
+    black_box_2: cms?.black_box_2 || "Every input to the Portfolio Blueprint is observable market data. Every output is a specific security position with a specific rationale: this position reflects where the collective market signal says leadership is forming within this mandate today. Every rebalance decision is traceable to a specific change in that signal. Every position can be explained to a client, a committee, or a regulator in plain language.",
+    black_box_pullquote: cms?.black_box_pullquote || "Transparent and explainable is not a feature. It is the architecture.",
+    cta_intro: cms?.cta_intro || "The process is built to answer questions. If you have specific ones, a conversation is the right next step.",
+    cta_advisor_eyebrow: cms?.cta_advisor_eyebrow || "For Advisors",
+    cta_advisor_text: cms?.cta_advisor_text || "See what a portfolio built from collective intelligence looks like for your practice. Worth 20 minutes.",
+    cta_advisor_button: cms?.cta_advisor_button || "Book a 20-Minute Call",
+    cta_institution_eyebrow: cms?.cta_institution_eyebrow || "For Institutions",
+    cta_institution_text: cms?.cta_institution_text || "Paradigm is actively building strategic relationships with family offices, OCIOs, and institutional partners.",
+    cta_institution_button: cms?.cta_institution_button || "Start a Conversation",
   };
 
-  const defaultWords = ['Systematic.', 'Transparent.', 'Explainable at every step.'];
-  const words = cms?.hero_headline ? cms.hero_headline.split('\n') : defaultWords;
+  const words = c.hero_headline.split('\n');
 
   return (
     <>
@@ -146,7 +162,7 @@ export default function Process() {
       <section className="section-white">
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Data Foundation</p>
+            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.data_foundation_eyebrow}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
               <motion.p
                 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
@@ -171,9 +187,9 @@ export default function Process() {
       <section className="section-offwhite">
         <div className="section-inner">
           <div style={{ maxWidth: 760, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Process — Four Steps</p>
+            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.process_eyebrow}</p>
             <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', marginBottom: '3.5rem', lineHeight: 1.8 }}>
-              The same four steps run for every mandate. Evaluated monthly. Signal-driven from start to finish.
+              {c.process_intro}
             </p>
 
             <ProcessStep
@@ -191,7 +207,7 @@ export default function Process() {
               title={c.step3_title}
               paragraphs={[
                 c.step3_text,
-                "The Blueprint is not a replication of any single strategy. It is a new intelligence that emerges from the aggregate of many strategies each doing their job well within their own domain.",
+                c.step3_text_2,
               ]}
             />
             <ProcessStep
@@ -199,7 +215,7 @@ export default function Process() {
               title={c.step4_title}
               paragraphs={[
                 c.step4_text,
-                "Tax-loss harvesting runs on the active positions through the platform. The advisor or institution operates this capability. Paradigm enables it.",
+                c.step4_text_2,
               ]}
               isLast
             />
@@ -211,15 +227,15 @@ export default function Process() {
       <section className="section-white">
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>Why No Black Box</p>
+            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.black_box_eyebrow}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                Systematic investment processes are often dismissed as black boxes — algorithms that produce outputs no one can explain or defend. Paradigm's process is the opposite.
+                {c.black_box_1}
               </motion.p>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.07 }}
                 style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                Every input to the Portfolio Blueprint is observable market data. Every output is a specific security position with a specific rationale: this position reflects where the collective market signal says leadership is forming within this mandate today. Every rebalance decision is traceable to a specific change in that signal. Every position can be explained to a client, a committee, or a regulator in plain language.
+                {c.black_box_2}
               </motion.p>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.14 }}
                 style={{
@@ -230,7 +246,7 @@ export default function Process() {
                   fontWeight: 700,
                 }}
               >
-                Transparent and explainable is not a feature. It is the architecture.
+                {c.black_box_pullquote}
               </motion.p>
             </div>
           </div>
@@ -248,7 +264,7 @@ export default function Process() {
               textAlign: 'center', maxWidth: 600, margin: '0 auto 3rem',
             }}
           >
-            The process is built to answer questions. If you have specific ones, a conversation is the right next step.
+            {c.cta_intro}
           </motion.p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '3rem' }}>
             {/* Advisor CTA */}
@@ -258,12 +274,12 @@ export default function Process() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>For Advisors</p>
+              <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>{c.cta_advisor_eyebrow}</p>
               <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.375rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.4 }}>
-                See what a portfolio built from collective intelligence looks like for your practice. Worth 20 minutes.
+                {c.cta_advisor_text}
               </p>
               <Link to="/contact" className="btn-gold" style={{ marginTop: '0.5rem' }}>
-                Book a 20-Minute Call
+                {c.cta_advisor_button}
               </Link>
             </motion.div>
             {/* Institutional CTA */}
@@ -273,12 +289,12 @@ export default function Process() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>For Institutions</p>
+              <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>{c.cta_institution_eyebrow}</p>
               <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.375rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.4 }}>
-                Paradigm is actively building strategic relationships with family offices, OCIOs, and institutional partners.
+                {c.cta_institution_text}
               </p>
               <Link to="/contact" className="btn-outline-navy" style={{ marginTop: '0.5rem' }}>
-                Start a Conversation
+                {c.cta_institution_button}
               </Link>
             </motion.div>
           </div>
