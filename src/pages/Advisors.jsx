@@ -32,9 +32,44 @@ export default function Advisors() {
     hero_eyebrow: cms?.hero_eyebrow || "For Wealth Advisors & Independent RIAs",
     hero_headline: cms?.hero_headline || "Your clients are paying active management fees. Most of that capital is locked inside a single strategy's approach. There is a different way to invest it.",
     hero_sub: cms?.hero_sub || "Paradigm builds portfolios from active market data — not anchored to any single approach. Portfolios that can move as market leadership moves. Under your name.",
+    hero_cta_label: cms?.hero_cta_label || "Book a 20-Minute Call",
+    core_story_eyebrow: cms?.core_story_eyebrow || "The Core Story",
+    core_story_1: cms?.core_story_1 || "Every active strategy operates within the boundaries of its expertise. A deep value manager knows deep value. A quality growth manager has a genuine edge in quality growth. That specialization is not a limitation — it is the source of their edge. It is also the boundary they cannot cross without leaving what they genuinely know how to do.",
+    core_story_2: cms?.core_story_2 || "When market leadership rotates outside those boundaries, the strategy lags. Not because of a mistake. Because following the rotation would mean leaving the domain of real competence. The clients who hired that strategy wait for the cycle to come back around.",
+    core_story_3: cms?.core_story_3 || "Paradigm reads active market data to identify where leadership is forming within each mandate right now — and constructs portfolios from that signal. Not anchored to any single approach. Not waiting for a cycle to reverse.",
+    core_story_4: cms?.core_story_4 || "The result is a portfolio that can move as leadership moves. Something no single strategy built around a defined approach can do — because doing it would mean abandoning the expertise that defines them.",
+    practice_eyebrow: cms?.practice_eyebrow || "What This Means for Your Practice",
+    practice_headline: cms?.practice_headline || "Three specific consequences",
+    practice_sub: cms?.practice_sub || "For independent advisors and wealth managers.",
+    consequence_1_label: cms?.consequence_1_label || "Consequence 01",
+    consequence_1_title: cms?.consequence_1_title || "A proprietary investment story",
+    consequence_1_body: cms?.consequence_1_body || "Your clients receive something no other advisor on any platform can replicate. Built from the market's full signal. Not any single strategy's approach. Presented under your name.",
+    consequence_2_label: cms?.consequence_2_label || "Consequence 02",
+    consequence_2_title: cms?.consequence_2_title || "Better economics",
+    consequence_2_body: cms?.consequence_2_body || "Replace active strategies charging 65 to 100 basis points with portfolios built from collective market intelligence at a fraction of that cost. The margin difference stays with you.",
+    consequence_3_label: cms?.consequence_3_label || "Consequence 03",
+    consequence_3_title: cms?.consequence_3_title || "Tax efficiency on active strategies",
+    consequence_3_body: cms?.consequence_3_body || "Run tax-loss harvesting on the active sleeve using the same workflow you already use for direct indexing. You operate it. Paradigm enables it. Your clients get better after-tax outcomes from both sleeves simultaneously.",
+    platform_eyebrow: cms?.platform_eyebrow || "The Platform Capability",
     platform_headline: cms?.platform_headline || "One platform. Three capabilities.",
     platform_para1: cms?.platform_para1 || "Custom active strategies built to your specification, SMA conversion of existing fund exposures into customizable tax-aware portfolios, and direct and custom indexing at scale. Customization, personalization, and tax-loss harvesting run across all three — at the individual client level. You operate it. Paradigm enables it.",
     platform_para2: cms?.platform_para2 || "Most advisors manage these capabilities across multiple vendors, multiple processes, and multiple stories for clients. Paradigm consolidates them. One relationship. One interface. One coherent investment narrative for every client conversation.",
+    delivery_eyebrow: cms?.delivery_eyebrow || "How It's Delivered",
+    delivery_headline: cms?.delivery_headline || "Two ways to work with Paradigm.",
+    delivery_sub: cms?.delivery_sub || "The capability is identical in both.",
+    delivery_1_tag: cms?.delivery_1_tag || "Self-Serve Platform",
+    delivery_1_tagline: cms?.delivery_1_tagline || "You build it. You run it.",
+    delivery_1_body: cms?.delivery_1_body || "Access Paradigm's platform directly. Customize portfolios to your specification. Run customization, personalization, and tax-loss harvesting across both the active and indexed sleeves from a single interface. Your custodian. Your brand. Your decisions at every step.",
+    delivery_2_tag: cms?.delivery_2_tag || "White Glove Service",
+    delivery_2_tagline: cms?.delivery_2_tagline || "We build it. You run it.",
+    delivery_2_body: cms?.delivery_2_body || "Paradigm builds the portfolio to your specification. It sits on the platform. You operate the personalization and tax-loss harvesting for your clients from there. The investment process is yours. The construction is Paradigm's. Your clients see your name on everything.",
+    proof_body: cms?.proof_body || "Paradigm has worked with institutional clients including General Motors, AMEX, and the US Treasury over its 35-year history.",
+    proof_bridge: cms?.proof_bridge || "The same investment intelligence is now available to independent advisors and multi-family offices.",
+    cta_title: cms?.cta_title || "Worth 20 minutes to see what this looks like for your practice?",
+    cta_contact_prefix: cms?.cta_contact_prefix || "Or reach us directly:",
+    cta_email: cms?.cta_email || "jef@paradigmasset.com",
+    cta_phone: cms?.cta_phone || "917-991-3348",
+    cta_button_label: cms?.cta_button_label || "Book a 20-Minute Call",
   };
 
   return (
@@ -50,20 +85,20 @@ export default function Advisors() {
         headline={c.hero_headline}
         sub={c.hero_sub}
         compact
-        ctas={[{ label: 'Book a 20-Minute Call', to: '/contact', variant: 'gold' }]}
+        ctas={[{ label: c.hero_cta_label, to: '/contact', variant: 'gold' }]}
       />
 
       {/* ── THE CORE STORY ── */}
       <section className="section-offwhite">
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Core Story</p>
+            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
               {[
-                "Every active strategy operates within the boundaries of its expertise. A deep value manager knows deep value. A quality growth manager has a genuine edge in quality growth. That specialization is not a limitation — it is the source of their edge. It is also the boundary they cannot cross without leaving what they genuinely know how to do.",
-                "When market leadership rotates outside those boundaries, the strategy lags. Not because of a mistake. Because following the rotation would mean leaving the domain of real competence. The clients who hired that strategy wait for the cycle to come back around.",
-                "Paradigm reads active market data to identify where leadership is forming within each mandate right now — and constructs portfolios from that signal. Not anchored to any single approach. Not waiting for a cycle to reverse.",
-                "The result is a portfolio that can move as leadership moves. Something no single strategy built around a defined approach can do — because doing it would mean abandoning the expertise that defines them.",
+                c.core_story_1,
+                c.core_story_2,
+                c.core_story_3,
+                c.core_story_4,
               ].map((p, i) => (
                 <motion.p key={i}
                   initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
@@ -81,28 +116,28 @@ export default function Advisors() {
       {/* ── WHAT THIS MEANS FOR YOUR PRACTICE ── */}
       <section className="section-white">
         <div className="section-inner">
-          <p className="eyebrow" style={{ marginBottom: '0.875rem', textAlign: 'center' }}>What This Means for Your Practice</p>
+          <p className="eyebrow" style={{ marginBottom: '0.875rem', textAlign: 'center' }}>{c.practice_eyebrow}</p>
           <h2 className="section-headline" style={{ color: '#34416D', textAlign: 'center', marginBottom: '0.625rem' }}>
-            Three specific consequences
+            {c.practice_headline}
           </h2>
           <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', textAlign: 'center', maxWidth: 480, margin: '0 auto 3.5rem' }}>
-            For independent advisors and wealth managers.
+            {c.practice_sub}
           </p>
           <ThreeCol blocks={[
             {
-              label: 'Consequence 01',
-              title: 'A proprietary investment story',
-              body: "Your clients receive something no other advisor on any platform can replicate. Built from the market's full signal. Not any single strategy's approach. Presented under your name.",
+              label: c.consequence_1_label,
+              title: c.consequence_1_title,
+              body: c.consequence_1_body,
             },
             {
-              label: 'Consequence 02',
-              title: 'Better economics',
-              body: 'Replace active strategies charging 65 to 100 basis points with portfolios built from collective market intelligence at a fraction of that cost. The margin difference stays with you.',
+              label: c.consequence_2_label,
+              title: c.consequence_2_title,
+              body: c.consequence_2_body,
             },
             {
-              label: 'Consequence 03',
-              title: 'Tax efficiency on active strategies',
-              body: 'Run tax-loss harvesting on the active sleeve using the same workflow you already use for direct indexing. You operate it. Paradigm enables it. Your clients get better after-tax outcomes from both sleeves simultaneously.',
+              label: c.consequence_3_label,
+              title: c.consequence_3_title,
+              body: c.consequence_3_body,
             },
           ]} />
         </div>
@@ -112,7 +147,7 @@ export default function Advisors() {
       <section className="section-offwhite">
         <div className="section-inner">
           <div style={{ maxWidth: 720, margin: '0 auto' }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform Capability</p>
+            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
             <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
@@ -129,25 +164,25 @@ export default function Advisors() {
       {/* ── HOW IT'S DELIVERED ── */}
       <section className="section-white">
         <div className="section-inner">
-          <p className="eyebrow" style={{ marginBottom: '0.875rem', textAlign: 'center' }}>How It's Delivered</p>
+          <p className="eyebrow" style={{ marginBottom: '0.875rem', textAlign: 'center' }}>{c.delivery_eyebrow}</p>
           <h2 className="section-headline" style={{ color: '#34416D', textAlign: 'center', marginBottom: '0.625rem' }}>
-            Two ways to work with Paradigm.
+            {c.delivery_headline}
           </h2>
           <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', textAlign: 'center', marginBottom: '3.5rem' }}>
-            The capability is identical in both.
+            {c.delivery_sub}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
             {[
               {
-                tag: 'Self-Serve Platform',
-                tagline: 'You build it. You run it.',
-                body: "Access Paradigm's platform directly. Customize portfolios to your specification. Run customization, personalization, and tax-loss harvesting across both the active and indexed sleeves from a single interface. Your custodian. Your brand. Your decisions at every step.",
+                tag: c.delivery_1_tag,
+                tagline: c.delivery_1_tagline,
+                body: c.delivery_1_body,
                 accent: true,
               },
               {
-                tag: 'White Glove Service',
-                tagline: 'We build it. You run it.',
-                body: "Paradigm builds the portfolio to your specification. It sits on the platform. You operate the personalization and tax-loss harvesting for your clients from there. The investment process is yours. The construction is Paradigm's. Your clients see your name on everything.",
+                tag: c.delivery_2_tag,
+                tagline: c.delivery_2_tagline,
+                body: c.delivery_2_body,
                 accent: false,
               },
             ].map((card, i) => (
@@ -173,12 +208,19 @@ export default function Advisors() {
       {/* ── PROOF ── */}
       <section className="section-offwhite">
         <div className="section-inner" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
-          <ProofBlock variant="advisor" />
+          <ProofBlock variant="advisor" body={c.proof_body} bridge={c.proof_bridge} />
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <CTAStrip variant="advisor" />
+      <CTAStrip
+        variant="advisor"
+        advisorTitle={c.cta_title}
+        advisorContactPrefix={c.cta_contact_prefix}
+        advisorEmail={c.cta_email}
+        advisorPhone={c.cta_phone}
+        advisorButtonLabel={c.cta_button_label}
+      />
     </>
   );
 }

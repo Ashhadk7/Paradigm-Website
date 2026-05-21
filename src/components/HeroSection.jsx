@@ -2,7 +2,29 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { GLSLHills } from './ui/glsl-hills';
 
+function splitHeroCopy(text) {
+  if (!text) return [];
+  if (text.includes('\n')) {
+    return text.split('\n');
+  }
+
+  const parts = text.match(/[^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$/g) || [text];
+  return parts.map(part => part.trimEnd());
+}
+
+function splitHeroSubcopy(text) {
+  if (!text) return [];
+  return text.includes('\n') ? text.split('\n') : [text];
+}
+
 export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal = false, compact = false }) {
+  const headlineLines = splitHeroCopy(headline);
+  const subLines = splitHeroSubcopy(sub);
+  const headlineDelay = 0.3;
+  const headlineStep = 0.22;
+  const subDelay = headlineDelay + Math.max(headlineLines.length, 1) * headlineStep + 0.1;
+  const actionDelay = subDelay + Math.max(subLines.length, 1) * 0.12 + 0.15;
+
   return (
     <section
       className="hero-section"
@@ -29,26 +51,51 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
             </motion.p>
           )}
 
-          <motion.h1
+          <h1
             className={compact ? 'display-headline-compact' : 'display-headline'}
-            initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-            style={{ marginBottom: compact ? '1rem' : '1.35rem', whiteSpace: 'pre-line' }}
+            style={{ marginBottom: compact ? '1rem' : '1.35rem' }}
           >
-            {headline}
-          </motion.h1>
+            {headlineLines.map((line, i) => (
+              <motion.span
+                key={`${line}-${i}`}
+                initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{
+                  duration: 0.7,
+                  delay: headlineDelay + i * headlineStep,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+                style={{
+                  display: 'block',
+                  marginBottom: i < headlineLines.length - 1 ? '0.12em' : 0,
+                }}
+              >
+                {line}
+              </motion.span>
+            ))}
+          </h1>
 
           {sub && (
-            <motion.p
+            <p
               className="hero-subcopy"
-              initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 0.6, delay: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
               style={compact ? { fontSize: '0.95rem', marginBottom: '1.25rem' } : undefined}
             >
-              {sub}
-            </motion.p>
+              {subLines.map((line, i) => (
+                <motion.span
+                  key={`${line}-${i}`}
+                  initial={{ opacity: 0, y: 18, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{
+                    duration: 0.6,
+                    delay: subDelay + i * 0.12,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                  style={{ display: 'block' }}
+                >
+                  {line}
+                </motion.span>
+              ))}
+            </p>
           )}
 
           {ctas.length > 0 && (
@@ -56,7 +103,7 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
               className="hero-actions"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.5, delay: actionDelay, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               {ctas.map((cta, i) => (
                 <Link key={i} to={cta.to} className={`btn-${cta.variant || 'gold'}`}>
@@ -70,7 +117,7 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.0, ease: 'easeOut' }}
+            transition={{ duration: 0.8, delay: actionDelay + 0.2, ease: 'easeOut' }}
             style={{
               height: 2,
               background: 'linear-gradient(90deg, #C4A25B 0%, transparent 70%)',

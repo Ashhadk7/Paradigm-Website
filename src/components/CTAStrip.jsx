@@ -5,7 +5,20 @@ import { motion } from 'framer-motion';
  * CTAStrip — bottom of every marketing page.
  * variant: 'advisor' | 'institutional' | 'both'
  */
-export default function CTAStrip({ variant = 'both', advisorText, institutionText }) {
+export default function CTAStrip({
+  variant = 'both',
+  advisorText,
+  institutionText,
+  advisorTitle,
+  advisorContactPrefix,
+  advisorEmail,
+  advisorPhone,
+  advisorButtonLabel,
+  mfoTitle,
+  mfoEmail,
+  mfoPhone,
+  mfoButtonLabel,
+}) {
   return (
     <section className="cta-strip" style={{ borderTop: '1px solid rgba(52,65,109,0.12)' }}>
       <div className="section-inner" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
@@ -50,15 +63,15 @@ export default function CTAStrip({ variant = 'both', advisorText, institutionTex
             style={{ textAlign: 'center', maxWidth: 560, margin: '0 auto' }}
           >
             <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.625rem', color: '#34416D', marginBottom: '0.625rem', lineHeight: 1.35 }}>
-              Worth 20 minutes to see what this looks like for your practice?
+              {advisorTitle || "Worth 20 minutes to see what this looks like for your practice?"}
             </p>
             <p style={{ fontFamily: 'Inter', fontSize: '0.875rem', color: '#637890', marginBottom: '1.75rem' }}>
-              Or reach us directly:&nbsp;
-              <a href="mailto:jef@paradigmasset.com" style={{ color: '#34416D', textDecoration: 'none' }}>jef@paradigmasset.com</a>
+              {advisorContactPrefix || "Or reach us directly:"}&nbsp;
+              <a href={`mailto:${advisorEmail || "jef@paradigmasset.com"}`} style={{ color: '#34416D', textDecoration: 'none' }}>{advisorEmail || "jef@paradigmasset.com"}</a>
               &nbsp;·&nbsp;
-              <a href="tel:9179913348" style={{ color: '#34416D', textDecoration: 'none' }}>917-991-3348</a>
+              <a href={`tel:${(advisorPhone || "917-991-3348").replace(/[^+\d]/g, '')}`} style={{ color: '#34416D', textDecoration: 'none' }}>{advisorPhone || "917-991-3348"}</a>
             </p>
-            <Link to="/contact" className="btn-gold">Book a 20-Minute Call</Link>
+            <Link to="/contact" className="btn-gold">{advisorButtonLabel || "Book a 20-Minute Call"}</Link>
           </motion.div>
         ) : variant === 'mfo' ? (
           <motion.div
@@ -68,14 +81,14 @@ export default function CTAStrip({ variant = 'both', advisorText, institutionTex
             style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto' }}
           >
             <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.625rem', color: '#34416D', marginBottom: '0.625rem', lineHeight: 1.35 }}>
-              Paradigm builds portfolios the way your clients expect them to be built — to their specific mandate, informed by current market intelligence, presented as your firm's own process.
+              {mfoTitle || "Paradigm builds portfolios the way your clients expect them to be built — to their specific mandate, informed by current market intelligence, presented as your firm's own process."}
             </p>
             <p style={{ fontFamily: 'Inter', fontSize: '0.875rem', color: '#637890', marginBottom: '1.75rem' }}>
-              <a href="mailto:jef@paradigmasset.com" style={{ color: '#34416D', textDecoration: 'none' }}>jef@paradigmasset.com</a>
+              <a href={`mailto:${mfoEmail || "jef@paradigmasset.com"}`} style={{ color: '#34416D', textDecoration: 'none' }}>{mfoEmail || "jef@paradigmasset.com"}</a>
               &nbsp;·&nbsp;
-              <a href="tel:9179913348" style={{ color: '#34416D', textDecoration: 'none' }}>917-991-3348</a>
+              <a href={`tel:${(mfoPhone || "917-991-3348").replace(/[^+\d]/g, '')}`} style={{ color: '#34416D', textDecoration: 'none' }}>{mfoPhone || "917-991-3348"}</a>
             </p>
-            <Link to="/contact" className="btn-outline-navy">Start a Conversation</Link>
+            <Link to="/contact" className="btn-outline-navy">{mfoButtonLabel || "Start a Conversation"}</Link>
           </motion.div>
         ) : (
           <motion.div
