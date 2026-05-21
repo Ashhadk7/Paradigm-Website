@@ -37,8 +37,7 @@ Core capabilities:
 .
 ├── public/
 │   ├── _redirects
-│   ├── favicon.svg
-│   └── icons.svg
+│   └── favicon.svg
 ├── src/
 │   ├── components/
 │   │   ├── CTAStrip.jsx

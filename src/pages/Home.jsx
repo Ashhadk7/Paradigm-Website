@@ -4,7 +4,6 @@ import HeroSection from '../components/HeroSection';
 import ProofBlock from '../components/ProofBlock';
 import CTAStrip from '../components/CTAStrip';
 import { useContent } from '../lib/useContent';
-/* Radar import removed — Leadership Signal card was not in the brief */
 
 function Stat({ value, label }) {
   return (
@@ -19,21 +18,6 @@ function Stat({ value, label }) {
     </motion.div>
   );
 }
-
-const OBSERVATIONS = [
-  {
-    num: '01',
-    body: 'No single mind sees everything the market knows. No single dataset captures everything experts observe. No single system processes both at scale. Dynamic Collective Intelligence is what emerges when human expertise, vast market data, and computing power are combined systematically — a new intelligence that surpasses any individual component.',
-  },
-  {
-    num: '02',
-    body: 'Every specialist performs well when market conditions align with their expertise — and faces headwinds when they shift. This is not a failure of skill. It is the inherent structure of specialization. When leadership moves away from a strategy\'s domain, the strategy waits. So do its clients.',
-  },
-  {
-    num: '03',
-    body: 'Paradigm identifies where regime leadership is forming within each mandate and qualifies that signal through collective intelligence. The result is a Portfolio Blueprint — a portfolio built from the confirmed consensus of what the market is rewarding right now.',
-  },
-];
 
 const LEGEND = [
   { label: 'ALL DATA', sub: 'Active market data universe', gold: false },

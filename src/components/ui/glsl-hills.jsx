@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-const GLSLHills = ({ width = '100%', height = '100%', cameraZ = 125, planeSize = 256, speed = 0.5 }) => {
+const GLSLHills = ({ cameraZ = 125, planeSize = 256, speed = 0.5 }) => {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
 

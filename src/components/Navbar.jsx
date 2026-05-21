@@ -76,9 +76,6 @@ export default function Navbar() {
     { label: 'Contact', path: '/contact' },
   ];
 
-  // Zoom-out scale: starts at 1, shrinks to 0.92 on scroll
-  const navScale = scrolled ? 0.92 : 1;
-
   return (
     <>
       {/* Floating pill navbar — stays same color, zooms out on scroll */}
