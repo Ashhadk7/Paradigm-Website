@@ -6,8 +6,6 @@ import {
   Code2,
   History,
   MessageSquare,
-  PanelLeftClose,
-  PanelLeftOpen,
   Plus,
   RotateCcw,
   ShieldCheck,
@@ -214,8 +212,8 @@ export default function AgentPanel({ activePage, content, fields, presentation, 
             <div className="agent-header-actions">
               <span className="agent-secure"><ShieldCheck size={12} /> {mode === 'quick' ? 'Controlled edits' : 'Reviewed branches'}</span>
               {mode === 'quick' && (
-                <button className="agent-quiet-action agent-rail-toggle" type="button" onClick={() => setRailOpen(value => !value)} aria-label="Toggle conversations">
-                  {railOpen ? <PanelLeftClose size={18} /> : <PanelLeftOpen size={18} />}
+                <button className="agent-quiet-action agent-rail-toggle" type="button" onClick={() => setRailOpen(value => !value)} aria-label={railOpen ? 'Hide history' : 'Show history'}>
+                  {railOpen ? '>>' : '<<'}
                 </button>
               )}
               <button className="agent-quiet-action" type="button" onClick={() => setOpen(false)} aria-label="Close assistant">

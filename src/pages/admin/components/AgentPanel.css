@@ -1217,3 +1217,23 @@
   color: #637890;
   font: 500 0.62rem/1 'Inter', sans-serif;
 }
+
+.developer-new {
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid rgba(52, 65, 109, 0.12);
+  border-radius: 8px;
+  background: #fff;
+  color: #34416d;
+  font: 700 0.7rem/1 'Inter', sans-serif;
+  cursor: pointer;
+}
+
+.developer-new:hover {
+  border-color: rgba(196, 162, 91, 0.55);
+}
+
+.developer-sidebar-head > div {
+  display: grid;
+}

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ArrowUp, CheckCircle2, ChevronLeft, ChevronRight, ExternalLink, GitBranch, History, LoaderCircle, RefreshCw, RotateCcw, ShieldCheck, Sparkles, XCircle } from 'lucide-react';
+import { ArrowUp, CheckCircle2, ExternalLink, GitBranch, History, LoaderCircle, RefreshCw, RotateCcw, ShieldCheck, Sparkles, XCircle } from 'lucide-react';
 import {
   createCodeRevert,
   createCodeTask,
@@ -131,8 +131,7 @@ export default function DeveloperAgentPanel() {
         <div className="developer-intro-actions">
           <span className="developer-guard"><ShieldCheck size={13} /> Admin approval required</span>
           <button type="button" className="developer-history-toggle" onClick={() => setHistoryOpen(value => !value)} aria-label={historyOpen ? 'Hide history' : 'Show history'}>
-            {historyOpen ? <ChevronLeft size={15} /> : <ChevronRight size={15} />}
-            {historyOpen ? 'Hide history' : 'Show history'}
+            {historyOpen ? '>>' : '<<'}
           </button>
         </div>
       </div>
@@ -141,9 +140,12 @@ export default function DeveloperAgentPanel() {
         <aside className="developer-sidebar" aria-label="Code change history">
           <div className="developer-sidebar-head">
             <div>
-              <span className="developer-sidebar-kicker"><History size={13} /> History</span>
+              <span className="developer-sidebar-kicker"><History size={13} /> Chat history</span>
               <strong>{tasks.length} request{tasks.length === 1 ? '' : 's'}</strong>
             </div>
+            <button type="button" className="developer-new" onClick={() => { setSelectedTaskId(''); setPrompt(''); setNotice(''); }}>
+              <span>New conversation</span>
+            </button>
           </div>
           <div className="developer-sidebar-list">
             {loading && <p className="developer-message">Loading code requests...</p>}
