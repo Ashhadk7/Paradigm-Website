@@ -93,6 +93,10 @@ export default function DeveloperAgentPanel() {
     }
   }
 
+  async function restoreBeforeTask(taskId) {
+    await run(taskId, 'revert', createCodeRevert, 'Rollback preview created. Review it before merging.');
+  }
+
   async function submit(event) {
     event.preventDefault();
     if (prompt.trim().length < 10) return;
@@ -221,6 +225,17 @@ export default function DeveloperAgentPanel() {
                       <a href={selectedTask.preview_url} target="_blank" rel="noreferrer">Deployment details <ExternalLink size={12} /></a>
                     )}
                   </div>
+
+                  {canRevert && (
+                    <button
+                      type="button"
+                      className="agent-restore"
+                      disabled={selectedBusy}
+                      onClick={() => restoreBeforeTask(selectedTask.id)}
+                    >
+                      <RotateCcw size={13} /> Restore before this request
+                    </button>
+                  )}
 
                   <div className="developer-approval-card">
                     <div>
