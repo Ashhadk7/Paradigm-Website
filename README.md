@@ -176,6 +176,7 @@ Required environment variables:
 ```env
 VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_ENABLE_CODE_AGENT=false
 ```
 
 Only those public Supabase browser values go into the Vite app `.env`.
@@ -185,6 +186,20 @@ request/validation flow is documented in:
 
 ```text
 docs/openai-cms-assistant.md
+```
+
+The reviewed source-code workflow for structural website changes is documented
+separately in:
+
+```text
+docs/code-change-agent.md
+```
+
+After the Code Change Agent release is validated, its additional live database
+migration is:
+
+```text
+supabase/migrations/202605260001_code_change_agent.sql
 ```
 
 Image uploads use the Supabase storage bucket named:

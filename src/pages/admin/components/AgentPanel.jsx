@@ -3,6 +3,7 @@ import {
   ArrowUp,
   Bot,
   Check,
+  Code2,
   History,
   MessageSquare,
   PanelLeftClose,
@@ -22,6 +23,7 @@ import {
   loadAgentStages,
   revertAgentStages,
 } from '../../../lib/cmsAgentSessions';
+import DeveloperAgentPanel from './DeveloperAgentPanel';
 import './AgentPanel.css';
 
 const STARTERS = [
@@ -43,8 +45,10 @@ function formatDate(value) {
 }
 
 export default function AgentPanel({ activePage, content, fields, presentation, saving, onApply, onRestore }) {
+  const codeAgentEnabled = import.meta.env.VITE_ENABLE_CODE_AGENT === 'true';
   const [open, setOpen] = useState(false);
   const [railOpen, setRailOpen] = useState(true);
+  const [mode, setMode] = useState('quick');
   const [prompt, setPrompt] = useState('');
   const [proposal, setProposal] = useState(null);
   const [notice, setNotice] = useState('');
@@ -198,26 +202,40 @@ export default function AgentPanel({ activePage, content, fields, presentation, 
   return (
     <>
       {open && (
-        <section className={`agent-console ${railOpen ? 'agent-console--rail' : ''}`} aria-label="Paradigm page assistant">
+        <section className={`agent-console ${mode === 'quick' && railOpen ? 'agent-console--rail' : ''}`} aria-label="Paradigm page assistant">
           <header className="agent-header">
             <div className="agent-brand">
               <span className="agent-mark">P</span>
               <div>
                 <p>Paradigm Studio</p>
-                <h2>Design Assistant</h2>
+                <h2>{mode === 'quick' ? 'Design Assistant' : 'Code Change Agent'}</h2>
               </div>
             </div>
             <div className="agent-header-actions">
-              <span className="agent-secure"><ShieldCheck size={12} /> Controlled edits</span>
-              <button className="agent-quiet-action agent-rail-toggle" type="button" onClick={() => setRailOpen(value => !value)} aria-label="Toggle conversations">
-                {railOpen ? <PanelLeftClose size={18} /> : <PanelLeftOpen size={18} />}
-              </button>
+              <span className="agent-secure"><ShieldCheck size={12} /> {mode === 'quick' ? 'Controlled edits' : 'Reviewed branches'}</span>
+              {mode === 'quick' && (
+                <button className="agent-quiet-action agent-rail-toggle" type="button" onClick={() => setRailOpen(value => !value)} aria-label="Toggle conversations">
+                  {railOpen ? <PanelLeftClose size={18} /> : <PanelLeftOpen size={18} />}
+                </button>
+              )}
               <button className="agent-quiet-action" type="button" onClick={() => setOpen(false)} aria-label="Close assistant">
                 <X size={19} />
               </button>
             </div>
           </header>
 
+          <nav className="agent-mode-switch" aria-label="Assistant mode">
+            <button type="button" className={mode === 'quick' ? 'is-active' : ''} onClick={() => setMode('quick')}>
+              <SlidersHorizontal size={14} /> Quick CMS Edit
+            </button>
+            {codeAgentEnabled && (
+              <button type="button" className={mode === 'code' ? 'is-active' : ''} onClick={() => setMode('code')}>
+                <Code2 size={14} /> Code Change
+              </button>
+            )}
+          </nav>
+
+          {codeAgentEnabled && mode === 'code' ? <DeveloperAgentPanel /> : (
           <div className="agent-body">
             {railOpen && (
               <aside className="agent-rail" aria-label="Saved conversations">
@@ -345,6 +363,7 @@ export default function AgentPanel({ activePage, content, fields, presentation, 
               </form>
             </div>
           </div>
+          )}
         </section>
       )}
 
