@@ -52,6 +52,7 @@ Create a GitHub App installed only on `Ashhadk7/Paradigm-Website` with:
 - Repository contents: Read and write
 - Pull requests: Read and write
 - Checks: Read-only
+- Commit statuses: Read-only
 - Metadata: Read-only
 
 Record the App ID, installation ID, and generated private key as Vercel

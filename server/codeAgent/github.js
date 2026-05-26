@@ -184,18 +184,28 @@ export async function createPullRequestForPlan(taskId, prompt, summary, changes,
 
 export async function loadChecks(headSha) {
   const token = await getToken();
-  const response = await requestGitHub(repoPath(`/commits/${headSha}/check-runs?per_page=100`), { token });
+  const [response, combinedStatus] = await Promise.all([
+    requestGitHub(repoPath(`/commits/${headSha}/check-runs?per_page=100`), { token }),
+    requestGitHub(repoPath(`/commits/${headSha}/status`), { token }),
+  ]);
   const checks = response.check_runs.map(check => ({
     name: check.name,
     status: check.status,
     conclusion: check.conclusion,
     url: check.details_url,
   }));
+  const statuses = combinedStatus.statuses.map(status => ({
+    name: status.context,
+    status: status.state === 'pending' ? 'in_progress' : 'completed',
+    conclusion: status.state === 'success' ? 'success' : status.state === 'pending' ? null : 'failure',
+    url: status.target_url,
+  }));
+  const allChecks = [...checks, ...statuses];
   const validation = checks.find(check => check.name.toLowerCase().includes('build and lint'));
-  const deployment = checks.find(check => /vercel/i.test(check.name));
-  const failed = checks.some(check => ['failure', 'cancelled', 'timed_out', 'action_required'].includes(check.conclusion));
+  const deployment = allChecks.find(check => /vercel/i.test(check.name));
+  const failed = allChecks.some(check => ['failure', 'cancelled', 'timed_out', 'action_required'].includes(check.conclusion));
   const ready = Boolean(validation?.conclusion === 'success' && deployment?.conclusion === 'success' && !failed);
-  return { checks, ready, previewUrl: deployment?.url || null };
+  return { checks: allChecks, ready, previewUrl: deployment?.url || null };
 }
 
 export async function mergePullRequest(number, title) {
