@@ -45,7 +45,7 @@ function formatDate(value) {
 }
 
 export default function AgentPanel({ activePage, content, fields, presentation, saving, onApply, onRestore }) {
-  const codeAgentEnabled = import.meta.env.VITE_ENABLE_CODE_AGENT === 'true';
+  const codeAgentEnabled = import.meta.env.VITE_ENABLE_CODE_AGENT !== 'false';
   const [open, setOpen] = useState(false);
   const [railOpen, setRailOpen] = useState(true);
   const [mode, setMode] = useState('quick');
