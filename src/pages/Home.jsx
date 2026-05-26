@@ -4,6 +4,7 @@ import HeroSection from '../components/HeroSection';
 import ProofBlock from '../components/ProofBlock';
 import CTAStrip from '../components/CTAStrip';
 import { useContent } from '../lib/useContent';
+import { usePresentation } from '../lib/usePresentation';
 
 function Stat({ value, label }) {
   return (
@@ -98,6 +99,7 @@ function AnimatedOrbit() {
 
 export default function Home() {
   const { content: cms } = useContent('home');
+  const presentation = usePresentation('home');
 
   const c = {
     // Hero
@@ -147,6 +149,7 @@ export default function Home() {
         eyebrow={c.hero_eyebrow}
         headline={c.hero_headline}
         sub={c.hero_sub}
+        appearance={presentation}
 
         ctas={[
           { label: 'For Advisors', to: '/advisors', variant: 'gold' },
@@ -155,7 +158,7 @@ export default function Home() {
         ]}
       />
 
-      <section className="home-proof-band">
+      <section className={`home-proof-band home-proof-band--${presentation.trust_band_density}`}>
         <div className="home-proof-inner">
           <Stat value={c.trust_stat_1_value} label={c.trust_stat_1_label} />
           <Stat value={c.trust_stat_2_value} label={c.trust_stat_2_label} />

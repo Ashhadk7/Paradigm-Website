@@ -1,9 +1,32 @@
 import { useState, useEffect } from 'react';
-import { CheckCircle2, FileText, Image as ImageIcon, LogOut, Save } from 'lucide-react';
+import { AlertCircle, CheckCircle2, FileText, Image as ImageIcon, LogOut, Save } from 'lucide-react';
+import { HOME_PRESENTATION_CONTROLS, SITE_PRESENTATION_CONTROLS, normalizePresentation } from '../../lib/presentationSchema';
 import { supabase } from '../../lib/supabase';
 import { publishContentUpdate } from '../../lib/useContent';
+import { publishPresentationUpdate } from '../../lib/usePresentation';
+import AgentPanel from './components/AgentPanel';
 
 const PAGES = [
+  {
+    key: 'site',
+    label: 'Site Shell',
+    fields: [
+      { name: 'brand_name', label: 'Brand Name', type: 'text' },
+      { name: 'brand_descriptor', label: 'Brand Descriptor', type: 'text' },
+      { name: 'nav_institutions', label: 'Navigation Institutions Label', type: 'text' },
+      { name: 'nav_process', label: 'Navigation Process Label', type: 'text' },
+      { name: 'nav_about', label: 'Navigation About Label', type: 'text' },
+      { name: 'nav_contact', label: 'Navigation Contact Label', type: 'text' },
+      { name: 'footer_strategies', label: 'Footer Strategies Label', type: 'text' },
+      { name: 'footer_process', label: 'Footer Process Label', type: 'text' },
+      { name: 'footer_team', label: 'Footer Team Label', type: 'text' },
+      { name: 'footer_legal', label: 'Footer Legal Label', type: 'text' },
+      { name: 'footer_contact', label: 'Footer Contact Label', type: 'text' },
+      { name: 'footer_copyright', label: 'Footer Copyright', type: 'text' },
+      { name: 'direct_email', label: 'Direct Email', type: 'text' },
+      { name: 'direct_phone', label: 'Direct Phone', type: 'text' },
+    ],
+  },
   {
     key: 'home',
     label: 'Home',
@@ -303,6 +326,20 @@ const HOME_SECTIONS = [
 ];
 
 const PAGE_SECTIONS = {
+  site: [
+    {
+      number: '01',
+      title: 'Brand and Navigation',
+      description: 'Shared navigation identity and public route labels.',
+      fields: ['brand_name', 'brand_descriptor', 'nav_institutions', 'nav_process', 'nav_about', 'nav_contact'],
+    },
+    {
+      number: '02',
+      title: 'Footer',
+      description: 'Shared footer labels, contact details, and copyright.',
+      fields: ['footer_strategies', 'footer_process', 'footer_team', 'footer_legal', 'footer_contact', 'footer_copyright', 'direct_email', 'direct_phone'],
+    },
+  ],
   advisors: [
     {
       number: '01',
@@ -609,6 +646,22 @@ const PAGE_SECTIONS = {
 };
 
 const PAGE_DEFAULTS = {
+  site: {
+    brand_name: 'PARADIGM',
+    brand_descriptor: 'Asset Management',
+    nav_institutions: 'For Institutions',
+    nav_process: 'Our Process',
+    nav_about: 'About',
+    nav_contact: 'Contact',
+    footer_strategies: 'Strategies',
+    footer_process: 'Process',
+    footer_team: 'Team',
+    footer_legal: 'Legal',
+    footer_contact: 'Contact',
+    footer_copyright: '© 2026 Paradigm Asset Management Co. LLC',
+    direct_email: 'jef@paradigmasset.com',
+    direct_phone: '212.771.6100',
+  },
   advisors: {
     hero_eyebrow: "For Wealth Advisors & Independent RIAs",
     hero_headline: "Your clients are paying active management fees. Most of that capital is locked inside a single strategy's approach. There is a different way to invest it.",
@@ -802,8 +855,10 @@ export default function AdminDashboard({ onLogout }) {
     return PAGES.some(p => p.key === hashPage) ? hashPage : 'home';
   });
   const [content, setContent] = useState({});
+  const [presentation, setPresentation] = useState(() => normalizePresentation('home'));
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState('');
   const [loading, setLoading] = useState(true);
   const [activeSectionId, setActiveSectionId] = useState('');
 
@@ -856,14 +911,25 @@ export default function AdminDashboard({ onLogout }) {
     Promise.resolve().then(async () => {
       setLoading(true);
       setSaved(false);
-      const { data } = await supabase
-        .from('page_content')
-        .select('content')
-        .eq('page_key', activePage)
-        .single();
+      setSaveError('');
+      const [contentResult, presentationResult] = await Promise.all([
+        supabase
+          .from('page_content')
+          .select('content')
+          .eq('page_key', activePage)
+          .single(),
+        ['home', 'site'].includes(activePage)
+          ? supabase
+              .from('page_presentation')
+              .select('settings')
+              .eq('page_key', activePage)
+              .maybeSingle()
+          : Promise.resolve({ data: null }),
+      ]);
 
       if (!cancelled) {
-        setContent({ ...(PAGE_DEFAULTS[activePage] || {}), ...(data?.content || {}) });
+        setContent({ ...(PAGE_DEFAULTS[activePage] || {}), ...(contentResult.data?.content || {}) });
+        setPresentation(normalizePresentation(activePage, presentationResult.data?.settings));
         setLoading(false);
       }
     });
@@ -910,23 +976,143 @@ export default function AdminDashboard({ onLogout }) {
   function updateField(name, value) {
     setContent(prev => ({ ...prev, [name]: value }));
     setSaved(false);
+    setSaveError('');
+  }
+
+  function updatePresentationSetting(name, value) {
+    setPresentation(prev => normalizePresentation(activePage, { ...prev, [name]: value }));
+    setSaved(false);
+    setSaveError('');
   }
 
   async function handleSave() {
     setSaving(true);
-    const { error } = await supabase
-      .from('page_content')
-      .upsert({
-        page_key: activePage,
-        content,
-        updated_at: new Date().toISOString(),
-      }, { onConflict: 'page_key' });
+    setSaveError('');
+    const operations = [
+      supabase.rpc('save_page_content', {
+        p_page_key: activePage,
+        p_content: content,
+      }),
+    ];
+
+    if (['home', 'site'].includes(activePage)) {
+      operations.push(supabase.rpc('save_page_presentation', {
+        p_page_key: activePage,
+        p_settings: presentation,
+      }));
+    }
+
+    const results = await Promise.all(operations);
+    const error = results.find(result => result.error)?.error;
 
     if (!error) {
       publishContentUpdate(activePage, content);
+      if (['home', 'site'].includes(activePage)) {
+        publishPresentationUpdate(activePage, presentation);
+      }
       setSaved(true);
+    } else {
+      setSaveError('Save failed. Your account may not have CMS publishing access.');
     }
     setSaving(false);
+  }
+
+  async function applyAgentProposal(proposal) {
+    if (!proposal || proposal.pageKey !== activePage || (!proposal.content && !proposal.settings)) return false;
+
+    setSaving(true);
+    setSaveError('');
+    const nextContent = proposal.content ? { ...proposal.content } : null;
+    const nextPresentation = ['home', 'site'].includes(activePage) && proposal.settings
+      ? normalizePresentation(activePage, proposal.settings)
+      : null;
+    const operations = [];
+
+    if (nextContent) {
+      operations.push(supabase.rpc('save_page_content', {
+        p_page_key: activePage,
+        p_content: nextContent,
+      }));
+    }
+
+    if (nextPresentation) {
+      operations.push(supabase.rpc('save_page_presentation', {
+        p_page_key: activePage,
+        p_settings: nextPresentation,
+      }));
+    }
+
+    const results = await Promise.all(operations);
+    const error = results.find(result => result.error)?.error;
+
+    if (error) {
+      setSaveError('Assistant change could not be published. Verify CMS publishing access.');
+      setSaving(false);
+      return false;
+    }
+
+    if (nextContent) {
+      setContent(nextContent);
+      publishContentUpdate(activePage, nextContent);
+    }
+    if (nextPresentation) {
+      setPresentation(nextPresentation);
+      publishPresentationUpdate(activePage, nextPresentation);
+    }
+    setSaved(true);
+    setSaving(false);
+    return true;
+  }
+
+  async function restoreAgentCheckpoint(checkpoint) {
+    setSaving(true);
+    setSaveError('');
+    const restoredContent = checkpoint?.content ? { ...checkpoint.content } : null;
+    const restoredPresentation = ['home', 'site'].includes(activePage) && checkpoint?.settings
+      ? normalizePresentation(activePage, checkpoint.settings)
+      : null;
+    const operations = [];
+
+    if (restoredContent) {
+      operations.push(supabase.rpc('save_page_content', {
+        p_page_key: activePage,
+        p_content: restoredContent,
+      }));
+    }
+
+    if (restoredPresentation) {
+      operations.push(supabase.rpc('save_page_presentation', {
+        p_page_key: activePage,
+        p_settings: restoredPresentation,
+      }));
+    }
+
+    if (!operations.length) {
+      setSaveError('This saved request has no restorable checkpoint.');
+      setSaving(false);
+      return false;
+    }
+
+    const results = await Promise.all(operations);
+    const error = results.find(result => result.error)?.error;
+
+    if (error) {
+      setSaveError('The previous content or appearance state could not be restored. Verify CMS publishing access.');
+      setSaving(false);
+      return false;
+    }
+
+    if (restoredContent) {
+      setContent(restoredContent);
+      publishContentUpdate(activePage, restoredContent);
+    }
+    if (restoredPresentation) {
+      setPresentation(restoredPresentation);
+      publishPresentationUpdate(activePage, restoredPresentation);
+    }
+    setSaved(true);
+    setSaving(false);
+    return true;
   }
 
   async function handleImageUpload(fieldName, file) {
@@ -1061,6 +1247,7 @@ export default function AdminDashboard({ onLogout }) {
               </button>
             ))}
           </div>
+
         </aside>
 
         <div style={styles.sectionStack}>
@@ -1071,6 +1258,37 @@ export default function AdminDashboard({ onLogout }) {
             </div>
             <div style={styles.homeIntroRule} />
           </div>
+
+          <section style={styles.editorSection}>
+            <div style={styles.sectionHeader}>
+              <span style={styles.sectionNumber}>UI</span>
+              <div style={styles.sectionHeaderCopy}>
+                <p style={styles.sectionEyebrow}>Safe Appearance Controls</p>
+                <h2 style={styles.sectionTitle}>Visual layout</h2>
+                <p style={styles.sectionDescription}>
+                  Approved spacing and typography settings that can later be operated by the AI assistant.
+                </p>
+              </div>
+              <span style={styles.sectionCount}>{HOME_PRESENTATION_CONTROLS.length} controls</span>
+            </div>
+            <div style={styles.appearanceFields}>
+              {HOME_PRESENTATION_CONTROLS.map(control => (
+                <label key={control.name} style={styles.appearanceField}>
+                  <span style={styles.label}>{control.label}</span>
+                  <span style={styles.appearanceHelp}>{control.description}</span>
+                  <select
+                    value={presentation[control.name]}
+                    onChange={event => updatePresentationSetting(control.name, event.target.value)}
+                    style={styles.select}
+                  >
+                    {control.options.map(option => (
+                      <option key={option.value} value={option.value}>{option.label}</option>
+                    ))}
+                  </select>
+                </label>
+              ))}
+            </div>
+          </section>
 
           {HOME_SECTIONS.map(section => (
             <section
@@ -1158,6 +1376,37 @@ export default function AdminDashboard({ onLogout }) {
             <div style={styles.homeIntroRule} />
           </div>
 
+          {activePage === 'site' && (
+            <section style={styles.editorSection}>
+              <div style={styles.sectionHeader}>
+                <span style={styles.sectionNumber}>UI</span>
+                <div style={styles.sectionHeaderCopy}>
+                  <p style={styles.sectionEyebrow}>Safe Theme Controls</p>
+                  <h2 style={styles.sectionTitle}>Navigation and footer treatment</h2>
+                  <p style={styles.sectionDescription}>Approved palette choices for shared public-site chrome.</p>
+                </div>
+                <span style={styles.sectionCount}>{SITE_PRESENTATION_CONTROLS.length} controls</span>
+              </div>
+              <div style={styles.appearanceFields}>
+                {SITE_PRESENTATION_CONTROLS.map(control => (
+                  <label key={control.name} style={styles.appearanceField}>
+                    <span style={styles.label}>{control.label}</span>
+                    <span style={styles.appearanceHelp}>{control.description}</span>
+                    <select
+                      value={presentation[control.name]}
+                      onChange={event => updatePresentationSetting(control.name, event.target.value)}
+                      style={styles.select}
+                    >
+                      {control.options.map(option => (
+                        <option key={option.value} value={option.value}>{option.label}</option>
+                      ))}
+                    </select>
+                  </label>
+                ))}
+              </div>
+            </section>
+          )}
+
           {sections.map(section => (
             <section
               key={section.title}
@@ -1225,6 +1474,12 @@ export default function AdminDashboard({ onLogout }) {
             <h1 style={styles.pageTitle}>{page?.label}</h1>
           </div>
           <div style={styles.topBarActions}>
+            {saveError && (
+              <span style={styles.errorBadge}>
+                <AlertCircle size={14} />
+                {saveError}
+              </span>
+            )}
             {saved && (
               <span style={styles.savedBadge}>
                 <CheckCircle2 size={14} />
@@ -1248,6 +1503,17 @@ export default function AdminDashboard({ onLogout }) {
           )
         )}
       </main>
+
+      <AgentPanel
+        key={activePage}
+        activePage={activePage}
+        content={content}
+        fields={page?.fields || []}
+        presentation={presentation}
+        saving={saving}
+        onApply={applyAgentProposal}
+        onRestore={restoreAgentCheckpoint}
+      />
     </div>
   );
 }
@@ -1409,6 +1675,19 @@ const styles = {
     fontWeight: 600,
     color: '#27ae60',
     background: 'rgba(39,174,96,0.1)',
+    padding: '0.35rem 0.75rem',
+    borderRadius: '4px',
+  },
+  errorBadge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.35rem',
+    maxWidth: 300,
+    fontFamily: 'Inter, sans-serif',
+    fontSize: '0.72rem',
+    fontWeight: 600,
+    color: '#9f3126',
+    background: 'rgba(192,57,43,0.1)',
     padding: '0.35rem 0.75rem',
     borderRadius: '4px',
   },
@@ -1664,6 +1943,39 @@ const styles = {
     display: 'grid',
     gap: '1.05rem',
     padding: '1.35rem',
+  },
+  appearanceFields: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+    gap: '0.9rem',
+    padding: '1.35rem',
+  },
+  appearanceField: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.42rem',
+    padding: '0.9rem',
+    background: '#FBFAF7',
+    border: '1px solid rgba(52,65,109,0.07)',
+    borderRadius: 4,
+  },
+  appearanceHelp: {
+    minHeight: 40,
+    fontFamily: 'Inter, sans-serif',
+    fontSize: '0.74rem',
+    lineHeight: 1.45,
+    color: '#637890',
+  },
+  select: {
+    width: '100%',
+    padding: '0.72rem 0.78rem',
+    fontSize: '0.88rem',
+    fontFamily: 'Inter, sans-serif',
+    border: '1px solid rgba(52,65,109,0.16)',
+    borderRadius: 3,
+    outline: 'none',
+    background: '#ffffff',
+    color: '#2C2C2C',
   },
   compactSectionFields: {
     display: 'grid',

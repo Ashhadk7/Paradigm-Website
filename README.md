@@ -91,6 +91,26 @@ Core capabilities:
 
 The CMS uses a `page_content` table in Supabase. Each page stores a JSON `content` object keyed by `page_key`.
 
+CMS publishing is restricted through a `cms_admins` allowlist. Saves use the
+`save_page_content` database function so the content mutation and its
+`cms_change_log` audit record succeed or fail together.
+
+Allowlisted appearance controls are stored separately in `page_presentation`.
+The homepage supports hero/trust-band layout controls. The shared `Site Shell`
+surface supports navigation/footer tone and accent selections. Unsupported
+settings are rejected in the database.
+
+The assistant converts quoted copy replacement requests on any configured CMS
+page into reviewable content changes, and converts supported Home/Site Shell
+style requests into reviewable presentation changes. It publishes only after
+administrator approval. It does not yet call a model or rewrite source code.
+
+The assistant is opened from a prominent lower-right Design Assistant control.
+It provides saved conversations, a review-first edit timeline, and a restore
+action under every published request. Each restore publishes the content and
+presentation snapshot from immediately before that request and marks later
+active stages as reverted.
+
 Implemented CMS pages:
 
 - Home
@@ -99,6 +119,7 @@ Implemented CMS pages:
 - For Institutions
 - Our Process
 - About
+- Site Shell (shared navigation and footer)
 
 The admin dashboard groups fields by the same section order used on the public website. Section navigation highlights the section currently in view and scrolls within the dashboard without changing section-specific URL hashes.
 
@@ -117,11 +138,42 @@ The Supabase schema is provided in:
 supabase-setup.sql
 ```
 
+For an existing Supabase project that already has `page_content`, apply:
+
+```text
+supabase/migrations/202605250001_secure_cms_foundation.sql
+supabase/migrations/202605250002_agent_chat_sessions.sql
+supabase/migrations/202605250003_agent_content_checkpoints.sql
+supabase/migrations/202605250004_site_shell_controls.sql
+```
+
+The migration automatically authorizes the existing
+`admin@paradigmasset.com` Auth user if that account already exists. If the
+account is created after the migration, authorize it once from the SQL
+Editor:
+
+```sql
+insert into public.cms_admins (user_id)
+select id
+from auth.users
+where lower(email) = lower('admin@paradigmasset.com')
+on conflict (user_id) do nothing;
+```
+
 Required environment variables:
 
 ```env
 VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+Only those public Supabase browser values go into the Vite app `.env`.
+OpenAI integration should be added through a server-side Supabase Edge
+Function; never expose an OpenAI key through a `VITE_*` variable. The intended
+request/validation flow is documented in:
+
+```text
+docs/openai-cms-assistant.md
 ```
 
 Image uploads use the Supabase storage bucket named:

@@ -1,12 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, ArrowUpRight } from 'lucide-react';
+import { resolveSitePalette } from '../lib/presentationSchema';
+import { useContent } from '../lib/useContent';
+import { usePresentation } from '../lib/usePresentation';
 
 const S = {
   nav: { fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', fontWeight: 700, letterSpacing: '0.08em', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s ease, background 0.2s ease', cursor: 'pointer', background: 'none', border: 'none', padding: '0.45rem 0.6rem', borderRadius: 3, display: 'flex', alignItems: 'center', gap: '0.25rem' },
 };
 
 export default function Navbar() {
+  const { content: cms } = useContent('site');
+  const palette = resolveSitePalette(usePresentation('site'));
+  const c = {
+    brand_name: cms?.brand_name || 'PARADIGM',
+    brand_descriptor: cms?.brand_descriptor || 'Asset Management',
+    nav_institutions: cms?.nav_institutions || 'For Institutions',
+    nav_process: cms?.nav_process || 'Our Process',
+    nav_about: cms?.nav_about || 'About',
+    nav_contact: cms?.nav_contact || 'Contact',
+    direct_email: cms?.direct_email || 'jef@paradigmasset.com',
+    direct_phone: cms?.direct_phone || '212.771.6100',
+  };
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropOpen, setDropOpen] = useState(false);
@@ -59,21 +74,21 @@ export default function Navbar() {
 
   const linkColor = (path) => {
     const active = location.pathname === path || (path === '/advisors' && ['/advisors', '/familyoffice'].includes(location.pathname));
-    return active ? '#C4A25B' : '#F5F3EF';
+    return active ? palette.accent : '#F5F3EF';
   };
 
   const rightLinks = [
-    { label: 'For Institutions', path: '/institutions' },
-    { label: 'Our Process', path: '/process' },
-    { label: 'About', path: '/about' },
-    { label: 'Contact', path: '/contact' },
+    { label: c.nav_institutions, path: '/institutions' },
+    { label: c.nav_process, path: '/process' },
+    { label: c.nav_about, path: '/about' },
+    { label: c.nav_contact, path: '/contact' },
   ];
 
   const mainMobileLinks = [
-    { label: 'For Institutions', path: '/institutions' },
-    { label: 'Our Process', path: '/process' },
-    { label: 'About', path: '/about' },
-    { label: 'Contact', path: '/contact' },
+    { label: c.nav_institutions, path: '/institutions' },
+    { label: c.nav_process, path: '/process' },
+    { label: c.nav_about, path: '/about' },
+    { label: c.nav_contact, path: '/contact' },
   ];
 
   return (
@@ -89,7 +104,7 @@ export default function Navbar() {
           maxWidth: scrolled ? '1320px' : '1440px',
           transform: 'translateX(-50%)',
           zIndex: 100,
-          background: mobileOpen ? 'rgba(232,228,220,0.65)' : 'rgba(26,34,64,0.82)',
+          background: mobileOpen ? 'rgba(232,228,220,0.65)' : palette.tone,
           backdropFilter: mobileOpen ? 'blur(24px) saturate(1.4)' : 'blur(20px)',
           WebkitBackdropFilter: mobileOpen ? 'blur(24px) saturate(1.4)' : 'blur(20px)',
           border: mobileOpen ? '1px solid rgba(196,162,91,0.18)' : '1px solid rgba(245,243,239,0.12)',
@@ -112,7 +127,7 @@ export default function Navbar() {
             <div style={{
               width: scrolled ? 30 : 34,
               height: scrolled ? 30 : 34,
-              background: '#C4A25B',
+              background: palette.accent,
               borderRadius: 3,
               display: 'flex',
               alignItems: 'center',
@@ -123,8 +138,8 @@ export default function Navbar() {
               <span style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '0.95rem' : '1.05rem', color: '#34416D', lineHeight: 1, transition: 'font-size 0.3s' }}>P</span>
             </div>
             <div>
-              <div style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '0.85rem' : '0.9375rem', letterSpacing: '0.06em', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', lineHeight: 1, transition: 'color 0.3s, font-size 0.3s' }}>PARADIGM</div>
-              <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.5rem', letterSpacing: '0.18em', fontWeight: 600, textTransform: 'uppercase', color: mobileOpen ? 'rgba(44,44,44,0.5)' : 'rgba(245,243,239,0.55)', transition: 'color 0.3s', marginTop: 1 }}>Asset Management</div>
+              <div style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '0.85rem' : '0.9375rem', letterSpacing: '0.06em', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', lineHeight: 1, transition: 'color 0.3s, font-size 0.3s' }}>{c.brand_name}</div>
+              <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.5rem', letterSpacing: '0.18em', fontWeight: 600, textTransform: 'uppercase', color: mobileOpen ? 'rgba(44,44,44,0.5)' : 'rgba(245,243,239,0.55)', transition: 'color 0.3s', marginTop: 1 }}>{c.brand_descriptor}</div>
             </div>
           </Link>
 
@@ -159,10 +174,10 @@ export default function Navbar() {
                   border: '1px solid rgba(245,243,239,0.1)', minWidth: 180, overflow: 'hidden',
                   animation: 'fadeDown 0.18s ease',
                 }}>
-                  <Link to="/advisors" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '0.8125rem', fontWeight: 500, color: location.pathname === '/advisors' ? '#C4A25B' : '#F5F3EF', textDecoration: 'none', borderBottom: '1px solid rgba(245,243,239,0.08)', letterSpacing: '0.04em' }}>
+                  <Link to="/advisors" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '0.8125rem', fontWeight: 500, color: location.pathname === '/advisors' ? palette.accent : '#F5F3EF', textDecoration: 'none', borderBottom: '1px solid rgba(245,243,239,0.08)', letterSpacing: '0.04em' }}>
                     Wealth Advisors
                   </Link>
-                  <Link to="/familyoffice" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '0.8125rem', fontWeight: 500, color: location.pathname === '/familyoffice' ? '#C4A25B' : '#F5F3EF', textDecoration: 'none', letterSpacing: '0.04em' }}>
+                  <Link to="/familyoffice" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '0.8125rem', fontWeight: 500, color: location.pathname === '/familyoffice' ? palette.accent : '#F5F3EF', textDecoration: 'none', letterSpacing: '0.04em' }}>
                     Family Offices
                   </Link>
                 </div>
@@ -200,7 +215,7 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       <div style={{
         position: 'fixed', inset: 0, zIndex: 99,
-        background: '#1a2240',
+        background: palette.tone,
         transform: mobileOpen ? 'translateX(0)' : 'translateX(100%)',
         transition: 'transform 0.38s cubic-bezier(0.32,0.72,0,1)',
         willChange: 'transform',
@@ -216,7 +231,7 @@ export default function Navbar() {
             fontFamily: 'Source Serif 4, serif',
             fontSize: '1.625rem',
             fontWeight: 600,
-            color: location.pathname === '/' ? '#C4A25B' : '#F5F3EF',
+            color: location.pathname === '/' ? palette.accent : '#F5F3EF',
             textDecoration: 'none',
             padding: '1rem 0',
             borderBottom: '1px solid rgba(255,255,255,0.08)',
@@ -224,7 +239,7 @@ export default function Navbar() {
           }}
         >
           Home
-          <ArrowUpRight size={18} style={{ color: '#C4A25B' }} />
+          <ArrowUpRight size={18} style={{ color: palette.accent }} />
         </Link>
 
         {/* For Advisors — collapsible parent */}
@@ -234,7 +249,7 @@ export default function Navbar() {
             fontFamily: 'Source Serif 4, serif',
             fontSize: '1.625rem',
             fontWeight: 600,
-            color: ['/advisors', '/familyoffice'].includes(location.pathname) ? '#C4A25B' : '#F5F3EF',
+            color: ['/advisors', '/familyoffice'].includes(location.pathname) ? palette.accent : '#F5F3EF',
             textDecoration: 'none',
             padding: '1rem 0',
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -244,7 +259,7 @@ export default function Navbar() {
           }}
         >
           For Advisors
-          <ChevronDown size={20} style={{ color: '#C4A25B', transition: 'transform 0.25s', transform: mobileAdvisorOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+          <ChevronDown size={20} style={{ color: palette.accent, transition: 'transform 0.25s', transform: mobileAdvisorOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
         </button>
 
         {mobileAdvisorOpen && (
@@ -258,7 +273,7 @@ export default function Navbar() {
                   fontFamily: 'Inter, sans-serif',
                   fontSize: '1.1rem',
                   fontWeight: 500,
-                  color: location.pathname === l.path ? '#C4A25B' : 'rgba(245,243,239,0.6)',
+                  color: location.pathname === l.path ? palette.accent : 'rgba(245,243,239,0.6)',
                   textDecoration: 'none',
                   padding: '0.875rem 0',
                   paddingLeft: '1.5rem',
@@ -267,7 +282,7 @@ export default function Navbar() {
                 }}
               >
                 {l.label}
-                <ArrowUpRight size={16} style={{ color: '#C4A25B', opacity: 0.5 }} />
+                <ArrowUpRight size={16} style={{ color: palette.accent, opacity: 0.5 }} />
               </Link>
             ))}
           </div>
@@ -280,7 +295,7 @@ export default function Navbar() {
               fontFamily: 'Source Serif 4, serif',
               fontSize: '1.625rem',
               fontWeight: 600,
-              color: location.pathname === l.path ? '#C4A25B' : '#F5F3EF',
+              color: location.pathname === l.path ? palette.accent : '#F5F3EF',
               textDecoration: 'none',
               padding: '1rem 0',
               borderBottom: '1px solid rgba(255,255,255,0.08)',
@@ -288,14 +303,14 @@ export default function Navbar() {
             }}
           >
             {l.label}
-            <ArrowUpRight size={18} style={{ color: '#C4A25B' }} />
+            <ArrowUpRight size={18} style={{ color: palette.accent }} />
           </Link>
         ))}
 
         <div style={{ marginTop: '2rem', paddingTop: '1.25rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
           <p style={{ fontFamily: 'Inter', fontSize: '0.7rem', color: 'rgba(245,243,239,0.4)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Direct Contact</p>
-          <a href="mailto:jef@paradigmasset.com" style={{ display: 'block', fontFamily: 'Inter', fontSize: '0.9375rem', color: '#C4A25B', textDecoration: 'none', marginBottom: '0.25rem' }}>jef@paradigmasset.com</a>
-          <a href="tel:2127716100" style={{ display: 'block', fontFamily: 'Inter', fontSize: '0.9375rem', color: 'rgba(245,243,239,0.6)', textDecoration: 'none', marginBottom: '0.15rem' }}>212.771.6100</a>
+          <a href={`mailto:${c.direct_email}`} style={{ display: 'block', fontFamily: 'Inter', fontSize: '0.9375rem', color: palette.accent, textDecoration: 'none', marginBottom: '0.25rem' }}>{c.direct_email}</a>
+          <a href={`tel:${c.direct_phone.replace(/[^+\d]/g, '')}`} style={{ display: 'block', fontFamily: 'Inter', fontSize: '0.9375rem', color: 'rgba(245,243,239,0.6)', textDecoration: 'none', marginBottom: '0.15rem' }}>{c.direct_phone}</a>
           <a href="tel:9179913348" style={{ display: 'block', fontFamily: 'Inter', fontSize: '0.8125rem', color: 'rgba(245,243,239,0.4)', textDecoration: 'none' }}>917-991-3348</a>
         </div>
       </div>

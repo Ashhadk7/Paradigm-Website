@@ -3,7 +3,7 @@ import { supabase } from '../../lib/supabase';
 
 const ADMIN_EMAIL = 'admin@paradigmasset.com';
 
-export default function AdminLogin({ onLogin }) {
+export default function AdminLogin({ onLogin, notice = '' }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -48,7 +48,7 @@ export default function AdminLogin({ onLogin }) {
             style={styles.input}
             autoFocus
           />
-          {error && <p style={styles.error}>{error}</p>}
+          {(error || notice) && <p style={styles.error}>{error || notice}</p>}
           <button type="submit" disabled={loading} style={styles.button}>
             {loading ? 'Signing in...' : 'Sign In'}
           </button>

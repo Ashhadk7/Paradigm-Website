@@ -17,7 +17,7 @@ function splitHeroSubcopy(text) {
   return text.includes('\n') ? text.split('\n') : [text];
 }
 
-export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal = false, compact = false }) {
+export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal = false, compact = false, appearance }) {
   const headlineLines = splitHeroCopy(headline);
   const subLines = splitHeroSubcopy(sub);
   const headlineDelay = 0.3;
@@ -27,18 +27,18 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
 
   return (
     <section
-      className="hero-section"
-      style={{
-        paddingTop: minimal ? '8rem' : '5rem',
-        paddingBottom: minimal ? '4rem' : '3rem',
-      }}
+      className={`hero-section ${appearance?.hero_density ? `hero-section--${appearance.hero_density}` : ''}`}
+      style={minimal ? { paddingTop: '8rem', paddingBottom: '4rem' } : undefined}
     >
       <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>
         <GLSLHills speed={0.3} cameraZ={130} />
       </div>
 
       <div className="hero-inner">
-        <div style={{ maxWidth: compact ? 720 : 760, position: 'relative', zIndex: 2 }}>
+        <div
+          className={appearance?.hero_headline_width ? `hero-copy--${appearance.hero_headline_width}` : 'hero-copy--standard'}
+          style={{ maxWidth: compact ? 720 : undefined, position: 'relative', zIndex: 2 }}
+        >
           {eyebrow && (
             <motion.p
               className="eyebrow"
@@ -52,7 +52,7 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
           )}
 
           <h1
-            className={compact ? 'display-headline-compact' : 'display-headline'}
+            className={`${compact ? 'display-headline-compact' : 'display-headline'} ${appearance?.hero_headline_scale ? `display-headline-size--${appearance.hero_headline_scale}` : ''}`}
             style={{ marginBottom: compact ? '1rem' : '1.35rem' }}
           >
             {headlineLines.map((line, i) => (
