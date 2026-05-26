@@ -6,7 +6,7 @@ import { useContent } from '../lib/useContent';
 import { usePresentation } from '../lib/usePresentation';
 
 const S = {
-  nav: { fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', fontWeight: 700, letterSpacing: '0.08em', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s ease, background 0.2s ease', cursor: 'pointer', background: 'none', border: 'none', padding: '0.45rem 0.6rem', borderRadius: 3, display: 'flex', alignItems: 'center', gap: '0.25rem' },
+  nav: { fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.08em', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s ease, background 0.2s ease', cursor: 'pointer', background: 'none', border: 'none', padding: '0.38rem 0.5rem', borderRadius: 3, display: 'flex', alignItems: 'center', gap: '0.25rem' },
 };
 
 export default function Navbar() {
@@ -88,7 +88,6 @@ export default function Navbar() {
     { label: c.nav_institutions, path: '/institutions' },
     { label: c.nav_process, path: '/process' },
     { label: c.nav_about, path: '/about' },
-    { label: c.nav_contact, path: '/contact' },
   ];
 
   return (
@@ -98,10 +97,10 @@ export default function Navbar() {
         className="floating-nav"
         style={{
           position: 'fixed',
-          top: scrolled ? '0.5rem' : '0.85rem',
+          top: scrolled ? '0.45rem' : '0.7rem',
           left: '50%',
-          width: scrolled ? '92%' : '96%',
-          maxWidth: scrolled ? '1320px' : '1440px',
+          width: scrolled ? '91%' : '95%',
+          maxWidth: scrolled ? '1280px' : '1400px',
           transform: 'translateX(-50%)',
           zIndex: 100,
           background: mobileOpen ? 'rgba(232,228,220,0.65)' : palette.tone,
@@ -114,7 +113,7 @@ export default function Navbar() {
             : scrolled
               ? '0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px rgba(196,162,91,0.08)'
               : '0 4px 24px rgba(0,0,0,0.18)',
-          padding: scrolled ? '0.35rem 1.25rem' : '0.55rem 1.25rem',
+          padding: scrolled ? '0.28rem 1rem' : '0.42rem 1rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -123,10 +122,10 @@ export default function Navbar() {
         }}
       >
           {/* Logo */}
-          <Link to="/" onClick={closeMenus} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', flexShrink: 0 }}>
+          <Link to="/" onClick={closeMenus} style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', textDecoration: 'none', flexShrink: 0 }}>
             <div style={{
-              width: scrolled ? 30 : 34,
-              height: scrolled ? 30 : 34,
+              width: scrolled ? 28 : 32,
+              height: scrolled ? 28 : 32,
               background: palette.accent,
               borderRadius: 3,
               display: 'flex',
@@ -135,16 +134,16 @@ export default function Navbar() {
               flexShrink: 0,
               transition: 'width 0.3s, height 0.3s',
             }}>
-              <span style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '0.95rem' : '1.05rem', color: '#34416D', lineHeight: 1, transition: 'font-size 0.3s' }}>P</span>
+              <span style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '0.88rem' : '1rem', color: '#34416D', lineHeight: 1, transition: 'font-size 0.3s' }}>P</span>
             </div>
             <div>
-              <div style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '0.85rem' : '0.9375rem', letterSpacing: '0.06em', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', lineHeight: 1, transition: 'color 0.3s, font-size 0.3s' }}>{c.brand_name}</div>
-              <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.5rem', letterSpacing: '0.18em', fontWeight: 600, textTransform: 'uppercase', color: mobileOpen ? 'rgba(44,44,44,0.5)' : 'rgba(245,243,239,0.55)', transition: 'color 0.3s', marginTop: 1 }}>{c.brand_descriptor}</div>
+              <div style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '0.8rem' : '0.9rem', letterSpacing: '0.06em', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', lineHeight: 1, transition: 'color 0.3s, font-size 0.3s' }}>{c.brand_name}</div>
+              <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.46rem', letterSpacing: '0.18em', fontWeight: 600, textTransform: 'uppercase', color: mobileOpen ? 'rgba(44,44,44,0.5)' : 'rgba(245,243,239,0.55)', transition: 'color 0.3s', marginTop: 1 }}>{c.brand_descriptor}</div>
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="desktop-nav" style={{ alignItems: 'center', gap: '0.15rem' }}>
+          <div className="desktop-nav" style={{ alignItems: 'center', gap: '0.1rem' }}>
             {/* Home — first item */}
             <Link
               to="/"
@@ -185,16 +184,42 @@ export default function Navbar() {
             </div>
 
             {rightLinks.map(l => (
-              <Link
-                key={l.path}
-                to={l.path}
-                onClick={closeMenus}
-                style={{ ...S.nav, color: linkColor(l.path) }}
-                onMouseEnter={e => e.currentTarget.style.background = 'rgba(245,243,239,0.1)'}
-                onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-              >
-                {l.label}
-              </Link>
+              l.path === '/contact' ? (
+                <Link
+                  key={l.path}
+                  to={l.path}
+                  onClick={closeMenus}
+                  style={{
+                    ...S.nav,
+                    color: '#34416D',
+                    background: palette.accent,
+                    border: `1px solid ${palette.accent}`,
+                    padding: '0.48rem 0.8rem',
+                    boxShadow: '0 6px 18px rgba(196,162,91,0.22)',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.background = '#F5F3EF';
+                    e.currentTarget.style.color = '#34416D';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background = palette.accent;
+                    e.currentTarget.style.color = '#34416D';
+                  }}
+                >
+                  {l.label}
+                </Link>
+              ) : (
+                <Link
+                  key={l.path}
+                  to={l.path}
+                  onClick={closeMenus}
+                  style={{ ...S.nav, color: linkColor(l.path) }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(245,243,239,0.1)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                >
+                  {l.label}
+                </Link>
+              )
             ))}
           </div>
 
@@ -202,10 +227,10 @@ export default function Navbar() {
           <button
             className="mobile-menu-toggle"
             onClick={() => setMobileOpen(o => !o)}
-            style={{ background: mobileOpen ? 'rgba(44,44,44,0.08)' : 'rgba(245,243,239,0.1)', border: mobileOpen ? '1px solid rgba(44,44,44,0.15)' : '1px solid rgba(245,243,239,0.15)', borderRadius: 50, cursor: 'pointer', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', padding: '0.4rem', alignItems: 'center', transition: 'all 0.3s' }}
+            style={{ background: mobileOpen ? 'rgba(44,44,44,0.08)' : 'rgba(245,243,239,0.1)', border: mobileOpen ? '1px solid rgba(44,44,44,0.15)' : '1px solid rgba(245,243,239,0.15)', borderRadius: 50, cursor: 'pointer', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', padding: '0.35rem', alignItems: 'center', transition: 'all 0.3s' }}
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
       </nav>
 
@@ -220,11 +245,32 @@ export default function Navbar() {
         transition: 'transform 0.38s cubic-bezier(0.32,0.72,0,1)',
         willChange: 'transform',
         display: 'flex', flexDirection: 'column',
-        paddingTop: '5.5rem', paddingLeft: '2rem', paddingRight: '2rem',
+        paddingTop: '5.25rem', paddingLeft: '2rem', paddingRight: '2rem',
         overflowY: 'auto',
         overscrollBehavior: 'contain',
         WebkitOverflowScrolling: 'touch',
       }}>
+        <Link to="/contact" onClick={closeMenus}
+          style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '0.85rem',
+            fontWeight: 800,
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            color: '#34416D',
+            background: palette.accent,
+            textDecoration: 'none',
+            padding: '0.95rem 1rem',
+            borderRadius: 4,
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+            marginBottom: '1.25rem',
+            boxShadow: '0 10px 28px rgba(196,162,91,0.22)',
+          }}
+        >
+          {c.nav_contact}
+          <ArrowUpRight size={18} style={{ color: '#34416D' }} />
+        </Link>
+
         {/* Home link */}
         <Link to="/" onClick={closeMenus}
           style={{
