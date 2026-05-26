@@ -138,6 +138,17 @@ The Supabase schema is provided in:
 supabase-setup.sql
 ```
 
+For a fresh Supabase project or Supabase Preview branch, migrations run in
+order and begin with the `page_content` foundation:
+
+```text
+supabase/migrations/202605250000_page_content_foundation.sql
+supabase/migrations/202605250001_secure_cms_foundation.sql
+supabase/migrations/202605250002_agent_chat_sessions.sql
+supabase/migrations/202605250003_agent_content_checkpoints.sql
+supabase/migrations/202605250004_site_shell_controls.sql
+```
+
 For an existing Supabase project that already has `page_content`, apply:
 
 ```text
