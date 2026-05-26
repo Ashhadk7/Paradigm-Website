@@ -78,4 +78,3 @@ $$;
 
 revoke all on function public.create_cms_code_change_request(text) from public;
 grant execute on function public.create_cms_code_change_request(text) to authenticated;
-
