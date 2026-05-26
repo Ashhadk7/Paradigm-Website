@@ -46,6 +46,8 @@ create policy "CMS admins can read audit log"
 
 drop policy if exists "Admin can update content" on public.page_content;
 drop policy if exists "Admin can insert content" on public.page_content;
+drop policy if exists "CMS admins can update content" on public.page_content;
+drop policy if exists "CMS admins can insert content" on public.page_content;
 
 create policy "CMS admins can update content"
   on public.page_content for update
