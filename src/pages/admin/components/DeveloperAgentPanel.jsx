@@ -285,17 +285,17 @@ export default function DeveloperAgentPanel({ railOpen }) {
                   <div className="developer-links">
                     {selectedTask.pull_request_url && (
                       <a href={selectedTask.pull_request_url} target="_blank" rel="noreferrer">
-                        Pull request <ExternalLink size={12} />
+                        Open pull request <ExternalLink size={12} />
                       </a>
                     )}
                     {selectedTask.revert_pull_request_url && (
                       <a href={selectedTask.revert_pull_request_url} target="_blank" rel="noreferrer">
-                        Rollback PR <ExternalLink size={12} />
+                        Open rollback PR <ExternalLink size={12} />
                       </a>
                     )}
                     {selectedTask.preview_url && (
                       <a href={selectedTask.preview_url} target="_blank" rel="noreferrer">
-                        Deployment details <ExternalLink size={12} />
+                        Open preview <ExternalLink size={12} />
                       </a>
                     )}
                   </div>

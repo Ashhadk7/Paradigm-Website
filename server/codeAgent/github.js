@@ -202,7 +202,16 @@ export async function loadChecks(headSha) {
   }));
   const allChecks = [...checks, ...statuses];
   const validation = checks.find(check => check.name.toLowerCase().includes('build and lint'));
-  const deployment = allChecks.find(check => /vercel/i.test(check.name));
+  const previewCandidates = allChecks.filter(check => {
+    if (!check.url) return false;
+    if (!/^https?:\/\//i.test(check.url)) return false;
+    if (/\/docs\//i.test(check.url)) return false;
+    return /vercel|preview|deployment/i.test(check.name) || /vercel\.app/i.test(check.url);
+  });
+  const deployment = previewCandidates.find(check => /vercel\.app/i.test(check.url))
+    || previewCandidates.find(check => /vercel/i.test(check.name))
+    || previewCandidates[0]
+    || null;
   const failed = allChecks.some(check => ['failure', 'cancelled', 'timed_out', 'action_required'].includes(check.conclusion));
   const ready = Boolean(validation?.conclusion === 'success' && deployment?.conclusion === 'success' && !failed);
   return { checks: allChecks, ready, previewUrl: deployment?.url || null };
