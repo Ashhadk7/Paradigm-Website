@@ -200,7 +200,7 @@ export default function AgentPanel({ activePage, content, fields, presentation, 
   return (
     <>
       {open && (
-        <section className={`agent-console ${mode === 'quick' && railOpen ? 'agent-console--rail' : ''}`} aria-label="Paradigm page assistant">
+        <section className={`agent-console ${railOpen ? 'agent-console--rail' : ''}`} aria-label="Paradigm page assistant">
           <header className="agent-header">
             <div className="agent-brand">
               <span className="agent-mark">P</span>
@@ -211,11 +211,9 @@ export default function AgentPanel({ activePage, content, fields, presentation, 
             </div>
             <div className="agent-header-actions">
               <span className="agent-secure"><ShieldCheck size={12} /> {mode === 'quick' ? 'Controlled edits' : 'Reviewed branches'}</span>
-              {mode === 'quick' && (
-                <button className="agent-quiet-action agent-rail-toggle" type="button" onClick={() => setRailOpen(value => !value)} aria-label={railOpen ? 'Hide history' : 'Show history'}>
-                  {railOpen ? '>>' : '<<'}
-                </button>
-              )}
+              <button className="agent-quiet-action agent-rail-toggle" type="button" onClick={() => setRailOpen(value => !value)} aria-label={railOpen ? 'Hide history' : 'Show history'}>
+                {railOpen ? '>>' : '<<'}
+              </button>
               <button className="agent-quiet-action" type="button" onClick={() => setOpen(false)} aria-label="Close assistant">
                 <X size={19} />
               </button>
@@ -233,7 +231,7 @@ export default function AgentPanel({ activePage, content, fields, presentation, 
             )}
           </nav>
 
-          {codeAgentEnabled && mode === 'code' ? <DeveloperAgentPanel /> : (
+          {codeAgentEnabled && mode === 'code' ? <DeveloperAgentPanel railOpen={railOpen} onRailToggle={() => setRailOpen(v => !v)} /> : (
           <div className="agent-body">
             {railOpen && (
               <aside className="agent-rail" aria-label="Saved conversations">

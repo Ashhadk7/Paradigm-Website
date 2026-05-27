@@ -1,5 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ArrowUp, CheckCircle2, ExternalLink, GitBranch, History, LoaderCircle, RefreshCw, RotateCcw, ShieldCheck, Sparkles, XCircle } from 'lucide-react';
+import {
+  ArrowUp,
+  CheckCircle2,
+  ExternalLink,
+  GitBranch,
+  History,
+  LoaderCircle,
+  RefreshCw,
+  RotateCcw,
+  ShieldCheck,
+  Sparkles,
+  XCircle,
+} from 'lucide-react';
 import {
   createCodeRevert,
   createCodeTask,
@@ -27,7 +39,7 @@ const STATUS_LABELS = {
 };
 
 function formatDate(value) {
-  return new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(new Date(value));
+  return new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric' }).format(new Date(value));
 }
 
 function Status({ task }) {
@@ -41,10 +53,9 @@ function Status({ task }) {
   );
 }
 
-export default function DeveloperAgentPanel() {
+export default function DeveloperAgentPanel({ railOpen, onRailToggle }) {
   const [tasks, setTasks] = useState([]);
   const [selectedTaskId, setSelectedTaskId] = useState('');
-  const [historyOpen, setHistoryOpen] = useState(true);
   const [prompt, setPrompt] = useState('');
   const [activeAction, setActiveAction] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -93,10 +104,6 @@ export default function DeveloperAgentPanel() {
     }
   }
 
-  async function restoreBeforeTask(taskId) {
-    await run(taskId, 'revert', createCodeRevert, 'Rollback preview created. Review it before merging.');
-  }
-
   async function submit(event) {
     event.preventDefault();
     if (prompt.trim().length < 10) return;
@@ -106,7 +113,6 @@ export default function DeveloperAgentPanel() {
       const task = await createCodeTask(prompt);
       replaceTask(task);
       setPrompt('');
-      setHistoryOpen(true);
       setNotice('Request saved. Approve generation when you are ready to create a review branch and preview.');
     } catch (error) {
       setNotice(error.message);
@@ -125,48 +131,47 @@ export default function DeveloperAgentPanel() {
   const canReject = selectedTask && !['generating', 'merged', 'reverted', 'rejected', 'merging', 'reverting'].includes(selectedTask.status);
 
   return (
-    <div className="developer-workspace">
-      <div className="developer-intro">
-        <div>
-          <span className="agent-page-tag">Repository workflow</span>
-          <strong>Website code changes</strong>
-          <p>Chat-driven website changes through GitHub pull requests, preview builds, admin approval, and rollback.</p>
-        </div>
-        <div className="developer-intro-actions">
-          <span className="developer-guard"><ShieldCheck size={13} /> Admin approval required</span>
-          <button type="button" className="developer-history-toggle" onClick={() => setHistoryOpen(value => !value)} aria-label={historyOpen ? 'Hide history' : 'Show history'}>
-            {historyOpen ? '>>' : '<<'}
+    <div className="agent-body">
+      {/* ── LEFT SIDEBAR ── mirrors agent-rail from Quick CMS */}
+      {railOpen && (
+        <aside className="agent-rail" aria-label="Code change history">
+          {/* New conversation button */}
+          <button
+            type="button"
+            className="agent-new"
+            onClick={() => { setSelectedTaskId(''); setPrompt(''); setNotice(''); }}
+          >
+            New conversation
           </button>
-        </div>
-      </div>
 
-      <div className={`developer-layout ${historyOpen ? 'is-open' : 'is-collapsed'}`}>
-        <aside className="developer-sidebar" aria-label="Code change history">
-          <div className="developer-sidebar-head">
-            <div>
-              <span className="developer-sidebar-kicker"><History size={13} /> Chat history</span>
-              <strong>{tasks.length} request{tasks.length === 1 ? '' : 's'}</strong>
-            </div>
-            <button type="button" className="developer-new" onClick={() => { setSelectedTaskId(''); setPrompt(''); setNotice(''); }}>
-              <span>New conversation</span>
-            </button>
+          {/* Section heading */}
+          <div className="agent-rail-title">
+            <History size={13} /> Chat history
           </div>
-          <div className="developer-sidebar-list">
-            {loading && <p className="developer-message">Loading code requests...</p>}
+
+          {/* Request count */}
+          <div className="dev-rail-count">
+            {tasks.length} request{tasks.length === 1 ? '' : 's'}
+          </div>
+
+          {/* Task list */}
+          <div className="agent-session-list">
+            {loading && <p className="agent-rail-empty">Loading...</p>}
+
             {!loading && !tasks.length && (
-              <div className="developer-empty developer-empty--sidebar">
-                <GitBranch size={20} />
-                <p>Requests you approve will appear here.</p>
+              <div className="dev-rail-empty-state">
+                <GitBranch size={18} />
+                <p className="agent-rail-empty">Requests you approve will appear here.</p>
               </div>
             )}
+
             {tasks.map(task => (
               <button
                 key={task.id}
                 type="button"
-                className={`developer-sidebar-item ${selectedTaskId === task.id ? 'is-selected' : ''}`}
+                className={`agent-session ${selectedTaskId === task.id ? 'is-selected' : ''}`}
                 onClick={() => setSelectedTaskId(task.id)}
               >
-                <Status task={task} />
                 <span>
                   <strong>{task.title || task.prompt}</strong>
                   <small>{formatDate(task.created_at)}</small>
@@ -175,32 +180,53 @@ export default function DeveloperAgentPanel() {
             ))}
           </div>
         </aside>
+      )}
 
-        <section className="developer-main">
-          <div className="developer-thread">
-            {!selectedTask && !loading && (
-              <div className="developer-empty">
-                <Sparkles size={22} />
-                <h3>Create a controlled code update</h3>
-                <p>The agent creates a separate branch and Vercel preview. Production changes only after your final approval.</p>
+      {/* ── RIGHT MAIN WORKSPACE ── mirrors agent-workspace from Quick CMS */}
+      <div className="agent-workspace">
+        {/* Context bar */}
+        <div className="agent-context">
+          <div>
+            <span className="agent-page-tag">Repository workflow</span>
+            <strong>Website code changes</strong>
+          </div>
+          <span className="developer-guard">
+            <ShieldCheck size={12} /> Admin approval required
+          </span>
+        </div>
+
+        {/* Thread / history area */}
+        <div className="agent-history">
+          {!selectedTask && !loading && (
+            <div className="agent-welcome">
+              <div className="agent-welcome-icon">
+                <Sparkles size={20} />
               </div>
-            )}
+              <h3>Create a controlled code update</h3>
+              <p>
+                The agent creates a separate branch and Vercel preview.
+                Production changes only after your final approval.
+              </p>
+            </div>
+          )}
 
-            {selectedTask && (
-              <>
-                <article className="developer-bubble developer-bubble--user">
+          {selectedTask && (
+            <>
+              {/* User message bubble */}
+              <article className="agent-stage">
+                <div className="agent-prompt">
                   <span>Request</span>
                   <p>{selectedTask.prompt}</p>
-                </article>
+                </div>
 
-                <article className="developer-bubble developer-bubble--assistant">
-                  <div className="developer-bubble-head">
+                {/* Agent response bubble */}
+                <div className="agent-result">
+                  <div className="agent-result-state">
                     <Status task={selectedTask} />
-                    <time>{formatDate(selectedTask.created_at)}</time>
+                    <time className="dev-bubble-time">{formatDate(selectedTask.created_at)}</time>
                   </div>
-                  <p className="developer-summary">
-                    {selectedTask.summary || 'The agent has not generated a proposal yet.'}
-                  </p>
+
+                  <p className="developer-summary">{selectedTask.summary || 'The agent has not generated a proposal yet.'}</p>
 
                   {selectedTask.error_message && (
                     <p className="developer-error">{selectedTask.error_message}</p>
@@ -216,27 +242,23 @@ export default function DeveloperAgentPanel() {
 
                   <div className="developer-links">
                     {selectedTask.pull_request_url && (
-                      <a href={selectedTask.pull_request_url} target="_blank" rel="noreferrer">Pull request <ExternalLink size={12} /></a>
+                      <a href={selectedTask.pull_request_url} target="_blank" rel="noreferrer">
+                        Pull request <ExternalLink size={12} />
+                      </a>
                     )}
                     {selectedTask.revert_pull_request_url && (
-                      <a href={selectedTask.revert_pull_request_url} target="_blank" rel="noreferrer">Rollback PR <ExternalLink size={12} /></a>
+                      <a href={selectedTask.revert_pull_request_url} target="_blank" rel="noreferrer">
+                        Rollback PR <ExternalLink size={12} />
+                      </a>
                     )}
                     {selectedTask.preview_url && (
-                      <a href={selectedTask.preview_url} target="_blank" rel="noreferrer">Deployment details <ExternalLink size={12} /></a>
+                      <a href={selectedTask.preview_url} target="_blank" rel="noreferrer">
+                        Deployment details <ExternalLink size={12} />
+                      </a>
                     )}
                   </div>
 
-                  {canRevert && (
-                    <button
-                      type="button"
-                      className="agent-restore"
-                      disabled={selectedBusy}
-                      onClick={() => restoreBeforeTask(selectedTask.id)}
-                    >
-                      <RotateCcw size={13} /> Restore before this request
-                    </button>
-                  )}
-
+                  {/* Approval action buttons */}
                   <div className="developer-approval-card">
                     <div>
                       <strong>Approval workflow</strong>
@@ -305,28 +327,29 @@ export default function DeveloperAgentPanel() {
                       )}
                     </div>
                   </div>
-                </article>
-              </>
-            )}
+                </div>
+              </article>
+            </>
+          )}
 
-            {notice && <p className="developer-message">{notice}</p>}
+          {notice && <p className="agent-notice">{notice}</p>}
+        </div>
+
+        {/* Composer — mirrors agent-composer from Quick CMS */}
+        <form className="agent-composer" onSubmit={submit}>
+          <textarea
+            value={prompt}
+            onChange={event => setPrompt(event.target.value)}
+            placeholder="Example: Redesign the navbar with a compact sticky layout and a stronger contact action."
+            rows={2}
+          />
+          <div className="agent-composer-meta">
+            <span>Request first. Branch creation and publishing each require approval.</span>
+            <button type="submit" disabled={prompt.trim().length < 10 || activeTaskBusy} aria-label="Save code change request">
+              <ArrowUp size={17} />
+            </button>
           </div>
-
-          <form className="developer-composer" onSubmit={submit}>
-            <textarea
-              value={prompt}
-              onChange={event => setPrompt(event.target.value)}
-              placeholder="Example: Redesign the navbar with a compact sticky layout and a stronger contact action."
-              rows={3}
-            />
-            <div>
-              <span>Request first. Branch creation and publishing each require approval.</span>
-              <button type="submit" disabled={prompt.trim().length < 10 || activeTaskBusy} aria-label="Save code change request">
-                <ArrowUp size={17} />
-              </button>
-            </div>
-          </form>
-        </section>
+        </form>
       </div>
     </div>
   );

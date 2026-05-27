@@ -1237,3 +1237,30 @@
 .developer-sidebar-head > div {
   display: grid;
 }
+
+/* ── Code Change tab sidebar extras ── */
+
+.dev-rail-count {
+  margin: 8px 7px 2px;
+  color: #34416d;
+  font: 600 0.8rem/1.25 'Inter', sans-serif;
+}
+
+.dev-rail-empty-state {
+  padding: 14px 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  color: #637890;
+}
+
+.dev-bubble-time {
+  margin-left: 8px;
+  color: #637890;
+  font: 500 0.62rem/1 'Inter', sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
