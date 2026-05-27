@@ -31,6 +31,21 @@ function extractText(response) {
     .join('') || '';
 }
 
+function clampText(value, maxLength) {
+  const compact = String(value || '').replace(/\s+/g, ' ').trim();
+  if (!compact) return '';
+  return compact.length > maxLength ? `${compact.slice(0, maxLength - 1).trimEnd()}…` : compact;
+}
+
+function summarizePrompt(prompt, changes) {
+  const source = clampText(prompt, 180) || 'requested website updates';
+  const firstChange = changes?.[0]?.reason ? clampText(changes[0].reason, 70) : '';
+  const summary = firstChange
+    ? `Update ${source}: ${firstChange}`
+    : `Update ${source}`;
+  return clampText(summary, 240);
+}
+
 export async function createCodePlan(prompt, files) {
   assert(process.env.OPENAI_API_KEY, 'OpenAI server configuration is missing.', 503);
   const repositoryContext = files
@@ -97,7 +112,6 @@ export async function createCodePlan(prompt, files) {
 
   assert(plan.changes?.length, 'OpenAI did not propose any file updates.', 422);
   assert(plan.changes.length <= 10, 'OpenAI proposed too many file updates.', 422);
-  assert(typeof plan.summary === 'string' && plan.summary.trim().length >= 10 && plan.summary.length <= 240, 'OpenAI returned an invalid proposal summary.', 422);
   const paths = new Set();
   for (const change of plan.changes) {
     assert(isEditableWebsitePath(change.path), `Proposed file is outside the editable website surface: ${change.path}`, 422);
@@ -106,5 +120,8 @@ export async function createCodePlan(prompt, files) {
     assert(typeof change.reason === 'string' && change.reason.trim().length >= 5 && change.reason.length <= 240, `Proposed reason is invalid: ${change.path}`, 422);
     paths.add(change.path);
   }
+  const summary = clampText(plan.summary, 240) || summarizePrompt(prompt, plan.changes);
+  assert(summary.length >= 10, 'OpenAI returned an invalid proposal summary.', 422);
+  plan.summary = summary;
   return plan;
 }

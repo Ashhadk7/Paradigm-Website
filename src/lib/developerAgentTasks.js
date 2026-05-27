@@ -37,3 +37,5 @@ export const mergeCodeTask = taskId => execute('merge', taskId);
 export const rejectCodeTask = taskId => execute('reject', taskId);
 export const createCodeRevert = taskId => execute('revert', taskId);
 export const mergeCodeRevert = taskId => execute('merge', taskId, { revert: true });
+export const pauseCodeTask = taskId => execute('pause', taskId);
+export const resumeCodeTask = taskId => execute('resume', taskId);

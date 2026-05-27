@@ -19,14 +19,17 @@ import {
   listCodeTasks,
   mergeCodeRevert,
   mergeCodeTask,
+  pauseCodeTask,
   refreshCodeTask,
   rejectCodeTask,
+  resumeCodeTask,
 } from '../../../lib/developerAgentTasks';
 
 const STATUS_LABELS = {
   requested: 'Requested',
   generating: 'Generating',
   generation_failed: 'Generation failed',
+  paused: 'Paused',
   preview_ready: 'Preview building',
   merge_ready: 'Ready for approval',
   merging: 'Publishing',
@@ -45,21 +48,23 @@ function formatDate(value) {
 function Status({ task }) {
   const success = ['merge_ready', 'merged', 'revert_ready', 'reverted'].includes(task.status);
   const failure = ['generation_failed', 'rejected'].includes(task.status);
+  const paused = task.status === 'paused';
   return (
-    <span className={`developer-status ${success ? 'is-success' : ''} ${failure ? 'is-failed' : ''}`}>
+    <span className={`developer-status ${success ? 'is-success' : ''} ${failure ? 'is-failed' : ''} ${paused ? 'is-paused' : ''}`}>
       {success ? <CheckCircle2 size={12} /> : failure ? <XCircle size={12} /> : <LoaderCircle size={12} />}
       {STATUS_LABELS[task.status] || task.status}
     </span>
   );
 }
 
-export default function DeveloperAgentPanel({ railOpen, onRailToggle }) {
+export default function DeveloperAgentPanel({ railOpen }) {
   const [tasks, setTasks] = useState([]);
   const [selectedTaskId, setSelectedTaskId] = useState('');
   const [prompt, setPrompt] = useState('');
   const [activeAction, setActiveAction] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notice, setNotice] = useState('');
+  const [liveStep, setLiveStep] = useState(0);
 
   useEffect(() => {
     let active = true;
@@ -91,6 +96,7 @@ export default function DeveloperAgentPanel({ railOpen, onRailToggle }) {
   }
 
   async function run(taskId, actionName, operation, successMessage) {
+    setLiveStep(0);
     setActiveAction({ taskId, actionName });
     setNotice('');
     try {
@@ -104,9 +110,18 @@ export default function DeveloperAgentPanel({ railOpen, onRailToggle }) {
     }
   }
 
+  async function pauseSelected(taskId) {
+    await run(taskId, 'pause', pauseCodeTask, 'Request paused. Resume it when you are ready to continue.');
+  }
+
+  async function resumeSelected(taskId) {
+    await run(taskId, 'resume', resumeCodeTask, 'Request resumed. You can continue the approval flow.');
+  }
+
   async function submit(event) {
     event.preventDefault();
     if (prompt.trim().length < 10) return;
+    setLiveStep(0);
     setActiveAction({ taskId: 'new', actionName: 'create' });
     setNotice('');
     try {
@@ -129,6 +144,33 @@ export default function DeveloperAgentPanel({ railOpen, onRailToggle }) {
   const canRevert = selectedTask && selectedTask.status === 'merged';
   const canMergeRevert = selectedTask && selectedTask.status === 'revert_ready';
   const canReject = selectedTask && !['generating', 'merged', 'reverted', 'rejected', 'merging', 'reverting'].includes(selectedTask.status);
+  const canPause = selectedTask && !['paused', 'generating', 'merging', 'reverting', 'merged', 'reverted', 'rejected'].includes(selectedTask.status);
+  const canResume = selectedTask && selectedTask.status === 'paused';
+  const liveMessages = activeAction?.actionName === 'pause'
+    ? ['Pausing request…', 'Saving the current state…']
+    : activeAction?.actionName === 'resume'
+      ? ['Resuming request…', 'Restoring the approval state…']
+      : activeAction?.actionName === 'generate'
+        ? ['Reviewing your request…', 'Scanning editable files…', 'Drafting the proposal…', 'Creating the preview branch…']
+        : activeAction?.actionName === 'refresh'
+          ? ['Refreshing checks…', 'Pulling the latest preview status…']
+          : activeAction?.actionName === 'merge'
+            ? ['Preparing production merge…', 'Waiting for approval checks…']
+            : activeAction?.actionName === 'revert'
+              ? ['Creating rollback preview…', 'Preparing the rollback branch…']
+              : activeAction?.actionName === 'merge-revert'
+                ? ['Publishing rollback…', 'Applying the approved restore…']
+                : activeAction?.actionName === 'reject'
+                  ? ['Closing the request…', 'Shutting down any open pull requests…']
+                  : ['Working…'];
+
+  useEffect(() => {
+    if (!activeAction) return undefined;
+    const timer = window.setInterval(() => {
+      setLiveStep(current => (current + 1) % liveMessages.length);
+    }, 1400);
+    return () => window.clearInterval(timer);
+  }, [activeAction, liveMessages.length]);
 
   return (
     <div className="agent-body">
@@ -257,6 +299,34 @@ export default function DeveloperAgentPanel({ railOpen, onRailToggle }) {
                       </a>
                     )}
                   </div>
+
+                  {(activeAction?.taskId === selectedTask.id || ['generating', 'preview_ready', 'merge_ready', 'revert_preview_ready', 'revert_ready'].includes(selectedTask.status)) && (
+                    <div className="developer-live-strip" aria-live="polite">
+                      <LoaderCircle size={13} />
+                      <span>{liveMessages[liveStep]}</span>
+                    </div>
+                  )}
+
+                  {canPause && (
+                    <button
+                      type="button"
+                      className="agent-restore"
+                      disabled={selectedBusy}
+                      onClick={() => pauseSelected(selectedTask.id)}
+                    >
+                      Pause request
+                    </button>
+                  )}
+                  {canResume && (
+                    <button
+                      type="button"
+                      className="agent-restore"
+                      disabled={selectedBusy}
+                      onClick={() => resumeSelected(selectedTask.id)}
+                    >
+                      Resume request
+                    </button>
+                  )}
 
                   {/* Approval action buttons */}
                   <div className="developer-approval-card">

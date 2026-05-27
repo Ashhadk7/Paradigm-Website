@@ -752,6 +752,10 @@
   color: #a64234;
 }
 
+.developer-status.is-paused {
+  color: #7b5b16;
+}
+
 .developer-request {
   color: #34416d;
   font: 500 0.77rem/1.55 'Inter', sans-serif;
@@ -796,6 +800,23 @@
   gap: 4px;
   color: #34416d;
   font: 700 0.64rem/1 'Inter', sans-serif;
+}
+
+.developer-live-strip {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: rgba(52, 65, 109, 0.06);
+  color: #34416d;
+  font: 600 0.66rem/1 'Inter', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.developer-live-strip svg {
+  color: #c4a25b;
 }
 
 .developer-actions button {
@@ -1263,4 +1284,3 @@
   text-transform: none;
   letter-spacing: 0;
 }
-
