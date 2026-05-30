@@ -79,7 +79,7 @@ export default function FamilyOffice() {
       {/* Core Story */}
       <section className="section-offwhite">
         <div className="section-inner">
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <div style={{ maxWidth: 720 }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
               {[
@@ -134,7 +134,7 @@ export default function FamilyOffice() {
       {/* Operational Consequence */}
       <section className="section-offwhite">
         <div className="section-inner">
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <div style={{ maxWidth: 720 }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_ops_title}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}

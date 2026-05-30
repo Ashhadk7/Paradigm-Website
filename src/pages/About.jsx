@@ -144,7 +144,7 @@ export default function About() {
       {/* ── THE FIRM ── */}
       <section className="section-white">
         <div className="section-inner">
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <div style={{ maxWidth: 720 }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.firm_eyebrow}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
               {[

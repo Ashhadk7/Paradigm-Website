@@ -161,7 +161,7 @@ export default function Process() {
       {/* ── THE DATA FOUNDATION ── */}
       <section className="section-white">
         <div className="section-inner">
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <div style={{ maxWidth: 720 }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.data_foundation_eyebrow}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
               <motion.p
@@ -186,7 +186,7 @@ export default function Process() {
       {/* ── THE PROCESS — FOUR STEPS ── */}
       <section className="section-offwhite">
         <div className="section-inner">
-          <div style={{ maxWidth: 760, margin: '0 auto' }}>
+          <div style={{ maxWidth: 760 }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.process_eyebrow}</p>
             <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', marginBottom: '3.5rem', lineHeight: 1.8 }}>
               {c.process_intro}
@@ -226,7 +226,7 @@ export default function Process() {
       {/* ── WHY NO BLACK BOX ── */}
       <section className="section-white">
         <div className="section-inner">
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <div style={{ maxWidth: 720 }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.black_box_eyebrow}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}

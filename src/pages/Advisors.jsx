@@ -91,7 +91,7 @@ export default function Advisors() {
       {/* ── THE CORE STORY ── */}
       <section className="section-offwhite">
         <div className="section-inner">
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <div style={{ maxWidth: 720 }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
               {[
@@ -146,7 +146,7 @@ export default function Advisors() {
       {/* ── THE PLATFORM CAPABILITY ── */}
       <section className="section-offwhite">
         <div className="section-inner">
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <div style={{ maxWidth: 720 }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
             <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>

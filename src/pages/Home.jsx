@@ -228,7 +228,7 @@ export default function Home() {
       {/* ── THE STORY ── */}
       <section className="section-white">
         <div className="section-inner">
-          <div style={{ maxWidth: 720, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+          <div style={{ maxWidth: 720, display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
             {[c.story_1, c.story_2, c.story_3, c.story_4].map((p, i) => (
               <motion.p
                 key={i}
@@ -248,7 +248,7 @@ export default function Home() {
       {/* ── THE PLATFORM ── */}
       <section className="section-offwhite">
         <div className="section-inner">
-          <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <div style={{ maxWidth: 720 }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
               <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
