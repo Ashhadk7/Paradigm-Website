@@ -117,29 +117,27 @@ export default function Process() {
 
         <div className="hero-inner">
           <div style={{ position: 'relative', zIndex: 2, maxWidth: 820 }}>
-            {/* Staggered three-line H1 */}
-            {words.map((word, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.3 + i * 0.25,
-                  ease: [0.25, 0.46, 0.45, 0.94],
-                }}
-              >
-                <h1
-                  className="display-headline"
+            {/* Staggered three-line H1 (single h1, animated line spans) */}
+            <h1 className="display-headline" style={{ lineHeight: 1.1 }}>
+              {words.map((word, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{
+                    duration: 0.7,
+                    delay: 0.3 + i * 0.25,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
                   style={{
+                    display: 'block',
                     marginBottom: i < words.length - 1 ? '0.15em' : 0,
-                    lineHeight: 1.1,
                   }}
                 >
                   {word}
-                </h1>
-              </motion.div>
-            ))}
+                </motion.span>
+              ))}
+            </h1>
 
             {/* Subtle gold accent line below the H1 */}
             <motion.div
@@ -261,7 +259,7 @@ export default function Process() {
             viewport={{ once: true }}
             style={{
               fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890',
-              textAlign: 'center', maxWidth: 600, margin: '0 auto 3rem',
+              maxWidth: 600, margin: '0 0 3rem',
             }}
           >
             {c.cta_intro}

@@ -102,28 +102,26 @@ export default function About() {
 
         <div className="hero-inner">
           <div style={{ position: 'relative', zIndex: 2, maxWidth: 820 }}>
-            {clauses.map((clause, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.3 + i * 0.25,
-                  ease: [0.25, 0.46, 0.45, 0.94],
-                }}
-              >
-                <h1
-                  className="display-headline"
+            <h1 className="display-headline" style={{ lineHeight: 1.1 }}>
+              {clauses.map((clause, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{
+                    duration: 0.7,
+                    delay: 0.3 + i * 0.25,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
                   style={{
+                    display: 'block',
                     marginBottom: i < clauses.length - 1 ? '0.15em' : 0,
-                    lineHeight: 1.1,
                   }}
                 >
                   {clause}
-                </h1>
-              </motion.div>
-            ))}
+                </motion.span>
+              ))}
+            </h1>
 
             <motion.div
               initial={{ scaleX: 0, opacity: 0 }}

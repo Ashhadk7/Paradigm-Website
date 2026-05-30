@@ -105,11 +105,11 @@ export default function Institutions() {
       {/* What Paradigm Offers Institutions */}
       <section className="section-white">
         <div className="section-inner">
-          <p className="eyebrow" style={{ marginBottom: '0.875rem', textAlign: 'center' }}>{c.offers_eyebrow}</p>
-          <h2 className="section-headline" style={{ color: '#34416D', textAlign: 'center', marginBottom: '0.625rem' }}>
+          <p className="eyebrow" style={{ marginBottom: '0.875rem' }}>{c.offers_eyebrow}</p>
+          <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '0.625rem' }}>
             {c.offers_headline}
           </h2>
-          <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', textAlign: 'center', maxWidth: 480, margin: '0 auto 3.5rem' }}>
+          <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', maxWidth: 560, margin: '0 0 3.5rem' }}>
             {c.offers_sub}
           </p>
           <ThreeCol blocks={[

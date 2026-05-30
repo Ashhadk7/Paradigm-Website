@@ -116,11 +116,11 @@ export default function Advisors() {
       {/* ── WHAT THIS MEANS FOR YOUR PRACTICE ── */}
       <section className="section-white">
         <div className="section-inner">
-          <p className="eyebrow" style={{ marginBottom: '0.875rem', textAlign: 'center' }}>{c.practice_eyebrow}</p>
-          <h2 className="section-headline" style={{ color: '#34416D', textAlign: 'center', marginBottom: '0.625rem' }}>
+          <p className="eyebrow" style={{ marginBottom: '0.875rem' }}>{c.practice_eyebrow}</p>
+          <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '0.625rem' }}>
             {c.practice_headline}
           </h2>
-          <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', textAlign: 'center', maxWidth: 480, margin: '0 auto 3.5rem' }}>
+          <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', maxWidth: 560, margin: '0 0 3.5rem' }}>
             {c.practice_sub}
           </p>
           <ThreeCol blocks={[
@@ -164,11 +164,11 @@ export default function Advisors() {
       {/* ── HOW IT'S DELIVERED ── */}
       <section className="section-white">
         <div className="section-inner">
-          <p className="eyebrow" style={{ marginBottom: '0.875rem', textAlign: 'center' }}>{c.delivery_eyebrow}</p>
-          <h2 className="section-headline" style={{ color: '#34416D', textAlign: 'center', marginBottom: '0.625rem' }}>
+          <p className="eyebrow" style={{ marginBottom: '0.875rem' }}>{c.delivery_eyebrow}</p>
+          <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '0.625rem' }}>
             {c.delivery_headline}
           </h2>
-          <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', textAlign: 'center', marginBottom: '3.5rem' }}>
+          <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', maxWidth: 560, marginBottom: '3.5rem' }}>
             {c.delivery_sub}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
