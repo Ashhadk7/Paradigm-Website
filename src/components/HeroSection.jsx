@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { GLSLHills } from './ui/glsl-hills';
+import Editable from './cms/Editable';
+import { useEditMode } from '../lib/editModeContext';
 
 function splitHeroCopy(text) {
   if (!text) return [];
@@ -17,9 +19,12 @@ function splitHeroSubcopy(text) {
   return text.includes('\n') ? text.split('\n') : [text];
 }
 
-export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal = false, compact = false, appearance }) {
+export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal = false, compact = false, appearance, editable, styleSource }) {
+  const { editing } = useEditMode();
   const headlineLines = splitHeroCopy(headline);
   const subLines = splitHeroSubcopy(sub);
+  // In edit mode, render the hero text as Editable so it can be clicked/styled.
+  const editHero = editing && editable;
   const headlineDelay = 0.3;
   const headlineStep = 0.22;
   const subDelay = headlineDelay + Math.max(headlineLines.length, 1) * headlineStep + 0.1;
@@ -39,7 +44,12 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
           className={appearance?.hero_headline_width ? `hero-copy--${appearance.hero_headline_width}` : 'hero-copy--standard'}
           style={{ maxWidth: compact ? 720 : undefined, position: 'relative', zIndex: 2 }}
         >
-          {eyebrow && (
+          {editHero && eyebrow !== undefined ? (
+            <Editable field={editable.eyebrowField} as="p" className="eyebrow"
+              styleSource={styleSource} baseStyle={{ marginBottom: compact ? '0.75rem' : '1rem' }}>
+              {eyebrow}
+            </Editable>
+          ) : eyebrow && (
             <motion.p
               className="eyebrow"
               initial={{ opacity: 0, y: 16 }}
@@ -51,6 +61,18 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
             </motion.p>
           )}
 
+          {editHero ? (
+            <Editable
+              field={editable.headlineField}
+              as="h1"
+              multiline
+              className={`${compact ? 'display-headline-compact' : 'display-headline'} ${appearance?.hero_headline_scale ? `display-headline-size--${appearance.hero_headline_scale}` : ''}`}
+              styleSource={styleSource}
+              baseStyle={{ marginBottom: compact ? '1rem' : '1.35rem', whiteSpace: 'pre-line' }}
+            >
+              {headline}
+            </Editable>
+          ) : (
           <h1
             className={`${compact ? 'display-headline-compact' : 'display-headline'} ${appearance?.hero_headline_scale ? `display-headline-size--${appearance.hero_headline_scale}` : ''}`}
             style={{ marginBottom: compact ? '1rem' : '1.35rem' }}
@@ -75,8 +97,15 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
               </motion.span>
             ))}
           </h1>
+          )}
 
-          {sub && (
+          {editHero && sub !== undefined ? (
+            <Editable field={editable.subField} as="p" multiline className="hero-subcopy"
+              styleSource={styleSource}
+              baseStyle={compact ? { fontSize: '0.95rem', marginBottom: '1.25rem', whiteSpace: 'pre-line' } : { whiteSpace: 'pre-line' }}>
+              {sub}
+            </Editable>
+          ) : sub && (
             <p
               className="hero-subcopy"
               style={compact ? { fontSize: '0.95rem', marginBottom: '1.25rem' } : undefined}

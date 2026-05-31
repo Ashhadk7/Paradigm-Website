@@ -1,10 +1,14 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import ProofBlock from '../components/ProofBlock';
 import CTAStrip from '../components/CTAStrip';
+import Editable from '../components/cms/Editable';
 import { useContent } from '../lib/useContent';
 import { usePresentation } from '../lib/usePresentation';
+import { useEditMode } from '../lib/editModeContext';
+import { isHidden } from '../lib/elementStyles';
 
 function Stat({ value, label }) {
   return (
@@ -100,42 +104,52 @@ function AnimatedOrbit() {
 export default function Home() {
   const { content: cms } = useContent('home');
   const presentation = usePresentation('home');
+  const { editing, draft, registerPage } = useEditMode();
+
+  // In edit mode, seed/track the provider draft from the loaded content so the
+  // toolbar can save and the popover can read styles. Source-of-truth for the
+  // rendered values is the draft while editing, otherwise the CMS content.
+  useEffect(() => {
+    if (editing) registerPage('home', cms || {});
+  }, [editing, cms, registerPage]);
+
+  const source = editing && draft ? draft : cms;
 
   const c = {
     // Hero
-    hero_eyebrow: cms?.hero_eyebrow || "Institutional Portfolio Infrastructure for the Next Generation of Wealth Platforms",
-    hero_headline: cms?.hero_headline || "The collective intelligence of the market.\nBuilt into every portfolio.",
-    hero_sub: cms?.hero_sub || "Paradigm identifies where market leadership is forming — right now, within each mandate — and builds portfolios that reflect it. Portfolios that can move as leadership moves.",
+    hero_eyebrow: source?.hero_eyebrow || "Institutional Portfolio Infrastructure for the Next Generation of Wealth Platforms",
+    hero_headline: source?.hero_headline || "The collective intelligence of the market.\nBuilt into every portfolio.",
+    hero_sub: source?.hero_sub || "Paradigm identifies where market leadership is forming — right now, within each mandate — and builds portfolios that reflect it. Portfolios that can move as leadership moves.",
     // Trust Strip
-    trust_stat_1_value: cms?.trust_stat_1_value || "35 Years",
-    trust_stat_1_label: cms?.trust_stat_1_label || "Founded 1990",
-    trust_stat_2_value: cms?.trust_stat_2_value || "65 of the top 100",
-    trust_stat_2_label: cms?.trust_stat_2_label || "U.S. pension funds served",
-    trust_stat_3_value: cms?.trust_stat_3_value || "6",
-    trust_stat_3_label: cms?.trust_stat_3_label || "Equity strategies",
-    trust_stat_3_sub: cms?.trust_stat_3_sub || "Funded — domestic, international, global",
-    trust_stat_4_value: cms?.trust_stat_4_value || "$7B+",
-    trust_stat_4_label: cms?.trust_stat_4_label || "Cumulative AUM",
-    trust_stat_5_value: cms?.trust_stat_5_value || "100%",
-    trust_stat_5_label: cms?.trust_stat_5_label || "Employee owned",
+    trust_stat_1_value: source?.trust_stat_1_value || "35 Years",
+    trust_stat_1_label: source?.trust_stat_1_label || "Founded 1990",
+    trust_stat_2_value: source?.trust_stat_2_value || "65 of the top 100",
+    trust_stat_2_label: source?.trust_stat_2_label || "U.S. pension funds served",
+    trust_stat_3_value: source?.trust_stat_3_value || "6",
+    trust_stat_3_label: source?.trust_stat_3_label || "Equity strategies",
+    trust_stat_3_sub: source?.trust_stat_3_sub || "Funded — domestic, international, global",
+    trust_stat_4_value: source?.trust_stat_4_value || "$7B+",
+    trust_stat_4_label: source?.trust_stat_4_label || "Cumulative AUM",
+    trust_stat_5_value: source?.trust_stat_5_value || "100%",
+    trust_stat_5_label: source?.trust_stat_5_label || "Employee owned",
     // What We See
-    what_we_see_headline: cms?.what_we_see_headline || "Three observations. Thirty-five years. The foundation behind every portfolio Paradigm builds.",
-    obs_1: cms?.obs_1 || "No single mind sees everything the market knows. No single dataset captures everything experts observe. No single system processes both at scale. Dynamic Collective Intelligence is what emerges when human expertise, vast market data, and computing power are combined systematically — a new intelligence that surpasses any individual component.",
-    obs_2: cms?.obs_2 || "Every specialist performs well when market conditions align with their expertise — and faces headwinds when they shift. This is not a failure of skill. It is the inherent structure of specialization. When leadership moves away from a strategy's domain, the strategy waits. So do its clients.",
-    obs_3: cms?.obs_3 || "Paradigm identifies where regime leadership is forming within each mandate and qualifies that signal through collective intelligence. The result is a Portfolio Blueprint — a portfolio built from the confirmed consensus of what the market is rewarding right now.",
+    what_we_see_headline: source?.what_we_see_headline || "Three observations. Thirty-five years. The foundation behind every portfolio Paradigm builds.",
+    obs_1: source?.obs_1 || "No single mind sees everything the market knows. No single dataset captures everything experts observe. No single system processes both at scale. Dynamic Collective Intelligence is what emerges when human expertise, vast market data, and computing power are combined systematically — a new intelligence that surpasses any individual component.",
+    obs_2: source?.obs_2 || "Every specialist performs well when market conditions align with their expertise — and faces headwinds when they shift. This is not a failure of skill. It is the inherent structure of specialization. When leadership moves away from a strategy's domain, the strategy waits. So do its clients.",
+    obs_3: source?.obs_3 || "Paradigm identifies where regime leadership is forming within each mandate and qualifies that signal through collective intelligence. The result is a Portfolio Blueprint — a portfolio built from the confirmed consensus of what the market is rewarding right now.",
     // The Story
-    story_1: cms?.story_1 || "Every active strategy operates within the boundaries of its expertise. A deep value manager knows deep value with precision built over years. A quality growth manager has a genuine edge in quality growth. That specialization is the source of their advantage — and the boundary they cannot cross without leaving behind what they actually know how to do.",
-    story_2: cms?.story_2 || "When market leadership moves outside those boundaries, the strategy lags. Not because of a mistake. Because following the rotation would mean operating outside the domain of genuine competence. Their clients wait for the cycle to return.",
-    story_3: cms?.story_3 || "Paradigm reads active market data to identify where leadership is forming within each mandate right now — and constructs portfolios from that signal. Not anchored to any single approach. Not waiting for a cycle to reverse.",
-    story_4: cms?.story_4 || "No single strategy can do this by definition. To follow the rotation, it would have to leave the domain of its own expertise.",
+    story_1: source?.story_1 || "Every active strategy operates within the boundaries of its expertise. A deep value manager knows deep value with precision built over years. A quality growth manager has a genuine edge in quality growth. That specialization is the source of their advantage — and the boundary they cannot cross without leaving behind what they actually know how to do.",
+    story_2: source?.story_2 || "When market leadership moves outside those boundaries, the strategy lags. Not because of a mistake. Because following the rotation would mean operating outside the domain of genuine competence. Their clients wait for the cycle to return.",
+    story_3: source?.story_3 || "Paradigm reads active market data to identify where leadership is forming within each mandate right now — and constructs portfolios from that signal. Not anchored to any single approach. Not waiting for a cycle to reverse.",
+    story_4: source?.story_4 || "No single strategy can do this by definition. To follow the rotation, it would have to leave the domain of its own expertise.",
     // The Platform
-    platform_text: cms?.platform_text || "One platform. Three capabilities. Custom active strategies built to specification, SMA conversion of existing fund exposures into customizable tax-aware portfolios, and direct and custom indexing at scale. Customization, personalization, and tax-loss harvesting run across all three — at the individual client level. Built for advisors and institutions who want the full capability without splitting it across multiple vendors.",
+    platform_text: source?.platform_text || "One platform. Three capabilities. Custom active strategies built to specification, SMA conversion of existing fund exposures into customizable tax-aware portfolios, and direct and custom indexing at scale. Customization, personalization, and tax-loss harvesting run across all three — at the individual client level. Built for advisors and institutions who want the full capability without splitting it across multiple vendors.",
     // Proof
-    proof_body: cms?.proof_body || "Over 35 years Paradigm has worked with institutional clients including General Motors, AMEX, and the US Treasury. 65 of the nation's top 100 US pension funds have worked with Paradigm.",
-    proof_bridge: cms?.proof_bridge || "The same intelligence is now accessible to advisors and institutional partners.",
+    proof_body: source?.proof_body || "Over 35 years Paradigm has worked with institutional clients including General Motors, AMEX, and the US Treasury. 65 of the nation's top 100 US pension funds have worked with Paradigm.",
+    proof_bridge: source?.proof_bridge || "The same intelligence is now accessible to advisors and institutional partners.",
     // Closing CTA
-    cta_advisor_text: cms?.cta_advisor_text || "See what a portfolio built from collective intelligence looks like for your practice. Worth 20 minutes.",
-    cta_institution_text: cms?.cta_institution_text || "Paradigm is actively building strategic relationships with family offices, OCIOs, and institutional partners. Start a conversation.",
+    cta_advisor_text: source?.cta_advisor_text || "See what a portfolio built from collective intelligence looks like for your practice. Worth 20 minutes.",
+    cta_institution_text: source?.cta_institution_text || "Paradigm is actively building strategic relationships with family offices, OCIOs, and institutional partners. Start a conversation.",
   };
 
   return (
@@ -150,6 +164,8 @@ export default function Home() {
         headline={c.hero_headline}
         sub={c.hero_sub}
         appearance={presentation}
+        styleSource={source}
+        editable={{ eyebrowField: 'hero_eyebrow', headlineField: 'hero_headline', subField: 'hero_sub' }}
 
         ctas={[
           { label: 'For Advisors', to: '/advisors', variant: 'gold' },
@@ -173,19 +189,22 @@ export default function Home() {
         <div className="section-inner">
           <div style={{ marginBottom: '3.5rem' }}>
             <p className="eyebrow">What We See</p>
-            <h2 className="section-headline" style={{ maxWidth: 640 }}>
+            <Editable field="what_we_see_headline" as="h2" className="section-headline"
+              styleSource={source} baseStyle={{ maxWidth: 640 }}>
               {c.what_we_see_headline}
-            </h2>
+            </Editable>
           </div>
 
           <div className="what-we-see-grid">
             {/* Left: numbered observations */}
             <div style={{ maxWidth: 540 }}>
               {[
-                { num: '01', body: c.obs_1 },
-                { num: '02', body: c.obs_2 },
-                { num: '03', body: c.obs_3 },
-              ].map(({ num, body }, i) => (
+                { num: '01', field: 'obs_1', body: c.obs_1 },
+                { num: '02', field: 'obs_2', body: c.obs_2 },
+                { num: '03', field: 'obs_3', body: c.obs_3 },
+              ].map(({ num, field, body }, i) => {
+                if (!editing && isHidden(source, field)) return null;
+                return (
                 <motion.div
                   key={num}
                   initial={{ opacity: 0, y: 14 }}
@@ -206,17 +225,23 @@ export default function Home() {
                   }}>
                     {num}
                   </span>
-                  <p style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '1.0625rem',
-                    lineHeight: 1.75,
-                    color: '#637890',
-                    margin: 0,
-                  }}>
+                  <Editable
+                    field={field}
+                    as="p"
+                    styleSource={source}
+                    baseStyle={{
+                      fontFamily: 'Inter, sans-serif',
+                      fontSize: '1.0625rem',
+                      lineHeight: 1.75,
+                      color: '#637890',
+                      margin: 0,
+                    }}
+                  >
                     {body}
-                  </p>
+                  </Editable>
                 </motion.div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Right: animated concentric circles */}
@@ -229,18 +254,28 @@ export default function Home() {
       <section className="section-white">
         <div className="section-inner">
           <div style={{ maxWidth: 720, display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-            {[c.story_1, c.story_2, c.story_3, c.story_4].map((p, i) => (
-              <motion.p
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.07 }}
-                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
-              >
-                {p}
-              </motion.p>
-            ))}
+            {[
+              { field: 'story_1', body: c.story_1 },
+              { field: 'story_2', body: c.story_2 },
+              { field: 'story_3', body: c.story_3 },
+              { field: 'story_4', body: c.story_4 },
+            ].map(({ field, body }, i) => {
+              if (!editing && isHidden(source, field)) return null;
+              return (
+                <motion.div
+                  key={field}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.07 }}
+                >
+                  <Editable field={field} as="p" styleSource={source}
+                    baseStyle={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890', margin: 0 }}>
+                    {body}
+                  </Editable>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -251,9 +286,10 @@ export default function Home() {
           <div style={{ maxWidth: 720 }}>
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
+              <Editable field="platform_text" as="p" styleSource={source}
+                baseStyle={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890', margin: 0 }}>
                 {c.platform_text}
-              </p>
+              </Editable>
             </div>
           </div>
         </div>
