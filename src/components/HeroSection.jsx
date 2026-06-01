@@ -41,8 +41,8 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
 
       <div className="hero-inner">
         <div
-          className={appearance?.hero_headline_width ? `hero-copy--${appearance.hero_headline_width}` : 'hero-copy--standard'}
-          style={{ maxWidth: compact ? 720 : undefined, position: 'relative', zIndex: 2 }}
+          className={`hero-centered ${appearance?.hero_headline_width ? `hero-copy--${appearance.hero_headline_width}` : 'hero-copy--standard'}`}
+          style={{ maxWidth: compact ? 960 : undefined, position: 'relative', zIndex: 2 }}
         >
           {editHero && eyebrow !== undefined ? (
             <Editable field={editable.eyebrowField} as="p" className="eyebrow"
@@ -145,6 +145,7 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
 
           {/* Gold accent line */}
           <motion.div
+            className="hero-accent-line"
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
             transition={{ duration: 0.8, delay: actionDelay + 0.2, ease: 'easeOut' }}
@@ -152,7 +153,7 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
               height: 2,
               background: 'linear-gradient(90deg, #C4A25B 0%, transparent 70%)',
               marginTop: ctas.length > 0 ? '2rem' : '1.5rem',
-              maxWidth: 180,
+              width: 180,
               transformOrigin: 'left',
             }}
           />
