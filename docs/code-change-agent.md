@@ -9,12 +9,18 @@ requests for React/CSS structure or design work.
 - The browser never receives OpenAI, GitHub, or Supabase service-role secrets.
 - All `/api/code-agent/*` routes validate the signed-in user with Supabase and
   require `is_cms_admin()` before taking action.
-- Generated changes can only modify website-facing `src` JS/JSX/CSS files
-  outside `src/pages/admin` and `src/lib`, or safe text assets under `public`.
-- Generated changes cannot edit API routes, authorization, Supabase migrations,
-  environment files, packages, CI, or the agent approval UI.
+- The agent can edit a wide website-UI surface: any JS/JSX/CSS under `src/`
+  (components, pages **including the admin UI**, shared hooks in `src/lib/`,
+  global `src/index.css`), `tailwind.config.js`, `index.html`, and safe public
+  assets — up to **30 files per request**. It may create new component files.
+- It can NEVER edit (hard denylist in `server/codeAgent/github.js`,
+  `isProtectedPath`): `api/**`, `server/**` (the agent's own backend),
+  authentication, `src/lib/supabase.js`, any `supabaseAdmin`/`supabase-setup.sql`,
+  `supabase/**` migrations, `.github/**` CI, `package.json`/lockfile,
+  `vercel.json`, `vite.config.js`, `eslint.config.js`, and any `.env`/secret file.
 - A generated branch does not change production. Merge and rollback merge each
-  require an explicit administrator action after checks pass.
+  require an explicit administrator action after the build/lint + Vercel checks
+  pass. A shrink-guard rejects generations that truncate an existing large file.
 
 ## Workflow
 
