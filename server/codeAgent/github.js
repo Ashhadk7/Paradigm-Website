@@ -61,10 +61,32 @@ function repoPath(path) {
   return `/repos/${OWNER}/${REPOSITORY}${path}`;
 }
 
+// Files the agent must NEVER edit. Editing any of these could break the agent
+// itself, the auth/security model, the build, or leak secrets — and since merges
+// go straight to production, this denylist is the hard safety floor. Everything
+// else under src/ (components, pages incl. admin UI, hooks, styles) is fair game.
+function isProtectedPath(path) {
+  if (path.startsWith('api/')) return true;            // serverless API routes
+  if (path.startsWith('server/')) return true;          // code-agent backend, github/openai
+  if (path.startsWith('supabase/')) return true;        // DB migrations / setup
+  if (path.startsWith('.github/')) return true;         // CI workflows (the merge gate)
+  if (path === 'src/lib/supabase.js') return true;      // the Supabase client / keys wiring
+  if (/(^|\/)supabaseAdmin\.js$/.test(path)) return true;
+  if (/(^|\/)supabase-setup\.sql$/.test(path)) return true;
+  if (/secret|credential/i.test(path)) return true;
+  // Build / dependency / deploy / env config — break these and nothing ships.
+  if (/^package(-lock)?\.json$/.test(path)) return true;
+  if (path === 'vercel.json' || path === 'vite.config.js' || path === 'eslint.config.js') return true;
+  if (/(^|\/)\.env/.test(path)) return true;
+  return false;
+}
+
 export function isEditableWebsitePath(path) {
-  if (path.startsWith('src/pages/admin/') || path.startsWith('src/lib/')) return false;
+  if (isProtectedPath(path)) return false;
+  // Wide surface: any JS/JSX/CSS under src (components, pages incl. admin UI,
+  // hooks, styles) and common public assets + root config that is safe to edit.
   if (/^src\/.*\.(jsx?|css)$/.test(path)) return true;
-  if (/^public\/.*\.(svg|txt|json|css)$/.test(path)) return true;
+  if (/^public\/.*\.(svg|txt|json|css|html|webmanifest)$/.test(path)) return true;
   return ['index.html', 'tailwind.config.js', 'postcss.config.js'].includes(path);
 }
 
@@ -83,22 +105,49 @@ async function getBlobText(token, sha) {
   return Buffer.from(blob.content, 'base64').toString('utf8');
 }
 
+const MAX_CONTEXT_FILES = 120;
+const MAX_CONTEXT_CHARS = 400000;
+
+// Higher = sent to the model first, so truncation never silently drops the
+// files a UI change is most likely to need.
+function contextPriority(path) {
+  if (path === 'src/index.css') return 0;
+  if (path === 'tailwind.config.js' || path === 'index.html') return 1;
+  if (path === 'src/App.jsx' || path === 'src/main.jsx') return 2;
+  if (path.startsWith('src/components/')) return 3;
+  if (path.startsWith('src/pages/') && !path.startsWith('src/pages/admin/')) return 4;
+  if (path.startsWith('src/lib/')) return 5;
+  if (path.startsWith('src/pages/admin/')) return 6;
+  return 7;
+}
+
 export async function loadEditableRepositoryContext() {
   const token = await getToken();
   const base = await getBranchHead(token);
   const tree = await getTree(token, base.treeSha);
   let total = 0;
   const files = [];
+  const skipped = [];
 
-  for (const entry of tree.tree.filter(item => item.type === 'blob' && isEditableWebsitePath(item.path))) {
-    if (files.length >= 60 || total >= 180000) break;
+  const candidates = tree.tree
+    .filter(item => item.type === 'blob' && isEditableWebsitePath(item.path))
+    .sort((a, b) => contextPriority(a.path) - contextPriority(b.path) || a.path.localeCompare(b.path));
+
+  for (const entry of candidates) {
+    if (files.length >= MAX_CONTEXT_FILES || total >= MAX_CONTEXT_CHARS) {
+      skipped.push(entry.path);
+      continue;
+    }
     const content = await getBlobText(token, entry.sha);
-    if (total + content.length > 180000) continue;
+    if (total + content.length > MAX_CONTEXT_CHARS) {
+      skipped.push(entry.path);
+      continue;
+    }
     total += content.length;
     files.push({ path: entry.path, sha: entry.sha, content });
   }
 
-  return { token, base, files };
+  return { token, base, files, skipped };
 }
 
 export async function createPullRequestForPlan(taskId, prompt, summary, changes, context) {

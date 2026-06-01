@@ -181,20 +181,21 @@ h1, h2, h3, h4 {
 
 .display-headline {
   font-family: 'Source Serif 4', Georgia, serif;
-  /* Max capped at 3.2rem so the longest authored hero line
-     ("The collective intelligence of the market.") holds on a single line
-     within the 1080px hero column instead of wrapping mid-phrase. */
-  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  /* Brief: hero display headlines 48–72px. Centered hero, so a 2-line wrap
+     reads as intentional ("each line has equal visual weight"). */
+  font-size: clamp(2.6rem, 5vw, 4.35rem);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.06;
   color: #F5F3EF;
 }
 
 .display-headline-compact {
   font-family: 'Source Serif 4', Georgia, serif;
-  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  /* Compact heroes carry long multi-sentence headlines; keep within the brief's
+     display range but slightly smaller at the top end for balance. */
+  font-size: clamp(2.1rem, 3.6vw, 3.25rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.14;
   color: #F5F3EF;
 }
 
@@ -229,13 +230,29 @@ h1, h2, h3, h4 {
 .hero-copy--standard { max-width: 1080px; }
 .hero-copy--wide { max-width: 1180px; }
 
-/* Authored headline lines (split on \n) stay on one line on wide desktops —
-   the approved copy doc fixes the line breaks ("one line in the doc => one
-   line on the site"). Scoped to >=1200px, where the 1200px hero column has
-   room for the longest line; below that they wrap naturally to avoid overflow. */
-@media (min-width: 1200px) {
-  .hero-headline-line { white-space: nowrap; }
+/* Centered hero: the copy column is centered in the hero and its contents
+   (eyebrow, headline, subcopy, CTAs, accent line) are horizontally centered. */
+.hero-centered {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
+.hero-centered .hero-subcopy {
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-centered .hero-actions {
+  justify-content: center;
+}
+.hero-centered .hero-accent-line {
+  margin-left: auto;
+  margin-right: auto;
+  transform-origin: center !important;
+}
+
+/* Hero headline lines wrap naturally. The hero is centered, so the authored
+   two-line break (per the copy doc) reads with equal visual weight and long
+   compact headlines wrap without overflowing. */
 
 @media (min-width: 1025px) {
   .hero-section--compact {
@@ -288,10 +305,11 @@ h1, h2, h3, h4 {
 
 .hero-subcopy {
   font-family: 'Inter', sans-serif;
-  font-size: 1.03rem;
+  /* Brief: subheading 18px, 70% white opacity, max-width 640px centered. */
+  font-size: 1.125rem;
   line-height: 1.72;
-  color: rgba(245,243,239,0.76);
-  max-width: 610px;
+  color: rgba(245,243,239,0.7);
+  max-width: 640px;
   margin-bottom: 1.75rem;
 }
 

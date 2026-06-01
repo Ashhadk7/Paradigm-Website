@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../../lib/supabase';
+import { supabase, isSupabaseConfigured } from '../../lib/supabase';
 import AdminLogin from './AdminLogin';
 import AdminDashboard from './AdminDashboard';
 
 export default function Admin() {
   const [session, setSession] = useState(null);
   const [authorized, setAuthorized] = useState(false);
-  const [checking, setChecking] = useState(true);
-  const [notice, setNotice] = useState('');
+  const [checking, setChecking] = useState(!isSupabaseConfigured ? false : true);
+  const [notice, setNotice] = useState(
+    isSupabaseConfigured ? '' : 'Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY (see .env.example), then restart the dev server.'
+  );
 
   useEffect(() => {
+    if (!isSupabaseConfigured) return undefined;
     let active = true;
 
     async function validateSession(nextSession) {

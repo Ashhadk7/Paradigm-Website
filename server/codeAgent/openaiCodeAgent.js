@@ -66,12 +66,12 @@ export async function createCodePlan(prompt, files) {
           content: [{
             type: 'input_text',
             text: [
-              'You are a careful frontend coding agent for a Vite React website.',
-              'Return complete replacement contents only for files that require changes.',
-              'You may update public website UI under src excluding src/pages/admin and src/lib, or safe text assets under public.',
-              'Never modify API routes, authentication, admin controls, database, CI, package files, environment files, or secrets.',
-              'Preserve existing coding style and imports. Keep changes narrowly scoped to the administrator request.',
-              'Do not include markdown in file content. Do not invent image binary files.',
+              'You are a capable frontend coding agent for a Vite + React website (React Router, Tailwind, Framer Motion).',
+              'You may change anything in the public-facing website UI: components, pages (including the admin UI), shared hooks, global styles in src/index.css, the Tailwind config, layout, and animations (framer-motion). You may create new component files — state the new path.',
+              'Return COMPLETE replacement file contents for every file you change (no diffs, no ellipses, no markdown fences inside content). Reproduce all unchanged code faithfully so nothing is lost.',
+              'HARD LIMITS — never modify any of these: server code, API routes (api/**, server/**), authentication, the Supabase client (src/lib/supabase.js) or any supabase admin/setup, the database/migrations, CI workflows (.github/**), package.json/lockfile, vite/vercel/eslint config, or any .env / secret file. If a request needs those, explain in the summary that it is out of scope instead of editing them.',
+              'Preserve existing coding style, imports, and the brand palette (navy #34416D, gold #C4A25B, off-white #F5F3EF). Keep changes scoped to the administrator request.',
+              'Do not invent binary/image files.',
             ].join(' '),
           }],
         },
@@ -111,13 +111,26 @@ export async function createCodePlan(prompt, files) {
   }
 
   assert(plan.changes?.length, 'OpenAI did not propose any file updates.', 422);
-  assert(plan.changes.length <= 10, 'OpenAI proposed too many file updates.', 422);
+  assert(plan.changes.length <= 30, 'OpenAI proposed too many file updates (max 30).', 422);
+  // Original contents, to guard against the model truncating a large existing file.
+  const originalByPath = new Map(files.map(f => [f.path, f.content]));
   const paths = new Set();
   for (const change of plan.changes) {
     assert(isEditableWebsitePath(change.path), `Proposed file is outside the editable website surface: ${change.path}`, 422);
     assert(!paths.has(change.path), `Proposed file is duplicated: ${change.path}`, 422);
     assert(change.content.length <= 250000, `Proposed file is too large: ${change.path}`, 422);
     assert(typeof change.reason === 'string' && change.reason.trim().length >= 5 && change.reason.length <= 240, `Proposed reason is invalid: ${change.path}`, 422);
+    // Shrink-guard: full-file replacement risks the model silently dropping code.
+    // If an existing, non-trivial file is rewritten to under 45% of its size,
+    // reject so the admin can retry rather than ship a truncated file.
+    const original = originalByPath.get(change.path);
+    if (original && original.length > 800) {
+      assert(
+        change.content.length >= original.length * 0.45,
+        `Proposed change to ${change.path} shrinks the file too much (likely truncated). Re-run the request.`,
+        422,
+      );
+    }
     paths.add(change.path);
   }
   const summary = clampText(plan.summary, 240) || summarizePrompt(prompt, plan.changes);
