@@ -90,6 +90,60 @@ function BubbleField({ bubbles, fill }) {
   );
 }
 
+// Bubbles that travel inward: spawn at the outer edge and drift along a radial
+// path through Some Data → Select Data → absorbed into the gold PB core.
+function generateFlowBubbles(count, seed) {
+  const rng = makeRng(seed);
+  const cx = 150;
+  const cy = 150;
+  const rStart = 130; // All Data outer edge
+  const rEnd = 24;    // gold PB core radius
+  const flows = [];
+  for (let i = 0; i < count; i++) {
+    const angle = rng() * Math.PI * 2;
+    const dx = Math.cos(angle);
+    const dy = Math.sin(angle);
+    flows.push({
+      xKeyframes: [cx + dx * rStart, cx + dx * (rStart * 0.55 + rEnd * 0.45), cx + dx * rEnd],
+      yKeyframes: [cy + dy * rStart, cy + dy * (rStart * 0.55 + rEnd * 0.45), cy + dy * rEnd],
+      size: 0.8 + rng() * 1.2,
+      delay: rng() * 4,
+      duration: 2.6 + rng() * 2.4,
+    });
+  }
+  return flows;
+}
+
+const FLOW_BUBBLES = generateFlowBubbles(60, 7919);
+
+function FlowBubbles({ bubbles }) {
+  return (
+    <>
+      {bubbles.map((b, i) => (
+        <motion.circle
+          key={i}
+          r={b.size}
+          fill="rgba(255,255,255,0.9)"
+          initial={{ opacity: 0 }}
+          animate={{
+            cx: b.xKeyframes,
+            cy: b.yKeyframes,
+            opacity: [0, 0.95, 0.95, 0],
+          }}
+          transition={{
+            duration: b.duration,
+            delay: b.delay,
+            repeat: Infinity,
+            repeatType: 'loop',
+            ease: 'easeIn',
+            times: [0, 0.15, 0.85, 1],
+          }}
+        />
+      ))}
+    </>
+  );
+}
+
 function AnimatedOrbit() {
   return (
     <motion.div
@@ -120,6 +174,9 @@ function AnimatedOrbit() {
         <BubbleField bubbles={ALL_DATA_BUBBLES} fill="rgba(255,255,255,0.65)" />
         <BubbleField bubbles={SOME_DATA_BUBBLES} fill="rgba(255,255,255,0.75)" />
         <BubbleField bubbles={SELECT_DATA_BUBBLES} fill="rgba(196,162,91,0.95)" />
+
+        {/* Bubbles streaming inward: All Data → Some Data → Select Data → PB core */}
+        <FlowBubbles bubbles={FLOW_BUBBLES} />
 
         {/* Gold Portfolio Blueprint core */}
         <motion.circle
@@ -267,7 +324,7 @@ export default function Home() {
         <div className="section-inner">
           <div style={{ marginBottom: '3.5rem' }}>
             <p className="eyebrow">What We See</p>
-            <h2 className="section-headline" style={{ maxWidth: 640 }}>
+            <h2 className="section-headline">
               {c.what_we_see_headline}
             </h2>
           </div>
