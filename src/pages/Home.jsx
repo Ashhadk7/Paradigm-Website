@@ -54,17 +54,17 @@ function generateBubbles(count, rInner, rOuter, seed, baseSize) {
   return bubbles;
 }
 
-// Staged narrowing sequence: bubbles concentrate inward, dropping in count.
-// Each stage populates ONLY its own ring band.
-// 0: All Data (outer grey) · 1: Some Data (blue) · 2: Select Data (navy) · 3: PB core (gold)
+// Staged narrowing sequence: bubbles fill the FULL disc of the active ring,
+// dropping in count as the universe narrows. Labels appear in sync per stage.
+// 0: All Data (grey) 1000 · 1: Some Data (blue) 350 · 2: Select Data (navy) 75 · 3: PB core (gold) 8
 const STAGES = [
-  { ring: 0, bubbles: generateBubbles(500, 100, 132, 1011, 0.9), fill: 'rgba(255,255,255,0.7)' },
-  { ring: 1, bubbles: generateBubbles(250, 58, 92, 2027, 1.0), fill: 'rgba(255,255,255,0.85)' },
-  { ring: 2, bubbles: generateBubbles(75, 28, 52, 3041, 1.2), fill: 'rgba(255,255,255,0.9)' },
-  { ring: 3, bubbles: generateBubbles(8, 6, 21, 4099, 1.6), fill: 'rgba(255,255,255,0.95)' },
+  { ring: 0, label: 'ALL DATA',    bubbles: generateBubbles(1000, 0, 130, 1011, 1.2), fill: 'rgba(255,255,255,0.75)', labelFill: '#34416D', labelY: 36 },
+  { ring: 1, label: 'SOME DATA',   bubbles: generateBubbles(350, 0, 92, 2027, 1.4),   fill: 'rgba(255,255,255,0.88)', labelFill: '#ffffff', labelY: 74 },
+  { ring: 2, label: 'SELECT DATA', bubbles: generateBubbles(75, 0, 52, 3041, 1.6),    fill: 'rgba(255,255,255,0.92)', labelFill: '#ffffff', labelY: 112 },
+  { ring: 3, label: '',            bubbles: generateBubbles(8, 0, 20, 4099, 1.9),      fill: 'rgba(255,255,255,0.95)', labelFill: '#ffffff', labelY: 0 },
 ];
 
-const STAGE_DURATION = 3200; // ms each stage holds before advancing
+const STAGE_DURATION = 4500; // ms each stage holds before advancing
 
 function BubbleField({ bubbles, fill }) {
   return (
@@ -136,7 +136,7 @@ function AnimatedOrbit() {
           style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
         />
 
-        {/* Bubble field for the current stage only (cross-fade between stages) */}
+        {/* Bubble field + label for the current stage only (cross-fade between stages) */}
         <AnimatePresence mode="wait">
           <motion.g
             key={stage}
@@ -146,6 +146,20 @@ function AnimatedOrbit() {
             transition={{ duration: 0.5 }}
           >
             <BubbleField bubbles={active.bubbles} fill={active.fill} />
+            {active.label && (
+              <text
+                x={150}
+                y={active.labelY}
+                textAnchor="middle"
+                fill={active.labelFill}
+                fontFamily="Inter, sans-serif"
+                fontSize="9"
+                fontWeight="700"
+                letterSpacing="2"
+              >
+                {active.label}
+              </text>
+            )}
           </motion.g>
         </AnimatePresence>
 

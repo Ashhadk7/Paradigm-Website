@@ -207,7 +207,11 @@ h1, h2, h3, h4 {
 }
 
 /* "What We See" header aligns with the content column (eyebrow + numbered
-   observations), matching the rest of the section. */
+   observations). Cap the headline width so it wraps cleanly within the
+   container instead of overflowing the right edge. */
+.what-we-see-header .section-headline {
+  max-width: 900px;
+}
 
 .body-prose {
   font-family: 'Inter', sans-serif;
