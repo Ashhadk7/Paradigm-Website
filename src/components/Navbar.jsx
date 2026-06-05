@@ -6,7 +6,7 @@ import { useContent } from '../lib/useContent';
 import { usePresentation } from '../lib/usePresentation';
 
 const S = {
-  nav: { fontFamily: 'Inter, sans-serif', fontSize: '0.74rem', fontWeight: 700, letterSpacing: '0.08em', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s ease, background 0.2s ease', cursor: 'pointer', background: 'none', border: 'none', padding: '0.45rem 0.6rem', borderRadius: 3, display: 'flex', alignItems: 'center', gap: '0.25rem' },
+  nav: { fontFamily: 'Inter, sans-serif', fontSize: '0.86rem', fontWeight: 700, letterSpacing: '0.08em', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s ease, background 0.2s ease', cursor: 'pointer', background: 'none', border: 'none', padding: '0.55rem 0.75rem', borderRadius: 3, display: 'flex', alignItems: 'center', gap: '0.25rem' },
 };
 
 export default function Navbar() {
@@ -114,7 +114,7 @@ export default function Navbar() {
             : scrolled
               ? '0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px rgba(196,162,91,0.08)'
               : '0 4px 24px rgba(0,0,0,0.18)',
-          padding: scrolled ? '0.35rem 1.25rem' : '0.55rem 1.25rem',
+          padding: scrolled ? '0.55rem 1.5rem' : '0.9rem 1.5rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -125,21 +125,21 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" onClick={closeMenus} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', flexShrink: 0 }}>
             <div style={{
-              width: scrolled ? 30 : 34,
-              height: scrolled ? 30 : 34,
+              width: scrolled ? 38 : 44,
+              height: scrolled ? 38 : 44,
               background: palette.accent,
-              borderRadius: 3,
+              borderRadius: 4,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
               transition: 'width 0.3s, height 0.3s',
             }}>
-              <span style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '0.95rem' : '1.05rem', color: '#34416D', lineHeight: 1, transition: 'font-size 0.3s' }}>P</span>
+              <span style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '1.2rem' : '1.35rem', color: '#34416D', lineHeight: 1, transition: 'font-size 0.3s' }}>P</span>
             </div>
             <div>
-              <div style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '0.85rem' : '0.9375rem', letterSpacing: '0.06em', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', lineHeight: 1, transition: 'color 0.3s, font-size 0.3s' }}>{c.brand_name}</div>
-              <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.5rem', letterSpacing: '0.18em', fontWeight: 600, textTransform: 'uppercase', color: mobileOpen ? 'rgba(44,44,44,0.5)' : 'rgba(245,243,239,0.55)', transition: 'color 0.3s', marginTop: 1 }}>{c.brand_descriptor}</div>
+              <div style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '1.05rem' : '1.2rem', letterSpacing: '0.06em', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', lineHeight: 1, transition: 'color 0.3s, font-size 0.3s' }}>{c.brand_name}</div>
+              <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6rem', letterSpacing: '0.18em', fontWeight: 600, textTransform: 'uppercase', color: mobileOpen ? 'rgba(44,44,44,0.5)' : 'rgba(245,243,239,0.55)', transition: 'color 0.3s', marginTop: 2 }}>{c.brand_descriptor}</div>
             </div>
           </Link>
 

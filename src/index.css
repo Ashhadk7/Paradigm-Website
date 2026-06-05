@@ -181,10 +181,7 @@ h1, h2, h3, h4 {
 
 .display-headline {
   font-family: 'Source Serif 4', Georgia, serif;
-  /* Max capped at 3.2rem so the longest authored hero line
-     ("The collective intelligence of the market.") holds on a single line
-     within the 1080px hero column instead of wrapping mid-phrase. */
-  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-size: clamp(2.9rem, 5vw, 4rem);
   font-weight: 700;
   line-height: 1.05;
   color: #F5F3EF;
@@ -295,10 +292,10 @@ h1, h2, h3, h4 {
 
 .hero-subcopy {
   font-family: 'Inter', sans-serif;
-  font-size: 1.03rem;
-  line-height: 1.72;
-  color: rgba(245,243,239,0.76);
-  max-width: 960px;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: rgba(245,243,239,0.78);
+  max-width: 1040px;
   margin-bottom: 1.75rem;
 }
 
