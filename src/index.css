@@ -206,6 +206,15 @@ h1, h2, h3, h4 {
   color: #34416D;
 }
 
+/* Pull the "What We See" header to the far-left edge of the viewport on desktop.
+   Escapes the centered .section-inner container; resets on mobile to avoid overflow. */
+@media (min-width: 1024px) {
+  .what-we-see-header {
+    margin-left: calc(-50vw + 50%);
+    padding-left: 2.5rem;
+  }
+}
+
 .body-prose {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;

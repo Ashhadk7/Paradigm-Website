@@ -1,5 +1,6 @@
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import ProofBlock from '../components/ProofBlock';
 import CTAStrip from '../components/CTAStrip';
@@ -19,13 +20,6 @@ function Stat({ value, label }) {
     </motion.div>
   );
 }
-
-const LEGEND = [
-  { label: 'ALL DATA', sub: 'Active market data universe', gold: false },
-  { label: 'SOME DATA', sub: 'Mandate-specific dataset', gold: false },
-  { label: 'SELECT DATA', sub: 'Regime leadership cluster', gold: false },
-  { label: 'PORTFOLIO BLUEPRINT', sub: 'The confirmed signal', gold: true },
-];
 
 // Deterministic PRNG (mulberry32) so bubble positions stay stable across renders.
 function makeRng(seed) {
@@ -53,17 +47,24 @@ function generateBubbles(count, rInner, rOuter, seed, baseSize) {
       cx: cx + Math.cos(angle) * r,
       cy: cy + Math.sin(angle) * r,
       size: baseSize * (0.5 + rng() * 0.9),
-      delay: rng() * 3,
-      duration: 1.4 + rng() * 2.2,
+      delay: rng() * 1.5,
+      duration: 1.2 + rng() * 1.6,
     });
   }
   return bubbles;
 }
 
-// All Data ring: 500 bubbles · Some Data: 200 · Select Data: 20
-const ALL_DATA_BUBBLES = generateBubbles(500, 100, 132, 1011, 0.9);
-const SOME_DATA_BUBBLES = generateBubbles(200, 60, 94, 2027, 1.1);
-const SELECT_DATA_BUBBLES = generateBubbles(20, 26, 54, 3041, 1.5);
+// Staged narrowing sequence: bubbles concentrate inward, dropping in count.
+// Each stage populates ONLY its own ring band.
+// 0: All Data (outer grey) · 1: Some Data (blue) · 2: Select Data (navy) · 3: PB core (gold)
+const STAGES = [
+  { ring: 0, bubbles: generateBubbles(500, 100, 132, 1011, 0.9), fill: 'rgba(255,255,255,0.7)' },
+  { ring: 1, bubbles: generateBubbles(250, 58, 92, 2027, 1.0), fill: 'rgba(255,255,255,0.85)' },
+  { ring: 2, bubbles: generateBubbles(75, 28, 52, 3041, 1.2), fill: 'rgba(255,255,255,0.9)' },
+  { ring: 3, bubbles: generateBubbles(8, 6, 21, 4099, 1.6), fill: 'rgba(255,255,255,0.95)' },
+];
+
+const STAGE_DURATION = 3200; // ms each stage holds before advancing
 
 function BubbleField({ bubbles, fill }) {
   return (
@@ -76,7 +77,7 @@ function BubbleField({ bubbles, fill }) {
           r={b.size}
           fill={fill}
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.85, 0] }}
+          animate={{ opacity: [0, 0.9, 0] }}
           transition={{
             duration: b.duration,
             delay: b.delay,
@@ -90,160 +91,81 @@ function BubbleField({ bubbles, fill }) {
   );
 }
 
-// Bubbles that travel inward: spawn at the outer edge and drift along a radial
-// path through Some Data → Select Data → absorbed into the gold PB core.
-function generateFlowBubbles(count, seed) {
-  const rng = makeRng(seed);
-  const cx = 150;
-  const cy = 150;
-  const rStart = 130; // All Data outer edge
-  const rEnd = 24;    // gold PB core radius
-  const flows = [];
-  for (let i = 0; i < count; i++) {
-    const angle = rng() * Math.PI * 2;
-    const dx = Math.cos(angle);
-    const dy = Math.sin(angle);
-    flows.push({
-      xKeyframes: [cx + dx * rStart, cx + dx * (rStart * 0.55 + rEnd * 0.45), cx + dx * rEnd],
-      yKeyframes: [cy + dy * rStart, cy + dy * (rStart * 0.55 + rEnd * 0.45), cy + dy * rEnd],
-      size: 0.8 + rng() * 1.2,
-      delay: rng() * 4,
-      duration: 2.6 + rng() * 2.4,
-    });
-  }
-  return flows;
-}
-
-const FLOW_BUBBLES = generateFlowBubbles(60, 7919);
-
-function FlowBubbles({ bubbles }) {
-  return (
-    <>
-      {bubbles.map((b, i) => (
-        <motion.circle
-          key={i}
-          r={b.size}
-          fill="rgba(255,255,255,0.9)"
-          initial={{ opacity: 0 }}
-          animate={{
-            cx: b.xKeyframes,
-            cy: b.yKeyframes,
-            opacity: [0, 0.95, 0.95, 0],
-          }}
-          transition={{
-            duration: b.duration,
-            delay: b.delay,
-            repeat: Infinity,
-            repeatType: 'loop',
-            ease: 'easeIn',
-            times: [0, 0.15, 0.85, 1],
-          }}
-        />
-      ))}
-    </>
-  );
-}
-
 function AnimatedOrbit() {
+  const [stage, setStage] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setStage((s) => (s + 1) % STAGES.length);
+    }, STAGE_DURATION);
+    return () => clearInterval(id);
+  }, []);
+
+  // Rings reveal progressively: ring N is visible once we've reached its stage,
+  // and stays visible through the rest of the sequence.
+  const ringVisible = (ring) => stage >= ring;
+  const active = STAGES[stage];
+
   return (
     <motion.div
-      initial="hidden"
-      whileInView="visible"
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       <svg
         viewBox="0 0 300 300"
         aria-hidden="true"
-        style={{ width: '100%', maxWidth: 320, display: 'block', margin: '0 auto' }}
+        style={{ width: '100%', maxWidth: 560, display: 'block', margin: '0 auto' }}
       >
-        {/* Filled layered rings — light blue → mid blue → navy → gold core */}
-        <motion.circle cx={150} cy={150} r={132} fill="#C5CEE0"
-          variants={{ hidden: { opacity: 0, scale: 0.85 }, visible: { opacity: 1, scale: 1, transition: { delay: 0.15, duration: 0.8, ease: 'easeOut' } } }}
-          style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
+        {/* Filled layered rings — revealed progressively as the sequence narrows */}
+        <motion.circle cx={150} cy={150} r={134} fill="#C5CEE0"
+          animate={{ opacity: ringVisible(0) ? 1 : 0 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
         />
         <motion.circle cx={150} cy={150} r={94} fill="#7E8CB5"
-          variants={{ hidden: { opacity: 0, scale: 0.85 }, visible: { opacity: 1, scale: 1, transition: { delay: 0.3, duration: 0.8, ease: 'easeOut' } } }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: ringVisible(1) ? 1 : 0, scale: ringVisible(1) ? 1 : 0.85 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
           style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
         />
         <motion.circle cx={150} cy={150} r={54} fill="#34416D"
-          variants={{ hidden: { opacity: 0, scale: 0.85 }, visible: { opacity: 1, scale: 1, transition: { delay: 0.45, duration: 0.8, ease: 'easeOut' } } }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: ringVisible(2) ? 1 : 0, scale: ringVisible(2) ? 1 : 0.85 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
           style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
         />
 
-        {/* Flashing bubbles, one field per ring band */}
-        <BubbleField bubbles={ALL_DATA_BUBBLES} fill="rgba(255,255,255,0.65)" />
-        <BubbleField bubbles={SOME_DATA_BUBBLES} fill="rgba(255,255,255,0.75)" />
-        <BubbleField bubbles={SELECT_DATA_BUBBLES} fill="rgba(196,162,91,0.95)" />
+        {/* Bubble field for the current stage only (cross-fade between stages) */}
+        <AnimatePresence mode="wait">
+          <motion.g
+            key={stage}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <BubbleField bubbles={active.bubbles} fill={active.fill} />
+          </motion.g>
+        </AnimatePresence>
 
-        {/* Bubbles streaming inward: All Data → Some Data → Select Data → PB core */}
-        <FlowBubbles bubbles={FLOW_BUBBLES} />
-
-        {/* Gold Portfolio Blueprint core */}
+        {/* Gold Portfolio Blueprint core — revealed at the final stage */}
         <motion.circle
-          cx={150} cy={150} r={24}
+          cx={150} cy={150} r={22}
           fill="#C4A25B"
+          initial={{ opacity: 0, scale: 0.4 }}
+          animate={{ opacity: ringVisible(3) ? 1 : 0, scale: ringVisible(3) ? 1 : 0.4 }}
+          transition={{ duration: 0.6, type: 'spring', stiffness: 180 }}
           style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
-          variants={{ hidden: { opacity: 0, scale: 0.4 }, visible: { opacity: 1, scale: 1, transition: { delay: 0.9, duration: 0.6, type: 'spring', stiffness: 180 } } }}
         />
         <motion.text x={150} y={153} textAnchor="middle" fill="#fff"
-          fontFamily="Inter, sans-serif" fontSize="8" fontWeight="700" letterSpacing="1.5"
-          variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { delay: 1.1, duration: 0.4 } } }}
+          fontFamily="Inter, sans-serif" fontSize="7" fontWeight="700" letterSpacing="1.5"
+          animate={{ opacity: ringVisible(3) ? 1 : 0 }}
+          transition={{ duration: 0.4 }}
         >
           PB
         </motion.text>
-
-        {/* Band labels */}
-        <motion.text x={150} y={36} textAnchor="middle" fill="#34416D"
-          fontFamily="Inter, sans-serif" fontSize="7.5" fontWeight="600" letterSpacing="1"
-          variants={{ hidden: { opacity: 0 }, visible: { opacity: 0.85, transition: { delay: 1.0, duration: 0.5 } } }}
-        >
-          ALL DATA
-        </motion.text>
-        <motion.text x={150} y={74} textAnchor="middle" fill="#fff"
-          fontFamily="Inter, sans-serif" fontSize="7.5" fontWeight="600" letterSpacing="1"
-          variants={{ hidden: { opacity: 0 }, visible: { opacity: 0.9, transition: { delay: 1.05, duration: 0.5 } } }}
-        >
-          SOME DATA
-        </motion.text>
-        <motion.text x={150} y={108} textAnchor="middle" fill="#fff"
-          fontFamily="Inter, sans-serif" fontSize="7.5" fontWeight="600" letterSpacing="1"
-          variants={{ hidden: { opacity: 0 }, visible: { opacity: 0.9, transition: { delay: 1.1, duration: 0.5 } } }}
-        >
-          SELECT DATA
-        </motion.text>
       </svg>
-
-      <div style={{ marginTop: '2.5rem', display: 'flex', flexDirection: 'column' }}>
-        {LEGEND.map(({ label, sub, gold }, i) => (
-          <motion.div
-            key={label}
-            variants={{ hidden: { opacity: 0, x: 10 }, visible: { opacity: 1, x: 0, transition: { delay: 0.25 + i * 0.1, duration: 0.4 } } }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              padding: '0.75rem 0',
-              borderBottom: i < 3 ? '1px solid rgba(52,65,109,0.07)' : 'none',
-            }}
-          >
-            <span style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: '0.6rem',
-              fontWeight: 700,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color: gold ? '#C4A25B' : 'rgba(52,65,109,0.45)',
-              minWidth: 128,
-              flexShrink: 0,
-            }}>
-              {label}
-            </span>
-            <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8125rem', color: '#637890', lineHeight: 1.5 }}>
-              {sub}
-            </span>
-          </motion.div>
-        ))}
-      </div>
     </motion.div>
   );
 }
@@ -322,7 +244,7 @@ export default function Home() {
       {/* ── WHAT WE SEE ── */}
       <section className="section-white">
         <div className="section-inner">
-          <div style={{ marginBottom: '3.5rem' }}>
+          <div className="what-we-see-header" style={{ marginBottom: '3.5rem' }}>
             <p className="eyebrow">What We See</p>
             <h2 className="section-headline">
               {c.what_we_see_headline}
