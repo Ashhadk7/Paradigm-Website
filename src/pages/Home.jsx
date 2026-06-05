@@ -27,6 +27,69 @@ const LEGEND = [
   { label: 'PORTFOLIO BLUEPRINT', sub: 'The confirmed signal', gold: true },
 ];
 
+// Deterministic PRNG (mulberry32) so bubble positions stay stable across renders.
+function makeRng(seed) {
+  let a = seed;
+  return function () {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Scatter `count` bubbles uniformly inside an annular band [rInner, rOuter].
+function generateBubbles(count, rInner, rOuter, seed, baseSize) {
+  const rng = makeRng(seed);
+  const cx = 150;
+  const cy = 150;
+  const bubbles = [];
+  for (let i = 0; i < count; i++) {
+    const angle = rng() * Math.PI * 2;
+    // sqrt for uniform area distribution within the annulus
+    const r = Math.sqrt(rng() * (rOuter * rOuter - rInner * rInner) + rInner * rInner);
+    bubbles.push({
+      cx: cx + Math.cos(angle) * r,
+      cy: cy + Math.sin(angle) * r,
+      size: baseSize * (0.5 + rng() * 0.9),
+      delay: rng() * 3,
+      duration: 1.4 + rng() * 2.2,
+    });
+  }
+  return bubbles;
+}
+
+// All Data ring: 500 bubbles · Some Data: 200 · Select Data: 20
+const ALL_DATA_BUBBLES = generateBubbles(500, 100, 132, 1011, 0.9);
+const SOME_DATA_BUBBLES = generateBubbles(200, 60, 94, 2027, 1.1);
+const SELECT_DATA_BUBBLES = generateBubbles(20, 26, 54, 3041, 1.5);
+
+function BubbleField({ bubbles, fill }) {
+  return (
+    <>
+      {bubbles.map((b, i) => (
+        <motion.circle
+          key={i}
+          cx={b.cx}
+          cy={b.cy}
+          r={b.size}
+          fill={fill}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 0.85, 0] }}
+          transition={{
+            duration: b.duration,
+            delay: b.delay,
+            repeat: Infinity,
+            repeatType: 'loop',
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+    </>
+  );
+}
+
 function AnimatedOrbit() {
   return (
     <motion.div
@@ -37,28 +100,59 @@ function AnimatedOrbit() {
       <svg
         viewBox="0 0 300 300"
         aria-hidden="true"
-        style={{ width: '100%', maxWidth: 280, display: 'block', margin: '0 auto' }}
+        style={{ width: '100%', maxWidth: 320, display: 'block', margin: '0 auto' }}
       >
-        <motion.circle cx={150} cy={150} r={133} stroke="#34416D" fill="none" strokeWidth={1}
-          variants={{ hidden: { opacity: 0.7 }, visible: { opacity: 0.08, transition: { delay: 0.2, duration: 1.2 } } }}
+        {/* Filled layered rings — light blue → mid blue → navy → gold core */}
+        <motion.circle cx={150} cy={150} r={132} fill="#C5CEE0"
+          variants={{ hidden: { opacity: 0, scale: 0.85 }, visible: { opacity: 1, scale: 1, transition: { delay: 0.15, duration: 0.8, ease: 'easeOut' } } }}
+          style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
         />
-        <motion.circle cx={150} cy={150} r={95} stroke="#34416D" fill="none" strokeWidth={1.5}
-          variants={{ hidden: { opacity: 0.7 }, visible: { opacity: 0.22, transition: { delay: 0.45, duration: 1.0 } } }}
+        <motion.circle cx={150} cy={150} r={94} fill="#7E8CB5"
+          variants={{ hidden: { opacity: 0, scale: 0.85 }, visible: { opacity: 1, scale: 1, transition: { delay: 0.3, duration: 0.8, ease: 'easeOut' } } }}
+          style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
         />
-        <motion.circle cx={150} cy={150} r={56} stroke="#34416D" fill="none" strokeWidth={2}
-          variants={{ hidden: { opacity: 0.7 }, visible: { opacity: 0.55, transition: { delay: 0.65, duration: 0.8 } } }}
+        <motion.circle cx={150} cy={150} r={54} fill="#34416D"
+          variants={{ hidden: { opacity: 0, scale: 0.85 }, visible: { opacity: 1, scale: 1, transition: { delay: 0.45, duration: 0.8, ease: 'easeOut' } } }}
+          style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
         />
+
+        {/* Flashing bubbles, one field per ring band */}
+        <BubbleField bubbles={ALL_DATA_BUBBLES} fill="rgba(255,255,255,0.65)" />
+        <BubbleField bubbles={SOME_DATA_BUBBLES} fill="rgba(255,255,255,0.75)" />
+        <BubbleField bubbles={SELECT_DATA_BUBBLES} fill="rgba(196,162,91,0.95)" />
+
+        {/* Gold Portfolio Blueprint core */}
         <motion.circle
           cx={150} cy={150} r={24}
           fill="#C4A25B"
           style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
           variants={{ hidden: { opacity: 0, scale: 0.4 }, visible: { opacity: 1, scale: 1, transition: { delay: 0.9, duration: 0.6, type: 'spring', stiffness: 180 } } }}
         />
-        <motion.text x={150} y={154} textAnchor="middle" fill="#fff"
+        <motion.text x={150} y={153} textAnchor="middle" fill="#fff"
           fontFamily="Inter, sans-serif" fontSize="8" fontWeight="700" letterSpacing="1.5"
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { delay: 1.1, duration: 0.4 } } }}
         >
           PB
+        </motion.text>
+
+        {/* Band labels */}
+        <motion.text x={150} y={36} textAnchor="middle" fill="#34416D"
+          fontFamily="Inter, sans-serif" fontSize="7.5" fontWeight="600" letterSpacing="1"
+          variants={{ hidden: { opacity: 0 }, visible: { opacity: 0.85, transition: { delay: 1.0, duration: 0.5 } } }}
+        >
+          ALL DATA
+        </motion.text>
+        <motion.text x={150} y={74} textAnchor="middle" fill="#fff"
+          fontFamily="Inter, sans-serif" fontSize="7.5" fontWeight="600" letterSpacing="1"
+          variants={{ hidden: { opacity: 0 }, visible: { opacity: 0.9, transition: { delay: 1.05, duration: 0.5 } } }}
+        >
+          SOME DATA
+        </motion.text>
+        <motion.text x={150} y={108} textAnchor="middle" fill="#fff"
+          fontFamily="Inter, sans-serif" fontSize="7.5" fontWeight="600" letterSpacing="1"
+          variants={{ hidden: { opacity: 0 }, visible: { opacity: 0.9, transition: { delay: 1.1, duration: 0.5 } } }}
+        >
+          SELECT DATA
         </motion.text>
       </svg>
 
