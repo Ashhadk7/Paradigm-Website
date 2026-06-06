@@ -116,7 +116,7 @@ function AnimatedOrbit() {
       <svg
         viewBox="0 0 300 300"
         aria-hidden="true"
-        style={{ width: '100%', maxWidth: 560, display: 'block', margin: '0 auto' }}
+        style={{ width: '100%', maxWidth: 620, display: 'block', margin: '0 auto' }}
       >
         {/* Filled layered rings — revealed progressively as the sequence narrows */}
         <motion.circle cx={150} cy={150} r={134} fill="#C5CEE0"
@@ -335,12 +335,37 @@ export default function Home() {
       {/* ── THE PLATFORM ── */}
       <section className="section-offwhite">
         <div className="section-inner">
-          <div style={{ maxWidth: 720 }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
+          <div className="platform-split">
+            {/* Left: intro text */}
+            <div>
+              <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
+              <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890', margin: 0 }}>
                 {c.platform_text}
               </p>
+            </div>
+
+            {/* Right: three capability cards */}
+            <div className="platform-cards">
+              {[
+                { n: '01', title: 'Custom Active Strategies', body: 'Built to specification within each mandate.' },
+                { n: '02', title: 'SMA Conversion', body: 'Existing fund exposures into customizable, tax-aware portfolios.' },
+                { n: '03', title: 'Direct & Custom Indexing', body: 'At scale — with personalization and tax-loss harvesting at the client level.' },
+              ].map(({ n, title, body }, i) => (
+                <motion.div
+                  key={n}
+                  className="platform-card"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                >
+                  <span className="platform-card-num">{n}</span>
+                  <div>
+                    <h3 className="platform-card-title">{title}</h3>
+                    <p className="platform-card-body">{body}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
