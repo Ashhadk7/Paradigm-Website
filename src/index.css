@@ -322,9 +322,9 @@ h1, h2, h3, h4 {
 
 .what-we-see-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: start;
+  align-items: center;
 }
 
 .scroll-indicator {
@@ -811,6 +811,7 @@ h1, h2, h3, h4 {
   }
 
   .what-we-see-grid {
+    grid-template-columns: 1fr;
     gap: 2.5rem;
   }
 
