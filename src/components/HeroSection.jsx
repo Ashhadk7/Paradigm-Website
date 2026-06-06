@@ -121,10 +121,12 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
             transition={{ duration: 0.8, delay: actionDelay + 0.2, ease: 'easeOut' }}
             style={{
               height: 2,
-              background: 'linear-gradient(90deg, #C4A25B 0%, transparent 70%)',
+              background: 'linear-gradient(90deg, transparent 0%, #C4A25B 50%, transparent 100%)',
               marginTop: ctas.length > 0 ? '2rem' : '1.5rem',
-              maxWidth: 180,
-              transformOrigin: 'left',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              width: 180,
+              transformOrigin: 'center',
             }}
           />
         </div>
