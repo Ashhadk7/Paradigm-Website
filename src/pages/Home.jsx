@@ -58,8 +58,8 @@ function generateBubbles(count, rInner, rOuter, seed, baseSize) {
 // dropping in count as the universe narrows. Labels appear in sync per stage.
 // 0: All Data (grey) 1000 · 1: Some Data (blue) 350 · 2: Select Data (navy) 75 · 3: PB core (gold) 8
 const STAGES = [
-  { ring: 0, label: 'ALL DATA',    bubbles: generateBubbles(1000, 0, 130, 1011, 1.2), fill: 'rgba(255,255,255,0.75)', labelFill: '#34416D', labelY: 36 },
-  { ring: 1, label: 'SOME DATA',   bubbles: generateBubbles(350, 0, 92, 2027, 1.4),   fill: 'rgba(255,255,255,0.88)', labelFill: '#ffffff', labelY: 74 },
+  { ring: 0, label: 'ALL DATA',    bubbles: generateBubbles(1000, 0, 130, 1011, 1.2), fill: 'rgba(52,65,109,0.55)', labelFill: '#34416D', labelY: 36 },
+  { ring: 1, label: 'SOME DATA',   bubbles: generateBubbles(350, 0, 92, 2027, 1.4),   fill: 'rgba(28,38,68,0.7)',  labelFill: '#ffffff', labelY: 74 },
   { ring: 2, label: 'SELECT DATA', bubbles: generateBubbles(75, 0, 52, 3041, 1.6),    fill: 'rgba(255,255,255,0.92)', labelFill: '#ffffff', labelY: 112 },
   { ring: 3, label: '',            bubbles: generateBubbles(8, 0, 20, 4099, 1.9),      fill: 'rgba(255,255,255,0.95)', labelFill: '#ffffff', labelY: 0 },
 ];
@@ -261,7 +261,18 @@ export default function Home() {
           <div className="what-we-see-header" style={{ marginBottom: '3.5rem' }}>
             <p className="eyebrow">What We See</p>
             <h2 className="section-headline">
-              {c.what_we_see_headline}
+              {(() => {
+                // "Three observations." on line 1, the rest on line 2.
+                const m = c.what_we_see_headline.match(/^(.*?[.!?])\s+(.*)$/s);
+                if (!m) return c.what_we_see_headline;
+                return (
+                  <>
+                    {m[1]}
+                    <br />
+                    {m[2]}
+                  </>
+                );
+              })()}
             </h2>
           </div>
 
@@ -336,7 +347,7 @@ export default function Home() {
       <section className="section-offwhite">
         <div className="section-inner">
           <div className="platform-split">
-            {/* Left: intro text */}
+            {/* Left: platform intro text */}
             <div>
               <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
               <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890', margin: 0 }}>
@@ -344,37 +355,9 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Right: three capability cards */}
-            <div className="platform-cards">
-              {[
-                { n: '01', title: 'Custom Active Strategies', body: 'Built to specification within each mandate.' },
-                { n: '02', title: 'SMA Conversion', body: 'Existing fund exposures into customizable, tax-aware portfolios.' },
-                { n: '03', title: 'Direct & Custom Indexing', body: 'At scale — with personalization and tax-loss harvesting at the client level.' },
-              ].map(({ n, title, body }, i) => (
-                <motion.div
-                  key={n}
-                  className="platform-card"
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                >
-                  <span className="platform-card-num">{n}</span>
-                  <div>
-                    <h3 className="platform-card-title">{title}</h3>
-                    <p className="platform-card-body">{body}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {/* Right: Proven over 35 years proof block */}
+            <ProofBlock variant="home" body={c.proof_body} bridge={c.proof_bridge} />
           </div>
-        </div>
-      </section>
-
-      {/* ── PROOF ── */}
-      <section className="section-offwhite compact-proof-section">
-        <div className="section-inner">
-          <ProofBlock variant="home" body={c.proof_body} bridge={c.proof_bridge} />
         </div>
       </section>
 
