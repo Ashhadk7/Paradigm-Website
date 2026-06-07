@@ -233,13 +233,10 @@ h1, h2, h3, h4 {
 .hero-copy--standard { max-width: 1180px; }
 .hero-copy--wide { max-width: 1180px; }
 
-/* Authored headline lines (split on \n) stay on one line on wide desktops —
-   the approved copy doc fixes the line breaks ("one line in the doc => one
-   line on the site"). Scoped to >=1200px, where the 1200px hero column has
-   room for the longest line; below that they wrap naturally to avoid overflow. */
-@media (min-width: 1200px) {
-  .hero-headline-line { white-space: nowrap; }
-}
+/* Headline lines wrap within the hero column instead of overflowing the
+   viewport. (Previously forced to nowrap, which pushed long sentences — e.g.
+   the Institutions hero — off the right edge of the screen.) */
+.hero-headline-line { white-space: normal; overflow-wrap: break-word; }
 
 @media (min-width: 1025px) {
   .hero-section--compact {
