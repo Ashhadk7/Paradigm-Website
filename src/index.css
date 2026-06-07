@@ -290,7 +290,7 @@ h1, h2, h3, h4 {
 /* Hero left/right split: copy occupies the LEFT half; the wave background
    fills the section behind, reading as the right half. */
 .hero-copy--standard {
-  max-width: 620px;
+  max-width: 680px;
   margin-left: 0;
   margin-right: auto;
   text-align: left;
@@ -305,10 +305,10 @@ h1, h2, h3, h4 {
 
 .hero-subcopy {
   font-family: 'Inter', sans-serif;
-  font-size: 1.2rem;
-  line-height: 1.65;
-  color: rgba(245,243,239,0.82);
-  max-width: 620px;
+  font-size: 1.45rem;
+  line-height: 1.6;
+  color: rgba(245,243,239,0.85);
+  max-width: 680px;
   margin-bottom: 1.75rem;
 }
 
