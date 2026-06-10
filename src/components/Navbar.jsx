@@ -127,7 +127,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" onClick={closeMenus} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0, marginLeft: '0.5rem' }}>
             <img
-              src="/logo.png"
+              src={mobileOpen ? '/logo2.png' : '/logo.png'}
               alt="Paradigm Asset Management"
               style={{
                 height: scrolled ? 46 : 56,
