@@ -114,33 +114,29 @@ export default function Navbar() {
             : scrolled
               ? '0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px rgba(196,162,91,0.08)'
               : '0 4px 24px rgba(0,0,0,0.18)',
-          padding: scrolled ? '0.55rem 1.5rem' : '0.9rem 1.5rem',
+          height: scrolled ? '40px' : '46px',
+          padding: scrolled ? '0 1.5rem' : '0 1.5rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           transition: 'top 0.4s cubic-bezier(0.4,0,0.2,1), width 0.4s cubic-bezier(0.4,0,0.2,1), max-width 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.4s cubic-bezier(0.4,0,0.2,1), border-radius 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s ease, background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
           willChange: 'transform',
+          overflow: 'visible',
         }}
       >
           {/* Logo */}
-          <Link to="/" onClick={closeMenus} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', flexShrink: 0 }}>
-            <div style={{
-              width: scrolled ? 38 : 44,
-              height: scrolled ? 38 : 44,
-              background: palette.accent,
-              borderRadius: 4,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-              transition: 'width 0.3s, height 0.3s',
-            }}>
-              <span style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '1.2rem' : '1.35rem', color: '#34416D', lineHeight: 1, transition: 'font-size 0.3s' }}>P</span>
-            </div>
-            <div>
-              <div style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: scrolled ? '1.05rem' : '1.2rem', letterSpacing: '0.06em', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', lineHeight: 1, transition: 'color 0.3s, font-size 0.3s' }}>{c.brand_name}</div>
-              <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.6rem', letterSpacing: '0.18em', fontWeight: 600, textTransform: 'uppercase', color: mobileOpen ? 'rgba(44,44,44,0.5)' : 'rgba(245,243,239,0.55)', transition: 'color 0.3s', marginTop: 2 }}>{c.brand_descriptor}</div>
-            </div>
+          <Link to="/" onClick={closeMenus} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0, marginLeft: '0.5rem' }}>
+            <img
+              src="/logo.png"
+              alt="Paradigm Asset Management"
+              style={{
+                height: scrolled ? 46 : 56,
+                width: 'auto',
+                flexShrink: 0,
+                display: 'block',
+                transition: 'height 0.3s ease',
+              }}
+            />
           </Link>
 
           {/* Desktop Nav */}

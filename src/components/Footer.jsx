@@ -35,17 +35,20 @@ export default function Footer() {
     <footer style={{ background: palette.tone, color: '#F5F3EF' }}>
       <div style={{ height: 2, background: `linear-gradient(90deg, ${palette.accent} 0%, transparent 100%)` }} />
 
-      <div style={{ maxWidth: 1600, margin: '0 auto', padding: '1.25rem 2.5rem 1rem' }}>
+      <div style={{ maxWidth: 1600, margin: '0 auto', padding: '0.75rem 2.5rem 0.6rem' }}>
         <div className="footer-row">
           {/* Logo */}
-          <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
-            <div style={{ width: 26, height: 26, background: palette.accent, borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <span style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: '0.85rem', color: '#34416D' }}>P</span>
-            </div>
-            <div>
-              <div style={{ fontFamily: 'Source Serif 4, serif', fontWeight: 700, fontSize: '0.8125rem', color: '#F5F3EF', letterSpacing: '0.05em', lineHeight: 1 }}>{c.brand_name}</div>
-              <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.48rem', color: 'rgba(245,243,239,0.45)', letterSpacing: '0.15em', textTransform: 'uppercase', marginTop: 1 }}>{c.brand_descriptor}</div>
-            </div>
+          <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
+            <img
+              src="/logo.png"
+              alt="Paradigm Asset Management"
+              style={{
+                height: 90,
+                width: 'auto',
+                flexShrink: 0,
+                display: 'block',
+              }}
+            />
           </Link>
 
           {/* Five links per brief: Strategies | Process | Team | Legal | Contact */}
