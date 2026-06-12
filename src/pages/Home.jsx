@@ -36,8 +36,8 @@ function makeRng(seed) {
 // Scatter `count` bubbles uniformly inside an annular band [rInner, rOuter].
 function generateBubbles(count, rInner, rOuter, seed, baseSize) {
   const rng = makeRng(seed);
-  const cx = 150;
-  const cy = 150;
+  const cx = 250;
+  const cy = 250;
   const bubbles = [];
   for (let i = 0; i < count; i++) {
     const angle = rng() * Math.PI * 2;
@@ -60,14 +60,14 @@ function generateBubbles(count, rInner, rOuter, seed, baseSize) {
 // Staged narrowing sequence: bubbles fill the FULL disc of the active ring,
 // dropping in count as the universe narrows. Labels appear centered.
 const STAGES = [
-  { ring: 0, label: 'All Data',    bubbles: generateBubbles(8, 0, 130, 1011, 4.0), fill: 'rgba(26,34,64,0.8)', labelFill: '#1a2240' },
-  { ring: 1, label: 'Some Data',   bubbles: generateBubbles(6, 0, 90, 2027, 3.0),  fill: 'rgba(255,255,255,0.9)', labelFill: '#ffffff' },
-  { ring: 2, label: 'Select Data', bubbles: generateBubbles(4, 0, 50, 3041, 2.0),  fill: 'rgba(26,34,64,0.95)', labelFill: '#1a2240' },
+  { ring: 0, label: 'All Data',    bubbles: generateBubbles(500, 0, 240, 1011, 10.0), color: 'rgba(26,34,64,0.8)', labelFill: '#1a2240' },
+  { ring: 1, label: 'Some Data',   bubbles: generateBubbles(300, 0, 170, 2027, 14.0), color: 'rgba(255,255,255,0.9)', labelFill: '#ffffff' },
+  { ring: 2, label: 'Select Data', bubbles: generateBubbles(150, 0, 100, 3041, 18.0), color: 'rgba(26,34,64,0.95)', labelFill: '#1a2240' },
 ];
 
 const STAGE_DURATION = 4500; // ms each stage holds before advancing
 
-function BubbleField({ bubbles, fill }) {
+function BubbleField({ bubbles, color }) {
   return (
     <>
       {bubbles.map((b, i) => (
@@ -76,7 +76,9 @@ function BubbleField({ bubbles, fill }) {
           cx={b.cx}
           cy={b.cy}
           r={b.size}
-          fill={fill}
+          fill="none"
+          stroke={color}
+          strokeWidth={Math.max(1, b.size * 0.15)}
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 0.9, 0] }}
           transition={{
@@ -115,22 +117,22 @@ function AnimatedOrbit() {
       transition={{ duration: 0.8, ease: 'easeOut' }}
     >
       <svg
-        viewBox="0 0 300 300"
+        viewBox="0 0 500 500"
         aria-hidden="true"
         style={{ width: '100%', maxWidth: 620, display: 'block', margin: '0 auto' }}
       >
         {/* Filled layered rings — revealed progressively as the sequence narrows */}
-        <motion.circle cx={150} cy={150} r={134} fill="#7E8CB5"
+        <motion.circle cx={250} cy={250} r={240} fill="#7E8CB5"
           animate={{ opacity: ringVisible(0) ? 1 : 0 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
         />
-        <motion.circle cx={150} cy={150} r={94} fill="#34416D"
+        <motion.circle cx={250} cy={250} r={170} fill="#34416D"
           initial={{ opacity: 0 }}
           animate={{ opacity: ringVisible(1) ? 1 : 0, scale: ringVisible(1) ? 1 : 0.85 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
           style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
         />
-        <motion.circle cx={150} cy={150} r={54} fill="#C4A25B"
+        <motion.circle cx={250} cy={250} r={100} fill="#C4A25B"
           initial={{ opacity: 0 }}
           animate={{ opacity: ringVisible(2) ? 1 : 0, scale: ringVisible(2) ? 1 : 0.85 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
@@ -146,16 +148,16 @@ function AnimatedOrbit() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <BubbleField bubbles={active.bubbles} fill={active.fill} />
+            <BubbleField bubbles={active.bubbles} color={active.color} />
             {active.label && (
               <text
-                x={150}
-                y={150}
+                x={250}
+                y={250}
                 textAnchor="middle"
                 dominantBaseline="central"
                 fill={active.labelFill}
                 fontFamily="Inter, sans-serif"
-                fontSize="10"
+                fontSize="18"
                 fontWeight="700"
                 letterSpacing="2"
               >
