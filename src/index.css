@@ -50,7 +50,7 @@ h1, h2, h3, h4 {
   align-items: center;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1150px) {
   .desktop-nav {
     display: none !important;
   }
@@ -220,12 +220,12 @@ h1, h2, h3, h4 {
 }
 
 .hero-section {
-  padding-top: 8.5rem;
+  padding-top: 9.5rem;
   padding-bottom: 4.5rem;
   background: #34416D;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -242,12 +242,12 @@ h1, h2, h3, h4 {
 
 @media (min-width: 1025px) {
   .hero-section--compact {
-    padding-top: 9rem;
+    padding-top: 10rem;
     padding-bottom: 4rem;
   }
 
   .hero-section--spacious {
-    padding-top: 10.5rem;
+    padding-top: 12.5rem;
     padding-bottom: 6rem;
   }
 
