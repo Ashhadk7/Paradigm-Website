@@ -333,7 +333,7 @@ export default function Home() {
         <div className="section-inner">
           <div className="platform-split">
             {/* Left: platform intro text */}
-            <div>
+            <div className="platform-left">
               <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
               <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890', margin: 0 }}>
                 {c.platform_text}

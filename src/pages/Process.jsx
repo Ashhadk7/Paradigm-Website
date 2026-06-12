@@ -106,8 +106,8 @@ export default function Process() {
       <section
         className="hero-section"
         style={{
-          paddingTop: '5rem',
-          paddingBottom: '3rem',
+          paddingTop: '8.5rem',
+          paddingBottom: '4.5rem',
         }}
       >
         {/* GLSL hills background */}

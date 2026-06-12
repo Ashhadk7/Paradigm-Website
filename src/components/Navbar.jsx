@@ -114,7 +114,7 @@ export default function Navbar() {
             : scrolled
               ? '0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px rgba(196,162,91,0.08)'
               : '0 4px 24px rgba(0,0,0,0.18)',
-          height: scrolled ? '64px' : '80px',
+          height: scrolled ? '80px' : '100px',
           display: 'flex',
           alignItems: 'center',
           transition: 'height 0.4s cubic-bezier(0.4,0,0.2,1), background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
@@ -137,7 +137,7 @@ export default function Navbar() {
               src="/Paradigm_Logo_XL 2.svg"
               alt="Paradigm Asset Management"
               style={{
-                height: scrolled ? '44px' : '52px',
+                height: scrolled ? '56px' : '72px',
                 width: 'auto',
                 flexShrink: 0,
                 display: 'block',
@@ -205,7 +205,7 @@ export default function Navbar() {
           <button
             className="mobile-menu-toggle"
             onClick={() => setMobileOpen(o => !o)}
-            style={{ background: mobileOpen ? 'rgba(44,44,44,0.08)' : 'rgba(245,243,239,0.1)', border: mobileOpen ? '1px solid rgba(44,44,44,0.15)' : '1px solid rgba(245,243,239,0.15)', borderRadius: 50, cursor: 'pointer', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', padding: '0.4rem', display: 'flex', alignItems: 'center', transition: 'all 0.3s' }}
+            style={{ background: mobileOpen ? 'rgba(44,44,44,0.08)' : 'rgba(245,243,239,0.1)', border: mobileOpen ? '1px solid rgba(44,44,44,0.15)' : '1px solid rgba(245,243,239,0.15)', borderRadius: 50, cursor: 'pointer', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', padding: '0.4rem', transition: 'all 0.3s' }}
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}

@@ -92,8 +92,8 @@ export default function About() {
       <section
         className="hero-section"
         style={{
-          paddingTop: '5rem',
-          paddingBottom: '3rem',
+          paddingTop: '8.5rem',
+          paddingBottom: '4.5rem',
         }}
       >
         <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>
