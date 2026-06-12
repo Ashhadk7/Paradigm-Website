@@ -6,7 +6,7 @@ import { useContent } from '../lib/useContent';
 import { usePresentation } from '../lib/usePresentation';
 
 const S = {
-  nav: { fontFamily: 'Inter, sans-serif', fontSize: '1.0625rem', fontWeight: 700, letterSpacing: '0.08em', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s ease, background 0.2s ease', cursor: 'pointer', background: 'none', border: 'none', padding: '0.55rem 0.75rem', borderRadius: 3, display: 'flex', alignItems: 'center', gap: '0.25rem' },
+  nav: { fontFamily: 'Inter, sans-serif', fontSize: '1.2rem', fontWeight: 700, letterSpacing: '0.08em', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s ease, background 0.2s ease', cursor: 'pointer', background: 'none', border: 'none', padding: '0.55rem 0.75rem', borderRadius: 3, display: 'flex', alignItems: 'center', gap: '0.25rem' },
 };
 
 export default function Navbar() {
@@ -114,7 +114,7 @@ export default function Navbar() {
             : scrolled
               ? '0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px rgba(196,162,91,0.08)'
               : '0 4px 24px rgba(0,0,0,0.18)',
-          height: scrolled ? '80px' : '100px',
+          height: scrolled ? '90px' : '115px',
           display: 'flex',
           alignItems: 'center',
           transition: 'height 0.4s cubic-bezier(0.4,0,0.2,1), background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
@@ -137,7 +137,7 @@ export default function Navbar() {
               src="/Paradigm_Logo_XL 2.svg"
               alt="Paradigm Asset Management"
               style={{
-                height: scrolled ? '56px' : '72px',
+                height: scrolled ? '66px' : '84px',
                 width: 'auto',
                 flexShrink: 0,
                 display: 'block',
@@ -177,10 +177,10 @@ export default function Navbar() {
                   border: '1px solid rgba(245,243,239,0.1)', minWidth: 180, overflow: 'hidden',
                   animation: 'fadeDown 0.18s ease',
                 }}>
-                  <Link to="/advisors" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '1.0625rem', fontWeight: 500, color: location.pathname === '/advisors' ? palette.accent : '#F5F3EF', textDecoration: 'none', borderBottom: '1px solid rgba(245,243,239,0.08)', letterSpacing: '0.04em' }}>
+                  <Link to="/advisors" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '1.125rem', fontWeight: 500, color: location.pathname === '/advisors' ? palette.accent : '#F5F3EF', textDecoration: 'none', borderBottom: '1px solid rgba(245,243,239,0.08)', letterSpacing: '0.04em' }}>
                     Wealth Advisors
                   </Link>
-                  <Link to="/familyoffice" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '1.0625rem', fontWeight: 500, color: location.pathname === '/familyoffice' ? palette.accent : '#F5F3EF', textDecoration: 'none', letterSpacing: '0.04em' }}>
+                  <Link to="/familyoffice" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '1.125rem', fontWeight: 500, color: location.pathname === '/familyoffice' ? palette.accent : '#F5F3EF', textDecoration: 'none', letterSpacing: '0.04em' }}>
                     Family Offices
                   </Link>
                 </div>
