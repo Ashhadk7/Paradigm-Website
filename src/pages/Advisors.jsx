@@ -16,9 +16,9 @@ function ThreeCol({ blocks }) {
           transition={{ delay: i * 0.1, duration: 0.5 }}
           style={{ background: '#fff', padding: '2.5rem 2rem' }}
         >
-          <p style={{ fontFamily: 'Inter', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '0.875rem' }}>{b.label}</p>
-          <h3 style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.25rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.3 }}>{b.title}</h3>
-          <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', lineHeight: 1.75, color: '#637890' }}>{b.body}</p>
+          <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '0.875rem' }}>{b.label}</p>
+          <h3 style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.45rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.3 }}>{b.title}</h3>
+          <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.75, color: '#637890' }}>{b.body}</p>
         </motion.div>
       ))}
     </div>
@@ -120,7 +120,7 @@ export default function Advisors() {
           <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '0.625rem' }}>
             {c.practice_headline}
           </h2>
-          <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', maxWidth: 560, margin: '0 0 3.5rem' }}>
+          <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', maxWidth: 560, margin: '0 0 3.5rem' }}>
             {c.practice_sub}
           </p>
           <ThreeCol blocks={[
@@ -150,10 +150,10 @@ export default function Advisors() {
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
             <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
+              <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
                 {c.platform_para1}
               </p>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
+              <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
                 {c.platform_para2}
               </p>
             </div>
@@ -168,7 +168,7 @@ export default function Advisors() {
           <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '0.625rem' }}>
             {c.delivery_headline}
           </h2>
-          <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', maxWidth: 560, marginBottom: '3.5rem' }}>
+          <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', maxWidth: 560, marginBottom: '3.5rem' }}>
             {c.delivery_sub}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
@@ -196,9 +196,9 @@ export default function Advisors() {
                   padding: '2.5rem',
                 }}
               >
-                <p style={{ fontFamily: 'Inter', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '0.625rem' }}>{card.tag}</p>
-                <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.25rem', color: card.accent ? '#F5F3EF' : '#34416D', marginBottom: '1.125rem', lineHeight: 1.35 }}>{card.tagline}</p>
-                <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', lineHeight: 1.75, color: card.accent ? 'rgba(245,243,239,0.7)' : '#637890' }}>{card.body}</p>
+                <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '0.625rem' }}>{card.tag}</p>
+                <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.45rem', color: card.accent ? '#F5F3EF' : '#34416D', marginBottom: '1.125rem', lineHeight: 1.35 }}>{card.tagline}</p>
+                <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.75, color: card.accent ? 'rgba(245,243,239,0.7)' : '#637890' }}>{card.body}</p>
               </motion.div>
             ))}
           </div>

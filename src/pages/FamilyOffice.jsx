@@ -16,9 +16,9 @@ function ThreeCol({ blocks }) {
           transition={{ delay: i * 0.1, duration: 0.5 }}
           style={{ background: '#fff', padding: '2.5rem 2rem' }}
         >
-          <p style={{ fontFamily: 'Inter', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '0.875rem' }}>{b.label}</p>
-          <h3 style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.25rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.3 }}>{b.title}</h3>
-          <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', lineHeight: 1.75, color: '#637890' }}>{b.body}</p>
+          <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '0.875rem' }}>{b.label}</p>
+          <h3 style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.45rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.3 }}>{b.title}</h3>
+          <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.75, color: '#637890' }}>{b.body}</p>
         </motion.div>
       ))}
     </div>
@@ -108,7 +108,7 @@ export default function FamilyOffice() {
           <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '0.625rem' }}>
             {c.offers_headline}
           </h2>
-          <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#637890', maxWidth: 560, margin: '0 0 3.5rem' }}>
+          <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', maxWidth: 560, margin: '0 0 3.5rem' }}>
             {c.offers_sub}
           </p>
           <ThreeCol blocks={[
@@ -138,11 +138,11 @@ export default function FamilyOffice() {
             <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_ops_title}</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
+                style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
                 {c.platform_ops_body}
               </motion.p>
               <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
+                style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
                 {c.platform_ops_body_2}
               </motion.p>
             </div>

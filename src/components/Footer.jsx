@@ -18,7 +18,7 @@ export default function Footer() {
   };
   const linkStyle = {
     fontFamily: 'Inter, sans-serif',
-    fontSize: '0.75rem',
+    fontSize: '1.0625rem',
     color: 'rgba(245,243,239,0.6)',
     textDecoration: 'none',
     transition: 'color 0.2s',
@@ -27,7 +27,7 @@ export default function Footer() {
   const separatorStyle = {
     color: 'rgba(245,243,239,0.2)',
     fontFamily: 'Inter, sans-serif',
-    fontSize: '0.75rem',
+    fontSize: '1.0625rem',
     userSelect: 'none',
   };
 
@@ -40,10 +40,10 @@ export default function Footer() {
           {/* Logo */}
           <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
             <img
-              src="/logo.png"
+              src="/Paradigm_Logo_XL 2.svg"
               alt="Paradigm Asset Management"
               style={{
-                height: 90,
+                height: 48,
                 width: 'auto',
                 flexShrink: 0,
                 display: 'block',
@@ -51,10 +51,8 @@ export default function Footer() {
             />
           </Link>
 
-          {/* Five links per brief: Strategies | Process | Team | Legal | Contact */}
+          {/* Links: Process | Team | Legal | Contact */}
           <nav className="footer-links">
-            <Link to="/advisors" style={linkStyle}>{c.footer_strategies}</Link>
-            <span style={separatorStyle}>|</span>
             <Link to="/process" style={linkStyle}>{c.footer_process}</Link>
             <span style={separatorStyle}>|</span>
             <Link to="/about" style={linkStyle}>{c.footer_team}</Link>
@@ -65,7 +63,7 @@ export default function Footer() {
           </nav>
 
           {/* Copyright */}
-          <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.68rem', color: 'rgba(245,243,239,0.32)', letterSpacing: '0.03em', flexShrink: 0 }}>
+          <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.0625rem', color: 'rgba(245,243,239,0.32)', letterSpacing: '0.03em', flexShrink: 0 }}>
             {c.footer_copyright}
           </p>
         </div>

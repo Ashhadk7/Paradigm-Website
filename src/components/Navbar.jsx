@@ -6,7 +6,7 @@ import { useContent } from '../lib/useContent';
 import { usePresentation } from '../lib/usePresentation';
 
 const S = {
-  nav: { fontFamily: 'Inter, sans-serif', fontSize: '0.86rem', fontWeight: 700, letterSpacing: '0.08em', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s ease, background 0.2s ease', cursor: 'pointer', background: 'none', border: 'none', padding: '0.55rem 0.75rem', borderRadius: 3, display: 'flex', alignItems: 'center', gap: '0.25rem' },
+  nav: { fontFamily: 'Inter, sans-serif', fontSize: '1.0625rem', fontWeight: 700, letterSpacing: '0.08em', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s ease, background 0.2s ease', cursor: 'pointer', background: 'none', border: 'none', padding: '0.55rem 0.75rem', borderRadius: 3, display: 'flex', alignItems: 'center', gap: '0.25rem' },
 };
 
 export default function Navbar() {
@@ -98,39 +98,46 @@ export default function Navbar() {
         className="floating-nav"
         style={{
           position: 'fixed',
-          top: scrolled ? '0.5rem' : '0.85rem',
-          left: '50%',
-          width: scrolled ? '92%' : '96%',
-          maxWidth: scrolled ? '1320px' : '1440px',
-          transform: 'translateX(-50%)',
+          top: 0,
+          left: 0,
+          right: 0,
+          width: '100%',
+          maxWidth: 'none',
           zIndex: 100,
           background: mobileOpen ? 'rgba(232,228,220,0.65)' : palette.tone,
           backdropFilter: mobileOpen ? 'blur(24px) saturate(1.4)' : 'blur(20px)',
           WebkitBackdropFilter: mobileOpen ? 'blur(24px) saturate(1.4)' : 'blur(20px)',
-          border: mobileOpen ? '1px solid rgba(196,162,91,0.18)' : '1px solid rgba(245,243,239,0.12)',
-          borderRadius: mobileOpen ? 50 : (scrolled ? 50 : 10),
+          borderBottom: '1px solid rgba(245,243,239,0.12)',
+          borderRadius: 0,
           boxShadow: mobileOpen
             ? '0 8px 32px rgba(52,65,109,0.12), inset 0 1px 0 rgba(255,255,255,0.3)'
             : scrolled
               ? '0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px rgba(196,162,91,0.08)'
               : '0 4px 24px rgba(0,0,0,0.18)',
-          height: scrolled ? '40px' : '46px',
-          padding: scrolled ? '0 1.5rem' : '0 1.5rem',
+          height: scrolled ? '64px' : '80px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          transition: 'top 0.4s cubic-bezier(0.4,0,0.2,1), width 0.4s cubic-bezier(0.4,0,0.2,1), max-width 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.4s cubic-bezier(0.4,0,0.2,1), border-radius 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s ease, background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
+          transition: 'height 0.4s cubic-bezier(0.4,0,0.2,1), background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
           willChange: 'transform',
           overflow: 'visible',
         }}
       >
+        <div style={{
+          width: '100%',
+          maxWidth: '1600px',
+          margin: '0 auto',
+          padding: '0 2.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
           {/* Logo */}
-          <Link to="/" onClick={closeMenus} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0, marginLeft: '0.5rem' }}>
+          <Link to="/" onClick={closeMenus} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
             <img
-              src={mobileOpen ? '/logo2.png' : '/logo.png'}
+              src="/Paradigm_Logo_XL 2.svg"
               alt="Paradigm Asset Management"
               style={{
-                height: scrolled ? 46 : 56,
+                height: scrolled ? '44px' : '52px',
                 width: 'auto',
                 flexShrink: 0,
                 display: 'block',
@@ -140,7 +147,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="desktop-nav" style={{ alignItems: 'center', gap: '0.15rem' }}>
+          <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '0.15rem' }}>
             {/* Home — first item */}
             <Link
               to="/"
@@ -170,10 +177,10 @@ export default function Navbar() {
                   border: '1px solid rgba(245,243,239,0.1)', minWidth: 180, overflow: 'hidden',
                   animation: 'fadeDown 0.18s ease',
                 }}>
-                  <Link to="/advisors" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '0.8125rem', fontWeight: 500, color: location.pathname === '/advisors' ? palette.accent : '#F5F3EF', textDecoration: 'none', borderBottom: '1px solid rgba(245,243,239,0.08)', letterSpacing: '0.04em' }}>
+                  <Link to="/advisors" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '1.0625rem', fontWeight: 500, color: location.pathname === '/advisors' ? palette.accent : '#F5F3EF', textDecoration: 'none', borderBottom: '1px solid rgba(245,243,239,0.08)', letterSpacing: '0.04em' }}>
                     Wealth Advisors
                   </Link>
-                  <Link to="/familyoffice" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '0.8125rem', fontWeight: 500, color: location.pathname === '/familyoffice' ? palette.accent : '#F5F3EF', textDecoration: 'none', letterSpacing: '0.04em' }}>
+                  <Link to="/familyoffice" onClick={closeMenus} style={{ display: 'block', padding: '0.875rem 1.25rem', fontFamily: 'Inter', fontSize: '1.0625rem', fontWeight: 500, color: location.pathname === '/familyoffice' ? palette.accent : '#F5F3EF', textDecoration: 'none', letterSpacing: '0.04em' }}>
                     Family Offices
                   </Link>
                 </div>
@@ -198,11 +205,12 @@ export default function Navbar() {
           <button
             className="mobile-menu-toggle"
             onClick={() => setMobileOpen(o => !o)}
-            style={{ background: mobileOpen ? 'rgba(44,44,44,0.08)' : 'rgba(245,243,239,0.1)', border: mobileOpen ? '1px solid rgba(44,44,44,0.15)' : '1px solid rgba(245,243,239,0.15)', borderRadius: 50, cursor: 'pointer', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', padding: '0.4rem', alignItems: 'center', transition: 'all 0.3s' }}
+            style={{ background: mobileOpen ? 'rgba(44,44,44,0.08)' : 'rgba(245,243,239,0.1)', border: mobileOpen ? '1px solid rgba(44,44,44,0.15)' : '1px solid rgba(245,243,239,0.15)', borderRadius: 50, cursor: 'pointer', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', padding: '0.4rem', display: 'flex', alignItems: 'center', transition: 'all 0.3s' }}
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
+        </div>
       </nav>
 
       {/* Dropdown animation */}
@@ -304,10 +312,10 @@ export default function Navbar() {
         ))}
 
         <div style={{ marginTop: '2rem', paddingTop: '1.25rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-          <p style={{ fontFamily: 'Inter', fontSize: '0.7rem', color: 'rgba(245,243,239,0.4)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Direct Contact</p>
-          <a href={`mailto:${c.direct_email}`} style={{ display: 'block', fontFamily: 'Inter', fontSize: '0.9375rem', color: palette.accent, textDecoration: 'none', marginBottom: '0.25rem' }}>{c.direct_email}</a>
-          <a href={`tel:${c.direct_phone.replace(/[^+\d]/g, '')}`} style={{ display: 'block', fontFamily: 'Inter', fontSize: '0.9375rem', color: 'rgba(245,243,239,0.6)', textDecoration: 'none', marginBottom: '0.15rem' }}>{c.direct_phone}</a>
-          <a href="tel:9179913348" style={{ display: 'block', fontFamily: 'Inter', fontSize: '0.8125rem', color: 'rgba(245,243,239,0.4)', textDecoration: 'none' }}>917-991-3348</a>
+          <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: 'rgba(245,243,239,0.4)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Direct Contact</p>
+          <a href={`mailto:${c.direct_email}`} style={{ display: 'block', fontFamily: 'Inter', fontSize: '1.0625rem', color: palette.accent, textDecoration: 'none', marginBottom: '0.25rem' }}>{c.direct_email}</a>
+          <a href={`tel:${c.direct_phone.replace(/[^+\d]/g, '')}`} style={{ display: 'block', fontFamily: 'Inter', fontSize: '1.0625rem', color: 'rgba(245,243,239,0.6)', textDecoration: 'none', marginBottom: '0.15rem' }}>{c.direct_phone}</a>
+          <a href="tel:9179913348" style={{ display: 'block', fontFamily: 'Inter', fontSize: '1.0625rem', color: 'rgba(245,243,239,0.4)', textDecoration: 'none' }}>917-991-3348</a>
         </div>
       </div>
     </>

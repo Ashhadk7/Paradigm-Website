@@ -57,11 +57,12 @@ function generateBubbles(count, rInner, rOuter, seed, baseSize) {
 // Staged narrowing sequence: bubbles fill the FULL disc of the active ring,
 // dropping in count as the universe narrows. Labels appear in sync per stage.
 // 0: All Data (grey) 1000 · 1: Some Data (blue) 350 · 2: Select Data (navy) 75 · 3: PB core (gold) 8
+// Staged narrowing sequence: bubbles fill the FULL disc of the active ring,
+// dropping in count as the universe narrows. Labels appear centered.
 const STAGES = [
-  { ring: 0, label: 'ALL DATA',    bubbles: generateBubbles(1000, 0, 130, 1011, 1.2), fill: 'rgba(52,65,109,0.55)', labelFill: '#34416D', labelY: 36 },
-  { ring: 1, label: 'SOME DATA',   bubbles: generateBubbles(350, 0, 92, 2027, 1.4),   fill: 'rgba(28,38,68,0.7)',  labelFill: '#ffffff', labelY: 74 },
-  { ring: 2, label: 'SELECT DATA', bubbles: generateBubbles(75, 0, 52, 3041, 1.6),    fill: 'rgba(255,255,255,0.92)', labelFill: '#ffffff', labelY: 112 },
-  { ring: 3, label: '',            bubbles: generateBubbles(8, 0, 20, 4099, 1.9),      fill: 'rgba(255,255,255,0.95)', labelFill: '#ffffff', labelY: 0 },
+  { ring: 0, label: 'All Data',    bubbles: generateBubbles(8, 0, 130, 1011, 4.0), fill: 'rgba(26,34,64,0.8)', labelFill: '#1a2240' },
+  { ring: 1, label: 'Some Data',   bubbles: generateBubbles(6, 0, 90, 2027, 3.0),  fill: 'rgba(255,255,255,0.9)', labelFill: '#ffffff' },
+  { ring: 2, label: 'Select Data', bubbles: generateBubbles(4, 0, 50, 3041, 2.0),  fill: 'rgba(26,34,64,0.95)', labelFill: '#1a2240' },
 ];
 
 const STAGE_DURATION = 4500; // ms each stage holds before advancing
@@ -119,17 +120,17 @@ function AnimatedOrbit() {
         style={{ width: '100%', maxWidth: 620, display: 'block', margin: '0 auto' }}
       >
         {/* Filled layered rings — revealed progressively as the sequence narrows */}
-        <motion.circle cx={150} cy={150} r={134} fill="#C5CEE0"
+        <motion.circle cx={150} cy={150} r={134} fill="#7E8CB5"
           animate={{ opacity: ringVisible(0) ? 1 : 0 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
         />
-        <motion.circle cx={150} cy={150} r={94} fill="#7E8CB5"
+        <motion.circle cx={150} cy={150} r={94} fill="#34416D"
           initial={{ opacity: 0 }}
           animate={{ opacity: ringVisible(1) ? 1 : 0, scale: ringVisible(1) ? 1 : 0.85 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
           style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
         />
-        <motion.circle cx={150} cy={150} r={54} fill="#34416D"
+        <motion.circle cx={150} cy={150} r={54} fill="#C4A25B"
           initial={{ opacity: 0 }}
           animate={{ opacity: ringVisible(2) ? 1 : 0, scale: ringVisible(2) ? 1 : 0.85 }}
           transition={{ duration: 0.9, ease: 'easeOut' }}
@@ -149,11 +150,12 @@ function AnimatedOrbit() {
             {active.label && (
               <text
                 x={150}
-                y={active.labelY}
+                y={150}
                 textAnchor="middle"
+                dominantBaseline="central"
                 fill={active.labelFill}
                 fontFamily="Inter, sans-serif"
-                fontSize="9"
+                fontSize="10"
                 fontWeight="700"
                 letterSpacing="2"
               >
@@ -162,23 +164,6 @@ function AnimatedOrbit() {
             )}
           </motion.g>
         </AnimatePresence>
-
-        {/* Gold Portfolio Blueprint core — revealed at the final stage */}
-        <motion.circle
-          cx={150} cy={150} r={22}
-          fill="#C4A25B"
-          initial={{ opacity: 0, scale: 0.4 }}
-          animate={{ opacity: ringVisible(3) ? 1 : 0, scale: ringVisible(3) ? 1 : 0.4 }}
-          transition={{ duration: 0.6, type: 'spring', stiffness: 180 }}
-          style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
-        />
-        <motion.text x={150} y={153} textAnchor="middle" fill="#fff"
-          fontFamily="Inter, sans-serif" fontSize="7" fontWeight="700" letterSpacing="1.5"
-          animate={{ opacity: ringVisible(3) ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          PB
-        </motion.text>
       </svg>
     </motion.div>
   );
@@ -350,7 +335,7 @@ export default function Home() {
             {/* Left: platform intro text */}
             <div>
               <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890', margin: 0 }}>
+              <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890', margin: 0 }}>
                 {c.platform_text}
               </p>
             </div>

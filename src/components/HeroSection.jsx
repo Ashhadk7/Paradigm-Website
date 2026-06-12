@@ -79,7 +79,7 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
           {sub && (
             <p
               className="hero-subcopy"
-              style={compact ? { fontSize: '0.95rem', marginBottom: '1.25rem' } : undefined}
+              style={compact ? { fontSize: '1.0625rem', marginBottom: '1.25rem' } : undefined}
             >
               {subLines.map((line, i) => (
                 <motion.span

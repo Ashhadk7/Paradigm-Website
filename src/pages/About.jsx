@@ -22,10 +22,10 @@ function TeamCard({ name, title, prev, bio, previousPrefix = 'Previous:' }) {
           {name.split(' ').map(w => w[0]).join('')}
         </span>
       </div>
-      <h3 style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.125rem', color: '#34416D', marginBottom: '0.2rem' }}>{name}</h3>
-      <p style={{ fontFamily: 'Inter', fontSize: '0.8125rem', fontWeight: 600, color: '#C4A25B', letterSpacing: '0.06em', marginBottom: '0.25rem' }}>{title}</p>
-      {prev && <p style={{ fontFamily: 'Inter', fontSize: '0.75rem', color: '#637890', marginBottom: '0.875rem' }}>{previousPrefix} {prev}</p>}
-      {bio && <p style={{ fontFamily: 'Inter', fontSize: '0.875rem', lineHeight: 1.7, color: '#637890' }}>{bio}</p>}
+      <h3 style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.45rem', color: '#34416D', marginBottom: '0.2rem' }}>{name}</h3>
+      <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', fontWeight: 600, color: '#C4A25B', letterSpacing: '0.06em', marginBottom: '0.25rem' }}>{title}</p>
+      {prev && <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', marginBottom: '0.875rem' }}>{previousPrefix} {prev}</p>}
+      {bio && <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.7, color: '#637890' }}>{bio}</p>}
     </motion.div>
   );
 }
@@ -201,12 +201,12 @@ export default function About() {
                   display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '0.5rem'
                 }}>
                   <span style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontWeight: 700, fontSize: '3rem', color: '#C4A25B' }}>{c.james_placeholder_initials}</span>
-                  <span style={{ fontFamily: 'Inter', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(245,243,239,0.5)' }}>{c.james_placeholder_text}</span>
+                  <span style={{ fontFamily: 'Inter', fontSize: '1.0625rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(245,243,239,0.5)' }}>{c.james_placeholder_text}</span>
                 </div>
               )}
               <div style={{ textAlign: 'center' }}>
-                <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.125rem', color: '#34416D' }}>{c.james_name}</p>
-                <p style={{ fontFamily: 'Inter', fontSize: '0.8125rem', color: '#C4A25B', fontWeight: 600 }}>{c.james_title}</p>
+                <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.45rem', color: '#34416D' }}>{c.james_name}</p>
+                <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#C4A25B', fontWeight: 600 }}>{c.james_title}</p>
               </div>
             </div>
           </div>
