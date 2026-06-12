@@ -47,8 +47,8 @@ function generateBubbles(count, rInner, rOuter, seed, baseSize) {
       cx: cx + Math.cos(angle) * r,
       cy: cy + Math.sin(angle) * r,
       size: baseSize * (0.5 + rng() * 0.9),
-      delay: rng() * 2.5,
-      duration: 3.0 + rng() * 3.0,
+      delay: rng() * 4.0,
+      duration: 5.0 + rng() * 5.0,
     });
   }
   return bubbles;
@@ -60,12 +60,12 @@ function generateBubbles(count, rInner, rOuter, seed, baseSize) {
 // Staged narrowing sequence: bubbles fill the FULL disc of the active ring,
 // dropping in count as the universe narrows. Labels appear centered.
 const STAGES = [
-  { ring: 0, label: 'All Data',    bubbles: generateBubbles(300, 0, 226, 1011, 8.0), strokeColor: 'rgba(255,255,255,0.6)', glowColor: 'rgba(255,255,255,0.8)', fillColor: 'rgba(255,255,255,0.25)', labelFill: '#1a2240' },
-  { ring: 1, label: 'Some Data',   bubbles: generateBubbles(150, 0, 152, 2027, 12.0), strokeColor: 'rgba(0,220,255,0.6)', glowColor: 'rgba(0,220,255,0.8)', fillColor: 'rgba(0,220,255,0.25)', labelFill: '#ffffff' },
-  { ring: 2, label: 'Select Data', bubbles: generateBubbles(50, 0, 80, 3041, 16.0), strokeColor: 'rgba(255,230,128,0.7)', glowColor: 'rgba(255,230,128,0.9)', fillColor: 'rgba(255,230,128,0.3)', labelFill: '#1a2240' },
+  { ring: 0, label: 'All Data',    bubbles: generateBubbles(300, 0, 226, 1011, 8.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#1a2240' },
+  { ring: 1, label: 'Some Data',   bubbles: generateBubbles(150, 0, 152, 2027, 12.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#ffffff' },
+  { ring: 2, label: 'Select Data', bubbles: generateBubbles(50, 0, 80, 3041, 16.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#1a2240' },
 ];
 
-const STAGE_DURATION = 6000; // ms each stage holds before advancing
+const STAGE_DURATION = 12000; // ms each stage holds before advancing
 
 function BubbleField({ bubbles, strokeColor, glowColor, fillColor }) {
   return (
@@ -125,18 +125,18 @@ function AnimatedOrbit() {
         {/* Filled layered rings — revealed progressively as the sequence narrows */}
         <motion.circle cx={250} cy={250} r={240} fill="#7E8CB5"
           animate={{ opacity: ringVisible(0) ? 1 : 0 }}
-          transition={{ duration: 1.5, ease: 'easeInOut' }}
+          transition={{ duration: 2.5, ease: 'easeInOut' }}
         />
         <motion.circle cx={250} cy={250} r={170} fill="#34416D"
           initial={{ opacity: 0 }}
           animate={{ opacity: ringVisible(1) ? 1 : 0, scale: ringVisible(1) ? 1 : 0.85 }}
-          transition={{ duration: 1.5, ease: 'easeInOut' }}
+          transition={{ duration: 2.5, ease: 'easeInOut' }}
           style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
         />
         <motion.circle cx={250} cy={250} r={100} fill="#C4A25B"
           initial={{ opacity: 0 }}
           animate={{ opacity: ringVisible(2) ? 1 : 0, scale: ringVisible(2) ? 1 : 0.85 }}
-          transition={{ duration: 1.5, ease: 'easeInOut' }}
+          transition={{ duration: 2.5, ease: 'easeInOut' }}
           style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
         />
 
@@ -147,7 +147,7 @@ function AnimatedOrbit() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
+            transition={{ duration: 2.5, ease: "easeInOut" }}
           >
             <BubbleField bubbles={active.bubbles} strokeColor={active.strokeColor} glowColor={active.glowColor} fillColor={active.fillColor} />
             {active.label && (
