@@ -41,6 +41,35 @@ h1, h2, h3, h4 {
   line-height: 1.15;
 }
 
+/* ─── Responsive CSS custom properties ───────────────────── */
+:root {
+  --nav-height: 115px;
+  --nav-height-scrolled: 90px;
+  --logo-height: 84px;
+  --logo-height-scrolled: 66px;
+  --nav-padding: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 70px;
+    --nav-height-scrolled: 60px;
+    --logo-height: 48px;
+    --logo-height-scrolled: 40px;
+    --nav-padding: 1rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1150px) {
+  :root {
+    --nav-height: 85px;
+    --nav-height-scrolled: 72px;
+    --logo-height: 60px;
+    --logo-height-scrolled: 50px;
+    --nav-padding: 1.5rem;
+  }
+}
+
 /* ─── Navbar ─────────────────────────────────────────────── */
 .desktop-nav {
   display: flex;
@@ -58,10 +87,8 @@ h1, h2, h3, h4 {
     display: flex !important;
   }
   .floating-nav {
-    width: calc(100% - 1.5rem) !important;
+    width: 100% !important;
     max-width: none !important;
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
   }
 }
 
@@ -173,7 +200,7 @@ h1, h2, h3, h4 {
 /* ─── Typography helpers ─────────────────────────────────── */
 .eyebrow {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(1.1rem, 1.25vw, 1.35rem);
+  font-size: clamp(0.72rem, 1.25vw, 1.35rem);
   font-weight: 800;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -183,7 +210,7 @@ h1, h2, h3, h4 {
 
 .display-headline {
   font-family: 'Source Serif 4', Georgia, serif;
-  font-size: clamp(2.8rem, 4.5vw, 4rem);
+  font-size: clamp(1.75rem, 4.5vw, 4rem);
   font-weight: 700;
   line-height: 1.06;
   color: #F5F3EF;
@@ -220,34 +247,46 @@ h1, h2, h3, h4 {
 }
 
 .hero-section {
-  padding-top: 9.5rem;
-  padding-bottom: 4.5rem;
+  padding-top: 7rem;
+  padding-bottom: 3rem;
   background: #34416D;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
+  min-height: auto;
 }
 
-.hero-copy--tight { max-width: 760px; }
-.hero-copy--standard { max-width: 1180px; }
-.hero-copy--wide { max-width: 1180px; }
+.hero-copy--tight { max-width: 100%; }
+.hero-copy--standard { max-width: 100%; }
+.hero-copy--wide { max-width: 100%; }
 
 /* Headline lines wrap within the hero column instead of overflowing the
    viewport. (Previously forced to nowrap, which pushed long sentences — e.g.
    the Institutions hero — off the right edge of the screen.) */
 .hero-headline-line { white-space: normal; overflow-wrap: break-word; }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-section {
+    padding-top: 8rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
 @media (min-width: 1025px) {
+  .hero-section {
+    padding-top: 11rem;
+    padding-bottom: 5rem;
+  }
+
   .hero-section--compact {
     padding-top: 10rem;
     padding-bottom: 4rem;
   }
 
   .hero-section--spacious {
-    padding-top: 12.5rem;
+    padding-top: 13rem;
     padding-bottom: 6rem;
   }
 
@@ -289,17 +328,28 @@ h1, h2, h3, h4 {
 .hero-inner {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 2.5rem;
+  padding: 0 1.25rem;
   width: 100%;
+}
+
+@media (min-width: 769px) {
+  .hero-inner {
+    padding: 0 2.5rem;
+  }
 }
 
 /* Hero left/right split: copy occupies the LEFT half; the wave background
    fills the section behind, reading as the right half. */
 .hero-copy--standard {
-  max-width: 820px;
+  max-width: 100%;
   margin-left: 0;
   margin-right: auto;
   text-align: left;
+}
+@media (min-width: 1025px) {
+  .hero-copy--standard {
+    max-width: 48%;
+  }
 }
 .hero-copy--standard .hero-actions {
   justify-content: flex-start;
@@ -311,8 +361,8 @@ h1, h2, h3, h4 {
 
 .hero-subcopy {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(1.1rem, 1.25vw, 1.35rem);
-  line-height: 1.6;
+  font-size: clamp(0.95rem, 1.25vw, 1.35rem);
+  line-height: 1.65;
   color: rgba(245,243,239,0.85);
   max-width: 680px;
   margin-bottom: 1.75rem;
@@ -325,11 +375,29 @@ h1, h2, h3, h4 {
   align-items: center;
 }
 
+@media (max-width: 480px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-actions a {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
 .what-we-see-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
   align-items: center;
+}
+
+@media (min-width: 769px) {
+  .what-we-see-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
 }
 
 /* THE PLATFORM — 50/50 split: intro text left, Proven proof block right */
@@ -385,10 +453,10 @@ h1, h2, h3, h4 {
 .section-inner {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 3.75rem 2.5rem;
+  padding: 2.5rem 1.25rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .section-inner {
     padding: 5rem 2.5rem;
   }
@@ -812,21 +880,71 @@ h1, h2, h3, h4 {
   flex-shrink: 0;
 }
 
+.footer-container {
+  padding: 0.75rem 2.5rem 0.6rem;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    padding: 0.75rem 1.25rem 0.6rem;
+  }
+
+  .footer-row {
+    gap: 0.5rem;
+  }
+
+  .footer-links a,
+  .footer-links span {
+    font-size: 0.875rem;
+  }
+
+  .footer-row > p {
+    font-size: 0.8rem !important;
+  }
+
+  .footer-row img {
+    height: 36px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .footer-container {
+    padding: 0.6rem 1rem 0.5rem;
+  }
+
+  .footer-links a,
+  .footer-links span {
+    font-size: 0.78rem;
+  }
+
+  .footer-row > p {
+    font-size: 0.7rem !important;
+  }
+
+  .footer-row img {
+    height: 32px !important;
+  }
+}
+
 /* Short / landscape viewports (e.g. Nest Hub 1280×800) */
 @media (max-height: 820px) and (min-width: 1025px) {
   .hero-section {
     min-height: auto;
-    padding-top: 5rem !important;
-    padding-bottom: 2.5rem !important;
+    padding-top: 9rem !important;
+    padding-bottom: 3rem !important;
   }
 }
 
-/* Tablets and below (iPad Pro 1024px, iPad Air 820px, etc.) */
-@media (max-width: 1024px) {
+/* Large tablets (iPad Pro 1024px, landscape tablets, etc.) */
+@media (min-width: 769px) and (max-width: 1024px) {
   .hero-section {
     min-height: auto;
-    padding-top: 6rem !important;
+    padding-top: 7.5rem !important;
     padding-bottom: 3rem !important;
+  }
+
+  .display-headline {
+    font-size: clamp(1.85rem, 4vw, 3rem);
   }
 
   .section-kicker-row,
@@ -840,7 +958,6 @@ h1, h2, h3, h4 {
     gap: 2.5rem;
   }
 
-  /* 3-up then a centered 2-up row (doc specifies a 3+2 mobile grid). */
   .home-proof-inner {
     grid-template-columns: repeat(6, 1fr);
     grid-auto-rows: 1fr;
@@ -866,12 +983,12 @@ h1, h2, h3, h4 {
   }
 
   .home-stat span {
-    font-size: 0.58rem;
+    font-size: 0.7rem;
     letter-spacing: 0.05em;
   }
 
   .home-stat .stat-sub {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
   }
 
   .observation-grid {
@@ -887,87 +1004,204 @@ h1, h2, h3, h4 {
     position: static;
   }
 
-  .footer-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .footer-links {
-    gap: 0.75rem 1rem;
-  }
-
   .section-inner {
-    padding: 3rem 1.25rem;
+    padding: 3rem 1.5rem;
   }
 }
 
-@media (max-width: 560px) {
+/* Small tablets and phones (max-width: 768px) */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: auto;
+    padding-top: 5.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
   .display-headline {
-    font-size: 2rem;
-    line-height: 1.08;
+    font-size: clamp(1.6rem, 6vw, 2.25rem);
+    line-height: 1.12;
   }
 
   .display-headline-compact {
-    font-size: 1.5rem;
-    line-height: 1.15;
+    font-size: clamp(1.4rem, 5vw, 1.85rem);
+    line-height: 1.18;
   }
 
   .hero-subcopy {
     font-size: 0.9375rem;
+    line-height: 1.6;
     margin-bottom: 1.25rem;
   }
 
-  .hero-actions a {
-    width: 100%;
-    justify-content: center;
+  .eyebrow {
+    font-size: clamp(0.65rem, 2.5vw, 0.85rem);
+  }
+
+  .section-kicker-row,
+  .intelligence-panel,
+  .platform-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .what-we-see-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .home-proof-inner {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .home-stat {
+    grid-column: span 1;
+    padding: 0.7rem 0.6rem;
+  }
+
+  .home-stat:nth-child(4) {
+    grid-column: span 1;
+  }
+
+  .home-stat:nth-child(5) {
+    grid-column: span 2;
+  }
+
+  .home-stat strong {
+    font-size: 1.2rem;
+  }
+
+  .home-stat span {
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+    margin-top: 0.2rem;
+  }
+
+  .home-stat .stat-sub {
+    font-size: 0.5rem;
   }
 
   .observation-grid {
     grid-template-columns: 1fr;
   }
 
-  /* 6-col base so the 5 stats render 3-up then a centered 2-up row
-     (each stat spans 2; the last two are offset to center the second row)
-     instead of a lopsided 3+2 with an empty orphan cell. */
+  .story-section {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .story-intro {
+    position: static;
+  }
+
+  .footer-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .footer-links {
+    gap: 0.5rem 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .section-inner {
+    padding: 2.5rem 1rem;
+  }
+
+  .section-headline {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+  }
+
+  .platform-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .proof-block {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions a {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* Very small phones (≤ 420px) */
+@media (max-width: 420px) {
+  .hero-section {
+    padding-top: 5rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .display-headline {
+    font-size: 1.55rem;
+    line-height: 1.12;
+  }
+
+  .display-headline-compact {
+    font-size: 1.3rem;
+    line-height: 1.18;
+  }
+
+  .hero-subcopy {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    margin-bottom: 1rem;
+  }
+
+  .eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-inner {
+    padding: 0 1rem;
+  }
+
+  .hero-actions a {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.7rem;
+    padding: 0.65rem 1rem;
+  }
+
   .home-proof-inner {
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr;
     padding: 0.5rem;
     gap: 0.35rem;
   }
 
   .home-stat {
-    grid-column: span 2;
-    padding: 0.5rem 0.4rem;
-  }
-
-  .home-stat:nth-child(4) {
-    grid-column: 2 / span 2;
-  }
-
-  .home-stat:nth-child(5) {
-    grid-column: 4 / span 2;
+    grid-column: span 1 !important;
+    padding: 0.6rem 0.5rem;
   }
 
   .home-stat strong {
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 
   .home-stat span {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     letter-spacing: 0.03em;
-    margin-top: 0.25rem;
+    margin-top: 0.2rem;
   }
 
   .home-stat .stat-sub {
-    font-size: 0.4rem;
+    font-size: 0.45rem;
     letter-spacing: 0.02em;
   }
 
   .story-step {
     grid-template-columns: 2.25rem minmax(0, 1fr);
-    padding: 1.15rem;
+    padding: 1rem;
   }
 
   .sleeve-visual {
@@ -975,11 +1209,33 @@ h1, h2, h3, h4 {
   }
 
   .section-headline {
-    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
   }
 
   .section-inner {
-    padding: 2.5rem 1rem;
+    padding: 2rem 0.875rem;
+  }
+
+  .btn-gold, .btn-navy, .btn-outline, .btn-outline-navy {
+    padding: 0.6rem 1rem;
+    font-size: 0.7rem;
+  }
+
+  .process-step-number {
+    font-size: 2rem;
+    min-width: 3rem;
+  }
+}
+
+/* Phones (max-width: 560px, above 420px) */
+@media (min-width: 421px) and (max-width: 560px) {
+  .story-step {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    padding: 1.15rem;
+  }
+
+  .sleeve-visual {
+    grid-template-columns: 1fr;
   }
 
   .btn-gold, .btn-navy, .btn-outline, .btn-outline-navy {
@@ -1012,6 +1268,42 @@ h1, h2, h3, h4 {
   color: #C4A25B;
   line-height: 1;
   min-width: 4rem;
+}
+
+.process-step-row {
+  grid-template-columns: 6rem 1fr;
+}
+
+@media (max-width: 768px) {
+  .process-step-row {
+    grid-template-columns: 4rem 1fr;
+    gap: 1.25rem !important;
+  }
+
+  .process-step-row > div:first-child {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .process-step-row > div:first-child span {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .process-step-row {
+    grid-template-columns: 3.25rem 1fr;
+    gap: 1rem !important;
+  }
+
+  .process-step-row > div:first-child {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .process-step-row > div:first-child span {
+    font-size: 1.25rem;
+  }
 }
 
 /* ─── CTA Strip ──────────────────────────────────────────── */

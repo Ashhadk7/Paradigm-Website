@@ -91,10 +91,6 @@ export default function About() {
       {/* ── HERO — Serif H1, navy background, no subheading ── */}
       <section
         className="hero-section"
-        style={{
-          paddingTop: '10rem',
-          paddingBottom: '5.5rem',
-        }}
       >
         <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>
           <GLSLHills speed={0.3} cameraZ={130} />

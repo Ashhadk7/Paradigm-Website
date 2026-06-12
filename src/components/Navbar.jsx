@@ -114,7 +114,7 @@ export default function Navbar() {
             : scrolled
               ? '0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px rgba(196,162,91,0.08)'
               : '0 4px 24px rgba(0,0,0,0.18)',
-          height: scrolled ? '90px' : '115px',
+          height: scrolled ? 'var(--nav-height-scrolled, 90px)' : 'var(--nav-height, 115px)',
           display: 'flex',
           alignItems: 'center',
           transition: 'height 0.4s cubic-bezier(0.4,0,0.2,1), background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
@@ -126,7 +126,7 @@ export default function Navbar() {
           width: '100%',
           maxWidth: '1600px',
           margin: '0 auto',
-          padding: '0 2.5rem',
+          padding: '0 var(--nav-padding, 2.5rem)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -137,7 +137,7 @@ export default function Navbar() {
               src="/Paradigm_Logo_XL 2.svg"
               alt="Paradigm Asset Management"
               style={{
-                height: scrolled ? '66px' : '84px',
+                height: scrolled ? 'var(--logo-height-scrolled, 66px)' : 'var(--logo-height, 84px)',
                 width: 'auto',
                 flexShrink: 0,
                 display: 'block',
@@ -224,7 +224,7 @@ export default function Navbar() {
         transition: 'transform 0.38s cubic-bezier(0.32,0.72,0,1)',
         willChange: 'transform',
         display: 'flex', flexDirection: 'column',
-        paddingTop: '5.5rem', paddingLeft: '2rem', paddingRight: '2rem',
+        paddingTop: 'calc(var(--nav-height, 70px) + 1rem)', paddingLeft: '1.5rem', paddingRight: '1.5rem', paddingBottom: '2rem',
         overflowY: 'auto',
         overscrollBehavior: 'contain',
         WebkitOverflowScrolling: 'touch',

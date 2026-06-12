@@ -37,7 +37,7 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
       <div className="hero-inner">
         <div
           className={appearance?.hero_headline_width ? `hero-copy--${appearance.hero_headline_width}` : 'hero-copy--standard'}
-          style={{ maxWidth: compact ? 720 : undefined, position: 'relative', zIndex: 2 }}
+          style={{ position: 'relative', zIndex: 2 }}
         >
           {eyebrow && (
             <motion.p

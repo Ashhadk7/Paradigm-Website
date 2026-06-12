@@ -11,12 +11,12 @@ function ProcessStep({ num, title, paragraphs, isLast }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6 }}
+      className="process-step-row"
       style={{
         display: 'grid',
-        gridTemplateColumns: '6rem 1fr',
-        gap: '2.5rem',
-        paddingBottom: isLast ? 0 : '3.5rem',
-        marginBottom: isLast ? 0 : '3.5rem',
+        gap: '2rem',
+        paddingBottom: isLast ? 0 : '3rem',
+        marginBottom: isLast ? 0 : '3rem',
         borderBottom: isLast ? 'none' : '1px solid rgba(52,65,109,0.08)',
         alignItems: 'start',
       }}
@@ -105,10 +105,6 @@ export default function Process() {
       {/* ── HERO — Minimal: H1 only, no sub, no CTA ── */}
       <section
         className="hero-section"
-        style={{
-          paddingTop: '10rem',
-          paddingBottom: '5.5rem',
-        }}
       >
         {/* GLSL hills background */}
         <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>

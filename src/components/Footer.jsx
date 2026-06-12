@@ -35,7 +35,7 @@ export default function Footer() {
     <footer style={{ background: palette.tone, color: '#F5F3EF' }}>
       <div style={{ height: 2, background: `linear-gradient(90deg, ${palette.accent} 0%, transparent 100%)` }} />
 
-      <div style={{ maxWidth: 1600, margin: '0 auto', padding: '0.75rem 2.5rem 0.6rem' }}>
+      <div className="footer-container" style={{ maxWidth: 1600, margin: '0 auto' }}>
         <div className="footer-row">
           {/* Logo */}
           <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
