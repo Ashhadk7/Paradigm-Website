@@ -113,10 +113,8 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="what-we-see-grid">
-            {/* Left: numbered observations */}
-            <div style={{ maxWidth: 540 }}>
-              {[
+          <div className="observations-grid">
+            {[
                 { num: '01', body: c.obs_1 },
                 { num: '02', body: c.obs_2 },
                 { num: '03', body: c.obs_3 },
@@ -127,7 +125,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  style={{ display: 'flex', gap: '1.5rem', marginBottom: i < 2 ? '2.5rem' : 0 }}
+                  style={{ display: 'flex', gap: '1.5rem' }}
                 >
                   <span style={{
                     fontFamily: 'Source Serif 4, Georgia, serif',
@@ -152,8 +150,6 @@ export default function Home() {
                   </p>
                 </motion.div>
               ))}
-            </div>
-
           </div>
         </div>
       </section>
