@@ -71,9 +71,9 @@ function generateBubbles(count, rInner, rOuter, seed, baseSize) {
 // dropping in count as the universe narrows. Labels appear centered.
 // labelLines: split across rows so a larger label still fits the smaller ring.
 const STAGES = [
-  { ring: 0, labelLines: ['All Data'],        clipR: 240, bubbles: generateBubbles(300, 0, 226, 1011, 8.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#1a2240' },
-  { ring: 1, labelLines: ['Some Data'],       clipR: 170, bubbles: generateBubbles(150, 0, 152, 2027, 12.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#ffffff' },
-  { ring: 2, labelLines: ['Select', 'Data'],  clipR: 100, bubbles: generateBubbles(9, 0, 80, 3041, 16.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#1a2240' },
+  { ring: 0, labelLines: ['All Data'],        clipR: 240, bubbles: generateBubbles(300, 0, 226, 1011, 8.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#ffffff', labelHalo: '#1a2240' },
+  { ring: 1, labelLines: ['Some Data'],       clipR: 170, bubbles: generateBubbles(150, 0, 152, 2027, 12.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#ffffff', labelHalo: '#1a2240' },
+  { ring: 2, labelLines: ['Select', 'Data'],  clipR: 100, bubbles: generateBubbles(9, 0, 80, 3041, 16.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#ffffff', labelHalo: '#1a2240' },
 ];
 
 const STAGE_DURATION = 12000; // ms each stage holds before advancing
@@ -185,11 +185,13 @@ function AnimatedOrbit() {
                 textAnchor="middle"
                 dominantBaseline="central"
                 fill={active.labelFill}
+                stroke={active.labelHalo}
+                strokeWidth={5}
                 fontFamily="Inter, sans-serif"
                 fontSize="30"
                 fontWeight="700"
                 letterSpacing="2.5"
-                style={{ pointerEvents: 'none' }}
+                style={{ pointerEvents: 'none', paintOrder: 'stroke fill', strokeLinejoin: 'round' }}
               >
                 {active.labelLines.map((line, i) => (
                   <tspan
