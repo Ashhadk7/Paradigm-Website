@@ -34,6 +34,8 @@ function makeRng(seed) {
 }
 
 // Scatter `count` bubbles uniformly inside an annular band [rInner, rOuter].
+// Each bubble also carries drift parameters so it can rise + wobble like a
+// real bubble in liquid (consumed by BubbleField below).
 function generateBubbles(count, rInner, rOuter, seed, baseSize) {
   const rng = makeRng(seed);
   const cx = 250;
@@ -43,12 +45,20 @@ function generateBubbles(count, rInner, rOuter, seed, baseSize) {
     const angle = rng() * Math.PI * 2;
     // sqrt for uniform area distribution within the annulus
     const r = Math.sqrt(rng() * (rOuter * rOuter - rInner * rInner) + rInner * rInner);
+    const size = baseSize * (0.5 + rng() * 0.9);
     bubbles.push({
       cx: cx + Math.cos(angle) * r,
       cy: cy + Math.sin(angle) * r,
-      size: baseSize * (0.5 + rng() * 0.9),
-      delay: rng() * 4.0,
-      duration: 5.0 + rng() * 5.0,
+      size,
+      // how far this bubble rises over its loop (bigger bubbles rise a bit more)
+      rise: 22 + rng() * 34 + size * 0.6,
+      // horizontal wobble amplitude and phase
+      sway: 4 + rng() * 9,
+      swayDir: rng() < 0.5 ? -1 : 1,
+      delay: rng() * 6.0,
+      duration: 6.0 + rng() * 5.0,
+      // subtle size breathing
+      pulse: 0.12 + rng() * 0.16,
     });
   }
   return bubbles;
@@ -59,39 +69,50 @@ function generateBubbles(count, rInner, rOuter, seed, baseSize) {
 // 0: All Data (grey) 300 · 1: Some Data (blue) 150 · 2: Select Data (navy) 50
 // Staged narrowing sequence: bubbles fill the FULL disc of the active ring,
 // dropping in count as the universe narrows. Labels appear centered.
+// labelLines: split across rows so a larger label still fits the smaller ring.
 const STAGES = [
-  { ring: 0, label: 'All Data',    bubbles: generateBubbles(300, 0, 226, 1011, 8.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#1a2240' },
-  { ring: 1, label: 'Some Data',   bubbles: generateBubbles(150, 0, 152, 2027, 12.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#ffffff' },
-  { ring: 2, label: 'Select Data', bubbles: generateBubbles(50, 0, 80, 3041, 16.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#1a2240' },
+  { ring: 0, labelLines: ['All Data'],        clipR: 240, bubbles: generateBubbles(300, 0, 226, 1011, 8.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#1a2240' },
+  { ring: 1, labelLines: ['Some Data'],       clipR: 170, bubbles: generateBubbles(150, 0, 152, 2027, 12.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#ffffff' },
+  { ring: 2, labelLines: ['Select', 'Data'],  clipR: 100, bubbles: generateBubbles(50, 0, 80, 3041, 16.0), strokeColor: 'rgba(255,255,255,0.8)', glowColor: 'rgba(255,255,255,1)', fillColor: 'rgba(255,255,255,0.45)', labelFill: '#1a2240' },
 ];
 
 const STAGE_DURATION = 12000; // ms each stage holds before advancing
 
-function BubbleField({ bubbles, strokeColor, glowColor, fillColor }) {
+function BubbleField({ bubbles, strokeColor, glowColor, fillColor, clipId }) {
   return (
-    <>
-      {bubbles.map((b, i) => (
-        <motion.circle
-          key={i}
-          cx={b.cx}
-          cy={b.cy}
-          r={b.size}
-          fill={fillColor}
-          stroke={strokeColor}
-          strokeWidth={Math.max(1, b.size * 0.15)}
-          style={{ filter: `drop-shadow(0px 0px 4px ${glowColor})` }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 1, 0] }}
-          transition={{
-            duration: b.duration,
-            delay: b.delay,
-            repeat: Infinity,
-            repeatType: 'loop',
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
-    </>
+    <g clipPath={clipId ? `url(#${clipId})` : undefined}>
+      {bubbles.map((b, i) => {
+        const sway = b.sway * b.swayDir;
+        return (
+          <motion.circle
+            key={i}
+            fill={fillColor}
+            stroke={strokeColor}
+            strokeWidth={Math.max(1, b.size * 0.15)}
+            style={{ filter: `drop-shadow(0px 0px 4px ${glowColor})` }}
+            initial={{ cx: b.cx, cy: b.cy, r: b.size, opacity: 0 }}
+            animate={{
+              // rise upward (cy decreases) over the loop
+              cy: [b.cy, b.cy - b.rise * 0.35, b.cy - b.rise * 0.7, b.cy - b.rise],
+              // wobble left/right like a real bubble
+              cx: [b.cx, b.cx + sway, b.cx - sway * 0.6, b.cx],
+              // gentle size breathing
+              r: [b.size, b.size * (1 + b.pulse), b.size, b.size * (1 + b.pulse * 0.5)],
+              // fade in, hold, fade out as it reaches the top
+              opacity: [0, 0.95, 0.95, 0],
+            }}
+            transition={{
+              duration: b.duration,
+              delay: b.delay,
+              repeat: Infinity,
+              repeatType: 'loop',
+              ease: 'easeInOut',
+              times: [0, 0.15, 0.85, 1],
+            }}
+          />
+        );
+      })}
+    </g>
   );
 }
 
@@ -122,6 +143,13 @@ function AnimatedOrbit() {
         aria-hidden="true"
         style={{ width: '100%', maxWidth: 620, display: 'block', margin: '0 auto' }}
       >
+        {/* Clip paths keep each stage's bubbles inside its ring as they rise */}
+        <defs>
+          <clipPath id="clip-ring-0"><circle cx={250} cy={250} r={238} /></clipPath>
+          <clipPath id="clip-ring-1"><circle cx={250} cy={250} r={168} /></clipPath>
+          <clipPath id="clip-ring-2"><circle cx={250} cy={250} r={98} /></clipPath>
+        </defs>
+
         {/* Filled layered rings — revealed progressively as the sequence narrows */}
         <motion.circle cx={250} cy={250} r={240} fill="#7E8CB5"
           animate={{ opacity: ringVisible(0) ? 1 : 0 }}
@@ -149,8 +177,8 @@ function AnimatedOrbit() {
             exit={{ opacity: 0 }}
             transition={{ duration: 2.5, ease: "easeInOut" }}
           >
-            <BubbleField bubbles={active.bubbles} strokeColor={active.strokeColor} glowColor={active.glowColor} fillColor={active.fillColor} />
-            {active.label && (
+            <BubbleField bubbles={active.bubbles} strokeColor={active.strokeColor} glowColor={active.glowColor} fillColor={active.fillColor} clipId={`clip-ring-${active.ring}`} />
+            {active.labelLines && (
               <text
                 x={250}
                 y={250}
@@ -158,11 +186,21 @@ function AnimatedOrbit() {
                 dominantBaseline="central"
                 fill={active.labelFill}
                 fontFamily="Inter, sans-serif"
-                fontSize="18"
+                fontSize="30"
                 fontWeight="700"
-                letterSpacing="2"
+                letterSpacing="2.5"
+                style={{ pointerEvents: 'none' }}
               >
-                {active.label}
+                {active.labelLines.map((line, i) => (
+                  <tspan
+                    key={i}
+                    x={250}
+                    // vertically center the block: shift up half the total line span
+                    dy={i === 0 ? `${-(active.labelLines.length - 1) * 0.6}em` : '1.2em'}
+                  >
+                    {line}
+                  </tspan>
+                ))}
               </text>
             )}
           </motion.g>
@@ -188,7 +226,7 @@ export default function Home() {
     trust_stat_2_label: cms?.trust_stat_2_label || "U.S. pension funds served",
     trust_stat_3_value: cms?.trust_stat_3_value || "6",
     trust_stat_3_label: cms?.trust_stat_3_label || "Equity strategies",
-    trust_stat_3_sub: cms?.trust_stat_3_sub || "Funded — domestic, international, global",
+    trust_stat_3_sub: cms?.trust_stat_3_sub || "Domestic, international, global",
     trust_stat_4_value: cms?.trust_stat_4_value || "$7B+",
     trust_stat_4_label: cms?.trust_stat_4_label || "Cumulative AUM",
     trust_stat_5_value: cms?.trust_stat_5_value || "100%",
