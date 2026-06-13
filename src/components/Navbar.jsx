@@ -172,7 +172,7 @@ export default function Navbar() {
               {dropOpen && (
                 <div style={{
                   position: 'absolute', top: 'calc(100% + 0.75rem)', left: '50%', transform: 'translateX(-50%)',
-                  background: 'rgba(26,34,64,0.95)', backdropFilter: 'blur(16px)',
+                  background: 'rgba(52,65,109,0.95)', backdropFilter: 'blur(16px)',
                   borderRadius: 8, boxShadow: '0 12px 40px rgba(0,0,0,0.3)',
                   border: '1px solid rgba(245,243,239,0.1)', minWidth: 180, overflow: 'hidden',
                   animation: 'fadeDown 0.18s ease',
