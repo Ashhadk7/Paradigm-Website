@@ -236,7 +236,7 @@ h1, h2, h3, h4 {
    observations). Cap the headline width so it wraps cleanly within the
    container instead of overflowing the right edge. */
 .what-we-see-header .section-headline {
-  max-width: 900px;
+  max-width: 520px;
 }
 
 .body-prose {
@@ -400,23 +400,35 @@ h1, h2, h3, h4 {
   }
 }
 
-/* WHAT WE SEE — observations as a full-width editorial list (even spacing,
-   each observation on its own row spanning a comfortable reading width). */
+/* WHAT WE SEE — editorial two-column: anchored headline left, numbered
+   observations right. Uses the full width and balances the section. */
+.what-we-see-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
 .observations-grid {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  width: 100%;
+  gap: 2.75rem;
 }
-.observation-row {
-  max-width: 1000px;
+.what-we-see-header {
+  margin-bottom: 2rem;
 }
-.observation-row p {
-  max-width: 880px;
-}
-@media (min-width: 769px) {
+
+@media (min-width: 901px) {
+  .what-we-see-split {
+    grid-template-columns: minmax(320px, 0.85fr) 1.15fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .what-we-see-header {
+    margin-bottom: 0;
+    position: sticky;
+    top: 160px;
+  }
   .observations-grid {
-    gap: 3.5rem;
+    gap: 3rem;
   }
 }
 

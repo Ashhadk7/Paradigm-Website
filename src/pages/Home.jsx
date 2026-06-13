@@ -95,25 +95,28 @@ export default function Home() {
       {/* ── WHAT WE SEE ── */}
       <section className="section-white">
         <div className="section-inner">
-          <div className="what-we-see-header" style={{ marginBottom: '3.5rem' }}>
-            <p className="eyebrow">What We See</p>
-            <h2 className="section-headline">
-              {(() => {
-                // "Three observations." on line 1, the rest on line 2.
-                const m = c.what_we_see_headline.match(/^(.*?[.!?])\s+(.*)$/s);
-                if (!m) return c.what_we_see_headline;
-                return (
-                  <>
-                    {m[1]}
-                    <br />
-                    {m[2]}
-                  </>
-                );
-              })()}
-            </h2>
-          </div>
+          <div className="what-we-see-split">
+            {/* Left: anchored headline */}
+            <div className="what-we-see-header">
+              <p className="eyebrow">What We See</p>
+              <h2 className="section-headline">
+                {(() => {
+                  // "Three observations." on line 1, the rest on line 2.
+                  const m = c.what_we_see_headline.match(/^(.*?[.!?])\s+(.*)$/s);
+                  if (!m) return c.what_we_see_headline;
+                  return (
+                    <>
+                      {m[1]}
+                      <br />
+                      {m[2]}
+                    </>
+                  );
+                })()}
+              </h2>
+            </div>
 
-          <div className="observations-grid">
+            {/* Right: numbered observations */}
+            <div className="observations-grid">
             {[
                 { num: '01', body: c.obs_1 },
                 { num: '02', body: c.obs_2 },
@@ -126,7 +129,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   className="observation-row"
-                  style={{ display: 'flex', gap: '2rem', alignItems: 'baseline' }}
+                  style={{ display: 'flex', gap: '1.5rem', alignItems: 'baseline' }}
                 >
                   <span style={{
                     fontFamily: 'Source Serif 4, Georgia, serif',
@@ -151,6 +154,7 @@ export default function Home() {
                   </p>
                 </motion.div>
               ))}
+            </div>
           </div>
         </div>
       </section>
