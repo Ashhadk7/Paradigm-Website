@@ -125,7 +125,8 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  style={{ display: 'flex', gap: '1.5rem' }}
+                  className="observation-row"
+                  style={{ display: 'flex', gap: '2rem', alignItems: 'baseline' }}
                 >
                   <span style={{
                     fontFamily: 'Source Serif 4, Georgia, serif',

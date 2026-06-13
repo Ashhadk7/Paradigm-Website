@@ -400,16 +400,22 @@ h1, h2, h3, h4 {
   }
 }
 
-/* WHAT WE SEE — three observations span the full width (no more empty right col) */
+/* WHAT WE SEE — observations as a full-width editorial list (even spacing,
+   each observation on its own row spanning a comfortable reading width). */
 .observations-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+}
+.observation-row {
+  max-width: 1000px;
+}
+.observation-row p {
+  max-width: 880px;
 }
 @media (min-width: 769px) {
   .observations-grid {
-    grid-template-columns: repeat(3, 1fr);
     gap: 3.5rem;
   }
 }
