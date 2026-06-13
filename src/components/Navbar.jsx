@@ -9,6 +9,11 @@ const S = {
   nav: { fontFamily: 'Inter, sans-serif', fontSize: '1.2rem', fontWeight: 700, letterSpacing: '0.08em', textDecoration: 'none', textTransform: 'uppercase', transition: 'color 0.2s ease, background 0.2s ease', cursor: 'pointer', background: 'none', border: 'none', padding: '0.55rem 0.75rem', borderRadius: 3, display: 'flex', alignItems: 'center', gap: '0.25rem' },
 };
 
+// Brand light shell — keeps the original dark logo readable.
+const NAV_BG = '#F5F3EF';   // Warm Off-White (brand background)
+const NAV_TEXT = '#2C2C2C'; // Near Black (brand body text)
+const NAV_HOVER = 'rgba(44,44,44,0.06)';
+
 export default function Navbar() {
   const { content: cms } = useContent('site');
   const palette = resolveSitePalette(usePresentation('site'));
@@ -74,7 +79,7 @@ export default function Navbar() {
 
   const linkColor = (path) => {
     const active = location.pathname === path || (path === '/advisors' && ['/advisors', '/familyoffice'].includes(location.pathname));
-    return active ? palette.accent : '#F5F3EF';
+    return active ? palette.accent : NAV_TEXT;
   };
 
   const rightLinks = [
@@ -104,16 +109,14 @@ export default function Navbar() {
           width: '100%',
           maxWidth: 'none',
           zIndex: 100,
-          background: mobileOpen ? 'rgba(232,228,220,0.65)' : palette.tone,
-          backdropFilter: mobileOpen ? 'blur(24px) saturate(1.4)' : 'blur(20px)',
-          WebkitBackdropFilter: mobileOpen ? 'blur(24px) saturate(1.4)' : 'blur(20px)',
-          borderBottom: '1px solid rgba(245,243,239,0.12)',
+          background: NAV_BG,
+          backdropFilter: 'blur(20px) saturate(1.4)',
+          WebkitBackdropFilter: 'blur(20px) saturate(1.4)',
+          borderBottom: '1px solid rgba(44,44,44,0.10)',
           borderRadius: 0,
-          boxShadow: mobileOpen
-            ? '0 8px 32px rgba(52,65,109,0.12), inset 0 1px 0 rgba(255,255,255,0.3)'
-            : scrolled
-              ? '0 8px 32px rgba(0,0,0,0.28), 0 0 0 1px rgba(196,162,91,0.08)'
-              : '0 4px 24px rgba(0,0,0,0.18)',
+          boxShadow: scrolled
+            ? '0 8px 32px rgba(26,34,64,0.14), 0 0 0 1px rgba(196,162,91,0.10)'
+            : '0 4px 24px rgba(26,34,64,0.08)',
           height: scrolled ? 'var(--nav-height-scrolled, 90px)' : 'var(--nav-height, 115px)',
           display: 'flex',
           alignItems: 'center',
@@ -134,7 +137,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" onClick={closeMenus} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
             <img
-              src="/Paradigm_Logo_REV.svg"
+              src="/Paradigm_Logo_XL 2.svg"
               alt="Paradigm Asset Management"
               style={{
                 height: scrolled ? 'var(--logo-height-scrolled, 66px)' : 'var(--logo-height, 84px)',
@@ -153,7 +156,7 @@ export default function Navbar() {
               to="/"
               onClick={closeMenus}
               style={{ ...S.nav, color: linkColor('/') }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(245,243,239,0.1)'}
+              onMouseEnter={e => e.currentTarget.style.background = NAV_HOVER}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               Home
@@ -164,7 +167,7 @@ export default function Navbar() {
               <button
                 onClick={() => setDropOpen(o => !o)}
                 style={{ ...S.nav, color: linkColor('/advisors') }}
-                onMouseEnter={e => e.currentTarget.style.background = 'rgba(245,243,239,0.1)'}
+                onMouseEnter={e => e.currentTarget.style.background = NAV_HOVER}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
               >
                 For Advisors <ChevronDown size={13} style={{ transition: 'transform 0.2s', transform: dropOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
@@ -193,7 +196,7 @@ export default function Navbar() {
                 to={l.path}
                 onClick={closeMenus}
                 style={{ ...S.nav, color: linkColor(l.path) }}
-                onMouseEnter={e => e.currentTarget.style.background = 'rgba(245,243,239,0.1)'}
+                onMouseEnter={e => e.currentTarget.style.background = NAV_HOVER}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
               >
                 {l.label}
@@ -205,7 +208,7 @@ export default function Navbar() {
           <button
             className="mobile-menu-toggle"
             onClick={() => setMobileOpen(o => !o)}
-            style={{ background: mobileOpen ? 'rgba(44,44,44,0.08)' : 'rgba(245,243,239,0.1)', border: mobileOpen ? '1px solid rgba(44,44,44,0.15)' : '1px solid rgba(245,243,239,0.15)', borderRadius: 50, cursor: 'pointer', color: mobileOpen ? '#2C2C2C' : '#F5F3EF', padding: '0.4rem', transition: 'all 0.3s' }}
+            style={{ background: 'rgba(44,44,44,0.06)', border: '1px solid rgba(44,44,44,0.15)', borderRadius: 50, cursor: 'pointer', color: NAV_TEXT, padding: '0.4rem', transition: 'all 0.3s' }}
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}

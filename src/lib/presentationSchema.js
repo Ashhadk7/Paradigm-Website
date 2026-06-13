@@ -98,7 +98,7 @@ export function normalizePresentation(pageKey, settings = {}) {
 export function resolveSitePalette(settings = {}) {
   const appearance = normalizePresentation('site', settings);
   const tone = {
-    navy: '#34416D',
+    navy: '#1a2240',
     charcoal: '#252a32',
     forest: '#18322d',
   }[appearance.shell_tone];
