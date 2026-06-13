@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { GLSLHills } from '../components/ui/glsl-hills';
+import AnimatedOrbit from '../components/AnimatedOrbit';
 import { useContent } from '../lib/useContent';
 
 function ProcessStep({ num, title, paragraphs, isLast }) {
@@ -180,39 +181,46 @@ export default function Process() {
       {/* ── THE PROCESS — FOUR STEPS ── */}
       <section className="section-offwhite">
         <div className="section-inner">
-          <div style={{ maxWidth: 760 }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.process_eyebrow}</p>
-            <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', marginBottom: '3.5rem', lineHeight: 1.8 }}>
-              {c.process_intro}
-            </p>
+          <div className="process-steps-grid">
+            <div style={{ maxWidth: 760 }}>
+              <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.process_eyebrow}</p>
+              <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', marginBottom: '3.5rem', lineHeight: 1.8 }}>
+                {c.process_intro}
+              </p>
 
-            <ProcessStep
-              num="01"
-              title={c.step1_title}
-              paragraphs={[c.step1_text]}
-            />
-            <ProcessStep
-              num="02"
-              title={c.step2_title}
-              paragraphs={[c.step2_para1, c.step2_para2]}
-            />
-            <ProcessStep
-              num="03"
-              title={c.step3_title}
-              paragraphs={[
-                c.step3_text,
-                c.step3_text_2,
-              ]}
-            />
-            <ProcessStep
-              num="04"
-              title={c.step4_title}
-              paragraphs={[
-                c.step4_text,
-                c.step4_text_2,
-              ]}
-              isLast
-            />
+              <ProcessStep
+                num="01"
+                title={c.step1_title}
+                paragraphs={[c.step1_text]}
+              />
+              <ProcessStep
+                num="02"
+                title={c.step2_title}
+                paragraphs={[c.step2_para1, c.step2_para2]}
+              />
+              <ProcessStep
+                num="03"
+                title={c.step3_title}
+                paragraphs={[
+                  c.step3_text,
+                  c.step3_text_2,
+                ]}
+              />
+              <ProcessStep
+                num="04"
+                title={c.step4_title}
+                paragraphs={[
+                  c.step4_text,
+                  c.step4_text_2,
+                ]}
+                isLast
+              />
+            </div>
+
+            {/* Right: animated concentric circles (sticky alongside the steps) */}
+            <div className="process-orbit">
+              <AnimatedOrbit />
+            </div>
           </div>
         </div>
       </section>

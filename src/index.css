@@ -400,6 +400,29 @@ h1, h2, h3, h4 {
   }
 }
 
+/* THE PROCESS — steps left, animated orbit right (sticky on desktop) */
+.process-steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.process-orbit {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .process-steps-grid {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 4rem;
+  }
+  .process-orbit {
+    display: block;
+    position: sticky;
+    top: 160px;
+  }
+}
+
 /* THE PLATFORM — 50/50 split: intro text left, Proven proof block right */
 .platform-split {
   display: grid;
