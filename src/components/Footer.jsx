@@ -40,7 +40,7 @@ export default function Footer() {
           {/* Logo */}
           <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
             <img
-              src="/Paradigm_Logo_XL 2.svg"
+              src="/Paradigm_PMS_Tag_Large.svg"
               alt="Paradigm Asset Management"
               style={{
                 height: 48,
