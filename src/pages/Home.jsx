@@ -36,7 +36,7 @@ export default function Home() {
     trust_stat_2_value: cms?.trust_stat_2_value || "65 of the top 100",
     trust_stat_2_label: cms?.trust_stat_2_label || "U.S. pension funds served",
     trust_stat_3_value: cms?.trust_stat_3_value || "6",
-    trust_stat_3_label: cms?.trust_stat_3_label || "Equity strategies",
+    trust_stat_3_label: cms?.trust_stat_3_label || "Strategies",
     trust_stat_3_sub: cms?.trust_stat_3_sub || "Domestic, international, global",
     trust_stat_4_value: cms?.trust_stat_4_value || "$7B+",
     trust_stat_4_label: cms?.trust_stat_4_label || "Cumulative AUM",

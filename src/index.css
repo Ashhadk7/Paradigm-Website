@@ -560,7 +560,7 @@ h1, h2, h3, h4 {
   padding: 1.05rem 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .home-stat strong {
