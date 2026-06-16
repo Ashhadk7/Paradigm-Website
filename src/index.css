@@ -141,13 +141,14 @@ h1, h2, h3, h4 {
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
-  border: 2px solid #34416D;
+  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border: 2px solid rgba(245, 243, 239, 0.5);
   cursor: pointer;
   text-decoration: none;
 }
 .btn-navy:hover {
   background: #2a3358;
+  border-color: #F5F3EF;
   box-shadow: 0 4px 20px rgba(52, 65, 109, 0.3);
 }
 
@@ -300,6 +301,15 @@ h1, h2, h3, h4 {
   .hero-copy--tight .eyebrow,
   .hero-copy--wide .eyebrow {
     white-space: nowrap;
+  }
+
+  /* Let the hero sub-copy use the full hero width on large screens
+     so it reads as one continuous flowing sentence instead of being
+     squeezed into the narrow ~680px column. */
+  .hero-copy--standard .hero-subcopy,
+  .hero-copy--tight .hero-subcopy,
+  .hero-copy--wide .hero-subcopy {
+    max-width: none;
   }
 
   .display-headline-size--compact {
