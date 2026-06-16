@@ -37,7 +37,6 @@ export default function Home() {
     trust_stat_2_label: cms?.trust_stat_2_label || "U.S. pension funds served",
     trust_stat_3_value: cms?.trust_stat_3_value || "6",
     trust_stat_3_label: cms?.trust_stat_3_label || "Strategies",
-    trust_stat_3_sub: cms?.trust_stat_3_sub || "Domestic, international, global",
     trust_stat_4_value: cms?.trust_stat_4_value || "$7B+",
     trust_stat_4_label: cms?.trust_stat_4_label || "Cumulative AUM",
     trust_stat_5_value: cms?.trust_stat_5_value || "100%",
@@ -86,7 +85,7 @@ export default function Home() {
         <div className="home-proof-inner">
           <Stat value={c.trust_stat_1_value} label={c.trust_stat_1_label} />
           <Stat value={c.trust_stat_2_value} label={c.trust_stat_2_label} />
-          <Stat value={c.trust_stat_3_value} label={<>{c.trust_stat_3_label}<br /><span className="stat-sub">{c.trust_stat_3_sub}</span></>} />
+          <Stat value={c.trust_stat_3_value} label={c.trust_stat_3_label} />
           <Stat value={c.trust_stat_4_value} label={c.trust_stat_4_label} />
           <Stat value={c.trust_stat_5_value} label={c.trust_stat_5_label} />
         </div>
