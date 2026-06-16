@@ -303,13 +303,12 @@ h1, h2, h3, h4 {
     white-space: nowrap;
   }
 
-  /* Let the hero sub-copy use the full hero width on large screens
-     so it reads as one continuous flowing sentence instead of being
-     squeezed into the narrow ~680px column. */
+  /* Keep the hero sub-copy on a single line on large screens. */
   .hero-copy--standard .hero-subcopy,
   .hero-copy--tight .hero-subcopy,
   .hero-copy--wide .hero-subcopy {
     max-width: none;
+    white-space: nowrap;
   }
 
   .display-headline-size--compact {
