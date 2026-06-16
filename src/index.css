@@ -294,6 +294,14 @@ h1, h2, h3, h4 {
   .hero-copy--tight { max-width: 42%; }
   .hero-copy--wide { max-width: 54%; }
 
+  /* Keep the long hero eyebrow on a single line on large screens,
+     even though the copy column is capped at ~48% width. */
+  .hero-copy--standard .eyebrow,
+  .hero-copy--tight .eyebrow,
+  .hero-copy--wide .eyebrow {
+    white-space: nowrap;
+  }
+
   .display-headline-size--compact {
     font-size: clamp(2.2rem, 3.6vw, 3rem);
   }
