@@ -34,7 +34,7 @@ export default function Advisors() {
   const c = {
     hero_eyebrow: cms?.hero_eyebrow || "For Wealth Advisors & Independent RIAs",
     hero_headline: cms?.hero_headline || "Your clients are paying active management fees. Most of that capital is locked inside a single strategy's approach. There is a different way to invest it.",
-    hero_sub: cms?.hero_sub || "Paradigm builds portfolios from active market data — not anchored to any single approach. Portfolios that can move as market leadership moves. Under your name.",
+    hero_sub: cms?.hero_sub || "Paradigm builds portfolios from active market data. Portfolios that can move within the mandate as market leadership moves. Under your name.",
     hero_cta_label: cms?.hero_cta_label || "Book a 20-Minute Call",
     core_story_eyebrow: cms?.core_story_eyebrow || "The Core Story",
     core_story_1: cms?.core_story_1 || "Every active strategy operates within the boundaries of its expertise. A deep value manager knows deep value. A quality growth manager has a genuine edge in quality growth. That specialization is not a limitation — it is the source of their edge. It is also the boundary they cannot cross without leaving what they genuinely know how to do.",

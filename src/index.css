@@ -320,6 +320,19 @@ h1, h2, h3, h4 {
     white-space: normal;
   }
 
+  /* Single-sentence subs: force onto one line. Allow the line to span almost
+     the full viewport and shrink the font just enough to fit. */
+  .hero-subcopy--oneline {
+    max-width: 94vw !important;
+    width: auto !important;
+    white-space: nowrap;
+    font-size: clamp(0.8rem, 1.18vw, 1.2rem);
+  }
+  .hero-subcopy--oneline > span {
+    display: inline !important;
+    white-space: nowrap;
+  }
+
   .display-headline-size--compact {
     font-size: clamp(2.2rem, 3.6vw, 3rem);
   }

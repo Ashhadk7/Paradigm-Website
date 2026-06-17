@@ -78,7 +78,7 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
 
           {sub && (
             <p
-              className="hero-subcopy"
+              className={`hero-subcopy ${subLines.length === 1 ? 'hero-subcopy--oneline' : ''}`}
               style={compact ? { fontSize: '1.0625rem', marginBottom: '1.25rem' } : undefined}
             >
               {subLines.map((line, i) => (
