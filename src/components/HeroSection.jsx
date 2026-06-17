@@ -91,7 +91,7 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
                     delay: subDelay + i * 0.12,
                     ease: [0.25, 0.46, 0.45, 0.94],
                   }}
-                  style={{ display: 'block' }}
+                  style={{ display: subLines.length === 1 ? 'inline' : 'block' }}
                 >
                   {line}
                 </motion.span>
