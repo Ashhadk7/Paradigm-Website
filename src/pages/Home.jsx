@@ -29,7 +29,7 @@ export default function Home() {
     // Hero
     hero_eyebrow: cms?.hero_eyebrow || "Institutional Portfolio Infrastructure for the Next Generation of Wealth Platforms",
     hero_headline: cms?.hero_headline || "The collective intelligence of the market.\nBuilt into every portfolio.",
-    hero_sub: cms?.hero_sub || "Paradigm identifies where market leadership is forming — right now, and builds portfolios that reflect it.\nPortfolios that can move as leadership moves.",
+    hero_sub: cms?.hero_sub || "Paradigm identifies where market leadership is forming — right now, and builds portfolios that reflect it.",
     // Trust Strip
     trust_stat_1_value: cms?.trust_stat_1_value || "35 Years",
     trust_stat_1_label: cms?.trust_stat_1_label || "Founded 1990",

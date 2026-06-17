@@ -308,12 +308,15 @@ h1, h2, h3, h4 {
     white-space: nowrap;
   }
 
-  /* Hero sub-copy wraps within a comfortable reading width (long sub
-     paragraphs must not run off the right edge of the screen). */
+  /* Hero sub-copy can extend wider than the (48%) headline column so short
+     one-sentence subs sit on a single line. It still wraps, so long subs
+     never run off the right edge of the screen. */
   .hero-copy--standard .hero-subcopy,
   .hero-copy--tight .hero-subcopy,
   .hero-copy--wide .hero-subcopy {
-    max-width: 760px;
+    max-width: 920px;
+    width: max-content;
+    max-width: min(920px, 62vw);
     white-space: normal;
   }
 

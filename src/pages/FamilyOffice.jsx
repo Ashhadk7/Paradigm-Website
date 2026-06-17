@@ -32,7 +32,7 @@ export default function FamilyOffice() {
   const c = {
     hero_eyebrow: cms?.hero_eyebrow || "For Multi-Family Offices & OCIOs",
     hero_headline: cms?.hero_headline || "Your clients expect portfolios built for them specifically. Most platforms offer portfolios built for everyone. There is a different approach.",
-    hero_sub: cms?.hero_sub || "Paradigm builds portfolios to your specification for any client mandate — using collective intelligence to identify regime leadership within each mandate and qualify it through active market data. Your investment team operates the platform. Your clients see your process.",
+    hero_sub: cms?.hero_sub || "Paradigm builds portfolios to your specification for any client mandate. Your investment team operates the platform.",
     hero_cta_label: cms?.hero_cta_label || "Start a Conversation",
     core_story_eyebrow: cms?.core_story_eyebrow || "The Core Story",
     core_story_1: cms?.core_story_1 || "Every active strategy operates within the boundaries of its expertise. A deep value manager knows deep value. A quality growth manager has a genuine edge in quality growth. That specialization is a real edge. It is also a structural constraint: when market leadership shifts outside those boundaries, the strategy lags and waits.",
