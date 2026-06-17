@@ -37,20 +37,6 @@ export default function Footer() {
 
       <div className="footer-container" style={{ maxWidth: 1600, margin: '0 auto' }}>
         <div className="footer-row">
-          {/* Logo */}
-          <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
-            <img
-              src="/Paradigm_PMS_Tag_Large.svg"
-              alt="Paradigm Asset Management"
-              style={{
-                height: 48,
-                width: 'auto',
-                flexShrink: 0,
-                display: 'block',
-              }}
-            />
-          </Link>
-
           {/* Links: Process | Team | Legal | Contact */}
           <nav className="footer-links">
             <Link to="/process" style={linkStyle}>{c.footer_process}</Link>
