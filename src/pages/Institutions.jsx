@@ -7,18 +7,18 @@ import { useContent } from '../lib/useContent';
 
 function ThreeCol({ blocks }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1px', background: 'rgba(52,65,109,0.08)', borderRadius: 3, overflow: 'hidden' }}>
+    <div className="outcomes-band">
       {blocks.map((b, i) => (
         <motion.div key={i}
+          className="outcome-cell"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.1 }}
-          style={{ background: '#fff', padding: '2.5rem 2rem' }}
         >
           <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '0.875rem' }}>{b.label}</p>
           <h3 style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.45rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.3 }}>{b.title}</h3>
-          <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.75, color: '#637890' }}>{b.body}</p>
+          <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.75, color: '#637890', margin: 0 }}>{b.body}</p>
         </motion.div>
       ))}
     </div>
