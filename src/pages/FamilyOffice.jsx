@@ -110,7 +110,7 @@ export default function FamilyOffice() {
           <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '0.625rem' }}>
             {c.offers_headline}
           </h2>
-          <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', maxWidth: 560, margin: '0 0 3.5rem' }}>
+          <p className="section-sub-oneline" style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', margin: '0 0 3.5rem' }}>
             {c.offers_sub}
           </p>
           <ThreeCol blocks={[

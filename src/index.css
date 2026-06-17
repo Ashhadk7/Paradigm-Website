@@ -460,6 +460,11 @@ h1, h2, h3, h4 {
   .cta-title-oneline { white-space: nowrap; }
 }
 
+/* Section sub-line stays on one line on desktop; wraps on narrow screens. */
+@media (min-width: 769px) {
+  .section-sub-oneline { white-space: nowrap; }
+}
+
 /* OUTCOMES BAND — framed equal-height cells, full width, headline-aligned.
    First cell flush-left (aligns with the section headline), last cell
    flush-right (reaches the section edge) so the row is balanced both sides. */
