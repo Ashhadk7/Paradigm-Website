@@ -43,10 +43,10 @@ h1, h2, h3, h4 {
 
 /* ─── Responsive CSS custom properties ───────────────────── */
 :root {
-  --nav-height: 115px;
-  --nav-height-scrolled: 90px;
-  --logo-height: 84px;
-  --logo-height-scrolled: 66px;
+  --nav-height: 124px;
+  --nav-height-scrolled: 98px;
+  --logo-height: 104px;
+  --logo-height-scrolled: 82px;
   --nav-padding: 2.5rem;
 }
 
@@ -64,8 +64,8 @@ h1, h2, h3, h4 {
   :root {
     --nav-height: 85px;
     --nav-height-scrolled: 72px;
-    --logo-height: 60px;
-    --logo-height-scrolled: 50px;
+    --logo-height: 72px;
+    --logo-height-scrolled: 60px;
     --nav-padding: 1.5rem;
   }
 }
@@ -266,7 +266,12 @@ h1, h2, h3, h4 {
 /* Headline lines wrap within the hero column instead of overflowing the
    viewport. (Previously forced to nowrap, which pushed long sentences — e.g.
    the Institutions hero — off the right edge of the screen.) */
-.hero-headline-line { white-space: normal; overflow-wrap: break-word; }
+/* Keep each hero headline line on a single row (so "...of the market." stays
+   intact) on desktop; allow wrapping on narrow screens to avoid overflow. */
+.hero-headline-line { white-space: nowrap; overflow-wrap: break-word; }
+@media (max-width: 768px) {
+  .hero-headline-line { white-space: normal; }
+}
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .hero-section {
