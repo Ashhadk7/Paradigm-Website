@@ -14,7 +14,14 @@ function ThreeCol({ blocks }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.1, duration: 0.5 }}
-          style={{ background: '#fff', padding: '2.5rem 2rem' }}
+          // First card has no left padding so "OUTCOME 01" lines up with the
+          // section headline ("Three…"); last card has no right padding.
+          style={{
+            background: '#fff',
+            padding: '2.5rem 2rem',
+            paddingLeft: i === 0 ? 0 : '2rem',
+            paddingRight: i === blocks.length - 1 ? 0 : '2rem',
+          }}
         >
           <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '0.875rem' }}>{b.label}</p>
           <h3 style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.45rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.3 }}>{b.title}</h3>
