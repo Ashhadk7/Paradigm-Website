@@ -30,8 +30,8 @@ export default function Institutions() {
 
   const c = {
     hero_eyebrow: cms?.hero_eyebrow || "For Institutional Investors & Strategic Partners",
-    hero_headline: cms?.hero_headline || "35 years of institutional investment\nprocess. The same intelligence that served General Motors, AMEX, and the US Treasury — now structured for the partnerships, mandates, and platforms that define what comes next.",
-    hero_sub: cms?.hero_sub || "Paradigm reads active market data to identify where leadership is forming within each mandate — and builds portfolios from that signal. Transparent. Explainable. No black box.",
+    hero_headline: cms?.hero_headline || "35 years of institutional investment process.",
+    hero_sub: cms?.hero_sub || "The same intelligence that served General Motors, AMEX, and the US Treasury — now structured for the partnerships, mandates, and platforms that define what comes next.\nParadigm reads active market data to identify where leadership is forming within each mandate — and builds portfolios from that signal. Transparent. Explainable. No black box.",
     hero_cta_label: cms?.hero_cta_label || "Start a Conversation",
     core_story_eyebrow: cms?.core_story_eyebrow || "The Core Story",
     core_story_1: cms?.core_story_1 || "Every active strategy operates within the boundaries of its expertise. A manager running large cap value runs large cap value — with precision and pattern recognition built over years. That specialization is a genuine edge. It is also a structural constraint: when market leadership rotates outside those boundaries, the strategy lags. Not because of error. Because staying current with the rotation would mean operating outside the domain of real competence.",
