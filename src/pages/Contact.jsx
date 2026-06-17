@@ -57,7 +57,7 @@ export default function Contact() {
     <>
       <Helmet>
         <title>Contact — Paradigm Asset Management</title>
-        <meta name="description" content="Start here. Book a 20-minute call or start a conversation. jef@paradigmasset.com" />
+        <meta name="description" content="Start here. Book a 20-minute call or start a conversation. info@defyscale.com" />
       </Helmet>
 
       {/* ── HERO — Minimal, light background, open and warm ── */}
@@ -129,8 +129,8 @@ export default function Contact() {
               body="See what a portfolio built from collective market intelligence looks like for your practice. A 20-minute call is enough to know whether this fits what you are building for your clients."
               ctaLabel="Book a 20-Minute Call"
               ctaVariant="gold"
-              ctaHref="mailto:jef@paradigmasset.com?subject=20-Minute Call Request"
-              email="jef@paradigmasset.com"
+              ctaHref="mailto:info@defyscale.com?subject=20-Minute Call Request"
+              email="info@defyscale.com"
               delay={0}
             />
             <ContactPath
@@ -139,8 +139,8 @@ export default function Contact() {
               body="Paradigm is actively building strategic relationships with institutional investors, family offices, OCIOs, and platforms. If you are exploring what a partnership looks like, the right first step is a conversation."
               ctaLabel="Start a Conversation"
               ctaVariant="outline-navy"
-              ctaHref="mailto:jef@paradigmasset.com?subject=Institutional Inquiry"
-              email="jef@paradigmasset.com"
+              ctaHref="mailto:info@defyscale.com?subject=Institutional Inquiry"
+              email="info@defyscale.com"
               delay={0.12}
             />
           </div>
@@ -161,14 +161,10 @@ export default function Contact() {
               alignItems: 'start',
             }}
           >
-            <div>
-              <p style={{ fontFamily: 'Inter', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '0.875rem' }}>Direct Contact</p>
-              <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.375rem', color: '#F5F3EF', marginBottom: '0.25rem' }}>James Francis</p>
-              <p style={{ fontFamily: 'Inter', fontSize: '0.8125rem', color: 'rgba(245,243,239,0.6)' }}>Founder & CEO</p>
-            </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
-              <a href="mailto:jef@paradigmasset.com" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontFamily: 'Inter', fontSize: '1rem', color: '#C4A25B', textDecoration: 'none' }}>
-                <Mail size={15} style={{ opacity: 0.7 }} /> jef@paradigmasset.com
+              <p style={{ fontFamily: 'Inter', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '0.25rem' }}>Direct Contact</p>
+              <a href="mailto:info@defyscale.com" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontFamily: 'Inter', fontSize: '1rem', color: '#C4A25B', textDecoration: 'none' }}>
+                <Mail size={15} style={{ opacity: 0.7 }} /> info@defyscale.com
               </a>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem' }}>
