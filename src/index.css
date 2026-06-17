@@ -308,12 +308,13 @@ h1, h2, h3, h4 {
     white-space: nowrap;
   }
 
-  /* Keep the hero sub-copy on a single line on large screens. */
+  /* Hero sub-copy wraps within a comfortable reading width (long sub
+     paragraphs must not run off the right edge of the screen). */
   .hero-copy--standard .hero-subcopy,
   .hero-copy--tight .hero-subcopy,
   .hero-copy--wide .hero-subcopy {
-    max-width: none;
-    white-space: nowrap;
+    max-width: 760px;
+    white-space: normal;
   }
 
   .display-headline-size--compact {
