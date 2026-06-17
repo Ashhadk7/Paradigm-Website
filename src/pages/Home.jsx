@@ -189,7 +189,7 @@ export default function Home() {
                 ))}
               </ul>
               <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890', margin: 0 }}>
-                Customization, personalization, and tax-loss harvesting run across all three — at the individual client level. Built for advisors and institutions who want the full capability without splitting it across multiple vendors.
+                Customization, personalization, and tax-loss harvesting run across all three at the individual client level. Built for advisors and institutions who want the full capability without splitting it across multiple vendors.
               </p>
             </div>
 
