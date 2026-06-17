@@ -104,6 +104,8 @@ export default function Home() {
                       <span key={i}>
                         {line}
                         {i < lines.length - 1 && <br />}
+                        {/* one-line gap after the first line ("Three observations.") */}
+                        {i === 0 && <br />}
                       </span>
                     ));
                   }
