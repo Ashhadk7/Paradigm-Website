@@ -97,7 +97,7 @@ export default function About() {
         </div>
 
         <div className="hero-inner">
-          <div style={{ position: 'relative', zIndex: 2, maxWidth: 820 }}>
+          <div style={{ position: 'relative', zIndex: 2, maxWidth: 1100 }}>
             <h1 className="display-headline" style={{ lineHeight: 1.1 }}>
               {clauses.map((clause, i) => (
                 <motion.span

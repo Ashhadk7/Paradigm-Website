@@ -37,11 +37,9 @@ export default function Footer() {
 
       <div className="footer-container" style={{ maxWidth: 1600, margin: '0 auto' }}>
         <div className="footer-row">
-          {/* Links: Process | Team | Legal | Contact */}
+          {/* Links: Process | Legal | Contact */}
           <nav className="footer-links">
             <Link to="/process" style={linkStyle}>{c.footer_process}</Link>
-            <span style={separatorStyle}>|</span>
-            <Link to="/about" style={linkStyle}>{c.footer_team}</Link>
             <span style={separatorStyle}>|</span>
             <Link to="/legal" style={linkStyle}>{c.footer_legal}</Link>
             <span style={separatorStyle}>|</span>
