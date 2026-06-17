@@ -80,13 +80,10 @@ export default function CTAStrip({
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{ textAlign: 'center', maxWidth: 600, margin: '0 auto' }}
+            style={{ textAlign: 'center', maxWidth: 860, margin: '0 auto' }}
           >
-            <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.625rem', color: '#34416D', marginBottom: '0.625rem', lineHeight: 1.35 }}>
+            <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.625rem', color: '#34416D', marginBottom: '1.75rem', lineHeight: 1.35 }}>
               {mfoTitle || "Paradigm builds portfolios the way your clients expect them to be built — to their specific mandate, informed by current market intelligence, presented as your firm's own process."}
-            </p>
-            <p style={{ fontFamily: 'Inter', fontSize: '0.875rem', color: '#637890', marginBottom: '1.75rem' }}>
-              <a href={`mailto:${mfoEmail || "jef@paradigmasset.com"}`} style={{ color: '#34416D', textDecoration: 'none' }}>{mfoEmail || "jef@paradigmasset.com"}</a>
             </p>
             <Link to="/contact" className="btn-outline-navy">{mfoButtonLabel || "Start a Conversation"}</Link>
           </motion.div>
