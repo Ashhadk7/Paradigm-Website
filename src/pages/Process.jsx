@@ -185,7 +185,22 @@ export default function Process() {
             <div style={{ maxWidth: 760 }}>
               <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.process_eyebrow}</p>
               <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', marginBottom: '3.5rem', lineHeight: 1.8 }}>
-                {c.process_intro}
+                {(() => {
+                  // Put "Evaluated monthly..." on its own line. Works whether the
+                  // text comes from code or the CMS.
+                  const intro = c.process_intro;
+                  const idx = intro.indexOf('Evaluated monthly');
+                  if (idx > 0) {
+                    return (
+                      <>
+                        {intro.slice(0, idx).trim()}
+                        <br />
+                        {intro.slice(idx).trim()}
+                      </>
+                    );
+                  }
+                  return intro;
+                })()}
               </p>
 
               <ProcessStep
