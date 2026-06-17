@@ -173,8 +173,23 @@ export default function Home() {
             {/* Left: platform intro text */}
             <div className="platform-left">
               <p className="eyebrow" style={{ marginBottom: '1rem' }}>The Platform</p>
+              <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890', margin: '0 0 1.25rem' }}>
+                One platform. Three capabilities.
+              </p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                {[
+                  'Custom active strategies built to specification.',
+                  'SMA conversion of existing fund exposures into customizable tax-aware portfolios.',
+                  'Direct and custom indexing at scale.',
+                ].map((item, i) => (
+                  <li key={i} style={{ display: 'flex', gap: '0.85rem', fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.7, color: '#637890' }}>
+                    <span style={{ color: '#C4A25B', fontWeight: 700, flexShrink: 0, lineHeight: 1.7 }}>—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
               <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890', margin: 0 }}>
-                {c.platform_text}
+                Customization, personalization, and tax-loss harvesting run across all three — at the individual client level. Built for advisors and institutions who want the full capability without splitting it across multiple vendors.
               </p>
             </div>
 
