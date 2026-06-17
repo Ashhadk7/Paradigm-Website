@@ -64,16 +64,14 @@ export default function CTAStrip({
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{ textAlign: 'center', maxWidth: 560, margin: '0 auto' }}
+            style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto' }}
           >
-            <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.625rem', color: '#34416D', marginBottom: '0.625rem', lineHeight: 1.35 }}>
+            <p className="cta-title-oneline" style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.625rem', color: '#34416D', marginBottom: '0.625rem', lineHeight: 1.35 }}>
               {advisorTitle || "Worth 20 minutes to see what this looks like for your practice?"}
             </p>
             <p style={{ fontFamily: 'Inter', fontSize: '0.875rem', color: '#637890', marginBottom: '1.75rem' }}>
               {advisorContactPrefix || "Or reach us directly:"}&nbsp;
               <a href={`mailto:${advisorEmail || "jef@paradigmasset.com"}`} style={{ color: '#34416D', textDecoration: 'none' }}>{advisorEmail || "jef@paradigmasset.com"}</a>
-              &nbsp;·&nbsp;
-              <a href={`tel:${(advisorPhone || "917-991-3348").replace(/[^+\d]/g, '')}`} style={{ color: '#34416D', textDecoration: 'none' }}>{advisorPhone || "917-991-3348"}</a>
             </p>
             <Link to="/contact" className="btn-gold">{advisorButtonLabel || "Book a 20-Minute Call"}</Link>
           </motion.div>
@@ -89,8 +87,6 @@ export default function CTAStrip({
             </p>
             <p style={{ fontFamily: 'Inter', fontSize: '0.875rem', color: '#637890', marginBottom: '1.75rem' }}>
               <a href={`mailto:${mfoEmail || "jef@paradigmasset.com"}`} style={{ color: '#34416D', textDecoration: 'none' }}>{mfoEmail || "jef@paradigmasset.com"}</a>
-              &nbsp;·&nbsp;
-              <a href={`tel:${(mfoPhone || "917-991-3348").replace(/[^+\d]/g, '')}`} style={{ color: '#34416D', textDecoration: 'none' }}>{mfoPhone || "917-991-3348"}</a>
             </p>
             <Link to="/contact" className="btn-outline-navy">{mfoButtonLabel || "Start a Conversation"}</Link>
           </motion.div>
@@ -106,8 +102,6 @@ export default function CTAStrip({
             </p>
             <p style={{ fontFamily: 'Inter', fontSize: '0.875rem', color: '#637890', marginBottom: '1.75rem' }}>
               <a href={`mailto:${institutionalEmail || "jef@paradigmasset.com"}`} style={{ color: '#34416D', textDecoration: 'none' }}>{institutionalEmail || "jef@paradigmasset.com"}</a>
-              &nbsp;·&nbsp;
-              <a href={`tel:${(institutionalPhone || "917-991-3348").replace(/[^+\d]/g, '')}`} style={{ color: '#34416D', textDecoration: 'none' }}>{institutionalPhone || "917-991-3348"}</a>
             </p>
             <Link to="/contact" className="btn-outline-navy">{institutionalButtonLabel || "Start a Conversation"}</Link>
           </motion.div>

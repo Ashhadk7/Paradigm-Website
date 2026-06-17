@@ -67,7 +67,7 @@ export default function Legal() {
                 Paradigm Asset Management Co. LLC is registered as an investment adviser with the U.S. Securities and Exchange Commission (SEC). Registration does not imply a certain level of skill or training.
               </p>
               <p>
-                A copy of Paradigm Asset Management's Form ADV Part 2A (Firm Brochure) is available upon request. Please contact us at <a href="mailto:jef@paradigmasset.com" style={{ color: '#34416D', textDecoration: 'none' }}>jef@paradigmasset.com</a> or call <a href="tel:2127716100" style={{ color: '#34416D', textDecoration: 'none' }}>212.771.6100</a> to request a copy.
+                A copy of Paradigm Asset Management's Form ADV Part 2A (Firm Brochure) is available upon request. Please contact us at <a href="mailto:jef@paradigmasset.com" style={{ color: '#34416D', textDecoration: 'none' }}>jef@paradigmasset.com</a> to request a copy.
               </p>
             </div>
           </motion.div>
@@ -132,8 +132,6 @@ export default function Legal() {
               <p style={{ marginBottom: '1rem' }}>New York, NY 10105</p>
               <p>
                 <a href="mailto:jef@paradigmasset.com" style={{ color: '#34416D', textDecoration: 'none' }}>jef@paradigmasset.com</a>
-                {' · '}
-                <a href="tel:2127716100" style={{ color: '#34416D', textDecoration: 'none' }}>212.771.6100</a>
               </p>
             </div>
           </motion.div>

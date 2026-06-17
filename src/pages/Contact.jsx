@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { Mail, MapPin, ArrowUpRight } from 'lucide-react';
 
 function ContactPath({ tag, headline, body, ctaLabel, ctaVariant, ctaHref, email, phone, delay = 0 }) {
   return (
@@ -47,9 +47,6 @@ function ContactPath({ tag, headline, body, ctaLabel, ctaVariant, ctaHref, email
         <a href={`mailto:${email}`} style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontFamily: 'Inter', fontSize: '0.875rem', color: '#34416D', textDecoration: 'none' }}>
           <Mail size={14} style={{ color: '#C4A25B', flexShrink: 0 }} /> {email}
         </a>
-        <a href={`tel:+1${phone.replace(/\D/g, '')}`} style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontFamily: 'Inter', fontSize: '0.875rem', color: '#637890', textDecoration: 'none' }}>
-          <Phone size={14} style={{ color: '#C4A25B', flexShrink: 0 }} /> {phone}
-        </a>
       </div>
     </motion.div>
   );
@@ -60,7 +57,7 @@ export default function Contact() {
     <>
       <Helmet>
         <title>Contact — Paradigm Asset Management</title>
-        <meta name="description" content="Start here. Book a 20-minute call or start a conversation. jef@paradigmasset.com · 917-991-3348" />
+        <meta name="description" content="Start here. Book a 20-minute call or start a conversation. jef@paradigmasset.com" />
       </Helmet>
 
       {/* ── HERO — Minimal, light background, open and warm ── */}
@@ -134,7 +131,6 @@ export default function Contact() {
               ctaVariant="gold"
               ctaHref="mailto:jef@paradigmasset.com?subject=20-Minute Call Request"
               email="jef@paradigmasset.com"
-              phone="917-991-3348"
               delay={0}
             />
             <ContactPath
@@ -145,7 +141,6 @@ export default function Contact() {
               ctaVariant="outline-navy"
               ctaHref="mailto:jef@paradigmasset.com?subject=Institutional Inquiry"
               email="jef@paradigmasset.com"
-              phone="917-991-3348"
               delay={0.12}
             />
           </div>
@@ -174,9 +169,6 @@ export default function Contact() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
               <a href="mailto:jef@paradigmasset.com" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontFamily: 'Inter', fontSize: '1rem', color: '#C4A25B', textDecoration: 'none' }}>
                 <Mail size={15} style={{ opacity: 0.7 }} /> jef@paradigmasset.com
-              </a>
-              <a href="tel:9179913348" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontFamily: 'Inter', fontSize: '1rem', color: 'rgba(245,243,239,0.8)', textDecoration: 'none' }}>
-                <Phone size={15} style={{ opacity: 0.7 }} /> 917-991-3348
               </a>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem' }}>

@@ -25,7 +25,6 @@ export default function Navbar() {
     nav_about: cms?.nav_about || 'About',
     nav_contact: cms?.nav_contact || 'Contact',
     direct_email: cms?.direct_email || 'jef@paradigmasset.com',
-    direct_phone: cms?.direct_phone || '212.771.6100',
   };
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -317,8 +316,6 @@ export default function Navbar() {
         <div style={{ marginTop: '2rem', paddingTop: '1.25rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
           <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: 'rgba(245,243,239,0.4)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Direct Contact</p>
           <a href={`mailto:${c.direct_email}`} style={{ display: 'block', fontFamily: 'Inter', fontSize: '1.0625rem', color: palette.accent, textDecoration: 'none', marginBottom: '0.25rem' }}>{c.direct_email}</a>
-          <a href={`tel:${c.direct_phone.replace(/[^+\d]/g, '')}`} style={{ display: 'block', fontFamily: 'Inter', fontSize: '1.0625rem', color: 'rgba(245,243,239,0.6)', textDecoration: 'none', marginBottom: '0.15rem' }}>{c.direct_phone}</a>
-          <a href="tel:9179913348" style={{ display: 'block', fontFamily: 'Inter', fontSize: '1.0625rem', color: 'rgba(245,243,239,0.4)', textDecoration: 'none' }}>917-991-3348</a>
         </div>
       </div>
     </>
