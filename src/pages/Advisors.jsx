@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
-import ProofBlock from '../components/ProofBlock';
 import CTAStrip from '../components/CTAStrip';
 import { useContent } from '../lib/useContent';
 
@@ -206,13 +205,6 @@ export default function Advisors() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── PROOF ── */}
-      <section className="section-offwhite">
-        <div className="section-inner" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
-          <ProofBlock variant="advisor" body={c.proof_body} bridge={c.proof_bridge} />
         </div>
       </section>
 
