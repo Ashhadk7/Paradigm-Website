@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="680" height="580" viewBox="0 0 680 580" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>The Data Foundation</title>
+<desc>A vast field of cool blue-grey points on a Dark Blue ground, evenly margined, representing the universe of disclosed active holdings. Up and to the right, a small concentrated warm gold bloom marks the leadership signal Paradigm distills from the public data.</desc>
+<defs>
+<pattern id="fieldCool" patternUnits="userSpaceOnUse" width="22" height="22" patternTransform="translate(21,15)"><circle cx="11" cy="11" r="1.9" fill="#637890"/></pattern>
+<pattern id="fieldGold" patternUnits="userSpaceOnUse" width="22" height="22" patternTransform="translate(21,15)"><circle cx="11" cy="11" r="2.5" fill="#C4A25B"/></pattern>
+<pattern id="fieldGoldBright" patternUnits="userSpaceOnUse" width="22" height="22" patternTransform="translate(21,15)"><circle cx="11" cy="11" r="2.8" fill="#EDE0C4"/></pattern>
+</defs>
+<rect x="0" y="0" width="680" height="580" fill="#34416D"/>
+<rect x="44" y="44" width="592" height="492" fill="url(#fieldCool)"/>
+<ellipse cx="435" cy="220" rx="135" ry="108" fill="#C4A25B" opacity="0.12"/>
+<ellipse cx="435" cy="220" rx="100" ry="80" fill="url(#fieldGold)"/>
+<ellipse cx="435" cy="220" rx="44" ry="35" fill="url(#fieldGoldBright)"/>
+</svg>
