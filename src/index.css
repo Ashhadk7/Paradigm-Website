@@ -495,7 +495,7 @@ h1, h2, h3, h4 {
 }
 .outcome-cell {
   background: #fff;
-  padding: 2.5rem 0;
+  padding: 2rem 1.25rem;
 }
 .outcome-cell > p:last-child { margin: 0; }
 
@@ -545,11 +545,11 @@ h1, h2, h3, h4 {
   }
   .platform-watermark-art {
     display: block;
-    background-image: url(/paradigm-emblem-tone-on-tone.svg);
+    background-image: url(/paradigm-emblem-watermark.svg);
     background-repeat: no-repeat;
-    background-position: left center;
-    /* oversized so it bleeds off the left edge like the reference */
-    background-size: auto 150%;
+    background-position: center center;
+    /* a quiet, contained emblem mark — not oversized blocks */
+    background-size: min(56%, 320px) auto;
     align-self: stretch;
   }
   .platform-watermark-text {
@@ -569,10 +569,14 @@ h1, h2, h3, h4 {
 }
 .core-story-band-art {
   background-color: #34416D;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 300px;
+  min-height: 260px;
+}
+@media (min-width: 769px) and (max-width: 1100px) {
+  /* tighter screens: shrink the body type so the split doesn't get cramped */
+  .core-story-band-text p { font-size: 1rem; }
 }
 @media (min-width: 769px) {
   .core-story-band {
@@ -587,6 +591,7 @@ h1, h2, h3, h4 {
   }
   .core-story-band-art {
     min-height: 0;
+    background-size: cover;
   }
 }
 
