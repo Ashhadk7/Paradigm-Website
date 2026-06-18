@@ -308,16 +308,20 @@ h1, h2, h3, h4 {
     white-space: nowrap;
   }
 
-  /* Hero sub-copy can extend wider than the (48%) headline column so short
-     one-sentence subs sit on a single line. It still wraps, so long subs
-     never run off the right edge of the screen. */
+  /* Hero sub-copy can extend wider than the (48%) headline column so each
+     sub line sits on its own single row. */
   .hero-copy--standard .hero-subcopy,
   .hero-copy--tight .hero-subcopy,
   .hero-copy--wide .hero-subcopy {
-    max-width: 920px;
+    max-width: 94vw;
     width: max-content;
-    max-width: min(920px, 62vw);
-    white-space: normal;
+  }
+  /* Each explicit sub line (split on the CMS line break) stays on one row so
+     the first sentence doesn't wrap across two rows. */
+  .hero-copy--standard .hero-subcopy > span,
+  .hero-copy--tight .hero-subcopy > span,
+  .hero-copy--wide .hero-subcopy > span {
+    white-space: nowrap;
   }
 
   /* Single-sentence subs: force onto one line. Allow the line to span almost
