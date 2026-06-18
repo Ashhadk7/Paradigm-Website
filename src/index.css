@@ -541,15 +541,15 @@ h1, h2, h3, h4 {
   .platform-watermark-band {
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    min-height: 520px;
+    min-height: 600px;
   }
   .platform-watermark-art {
     display: block;
     background-image: url(/paradigm-emblem-watermark.svg);
     background-repeat: no-repeat;
     background-position: center center;
-    /* sizable emblem mark filling the left half */
-    background-size: min(78%, 520px) auto;
+    /* large emblem mark filling most of the left half */
+    background-size: min(92%, 720px) auto;
     align-self: stretch;
   }
   .platform-watermark-text {
