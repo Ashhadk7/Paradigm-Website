@@ -91,26 +91,37 @@ export default function Advisors() {
         ctas={[{ label: c.hero_cta_label, to: '/contact', variant: 'gold' }]}
       />
 
-      {/* ── THE CORE STORY ── */}
+      {/* ── THE CORE STORY — text left (off-white), illustration right ── */}
       <section className="section-offwhite">
         <div className="section-inner">
-          <div style={{ maxWidth: 720 }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-              {[
-                c.core_story_1,
-                c.core_story_2,
-                c.core_story_3,
-                c.core_story_4,
-              ].map((p, i) => (
-                <motion.p key={i}
-                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                  style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.85, color: '#637890' }}
-                >
-                  {p}
-                </motion.p>
-              ))}
+          <div className="core-story-split">
+            <div>
+              <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+                {[
+                  c.core_story_1,
+                  c.core_story_2,
+                  c.core_story_3,
+                  c.core_story_4,
+                ].map((p, i) => (
+                  <motion.p key={i}
+                    initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+                    style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.85, color: '#637890' }}
+                  >
+                    {p}
+                  </motion.p>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: core story illustration */}
+            <div className="core-story-art">
+              <img
+                src="/paradigm-corestory-wealth-advisors.svg"
+                alt="Paradigm core story — wealth advisors"
+                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 6 }}
+              />
             </div>
           </div>
         </div>
@@ -146,26 +157,20 @@ export default function Advisors() {
         </div>
       </section>
 
-      {/* ── THE PLATFORM CAPABILITY — split band: image left, text right (navy) ── */}
-      <section className="platform-cap-band">
-        {/* Left half: illustration */}
-        <div
-          className="platform-cap-band-img"
-          style={{ backgroundImage: 'url(/paradigm-corestory-wealth-advisors.svg)' }}
-          role="img"
-          aria-label="Paradigm core story — wealth advisors"
-        />
-        {/* Right half: text on navy */}
-        <div className="platform-cap-band-text">
-          <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
-          <h2 className="section-headline" style={{ color: '#F5F3EF', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: 'rgba(245,243,239,0.8)' }}>
-              {c.platform_para1}
-            </p>
-            <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: 'rgba(245,243,239,0.8)' }}>
-              {c.platform_para2}
-            </p>
+      {/* ── THE PLATFORM CAPABILITY ── */}
+      <section className="section-offwhite">
+        <div className="section-inner">
+          <div style={{ maxWidth: 720 }}>
+            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
+            <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
+                {c.platform_para1}
+              </p>
+              <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
+                {c.platform_para2}
+              </p>
+            </div>
           </div>
         </div>
       </section>
