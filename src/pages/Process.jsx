@@ -152,29 +152,28 @@ export default function Process() {
         </div>
       </section>
 
-      {/* ── THE DATA FOUNDATION — text left, framed data panel right ── */}
-      <section className="core-story-band data-foundation-band">
-        <div className="core-story-band-text" style={{ background: '#fff' }}>
-          <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.data_foundation_eyebrow}</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-            <motion.p
-              initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
-            >
-              {c.data_foundation_text}
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ delay: 0.07 }}
-              style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
-            >
-              {c.data_foundation_amd}
-            </motion.p>
+      {/* ── THE DATA FOUNDATION ── */}
+      <section className="section-white">
+        <div className="section-inner">
+          <div style={{ maxWidth: 760 }}>
+            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.data_foundation_eyebrow}</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
+              >
+                {c.data_foundation_text}
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: 0.07 }}
+                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
+              >
+                {c.data_foundation_amd}
+              </motion.p>
+            </div>
           </div>
-        </div>
-        <div className="core-story-band-art">
-          <img src="/paradigm-data-foundation.svg" alt="The data foundation" />
         </div>
       </section>
 
