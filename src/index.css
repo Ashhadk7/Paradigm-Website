@@ -619,6 +619,19 @@ h1, h2, h3, h4 {
   }
 }
 
+/* About "The Firm" — photo fills its half edge-to-edge (it's a photo, not a
+   navy illustration), so override the padded/contained art rules. */
+.firm-band-photo {
+  background-color: transparent;
+  padding: 0 !important;
+}
+.firm-band-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  min-height: 320px;
+}
+
 /* THE PROCESS — four steps in a 2x2 grid (01 & 03 top, 02 & 04 below) */
 .process-steps-2x2 {
   display: grid;

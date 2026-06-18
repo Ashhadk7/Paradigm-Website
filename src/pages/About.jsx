@@ -136,26 +136,27 @@ export default function About() {
       </section>
 
       {/* ── THE FIRM ── */}
-      <section className="section-white">
-        <div className="section-inner">
-          <div style={{ maxWidth: 720 }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.firm_eyebrow}</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-              {[
-                c.firm_1,
-                c.firm_2,
-                c.firm_3,
-              ].map((p, i) => (
-                <motion.p key={i}
-                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                  style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.85, color: '#637890' }}
-                >
-                  {p}
-                </motion.p>
-              ))}
-            </div>
+      <section className="core-story-band firm-band">
+        <div className="core-story-band-text" style={{ background: '#fff' }}>
+          <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.firm_eyebrow}</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+            {[
+              c.firm_1,
+              c.firm_2,
+              c.firm_3,
+            ].map((p, i) => (
+              <motion.p key={i}
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.85, color: '#637890' }}
+              >
+                {p}
+              </motion.p>
+            ))}
           </div>
+        </div>
+        <div className="core-story-band-art firm-band-photo">
+          <img src="/about-firm.jpg" alt="Paradigm — the firm" />
         </div>
       </section>
 
@@ -209,7 +210,9 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── THE TEAM ── */}
+      {/* ── THE TEAM + ADVISORY BOARD — hidden for now (restore by removing the
+          surrounding {false && ( ... )}) ── */}
+      {false && (
       <section className="section-white">
         <div className="section-inner">
           <p className="eyebrow" style={{ marginBottom: '0.875rem' }}>{c.team_eyebrow}</p>
@@ -272,6 +275,7 @@ export default function About() {
           </div>
         </div>
       </section>
+      )}
 
     </>
   );
