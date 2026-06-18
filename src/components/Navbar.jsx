@@ -136,7 +136,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" onClick={closeMenus} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
             <img
-              src="/Paradigm_PMS_Tag_Large.svg"
+              src="/paradigm-logo-tag.svg"
               alt="Paradigm Asset Management"
               style={{
                 height: scrolled ? 'var(--logo-height-scrolled, 66px)' : 'var(--logo-height, 84px)',

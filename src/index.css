@@ -43,29 +43,30 @@ h1, h2, h3, h4 {
 
 /* ─── Responsive CSS custom properties ───────────────────── */
 :root {
-  --nav-height: 124px;
-  --nav-height-scrolled: 98px;
-  --logo-height: 104px;
-  --logo-height-scrolled: 82px;
+  /* wide horizontal logo lockup (~5:1) — heights tuned so it isn't too wide */
+  --nav-height: 92px;
+  --nav-height-scrolled: 74px;
+  --logo-height: 46px;
+  --logo-height-scrolled: 38px;
   --nav-padding: 2.5rem;
 }
 
 @media (max-width: 768px) {
   :root {
-    --nav-height: 70px;
-    --nav-height-scrolled: 60px;
-    --logo-height: 48px;
-    --logo-height-scrolled: 40px;
+    --nav-height: 66px;
+    --nav-height-scrolled: 58px;
+    --logo-height: 30px;
+    --logo-height-scrolled: 26px;
     --nav-padding: 1rem;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1150px) {
   :root {
-    --nav-height: 85px;
-    --nav-height-scrolled: 72px;
-    --logo-height: 72px;
-    --logo-height-scrolled: 60px;
+    --nav-height: 80px;
+    --nav-height-scrolled: 68px;
+    --logo-height: 38px;
+    --logo-height-scrolled: 32px;
     --nav-padding: 1.5rem;
   }
 }
