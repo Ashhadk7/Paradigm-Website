@@ -548,8 +548,8 @@ h1, h2, h3, h4 {
     background-image: url(/paradigm-emblem-watermark.svg);
     background-repeat: no-repeat;
     background-position: center center;
-    /* a quiet, contained emblem mark — not oversized blocks */
-    background-size: min(56%, 320px) auto;
+    /* sizable emblem mark filling the left half */
+    background-size: min(78%, 520px) auto;
     align-self: stretch;
   }
   .platform-watermark-text {
@@ -591,7 +591,9 @@ h1, h2, h3, h4 {
   }
   .core-story-band-art {
     min-height: 0;
-    background-size: cover;
+    /* contained (not full-bleed): the grid sits a little smaller within its
+       navy half, with breathing room around it */
+    background-size: 78% auto;
   }
 }
 
