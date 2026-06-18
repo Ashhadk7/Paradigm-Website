@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="680" height="580" viewBox="0 0 680 580" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Platform — emblem plate</title>
+<desc>The Paradigm emblem on a Dark Blue facade plate. The outer box is warm gold, the two nested squares pale gold and off-white, each reading as one of the three capabilities, divided by dark blue lines.</desc>
+<defs>
+<pattern id="gridEP" patternUnits="userSpaceOnUse" width="84" height="68" patternTransform="translate(51,23)">
+<rect x="0" y="0" width="74" height="58" rx="2" fill="#34416D" stroke="#2C2C2C" stroke-width="1" stroke-opacity="0.5"/>
+</pattern>
+</defs>
+<rect x="0" y="0" width="680" height="580" fill="#34416D"/>
+<rect x="51" y="23" width="578" height="534" fill="url(#gridEP)"/>
+<rect x="120" y="70" width="440" height="440" rx="16" fill="#C4A25B" opacity="0.08"/>
+<g transform="translate(140,90) scale(0.846)">
+<rect x="0" y="0" width="472.97" height="472.11" fill="#C4A25B"/>
+<rect x="118.27" y="118.29" width="235.88" height="235.89" fill="#EDE0C4" stroke="#34416D" stroke-width="18"/>
+<rect x="236.17" y="118.40" width="117.95" height="117.94" fill="#F5F3EF" stroke="#34416D" stroke-width="18"/>
+</g>
+</svg>

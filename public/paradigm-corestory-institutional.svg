@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="680" height="580" viewBox="0 0 680 580" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Core Story — Institutional</title>
+<desc>The identical Dark Blue facade and fixed window arrangement, with a broader warm gold leadership cluster settled across a lower-central band, brightest cells in pale gold.</desc>
+<defs>
+<pattern id="gridIN" patternUnits="userSpaceOnUse" width="84" height="68" patternTransform="translate(51,23)">
+<rect x="0" y="0" width="74" height="58" rx="2" fill="#34416D" stroke="#2C2C2C" stroke-width="1" stroke-opacity="0.5"/>
+</pattern>
+</defs>
+<rect x="0" y="0" width="680" height="580" fill="#34416D"/>
+<rect x="51" y="23" width="578" height="534" fill="url(#gridIN)"/>
+<rect x="135" y="23" width="74" height="58" rx="2" fill="#637890"/>
+<rect x="387" y="23" width="74" height="58" rx="2" fill="#637890"/>
+<rect x="555" y="91" width="74" height="58" rx="2" fill="#637890"/>
+<rect x="51" y="159" width="74" height="58" rx="2" fill="#637890"/>
+<rect x="51" y="363" width="74" height="58" rx="2" fill="#637890"/>
+<rect x="555" y="363" width="74" height="58" rx="2" fill="#637890"/>
+<rect x="135" y="431" width="74" height="58" rx="2" fill="#637890"/>
+<rect x="387" y="431" width="74" height="58" rx="2" fill="#637890"/>
+<rect x="219" y="499" width="74" height="58" rx="2" fill="#637890"/>
+<rect x="471" y="499" width="74" height="58" rx="2" fill="#637890"/>
+<rect x="471" y="23" width="74" height="58" rx="2" fill="#2C2C2C"/>
+<rect x="51" y="295" width="74" height="58" rx="2" fill="#2C2C2C"/>
+<rect x="51" y="431" width="74" height="58" rx="2" fill="#2C2C2C"/>
+<rect x="555" y="431" width="74" height="58" rx="2" fill="#2C2C2C"/>
+<rect x="51" y="499" width="74" height="58" rx="2" fill="#2C2C2C"/>
+<rect x="555" y="499" width="74" height="58" rx="2" fill="#2C2C2C"/>
+<rect x="219" y="227" width="74" height="58" rx="2" fill="#C4A25B"/>
+<rect x="303" y="227" width="74" height="58" rx="2" fill="#C4A25B"/>
+<rect x="135" y="295" width="74" height="58" rx="2" fill="#C4A25B"/>
+<rect x="387" y="295" width="74" height="58" rx="2" fill="#C4A25B"/>
+<rect x="471" y="295" width="74" height="58" rx="2" fill="#C4A25B"/>
+<rect x="135" y="363" width="74" height="58" rx="2" fill="#C4A25B"/>
+<rect x="219" y="363" width="74" height="58" rx="2" fill="#C4A25B"/>
+<rect x="387" y="363" width="74" height="58" rx="2" fill="#C4A25B"/>
+<rect x="219" y="295" width="74" height="58" rx="2" fill="#EDE0C4"/>
+<rect x="303" y="295" width="74" height="58" rx="2" fill="#EDE0C4"/>
+<rect x="303" y="363" width="74" height="58" rx="2" fill="#EDE0C4"/>
+</svg>

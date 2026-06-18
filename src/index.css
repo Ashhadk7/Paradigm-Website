@@ -519,6 +519,26 @@ h1, h2, h3, h4 {
   }
 }
 
+/* THE PLATFORM CAPABILITY — text left, emblem art right (navy section) */
+.platform-cap-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.platform-cap-art {
+  display: none;
+}
+@media (min-width: 901px) {
+  .platform-cap-split {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+  }
+  .platform-cap-art {
+    display: block;
+  }
+}
+
 /* THE PROCESS — steps left, animated orbit right (sticky on desktop) */
 .process-steps-grid {
   display: grid;

@@ -147,18 +147,30 @@ export default function Advisors() {
       </section>
 
       {/* ── THE PLATFORM CAPABILITY ── */}
-      <section className="section-offwhite">
+      <section style={{ background: '#34416D' }}>
         <div className="section-inner">
-          <div style={{ maxWidth: 720 }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
-            <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
-                {c.platform_para1}
-              </p>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
-                {c.platform_para2}
-              </p>
+          <div className="platform-cap-split">
+            {/* Left: text */}
+            <div>
+              <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
+              <h2 className="section-headline" style={{ color: '#F5F3EF', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: 'rgba(245,243,239,0.8)' }}>
+                  {c.platform_para1}
+                </p>
+                <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: 'rgba(245,243,239,0.8)' }}>
+                  {c.platform_para2}
+                </p>
+              </div>
+            </div>
+
+            {/* Right: platform emblem illustration */}
+            <div className="platform-cap-art">
+              <img
+                src="/paradigm-platform-emblem-offwhite.svg"
+                alt="Paradigm platform emblem"
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
             </div>
           </div>
         </div>
