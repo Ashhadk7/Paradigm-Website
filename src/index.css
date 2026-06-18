@@ -519,36 +519,43 @@ h1, h2, h3, h4 {
   }
 }
 
-/* THE PLATFORM CAPABILITY — navy emblem plate fills the left half,
-   text on the off-white right half (mirrors the Core Story rhythm). */
-.platform-plate-band {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-.platform-plate-art {
-  background-color: #34416D;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 300px;
-}
-.platform-plate-text {
+/* THE PLATFORM CAPABILITY — one continuous off-white band with a large,
+   faint emblem watermark bleeding off the left edge; text sits on the right.
+   (Matches the reference: tone-on-tone watermark, single background colour.) */
+.platform-cap-section {
+  position: relative;
   background: #F5F3EF;
-  padding: 3.5rem 1.5rem;
+  overflow: hidden;
+  padding: clamp(3.5rem, 7vw, 7rem) 0;
 }
+/* faint watermark, bleeding off the left edge */
+.platform-cap-section::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: clamp(-260px, -10vw, -120px);
+  transform: translateY(-50%);
+  width: clamp(360px, 42vw, 620px);
+  height: clamp(360px, 42vw, 620px);
+  background-image: url(/paradigm-emblem-watermark.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.platform-cap-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
+}
+/* push the text to the right portion on desktop */
 @media (min-width: 769px) {
-  .platform-plate-band {
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-  }
-  .platform-plate-art {
-    min-height: 0;
-  }
-  .platform-plate-text {
-    padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 5vw, 5rem);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .platform-cap-inner > * {
+    max-width: 600px;
+    margin-left: auto;
   }
 }
 
@@ -564,10 +571,12 @@ h1, h2, h3, h4 {
 }
 .core-story-band-art {
   background-color: #34416D;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 260px;
+  display: flex;
+}
+.core-story-band-art img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 @media (min-width: 769px) and (max-width: 1100px) {
   /* tighter screens: shrink the body type so the split doesn't get cramped */
@@ -576,7 +585,7 @@ h1, h2, h3, h4 {
 @media (min-width: 769px) {
   .core-story-band {
     grid-template-columns: 1fr 1fr;
-    align-items: stretch;
+    align-items: center;
   }
   .core-story-band-text {
     padding: clamp(3.5rem, 6vw, 6rem) clamp(2rem, 5vw, 5rem);
@@ -584,11 +593,9 @@ h1, h2, h3, h4 {
     flex-direction: column;
     justify-content: center;
   }
+  /* art panel height follows the image (no dead-navy stretch) */
   .core-story-band-art {
-    min-height: 0;
-    /* contained (not full-bleed): the grid sits a little smaller within its
-       navy half, with breathing room around it */
-    background-size: 78% auto;
+    align-items: center;
   }
 }
 
