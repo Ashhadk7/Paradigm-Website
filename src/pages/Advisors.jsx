@@ -153,20 +153,21 @@ export default function Advisors() {
         </div>
       </section>
 
-      {/* ── THE PLATFORM CAPABILITY ── */}
-      <section className="section-offwhite">
-        <div className="section-inner">
-          <div style={{ maxWidth: 720 }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
-            <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
-                {c.platform_para1}
-              </p>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
-                {c.platform_para2}
-              </p>
-            </div>
+      {/* ── THE PLATFORM CAPABILITY — emblem watermark left, text right half ── */}
+      <section className="platform-watermark-band">
+        {/* Left: faint emblem watermark */}
+        <div className="platform-watermark-art" aria-hidden="true" />
+        {/* Right half: text */}
+        <div className="platform-watermark-text">
+          <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
+          <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
+              {c.platform_para1}
+            </p>
+            <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
+              {c.platform_para2}
+            </p>
           </div>
         </div>
       </section>

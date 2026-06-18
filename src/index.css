@@ -519,6 +519,44 @@ h1, h2, h3, h4 {
   }
 }
 
+/* THE PLATFORM CAPABILITY — quiet emblem watermark on the left, text on the
+   right half. Whole band is the off-white tone (one continuous color). */
+.platform-watermark-band {
+  position: relative;
+  background: #F5F3EF;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+}
+.platform-watermark-art {
+  display: none;
+}
+.platform-watermark-text {
+  position: relative;
+  z-index: 1;
+  padding: clamp(3.5rem, 7vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+  max-width: 760px;
+}
+@media (min-width: 769px) {
+  .platform-watermark-band {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: 520px;
+  }
+  .platform-watermark-art {
+    display: block;
+    background-image: url(/paradigm-emblem-tone-on-tone.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+    /* oversized so it bleeds off the left edge like the reference */
+    background-size: auto 150%;
+    align-self: stretch;
+  }
+  .platform-watermark-text {
+    padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 5vw, 5rem);
+  }
+}
+
 /* THE CORE STORY — two equal halves: text left (off-white, unchanged),
    full-bleed illustration filling the entire right half. */
 .core-story-band {
