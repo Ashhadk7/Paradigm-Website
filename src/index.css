@@ -519,23 +519,36 @@ h1, h2, h3, h4 {
   }
 }
 
-/* THE PLATFORM CAPABILITY — text left, emblem art right (navy section) */
-.platform-cap-split {
+/* THE PLATFORM CAPABILITY — full-bleed split band: illustration left,
+   text on navy right (alternating "checker" layout). */
+.platform-cap-band {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.5rem;
-  align-items: center;
 }
-.platform-cap-art {
-  display: none;
+.platform-cap-band-img {
+  background-color: #34416D;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 320px;
 }
-@media (min-width: 901px) {
-  .platform-cap-split {
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 4rem;
+.platform-cap-band-text {
+  background: #34416D;
+  padding: 3.5rem 1.5rem;
+}
+@media (min-width: 769px) {
+  .platform-cap-band {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
   }
-  .platform-cap-art {
-    display: block;
+  .platform-cap-band-img {
+    min-height: 0;
+  }
+  .platform-cap-band-text {
+    padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 5vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 

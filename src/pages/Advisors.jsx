@@ -146,32 +146,26 @@ export default function Advisors() {
         </div>
       </section>
 
-      {/* ── THE PLATFORM CAPABILITY ── */}
-      <section style={{ background: '#34416D' }}>
-        <div className="section-inner">
-          <div className="platform-cap-split">
-            {/* Left: text */}
-            <div>
-              <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
-              <h2 className="section-headline" style={{ color: '#F5F3EF', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: 'rgba(245,243,239,0.8)' }}>
-                  {c.platform_para1}
-                </p>
-                <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: 'rgba(245,243,239,0.8)' }}>
-                  {c.platform_para2}
-                </p>
-              </div>
-            </div>
-
-            {/* Right: platform emblem illustration */}
-            <div className="platform-cap-art">
-              <img
-                src="/paradigm-platform-emblem-offwhite.svg"
-                alt="Paradigm platform emblem"
-                style={{ width: '100%', height: 'auto', display: 'block' }}
-              />
-            </div>
+      {/* ── THE PLATFORM CAPABILITY — split band: image left, text right (navy) ── */}
+      <section className="platform-cap-band">
+        {/* Left half: illustration */}
+        <div
+          className="platform-cap-band-img"
+          style={{ backgroundImage: 'url(/paradigm-corestory-wealth-advisors.svg)' }}
+          role="img"
+          aria-label="Paradigm core story — wealth advisors"
+        />
+        {/* Right half: text on navy */}
+        <div className="platform-cap-band-text">
+          <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
+          <h2 className="section-headline" style={{ color: '#F5F3EF', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: 'rgba(245,243,239,0.8)' }}>
+              {c.platform_para1}
+            </p>
+            <p style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: 'rgba(245,243,239,0.8)' }}>
+              {c.platform_para2}
+            </p>
           </div>
         </div>
       </section>
