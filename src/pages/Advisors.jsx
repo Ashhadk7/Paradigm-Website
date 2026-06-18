@@ -91,40 +91,36 @@ export default function Advisors() {
         ctas={[{ label: c.hero_cta_label, to: '/contact', variant: 'gold' }]}
       />
 
-      {/* ── THE CORE STORY — text left (off-white), illustration right ── */}
-      <section className="section-offwhite">
-        <div className="section-inner">
-          <div className="core-story-split">
-            <div>
-              <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-                {[
-                  c.core_story_1,
-                  c.core_story_2,
-                  c.core_story_3,
-                  c.core_story_4,
-                ].map((p, i) => (
-                  <motion.p key={i}
-                    initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                    style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.85, color: '#637890' }}
-                  >
-                    {p}
-                  </motion.p>
-                ))}
-              </div>
-            </div>
-
-            {/* Right: core story illustration */}
-            <div className="core-story-art">
-              <img
-                src="/paradigm-corestory-wealth-advisors.svg"
-                alt="Paradigm core story — wealth advisors"
-                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 6 }}
-              />
-            </div>
+      {/* ── THE CORE STORY — two halves: text left (off-white), full-bleed art right ── */}
+      <section className="core-story-band">
+        {/* Left half: text on off-white (background unchanged) */}
+        <div className="core-story-band-text">
+          <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+            {[
+              c.core_story_1,
+              c.core_story_2,
+              c.core_story_3,
+              c.core_story_4,
+            ].map((p, i) => (
+              <motion.p key={i}
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.85, color: '#637890' }}
+              >
+                {p}
+              </motion.p>
+            ))}
           </div>
         </div>
+
+        {/* Right half: full-bleed illustration */}
+        <div
+          className="core-story-band-art"
+          style={{ backgroundImage: 'url(/paradigm-corestory-wealth-advisors.svg)' }}
+          role="img"
+          aria-label="Paradigm core story — wealth advisors"
+        />
       </section>
 
       {/* ── WHAT THIS MEANS FOR YOUR PRACTICE ── */}

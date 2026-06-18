@@ -519,23 +519,36 @@ h1, h2, h3, h4 {
   }
 }
 
-/* THE CORE STORY — text left (background unchanged), illustration right */
-.core-story-split {
+/* THE CORE STORY — two equal halves: text left (off-white, unchanged),
+   full-bleed illustration filling the entire right half. */
+.core-story-band {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.5rem;
-  align-items: center;
 }
-.core-story-art {
-  display: none;
+.core-story-band-text {
+  background: #F5F3EF;
+  padding: 3.5rem 1.5rem;
 }
-@media (min-width: 901px) {
-  .core-story-split {
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 4rem;
+.core-story-band-art {
+  background-color: #34416D;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 300px;
+}
+@media (min-width: 769px) {
+  .core-story-band {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
   }
-  .core-story-art {
-    display: block;
+  .core-story-band-text {
+    padding: clamp(3.5rem, 6vw, 6rem) clamp(2rem, 5vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .core-story-band-art {
+    min-height: 0;
   }
 }
 
