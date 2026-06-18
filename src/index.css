@@ -552,11 +552,11 @@ h1, h2, h3, h4 {
   margin: 0 auto;
   padding: 0 clamp(1.5rem, 4vw, 3rem);
 }
-/* push the text to the right portion on desktop */
+/* text occupies the right half, starting at the page midpoint on desktop */
 @media (min-width: 769px) {
   .platform-cap-inner > * {
-    max-width: 600px;
-    margin-left: auto;
+    width: 50%;
+    margin-left: 50%;
   }
 }
 
