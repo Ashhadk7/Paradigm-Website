@@ -152,8 +152,8 @@ export default function Process() {
         </div>
       </section>
 
-      {/* ── THE DATA FOUNDATION — text left, illustration right ── */}
-      <section className="core-story-band">
+      {/* ── THE DATA FOUNDATION — text left, framed data panel right ── */}
+      <section className="core-story-band data-foundation-band">
         <div className="core-story-band-text" style={{ background: '#fff' }}>
           <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.data_foundation_eyebrow}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>

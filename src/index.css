@@ -619,6 +619,20 @@ h1, h2, h3, h4 {
   }
 }
 
+/* Data Foundation — frame the illustration as a contained "data panel" on an
+   off-white half, so it reads distinctly from the airy animated hero above
+   (which is also navy + gold dots). */
+.data-foundation-band .core-story-band-art {
+  background-color: #fff;
+  padding: clamp(2rem, 5vw, 4.5rem);
+}
+.data-foundation-band .core-story-band-art img {
+  border-radius: 10px;
+  box-shadow: 0 18px 48px rgba(52, 65, 109, 0.18);
+  height: auto;
+  max-height: 460px;
+}
+
 /* About "The Firm" — photo fills its half edge-to-edge (it's a photo, not a
    navy illustration), so override the padded/contained art rules. */
 .firm-band-photo {
