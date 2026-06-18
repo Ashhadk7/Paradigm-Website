@@ -69,6 +69,7 @@ export default function Institutions() {
       </Helmet>
 
       <HeroSection
+        heroVariant="institutions"
         eyebrow={c.hero_eyebrow}
         headline={c.hero_headline}
         sub={c.hero_sub}

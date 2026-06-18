@@ -65,6 +65,7 @@ export default function Home() {
       </Helmet>
 
       <HeroSection
+        heroVariant="home"
         eyebrow={c.hero_eyebrow}
         headline={c.hero_headline}
         sub={c.hero_sub}

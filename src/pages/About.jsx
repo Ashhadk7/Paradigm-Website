@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { GLSLHills } from '../components/ui/glsl-hills';
+import ParadigmHeroField from '../components/ParadigmHeroField';
 import { useContent } from '../lib/useContent';
 
 function TeamCard({ name, title, prev, bio, previousPrefix = 'Previous:' }) {
@@ -92,8 +92,8 @@ export default function About() {
       <section
         className="hero-section"
       >
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>
-          <GLSLHills speed={0.3} cameraZ={130} />
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <ParadigmHeroField variant="home" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
         </div>
 
         <div className="hero-inner">

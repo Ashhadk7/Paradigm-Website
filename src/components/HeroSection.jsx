@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { GLSLHills } from './ui/glsl-hills';
+import ParadigmHeroField from './ParadigmHeroField';
 
 function splitHeroCopy(text) {
   if (!text) return [];
@@ -17,7 +17,7 @@ function splitHeroSubcopy(text) {
   return text.includes('\n') ? text.split('\n') : [text];
 }
 
-export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal = false, compact = false, appearance }) {
+export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal = false, compact = false, appearance, heroVariant = 'home' }) {
   const headlineLines = splitHeroCopy(headline);
   const subLines = splitHeroSubcopy(sub);
   const headlineDelay = 0.3;
@@ -30,8 +30,8 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
       className={`hero-section ${appearance?.hero_density ? `hero-section--${appearance.hero_density}` : ''}`}
       style={minimal ? { paddingTop: '8rem', paddingBottom: '4rem' } : undefined}
     >
-      <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>
-        <GLSLHills speed={0.3} cameraZ={130} />
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <ParadigmHeroField variant={heroVariant} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
       </div>
 
       <div className="hero-inner">

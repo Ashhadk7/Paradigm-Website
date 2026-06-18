@@ -84,6 +84,7 @@ export default function Advisors() {
 
       {/* ── HERO ── */}
       <HeroSection
+        heroVariant="advisors"
         eyebrow={c.hero_eyebrow}
         headline={c.hero_headline}
         sub={c.hero_sub}

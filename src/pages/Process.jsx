@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { GLSLHills } from '../components/ui/glsl-hills';
+import ParadigmHeroField from '../components/ParadigmHeroField';
 import { useContent } from '../lib/useContent';
 
 function ProcessStep({ num, title, paragraphs, isLast }) {
@@ -106,9 +106,9 @@ export default function Process() {
       <section
         className="hero-section"
       >
-        {/* GLSL hills background */}
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.8, zIndex: 0 }}>
-          <GLSLHills speed={0.3} cameraZ={130} />
+        {/* Animated data-field background */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <ParadigmHeroField variant="institutions" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
         </div>
 
         <div className="hero-inner">

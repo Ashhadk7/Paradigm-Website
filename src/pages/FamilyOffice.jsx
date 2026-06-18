@@ -70,6 +70,7 @@ export default function FamilyOffice() {
       </Helmet>
 
       <HeroSection
+        heroVariant="family"
         eyebrow={c.hero_eyebrow}
         headline={c.hero_headline}
         sub={c.hero_sub}
