@@ -153,12 +153,17 @@ export default function Advisors() {
         </div>
       </section>
 
-      {/* ── THE PLATFORM CAPABILITY — emblem watermark left, text right half ── */}
-      <section className="platform-watermark-band">
-        {/* Left: faint emblem watermark */}
-        <div className="platform-watermark-art" aria-hidden="true" />
-        {/* Right half: text */}
-        <div className="platform-watermark-text">
+      {/* ── THE PLATFORM CAPABILITY — navy plate left, text right (off-white) ── */}
+      <section className="platform-plate-band">
+        {/* Left half: full-bleed platform emblem plate (navy) */}
+        <div
+          className="platform-plate-art"
+          style={{ backgroundImage: 'url(/paradigm-platform-emblem.svg)' }}
+          role="img"
+          aria-label="Paradigm platform — one platform, three capabilities"
+        />
+        {/* Right half: text on off-white */}
+        <div className="platform-plate-text">
           <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
           <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>

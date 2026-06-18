@@ -519,41 +519,36 @@ h1, h2, h3, h4 {
   }
 }
 
-/* THE PLATFORM CAPABILITY — quiet emblem watermark on the left, text on the
-   right half. Whole band is the off-white tone (one continuous color). */
-.platform-watermark-band {
-  position: relative;
-  background: #F5F3EF;
+/* THE PLATFORM CAPABILITY — navy emblem plate fills the left half,
+   text on the off-white right half (mirrors the Core Story rhythm). */
+.platform-plate-band {
   display: grid;
   grid-template-columns: 1fr;
-  overflow: hidden;
 }
-.platform-watermark-art {
-  display: none;
+.platform-plate-art {
+  background-color: #34416D;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 300px;
 }
-.platform-watermark-text {
-  position: relative;
-  z-index: 1;
-  padding: clamp(3.5rem, 7vw, 7rem) clamp(1.5rem, 5vw, 5rem);
-  max-width: 760px;
+.platform-plate-text {
+  background: #F5F3EF;
+  padding: 3.5rem 1.5rem;
 }
 @media (min-width: 769px) {
-  .platform-watermark-band {
+  .platform-plate-band {
     grid-template-columns: 1fr 1fr;
-    align-items: center;
-    min-height: 600px;
+    align-items: stretch;
   }
-  .platform-watermark-art {
-    display: block;
-    background-image: url(/paradigm-emblem-watermark.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    /* large emblem mark filling most of the left half */
-    background-size: min(92%, 720px) auto;
-    align-self: stretch;
+  .platform-plate-art {
+    min-height: 0;
   }
-  .platform-watermark-text {
+  .platform-plate-text {
     padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 5vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
