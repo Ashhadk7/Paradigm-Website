@@ -76,28 +76,32 @@ export default function Institutions() {
         ctas={[{ label: c.hero_cta_label, to: '/contact', variant: 'outline' }]}
       />
 
-      {/* Core Story — Institutional Register */}
-      <section className="section-offwhite">
-        <div className="section-inner">
-          <div style={{ maxWidth: 720 }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-              {[
-                c.core_story_1,
-                c.core_story_2,
-                c.core_story_3,
-                c.core_story_4,
-              ].map((p, i) => (
-                <motion.p key={i}
-                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                  style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.85, color: '#637890' }}
-                >
-                  {p}
-                </motion.p>
-              ))}
-            </div>
+      {/* Core Story — two halves: text left (off-white), illustration right */}
+      <section className="core-story-band">
+        <div className="core-story-band-text">
+          <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+            {[
+              c.core_story_1,
+              c.core_story_2,
+              c.core_story_3,
+              c.core_story_4,
+            ].map((p, i) => (
+              <motion.p key={i}
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.85, color: '#637890' }}
+              >
+                {p}
+              </motion.p>
+            ))}
           </div>
+        </div>
+        <div className="core-story-band-art">
+          <img
+            src="/paradigm-corestory-institutional.svg"
+            alt="Paradigm core story — institutional"
+          />
         </div>
       </section>
 
@@ -131,21 +135,19 @@ export default function Institutions() {
         </div>
       </section>
 
-      {/* The Platform */}
-      <section className="section-offwhite">
-        <div className="section-inner">
-          <div style={{ maxWidth: 720 }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
-                {c.platform_para1}
-              </motion.p>
-              <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-                style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
-                {c.platform_para2}
-              </motion.p>
-            </div>
+      {/* The Platform — faint emblem watermark left, text right */}
+      <section className="platform-cap-section">
+        <div className="platform-cap-inner">
+          <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
+              {c.platform_para1}
+            </motion.p>
+            <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+              style={{ fontFamily: 'Inter', fontSize: '1.25rem', lineHeight: 1.8, color: '#637890' }}>
+              {c.platform_para2}
+            </motion.p>
           </div>
         </div>
       </section>
