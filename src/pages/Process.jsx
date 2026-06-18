@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { GLSLHills } from '../components/ui/glsl-hills';
-import AnimatedOrbit from '../components/AnimatedOrbit';
 import { useContent } from '../lib/useContent';
 
 function ProcessStep({ num, title, paragraphs, isLast }) {
@@ -178,64 +177,38 @@ export default function Process() {
         </div>
       </section>
 
-      {/* ── THE PROCESS — FOUR STEPS ── */}
+      {/* ── THE PROCESS — FOUR STEPS (2×2 grid: 01 & 03 top, 02 & 04 below) ── */}
       <section className="section-offwhite">
         <div className="section-inner">
-          <div className="process-steps-grid">
-            <div style={{ maxWidth: 760 }}>
-              <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.process_eyebrow}</p>
-              <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', marginBottom: '3.5rem', lineHeight: 1.8 }}>
-                {(() => {
-                  // Put "Evaluated monthly..." on its own line. Works whether the
-                  // text comes from code or the CMS.
-                  const intro = c.process_intro;
-                  const idx = intro.indexOf('Evaluated monthly');
-                  if (idx > 0) {
-                    return (
-                      <>
-                        {intro.slice(0, idx).trim()}
-                        <br />
-                        {intro.slice(idx).trim()}
-                      </>
-                    );
-                  }
-                  return intro;
-                })()}
-              </p>
+          <div style={{ maxWidth: 760, marginBottom: '3.5rem' }}>
+            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.process_eyebrow}</p>
+            <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#637890', lineHeight: 1.8 }}>
+              {(() => {
+                // Put "Evaluated monthly..." on its own line. Works whether the
+                // text comes from code or the CMS.
+                const intro = c.process_intro;
+                const idx = intro.indexOf('Evaluated monthly');
+                if (idx > 0) {
+                  return (
+                    <>
+                      {intro.slice(0, idx).trim()}
+                      <br />
+                      {intro.slice(idx).trim()}
+                    </>
+                  );
+                }
+                return intro;
+              })()}
+            </p>
+          </div>
 
-              <ProcessStep
-                num="01"
-                title={c.step1_title}
-                paragraphs={[c.step1_text]}
-              />
-              <ProcessStep
-                num="02"
-                title={c.step2_title}
-                paragraphs={[c.step2_para1, c.step2_para2]}
-              />
-              <ProcessStep
-                num="03"
-                title={c.step3_title}
-                paragraphs={[
-                  c.step3_text,
-                  c.step3_text_2,
-                ]}
-              />
-              <ProcessStep
-                num="04"
-                title={c.step4_title}
-                paragraphs={[
-                  c.step4_text,
-                  c.step4_text_2,
-                ]}
-                isLast
-              />
-            </div>
-
-            {/* Right: animated concentric circles (sticky alongside the steps) */}
-            <div className="process-orbit">
-              <AnimatedOrbit />
-            </div>
+          {/* 2-column grid; source order 01,03,02,04 places 01 & 03 in the
+              first row and 02 & 04 in the second row. */}
+          <div className="process-steps-2x2">
+            <ProcessStep num="01" title={c.step1_title} paragraphs={[c.step1_text]} isLast />
+            <ProcessStep num="03" title={c.step3_title} paragraphs={[c.step3_text, c.step3_text_2]} isLast />
+            <ProcessStep num="02" title={c.step2_title} paragraphs={[c.step2_para1, c.step2_para2]} isLast />
+            <ProcessStep num="04" title={c.step4_title} paragraphs={[c.step4_text, c.step4_text_2]} isLast />
           </div>
         </div>
       </section>
