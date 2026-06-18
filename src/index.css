@@ -598,6 +598,16 @@ h1, h2, h3, h4 {
     align-items: center;
   }
 }
+/* Reverse variant: illustration left, text right on desktop (DOM is
+   art-first); on mobile show the text first for readability. */
+@media (max-width: 768px) {
+  .core-story-band--reverse .core-story-band-art {
+    order: 2;
+  }
+  .core-story-band--reverse .core-story-band-text {
+    order: 1;
+  }
+}
 
 /* THE PROCESS — four steps in a 2x2 grid (01 & 03 top, 02 & 04 below) */
 .process-steps-2x2 {
