@@ -594,10 +594,12 @@ h1, h2, h3, h4 {
     justify-content: center;
   }
   /* both halves equal height; illustration centered within its navy half
-     (contain = no cropping of the signal cluster; extra space stays navy) */
+     (contain = no cropping of the signal cluster; extra space stays navy).
+     Padding makes the illustration sit a bit smaller inside its half. */
   .core-story-band-art {
     align-items: center;
     justify-content: center;
+    padding: clamp(2rem, 5vw, 5rem);
   }
   .core-story-band-art img {
     height: 100%;
