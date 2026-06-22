@@ -730,11 +730,18 @@ h1, h2, h3, h4 {
   gap: 4rem;
   align-items: stretch;
 }
-/* navy proof box fills its (stretched) cell and centers its content */
+/* navy proof box fills its (stretched) cell; top-align its content so the
+   "PROVEN" eyebrow shares a baseline with "THE PLATFORM" on the left */
 .platform-split .proof-block {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+}
+/* push the left text down by the navy box's top inset so both eyebrows align */
+@media (min-width: 1025px) {
+  .platform-left {
+    padding-top: 3.5rem;
+  }
 }
 
 @media (max-width: 1024px) {
