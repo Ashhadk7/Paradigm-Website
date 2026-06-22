@@ -13,15 +13,16 @@
 <pattern id="hCool" patternUnits="userSpaceOnUse" width="24" height="24"><circle cx="12" cy="12" r="1.9" fill="#637890"/></pattern>
 <pattern id="hGold" patternUnits="userSpaceOnUse" width="24" height="24"><circle cx="12" cy="12" r="2.6" fill="#C4A25B"/></pattern>
 <pattern id="hBright" patternUnits="userSpaceOnUse" width="24" height="24"><circle cx="12" cy="12" r="2.9" fill="#EDE0C4"/></pattern>
-<linearGradient id="hScrim" x1="0" y1="0" x2="1" y2="0">
-<stop offset="0" stop-color="#34416D" stop-opacity="0.6"/>
-<stop offset="0.5" stop-color="#34416D" stop-opacity="0"/>
-</linearGradient>
+<radialGradient id="hGlow" cx="0.5" cy="0.5" r="0.5">
+<stop offset="0" stop-color="#C4A25B" stop-opacity="0.22"/>
+<stop offset="0.55" stop-color="#C4A25B" stop-opacity="0.08"/>
+<stop offset="1" stop-color="#C4A25B" stop-opacity="0"/>
+</radialGradient>
 </defs>
 <rect x="0" y="0" width="1440" height="560" fill="#34416D"/>
 <rect x="0" y="0" width="1440" height="560" fill="url(#hCool)" opacity="0.85"/>
 <g class="bloom">
-<ellipse cx="720" cy="280" rx="230" ry="190" fill="#C4A25B" opacity="0.12"/>
+<ellipse cx="720" cy="280" rx="300" ry="250" fill="url(#hGlow)"/>
 <ellipse cx="720" cy="280" rx="190" ry="152" fill="url(#hGold)"/>
 <ellipse class="core" cx="720" cy="280" rx="88" ry="70" fill="url(#hBright)"/>
 </g>
