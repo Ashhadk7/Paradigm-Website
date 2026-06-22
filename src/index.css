@@ -728,7 +728,13 @@ h1, h2, h3, h4 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: start;
+  align-items: stretch;
+}
+/* navy proof box fills its (stretched) cell and centers its content */
+.platform-split .proof-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media (min-width: 1025px) {
