@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import { useBookCall } from '../components/BookCallModal';
 
-function ContactPath({ tag, headline, body, ctaLabel, ctaVariant, ctaHref, email, phone, delay = 0 }) {
+function ContactPath({ tag, headline, body, ctaLabel, ctaVariant, ctaHref, onCtaClick, email, phone, delay = 0 }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -38,9 +39,15 @@ function ContactPath({ tag, headline, body, ctaLabel, ctaVariant, ctaHref, email
       <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', lineHeight: 1.8, color: '#637890', flexGrow: 1 }}>{body}</p>
 
       <div style={{ marginTop: '0.5rem' }}>
-        <a href={ctaHref} className={`btn-${ctaVariant}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-          {ctaLabel} <ArrowUpRight size={14} />
-        </a>
+        {onCtaClick ? (
+          <button type="button" onClick={onCtaClick} className={`btn-${ctaVariant}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+            {ctaLabel} <ArrowUpRight size={14} />
+          </button>
+        ) : (
+          <a href={ctaHref} className={`btn-${ctaVariant}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+            {ctaLabel} <ArrowUpRight size={14} />
+          </a>
+        )}
       </div>
 
       <div style={{ borderTop: '1px solid rgba(52,65,109,0.08)', paddingTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -53,6 +60,7 @@ function ContactPath({ tag, headline, body, ctaLabel, ctaVariant, ctaHref, email
 }
 
 export default function Contact() {
+  const { open } = useBookCall();
   return (
     <>
       <Helmet>
@@ -129,7 +137,7 @@ export default function Contact() {
               body="See what a portfolio built from collective market intelligence looks like for your practice. A 20-minute call is enough to know whether this fits what you are building for your clients."
               ctaLabel="Book a 20-Minute Call"
               ctaVariant="gold"
-              ctaHref="mailto:info@defyscale.com?subject=20-Minute Call Request"
+              onCtaClick={open}
               email="info@defyscale.com"
               delay={0}
             />
