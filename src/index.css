@@ -579,11 +579,10 @@ h1, h2, h3, h4 {
   overflow: hidden;
   box-shadow: 0 18px 48px rgba(52, 65, 109, 0.12);
 }
-/* Wider, more horizontal split: give the text more room and keep the
-   navy art half narrower so the card reads horizontal, not tall. */
+/* Equal 50/50 split between the text half and the navy art half. */
 @media (min-width: 769px) {
   .core-story-wrap .core-story-band--contained {
-    grid-template-columns: 1.35fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 .core-story-band-text {
