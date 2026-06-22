@@ -77,8 +77,9 @@ export default function Institutions() {
         ctas={[{ label: c.hero_cta_label, to: '/contact', variant: 'outline' }]}
       />
 
-      {/* Core Story — two halves: text left (off-white), illustration right */}
-      <section className="core-story-band">
+      {/* Core Story — two halves: text left (off-white), illustration right; contained on white */}
+      <div className="core-story-wrap">
+      <section className="core-story-band core-story-band--contained">
         <div className="core-story-band-text">
           <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
@@ -105,6 +106,7 @@ export default function Institutions() {
           />
         </div>
       </section>
+      </div>
 
       {/* What Paradigm Offers Institutions */}
       <section className="section-white">
