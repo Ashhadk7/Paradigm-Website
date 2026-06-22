@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import ParadigmHeroField from './ParadigmHeroField';
 
 function splitHeroCopy(text) {
   if (!text) return [];
@@ -30,10 +29,6 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
       className={`hero-section ${appearance?.hero_density ? `hero-section--${appearance.hero_density}` : ''}`}
       style={minimal ? { paddingTop: '8rem', paddingBottom: '4rem' } : undefined}
     >
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-        <ParadigmHeroField variant={heroVariant} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
-      </div>
-
       <div className="hero-inner">
         <div
           className={appearance?.hero_headline_width ? `hero-copy--${appearance.hero_headline_width}` : 'hero-copy--standard'}

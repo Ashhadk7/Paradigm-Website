@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import ParadigmHeroField from '../components/ParadigmHeroField';
 import { useContent } from '../lib/useContent';
 
 function TeamCard({ name, title, prev, bio, previousPrefix = 'Previous:' }) {
@@ -92,10 +91,6 @@ export default function About() {
       <section
         className="hero-section"
       >
-        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-          <ParadigmHeroField variant="home" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
-        </div>
-
         <div className="hero-inner">
           <div style={{ position: 'relative', zIndex: 2, maxWidth: 1100 }}>
             <h1 className="display-headline" style={{ lineHeight: 1.1 }}>

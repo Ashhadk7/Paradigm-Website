@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import ParadigmHeroField from '../components/ParadigmHeroField';
 import { useContent } from '../lib/useContent';
 
 function ProcessStep({ num, title, paragraphs, isLast }) {
@@ -106,11 +105,6 @@ export default function Process() {
       <section
         className="hero-section"
       >
-        {/* Animated data-field background */}
-        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-          <ParadigmHeroField variant="institutions" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
-        </div>
-
         <div className="hero-inner">
           <div style={{ position: 'relative', zIndex: 2, maxWidth: 820 }}>
             {/* Staggered three-line H1 (single h1, animated line spans) */}
