@@ -146,30 +146,33 @@ export default function Process() {
         </div>
       </section>
 
-      {/* ── THE DATA FOUNDATION ── */}
-      <section className="section-white">
-        <div className="section-inner">
-          <div style={{ maxWidth: 760 }}>
-            <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.data_foundation_eyebrow}</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
-              <motion.p
-                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
-              >
-                {c.data_foundation_text}
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: 0.07 }}
-                style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
-              >
-                {c.data_foundation_amd}
-              </motion.p>
-            </div>
+      {/* ── THE DATA FOUNDATION — text left, animated data-field right; contained on white ── */}
+      <div className="core-story-wrap">
+      <section className="core-story-band core-story-band--contained">
+        <div className="core-story-band-text">
+          <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.data_foundation_eyebrow}</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
+            >
+              {c.data_foundation_text}
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ delay: 0.07 }}
+              style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}
+            >
+              {c.data_foundation_amd}
+            </motion.p>
           </div>
         </div>
+        <div className="core-story-band-art data-field-art">
+          <img src="/paradigm-data-field-animated.svg" alt="Paradigm active market data field" />
+        </div>
       </section>
+      </div>
 
       {/* ── THE PROCESS — FOUR STEPS (2×2 grid: 01 & 03 top, 02 & 04 below) ── */}
       <section className="section-offwhite">
