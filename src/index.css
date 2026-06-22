@@ -737,11 +737,6 @@ h1, h2, h3, h4 {
   justify-content: center;
 }
 
-@media (min-width: 1025px) {
-  .platform-left {
-    padding-top: 3.5rem;
-  }
-}
 @media (max-width: 1024px) {
   .platform-split {
     grid-template-columns: 1fr;
