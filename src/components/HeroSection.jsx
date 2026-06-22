@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useBookCall } from './BookCallModal';
 
 function splitHeroCopy(text) {
   if (!text) return [];
@@ -17,6 +18,7 @@ function splitHeroSubcopy(text) {
 }
 
 export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal = false, compact = false, appearance, heroVariant = 'home' }) {
+  const { open: openBookCall } = useBookCall();
   const headlineLines = splitHeroCopy(headline);
   const subLines = splitHeroSubcopy(sub);
   const headlineDelay = 0.3;
@@ -101,11 +103,17 @@ export default function HeroSection({ eyebrow, headline, sub, ctas = [], minimal
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: actionDelay, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              {ctas.map((cta, i) => (
-                <Link key={i} to={cta.to} className={`btn-${cta.variant || 'gold'}`}>
-                  {cta.label}
-                </Link>
-              ))}
+              {ctas.map((cta, i) =>
+                cta.action === 'bookCall' ? (
+                  <button key={i} type="button" onClick={openBookCall} className={`btn-${cta.variant || 'gold'}`}>
+                    {cta.label}
+                  </button>
+                ) : (
+                  <Link key={i} to={cta.to} className={`btn-${cta.variant || 'gold'}`}>
+                    {cta.label}
+                  </Link>
+                )
+              )}
             </motion.div>
           )}
 

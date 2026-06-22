@@ -89,7 +89,7 @@ export default function Advisors() {
         headline={c.hero_headline}
         sub={c.hero_sub}
         compact
-        ctas={[{ label: c.hero_cta_label, to: '/contact', variant: 'gold' }]}
+        ctas={[{ label: c.hero_cta_label, action: 'bookCall', variant: 'gold' }]}
       />
 
       {/* ── THE CORE STORY — two halves: text left (off-white), art right, contained on white ── */}

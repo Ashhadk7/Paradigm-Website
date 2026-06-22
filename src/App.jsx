@@ -12,6 +12,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Legal from './pages/Legal';
 import Admin from './pages/admin/Admin';
+import { BookCallProvider } from './components/BookCallModal';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -21,6 +22,7 @@ function ScrollToTop() {
 
 function Layout() {
   return (
+    <BookCallProvider>
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar />
       <ScrollToTop />
@@ -39,6 +41,7 @@ function Layout() {
       </main>
       <Footer />
     </div>
+    </BookCallProvider>
   );
 }
 

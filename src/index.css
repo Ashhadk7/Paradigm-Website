@@ -1668,3 +1668,106 @@ h1, h2, h3, h4 {
   border-radius: 4px;
   padding: 2rem 2rem;
 }
+
+/* ─── Book a Call modal ──────────────────────────────────── */
+.bookcall-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(20, 26, 48, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+.bookcall-modal {
+  position: relative;
+  background: #F5F3EF;
+  border-radius: 16px;
+  border-top: 4px solid #C4A25B;
+  width: 100%;
+  max-width: 560px;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  box-shadow: 0 30px 80px rgba(20, 26, 48, 0.35);
+  margin: auto;
+}
+.bookcall-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 1.1rem;
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: #637890;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+.bookcall-close:hover { color: #34416D; }
+.bookcall-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  color: #34416D;
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+}
+.bookcall-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #637890;
+  margin: 0 0 1.5rem;
+}
+.bookcall-form { display: flex; flex-direction: column; gap: 1rem; }
+.bookcall-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 480px) {
+  .bookcall-row { grid-template-columns: 1fr; }
+}
+.bookcall-field { display: flex; flex-direction: column; gap: 0.35rem; }
+.bookcall-field > span {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #34416D;
+}
+.bookcall-field input,
+.bookcall-field textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9375rem;
+  color: #34416D;
+  background: #fff;
+  border: 1px solid rgba(52, 65, 109, 0.2);
+  border-radius: 6px;
+  padding: 0.65rem 0.8rem;
+  outline: none;
+  width: 100%;
+  resize: vertical;
+}
+.bookcall-field input:focus,
+.bookcall-field textarea:focus {
+  border-color: #C4A25B;
+  box-shadow: 0 0 0 3px rgba(196, 162, 91, 0.18);
+}
+.bookcall-submit { margin-top: 0.5rem; width: 100%; text-align: center; cursor: pointer; }
+.bookcall-submit:disabled { opacity: 0.6; cursor: default; }
+.bookcall-error {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: #9B2C2C;
+  margin: 0;
+}
+.bookcall-config-note {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: #637890;
+  margin: 0.25rem 0 0;
+}
+.bookcall-success { text-align: center; padding: 1rem 0; }

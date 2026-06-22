@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useBookCall } from './BookCallModal';
 
 /**
  * CTAStrip — bottom of every marketing page.
@@ -23,6 +24,7 @@ export default function CTAStrip({
   institutionalPhone,
   institutionalButtonLabel,
 }) {
+  const { open } = useBookCall();
   return (
     <section className="cta-strip" style={{ borderTop: '1px solid rgba(52,65,109,0.12)' }}>
       <div className="section-inner" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
@@ -39,9 +41,9 @@ export default function CTAStrip({
               <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.375rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.4 }}>
                 {advisorText || "See what a portfolio built from collective intelligence looks like for your practice. Worth 20 minutes."}
               </p>
-              <Link to="/contact" className="btn-gold" style={{ marginTop: '0.5rem' }}>
+              <button type="button" onClick={open} className="btn-gold" style={{ marginTop: '0.5rem' }}>
                 Book a 20-Minute Call
-              </Link>
+              </button>
             </motion.div>
             {/* Institutional */}
             <motion.div
@@ -73,7 +75,7 @@ export default function CTAStrip({
               {advisorContactPrefix || "Or reach us directly:"}&nbsp;
               <a href={`mailto:${advisorEmail || "jef@paradigmasset.com"}`} style={{ color: '#34416D', textDecoration: 'none' }}>{advisorEmail || "jef@paradigmasset.com"}</a>
             </p>
-            <Link to="/contact" className="btn-gold">{advisorButtonLabel || "Book a 20-Minute Call"}</Link>
+            <button type="button" onClick={open} className="btn-gold">{advisorButtonLabel || "Book a 20-Minute Call"}</button>
           </motion.div>
         ) : variant === 'mfo' ? (
           <motion.div
