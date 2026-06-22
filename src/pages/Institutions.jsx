@@ -138,8 +138,9 @@ export default function Institutions() {
         </div>
       </section>
 
-      {/* The Platform — faint emblem watermark left, text right */}
-      <section className="platform-cap-section">
+      {/* The Platform — emblem watermark left, text right; contained on white */}
+      <div className="platform-cap-wrap">
+      <section className="platform-cap-section platform-cap-section--contained">
         <div className="platform-cap-inner">
           <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -154,6 +155,7 @@ export default function Institutions() {
           </div>
         </div>
       </section>
+      </div>
 
       <CTAStrip
         variant="institutional"

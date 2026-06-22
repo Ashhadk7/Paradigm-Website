@@ -130,8 +130,9 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── THE FIRM ── */}
-      <section className="core-story-band firm-band">
+      {/* ── THE FIRM — contained on white ── */}
+      <div className="core-story-wrap">
+      <section className="core-story-band firm-band core-story-band--contained">
         <div className="core-story-band-text" style={{ background: '#fff' }}>
           <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.firm_eyebrow}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
@@ -154,6 +155,7 @@ export default function About() {
           <img src="/about-firm.jpg" alt="Paradigm — the firm" />
         </div>
       </section>
+      </div>
 
       {/* ── THE TEAM + ADVISORY BOARD — hidden for now (restore by removing the
           surrounding {false && ( ... )}) ── */}

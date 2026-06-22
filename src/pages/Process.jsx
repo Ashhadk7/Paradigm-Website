@@ -207,8 +207,9 @@ export default function Process() {
         </div>
       </section>
 
-      {/* ── WHY NO BLACK BOX — illustration left, text right (mirror) ── */}
-      <section className="core-story-band core-story-band--reverse">
+      {/* ── WHY NO BLACK BOX — illustration left, text right (mirror); contained on white ── */}
+      <div className="core-story-wrap">
+      <section className="core-story-band core-story-band--reverse core-story-band--contained">
         <div className="core-story-band-art">
           <img src="/paradigm-No-black-box.svg" alt="No black box — transparent and explainable" />
         </div>
@@ -237,6 +238,7 @@ export default function Process() {
           </div>
         </div>
       </section>
+      </div>
 
       {/* ── CLOSING CTA — PROCESS PAGE ── */}
       <section style={{ borderTop: '1px solid rgba(52,65,109,0.12)' }}>
