@@ -92,8 +92,9 @@ export default function Advisors() {
         ctas={[{ label: c.hero_cta_label, to: '/contact', variant: 'gold' }]}
       />
 
-      {/* ── THE CORE STORY — two halves: text left (off-white), full-bleed art right ── */}
-      <section className="core-story-band">
+      {/* ── THE CORE STORY — two halves: text left (off-white), art right, contained on white ── */}
+      <div className="core-story-wrap">
+      <section className="core-story-band core-story-band--contained">
         {/* Left half: text on off-white (background unchanged) */}
         <div className="core-story-band-text">
           <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.core_story_eyebrow}</p>
@@ -123,6 +124,7 @@ export default function Advisors() {
           />
         </div>
       </section>
+      </div>
 
       {/* ── WHAT THIS MEANS FOR YOUR PRACTICE ── */}
       <section className="section-white">

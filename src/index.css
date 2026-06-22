@@ -566,6 +566,19 @@ h1, h2, h3, h4 {
   display: grid;
   grid-template-columns: 1fr;
 }
+/* Contained variant: band sits centered on a white background with
+   breathing room on all sides, rounded as one clean block. */
+.core-story-wrap {
+  background: #FFFFFF;
+  padding: clamp(2.5rem, 5vw, 5rem) clamp(1.25rem, 5vw, 4rem);
+}
+.core-story-wrap .core-story-band--contained {
+  max-width: 1240px;
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 48px rgba(52, 65, 109, 0.12);
+}
 .core-story-band-text {
   background: #F5F3EF;
   padding: 3.5rem 1.5rem;
