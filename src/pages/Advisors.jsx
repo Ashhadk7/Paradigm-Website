@@ -156,9 +156,10 @@ export default function Advisors() {
         </div>
       </section>
 
-      {/* ── THE PLATFORM CAPABILITY — faint emblem watermark bleeding off the
-          left edge, text on the right; one continuous off-white band ── */}
-      <section className="platform-cap-section">
+      {/* ── THE PLATFORM CAPABILITY — emblem watermark left, text right;
+          contained as a card on white ── */}
+      <div className="platform-cap-wrap">
+      <section className="platform-cap-section platform-cap-section--contained">
         <div className="platform-cap-inner">
           <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.platform_eyebrow}</p>
           <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>{c.platform_headline}</h2>
@@ -172,6 +173,7 @@ export default function Advisors() {
           </div>
         </div>
       </section>
+      </div>
 
       {/* ── HOW IT'S DELIVERED ── */}
       <section className="section-white">
