@@ -155,56 +155,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── JAMES FRANCIS — FOUNDER & CEO ── */}
-      <section className="section-offwhite">
-        <div className="section-inner">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'start' }}>
-            <div>
-              <p className="eyebrow" style={{ marginBottom: '1rem' }}>{c.james_title}</p>
-              <h2 className="section-headline" style={{ color: '#34416D', marginBottom: '1.75rem' }}>
-                {c.james_name}
-              </h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                  style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                  {c.james_bio_1}
-                </motion.p>
-                <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.07 }}
-                  style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                  {c.james_bio_2}
-                </motion.p>
-                <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.14 }}
-                  style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890' }}>
-                  {c.james_bio_3}
-                </motion.p>
-              </div>
-            </div>
-            {/* Portrait placeholder */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
-              {c.james_image_url ? (
-                <img
-                  src={c.james_image_url}
-                  alt={c.james_image_alt}
-                  style={{ width: 220, height: 260, objectFit: 'cover', borderRadius: 4 }}
-                />
-              ) : (
-                <div style={{
-                  width: 220, height: 260, background: '#34416D', borderRadius: 4,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '0.5rem'
-                }}>
-                  <span style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontWeight: 700, fontSize: '3rem', color: '#C4A25B' }}>{c.james_placeholder_initials}</span>
-                  <span style={{ fontFamily: 'Inter', fontSize: '1.0625rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(245,243,239,0.5)' }}>{c.james_placeholder_text}</span>
-                </div>
-              )}
-              <div style={{ textAlign: 'center' }}>
-                <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.45rem', color: '#34416D' }}>{c.james_name}</p>
-                <p style={{ fontFamily: 'Inter', fontSize: '1.0625rem', color: '#C4A25B', fontWeight: 600 }}>{c.james_title}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── THE TEAM + ADVISORY BOARD — hidden for now (restore by removing the
           surrounding {false && ( ... )}) ── */}
       {false && (
