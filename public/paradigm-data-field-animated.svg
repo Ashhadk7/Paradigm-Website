@@ -4,7 +4,7 @@
 <desc>A dark blue hero background. Cool points span the full width; a warm gold leadership bloom slowly drifts and loops on the right, with a soft scrim darkening the left so headline copy stays readable.</desc>
 <style>
 .bloom{animation:drift 22s ease-in-out infinite;}
-@keyframes drift{0%{transform:translate(0px,0px);}25%{transform:translate(-42px,36px);}50%{transform:translate(27px,63px);}75%{transform:translate(-12px,-27px);}100%{transform:translate(0px,0px);}}
+@keyframes drift{0%{transform:translate(0px,0px);}25%{transform:translate(-20px,18px);}50%{transform:translate(14px,30px);}75%{transform:translate(-8px,-14px);}100%{transform:translate(0px,0px);}}
 .core{animation:pulse 6.5s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.72;}}
 @media (prefers-reduced-motion: reduce){.bloom,.core{animation:none;}}
@@ -21,8 +21,8 @@
 <rect x="0" y="0" width="1440" height="560" fill="#34416D"/>
 <rect x="0" y="0" width="1440" height="560" fill="url(#hCool)" opacity="0.85"/>
 <g class="bloom">
-<ellipse cx="720" cy="280" rx="260" ry="210" fill="#C4A25B" opacity="0.12"/>
-<ellipse cx="720" cy="280" rx="210" ry="168" fill="url(#hGold)"/>
-<ellipse class="core" cx="720" cy="280" rx="92" ry="72" fill="url(#hBright)"/>
+<ellipse cx="720" cy="280" rx="230" ry="190" fill="#C4A25B" opacity="0.12"/>
+<ellipse cx="720" cy="280" rx="190" ry="152" fill="url(#hGold)"/>
+<ellipse class="core" cx="720" cy="280" rx="88" ry="70" fill="url(#hBright)"/>
 </g>
 </svg>
