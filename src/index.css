@@ -1771,3 +1771,9 @@ h1, h2, h3, h4 {
   margin: 0.25rem 0 0;
 }
 .bookcall-success { text-align: center; padding: 1rem 0; }
+
+/* Process closing CTA intro: one line on wide screens, wraps on narrow */
+.process-cta-intro { max-width: 600px; }
+@media (min-width: 880px) {
+  .process-cta-intro { max-width: none; white-space: nowrap; }
+}

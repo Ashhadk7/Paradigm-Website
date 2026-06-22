@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useBookCall } from '../components/BookCallModal';
 import { useContent } from '../lib/useContent';
 
 function ProcessStep({ num, title, paragraphs, isLast }) {
@@ -60,6 +61,7 @@ function ProcessStep({ num, title, paragraphs, isLast }) {
 
 export default function Process() {
   const { content: cms } = useContent('process');
+  const { open: openBookCall } = useBookCall();
 
   const c = {
     hero_headline: cms?.hero_headline || "Systematic.\nTransparent.\nExplainable at every step.",
@@ -236,7 +238,17 @@ export default function Process() {
                 fontWeight: 700,
               }}
             >
-              {c.black_box_pullquote}
+              {(() => {
+                // Break after the first sentence so "It is the architecture."
+                // starts on its own line.
+                const m = c.black_box_pullquote.match(/^(.*?[.!?])\s+(.*)$/);
+                if (!m) return c.black_box_pullquote;
+                return (
+                  <>
+                    {m[1]}<br />{m[2]}
+                  </>
+                );
+              })()}
             </motion.p>
           </div>
         </div>
@@ -247,11 +259,12 @@ export default function Process() {
       <section style={{ borderTop: '1px solid rgba(52,65,109,0.12)' }}>
         <div className="section-inner" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
           <motion.p
+            className="process-cta-intro"
             initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             style={{
               fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.8, color: '#637890',
-              maxWidth: 600, margin: '0 0 3rem',
+              margin: '0 0 3rem',
             }}
           >
             {c.cta_intro}
@@ -268,9 +281,9 @@ export default function Process() {
               <p style={{ fontFamily: 'Source Serif 4, Georgia, serif', fontSize: '1.375rem', color: '#34416D', marginBottom: '0.875rem', lineHeight: 1.4 }}>
                 {c.cta_advisor_text}
               </p>
-              <Link to="/contact" className="btn-gold" style={{ marginTop: '0.5rem' }}>
+              <button type="button" onClick={openBookCall} className="btn-gold" style={{ marginTop: '0.5rem' }}>
                 {c.cta_advisor_button}
-              </Link>
+              </button>
             </motion.div>
             {/* Institutional CTA */}
             <motion.div
