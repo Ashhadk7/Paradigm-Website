@@ -167,9 +167,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── THE PLATFORM ── */}
-      <section className="section-offwhite">
-        <div className="section-inner">
+      {/* ── THE PLATFORM — contained as a card on white ── */}
+      <div className="core-story-wrap">
+        <div className="platform-split-card">
           <div className="platform-split">
             {/* Left: platform intro text */}
             <div className="platform-left">
@@ -198,7 +198,7 @@ export default function Home() {
             <ProofBlock variant="home" body={c.proof_body} bridge={c.proof_bridge} />
           </div>
         </div>
-      </section>
+      </div>
 
       <CTAStrip variant="both" advisorText={c.cta_advisor_text} institutionText={c.cta_institution_text} />
     </>

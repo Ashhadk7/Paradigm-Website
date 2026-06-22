@@ -552,6 +552,16 @@ h1, h2, h3, h4 {
   margin: 0 auto;
   padding: 0 clamp(1.5rem, 4vw, 3rem);
 }
+/* Home "The Platform" split, contained as a card on white to match the
+   other two-half bands. */
+.platform-split-card {
+  max-width: 1600px;
+  margin: 0 auto;
+  background: #F5F3EF;
+  border-radius: 18px;
+  box-shadow: 0 18px 48px rgba(52, 65, 109, 0.12);
+  padding: clamp(2.5rem, 5vw, 5rem) clamp(1.75rem, 4vw, 4rem);
+}
 /* Contained variant: band sits centered on white as a rounded card,
    matching the Core Story treatment. Watermark bleeds off the card's
    own left edge (clipped by the section's overflow:hidden). */
