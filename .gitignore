@@ -35,3 +35,5 @@ lerna-debug.log*
 
 # Temporary Office lock files
 ~$*.docx
+!.env.example
+!.env.production.example
