@@ -9,5 +9,14 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      (function (o, u, t, b, a, s, e, p) {
+      window[b] = window[b] || {}; (e = e || [])['key'] = o; e['__obr'] = u.location.href; e['__obrf'] = u.referrer || 0; a = [];
+      u.location.search.replace('?', '').split('&').forEach(function (q) { if (q.startsWith(b) || q.startsWith('_obid')) e[q.split('=')[0]] = q.split('=')[1]; });
+      e['_obid'] = e['_obid'] || (u.cookie.match(/(^|;)\s*_obid\s*=\s*([^;]+)/) || []).pop() || 0;
+      for (k in e) { if (e.hasOwnProperty(k)) a.push(encodeURIComponent(k) + '=' + encodeURIComponent(e[k])); }
+      s = u.createElement('script'); s.async = true; s.src = t + '?' + a.join('&'); p = u.getElementsByTagName('script')[0]; p.parentNode.insertBefore(s, p);
+      })('311463a2-5f1e-4f7c-9133-6fd5b931fd55', document, 'https://plugin.sopro.io/hq.js', 'outbase')
+    </script>
   </body>
 </html>
