@@ -126,11 +126,26 @@ async function main() {
         // without this, crawlers can see opacity:0 content as cloaked/invisible.
         html = html.replace(/(<[^>]+style="[^"]*?)opacity:\s*0(;?)/g, '$1opacity:1$2');
 
+        // Helmet PREPENDS its route-specific <title> ahead of the static fallback
+        // title baked into index.html (it only manages tags it renders itself, so
+        // the original stays put), leaving two <title> tags in <head> with
+        // Helmet's — the correct, route-specific one — always first. Browsers use
+        // the first tag, so this was never visibly wrong, but it's invalid markup
+        // that can confuse crawlers/validators. Keep the FIRST title, drop the rest.
+        const titleMatches = html.match(/<title>[^<]*<\/title>/g) || [];
+        if (titleMatches.length > 1) {
+          for (const t of titleMatches.slice(1)) html = html.replace(t, '');
+        }
+
         // Guard against the whole class of "every page got the homepage's tags"
-        // bugs: exactly one description and one canonical, pointing at THIS route.
+        // bugs: exactly one title, description and canonical, pointing at THIS route.
+        const titles = html.match(/<title>[^<]*<\/title>/g) || [];
         const canonicals = html.match(/<link[^>]+rel="canonical"[^>]*>/g) || [];
         const descriptions = html.match(/<meta[^>]+name="description"[^>]*>/g) || [];
         const expected = canonicalFor(route);
+        if (titles.length !== 1) {
+          throw new Error(`expected 1 title, found ${titles.length}`);
+        }
         if (canonicals.length !== 1) {
           throw new Error(`expected 1 canonical, found ${canonicals.length}`);
         }
