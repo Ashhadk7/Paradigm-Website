@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import CTAStrip from '../components/CTAStrip';
@@ -64,10 +64,7 @@ export default function FamilyOffice() {
 
   return (
     <>
-      <Helmet>
-        <title>For Family Offices — Paradigm Asset Management</title>
-        <meta name="description" content="Paradigm builds portfolios to your specification for any client mandate — using collective intelligence to identify regime leadership. Your clients see your process." />
-      </Helmet>
+      <Seo path="/familyoffice" />
 
       <HeroSection
         heroVariant="family"

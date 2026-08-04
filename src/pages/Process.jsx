@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useBookCall } from '../components/BookCallModal';
@@ -98,10 +98,7 @@ export default function Process() {
 
   return (
     <>
-      <Helmet>
-        <title>Our Process — Paradigm Asset Management</title>
-        <meta name="description" content="Systematic. Transparent. Explainable at every step. How Paradigm reads active market data to build portfolios from collective market intelligence." />
-      </Helmet>
+      <Seo path="/process" />
 
       {/* ── HERO — Minimal: H1 only, no sub, no CTA ── */}
       <section

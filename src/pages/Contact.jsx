@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, ArrowUpRight } from 'lucide-react';
 import { useBookCall } from '../components/BookCallModal';
@@ -63,10 +63,7 @@ export default function Contact() {
   const { open } = useBookCall();
   return (
     <>
-      <Helmet>
-        <title>Contact — Paradigm Asset Management</title>
-        <meta name="description" content="Start here. Book a 20-minute call or start a conversation. info@defyscale.com" />
-      </Helmet>
+      <Seo path="/contact" />
 
       {/* ── HERO — Minimal, light background, open and warm ── */}
       <section style={{
@@ -138,7 +135,7 @@ export default function Contact() {
               ctaLabel="Book a 20-Minute Call"
               ctaVariant="gold"
               onCtaClick={open}
-              email="info@defyscale.com"
+              email="jef@paradigmasset.com"
               delay={0}
             />
             <ContactPath
@@ -147,8 +144,8 @@ export default function Contact() {
               body="Paradigm is actively building strategic relationships with institutional investors, family offices, OCIOs, and platforms. If you are exploring what a partnership looks like, the right first step is a conversation."
               ctaLabel="Start a Conversation"
               ctaVariant="outline-navy"
-              ctaHref="mailto:info@defyscale.com?subject=Institutional Inquiry"
-              email="info@defyscale.com"
+              ctaHref="mailto:jef@paradigmasset.com?subject=Institutional Inquiry"
+              email="jef@paradigmasset.com"
               delay={0.12}
             />
           </div>
@@ -171,8 +168,8 @@ export default function Contact() {
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
               <p style={{ fontFamily: 'Inter', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C4A25B', marginBottom: '0.25rem' }}>Direct Contact</p>
-              <a href="mailto:info@defyscale.com" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontFamily: 'Inter', fontSize: '1rem', color: '#C4A25B', textDecoration: 'none' }}>
-                <Mail size={15} style={{ opacity: 0.7 }} /> info@defyscale.com
+              <a href="mailto:jef@paradigmasset.com" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontFamily: 'Inter', fontSize: '1rem', color: '#C4A25B', textDecoration: 'none' }}>
+                <Mail size={15} style={{ opacity: 0.7 }} /> jef@paradigmasset.com
               </a>
             </div>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem' }}>

@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import CTAStrip from '../components/CTAStrip';
@@ -63,10 +63,7 @@ export default function Institutions() {
 
   return (
     <>
-      <Helmet>
-        <title>For Institutions — Paradigm Asset Management</title>
-        <meta name="description" content="35 years of institutional investment process. The same intelligence that served General Motors, AMEX, and the US Treasury — now structured for the partnerships that define what comes next." />
-      </Helmet>
+      <Seo path="/institutions" />
 
       <HeroSection
         heroVariant="institutions"

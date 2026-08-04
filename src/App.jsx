@@ -11,6 +11,7 @@ import Process from './pages/Process';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Legal from './pages/Legal';
+import NotFound from './pages/NotFound';
 import Admin from './pages/admin/Admin';
 import { BookCallProvider } from './components/BookCallModal';
 
@@ -37,6 +38,7 @@ function Layout() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/legal" element={<Legal />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

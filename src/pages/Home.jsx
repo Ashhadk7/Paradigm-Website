@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import ProofBlock from '../components/ProofBlock';
@@ -59,10 +59,7 @@ export default function Home() {
 
   return (
     <>
-      <Helmet>
-        <title>Paradigm Asset Management — The Collective Intelligence of the Market</title>
-        <meta name="description" content={c.hero_sub} />
-      </Helmet>
+      <Seo path="/" />
 
       <HeroSection
         heroVariant="home"

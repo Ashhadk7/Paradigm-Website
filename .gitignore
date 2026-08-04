@@ -37,3 +37,4 @@ lerna-debug.log*
 ~$*.docx
 !.env.example
 !.env.production.example
+paradigm-site.zip

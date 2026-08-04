@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 import HeroSection from '../components/HeroSection';
 import CTAStrip from '../components/CTAStrip';
@@ -77,10 +77,7 @@ export default function Advisors() {
 
   return (
     <>
-      <Helmet>
-        <title>For Advisors — Paradigm Asset Management</title>
-        <meta name="description" content="Paradigm builds portfolios from active market data — not anchored to any single approach. Portfolios that can move as market leadership moves. Under your name." />
-      </Helmet>
+      <Seo path="/advisors" />
 
       {/* ── HERO ── */}
       <HeroSection

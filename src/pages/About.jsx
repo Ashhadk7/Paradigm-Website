@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 import { useContent } from '../lib/useContent';
 
@@ -82,10 +82,7 @@ export default function About() {
 
   return (
     <>
-      <Helmet>
-        <title>About — Paradigm Asset Management</title>
-        <meta name="description" content="Built on a single conviction. Run for 35 years. Now accessible to the partners and platforms that need it most." />
-      </Helmet>
+      <Seo path="/about" />
 
       {/* ── HERO — Serif H1, navy background, no subheading ── */}
       <section

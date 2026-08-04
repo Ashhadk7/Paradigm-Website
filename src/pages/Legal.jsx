@@ -1,13 +1,10 @@
-import { Helmet } from 'react-helmet-async';
+import Seo from '../components/Seo';
 import { motion } from 'framer-motion';
 
 export default function Legal() {
   return (
     <>
-      <Helmet>
-        <title>Legal & Disclosures — Paradigm Asset Management</title>
-        <meta name="description" content="Legal disclosures, regulatory information, and privacy policy for Paradigm Asset Management Co. LLC." />
-      </Helmet>
+      <Seo path="/legal" />
 
       <section style={{
         background: '#F5F3EF',

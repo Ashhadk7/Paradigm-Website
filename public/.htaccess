@@ -4,15 +4,35 @@
   RewriteEngine On
   RewriteBase /
 
+  # Canonical host: force apex -> www with a permanent redirect.
+  # Both hosts previously returned 200, so Google saw two competing copies of
+  # every page. Canonical tags are a hint; a 301 is definitive. Link equity is
+  # preserved, so existing apex links in collateral keep working.
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteCond %{HTTPS} on
+  RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
   # Serve existing files/directories as-is (assets, images, etc.)
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Everything else falls back to index.html so client-side routing works
-  # on deep links and page refreshes (/process, /about, /contact, ...).
+  # Prerendered routes: serve the static per-route HTML that scripts/prerender.mjs
+  # generated (e.g. /about -> /about/index.html) so crawlers get real content
+  # instead of the empty SPA shell.
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^([^/]+)/?$ /$1/index.html [L]
+
+  # Unknown paths return a real 404 instead of a 200 SPA shell. Serving 200 for
+  # every URL produced soft-404s and wasted crawl budget.
+  RewriteCond %{DOCUMENT_ROOT}/404.html -f
+  RewriteRule ^ /404.html [L,R=404]
+
+  # Fallback for client-side routing if 404.html is somehow absent.
   RewriteRule ^ index.html [L]
 </IfModule>
+
+ErrorDocument 404 /404.html
 
 # Long-cache fingerprinted build assets; never cache index.html
 <IfModule mod_headers.c>
