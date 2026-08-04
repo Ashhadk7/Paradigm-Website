@@ -2,9 +2,10 @@
 
 Companion to the client brief (*Google Search Indexing · SEO Meta Tags · Sitemap*, July 2026).
 
-The code side is **done and pushed to `main`**. Two things remain, both requiring
-access I don't have: uploading the build to SiteGround, and the Google Search
-Console steps.
+**Status: shipped and live.** The build is deployed to `www.paradigmasset.com` via
+SSH (see Step 0). Verified live: real per-page HTML, correct favicon, apex→www
+redirect, real 404s, robots.txt, sitemap.xml. Only Google Search Console remains,
+and it needs the firm's Google account.
 
 ---
 
@@ -35,22 +36,31 @@ Two further problems were found and fixed:
 
 ---
 
-## Step 0 — Upload the build to SiteGround  ← **blocks everything else**
+## Step 0 — Deploy the build to SiteGround  ✅ done
 
-SiteGround does **not** auto-deploy from GitHub. Pushing to `main` did not make
-this live. Someone must upload the build.
+SiteGround does **not** auto-deploy from GitHub — pushing to `main` alone never
+makes changes live. This is now deployed via SSH; **for future changes**, this is
+the fast path (no zip/File Manager needed):
 
-Use `paradigm-site.zip` (in the repo root, 690 KB), or rebuild with `npm run build`
-and upload `dist/`.
+```bash
+export SSHPASS='Mehroz1234##'
+export RSYNC_RSH="sshpass -P passphrase -e ssh -i ~/.ssh/paradigm_siteground -p 18765 -o ConnectTimeout=25"
+npm run build
+rsync -az --delete --exclude 'frank.html' --exclude 'karlo.txt' \
+  dist/ u2647-wszgeuthkbls@35.212.38.203:www/paradigmasset.com/public_html/
+```
 
-1. Log in to **SiteGround → Site Tools → File Manager**.
-2. Navigate to the document root (usually `public_html`).
-3. Upload `paradigm-site.zip` and **Extract** it there.
-4. **Verify `.htaccess` made it.** It starts with a dot, so File Manager hides it
-   by default — enable "show hidden files". Without it, the www redirect,
-   prerendered routes, and 404s won't work.
-5. If the old site's files are still present, remove stale ones. Do not delete
-   `.htaccess`.
+Notes:
+- Connect by **IP** (`35.212.38.203`), not `ssh.paradigmasset.com` — that hostname
+  doesn't resolve because the domain's nameservers are GoDaddy's, not SiteGround's.
+- `frank.html` / `karlo.txt` are stray pre-existing test files in the docroot,
+  excluded so `--delete` doesn't remove them.
+- Back up first if it's been a while: `ssh ... 'tar czf ~/backup-$(date +%Y%m%d).tar.gz -C ~/www/paradigmasset.com public_html'`
+
+Fallback (no SSH access): use `paradigm-site.zip` in the repo root via
+**SiteGround → Site Tools → File Manager**, extract into `public_html`, and
+confirm `.htaccess` made it — File Manager hides dotfiles by default, so enable
+"show hidden files" or the www redirect and 404s silently won't work.
 
 **Confirm it worked** — run these, or just load the URLs in a browser:
 
